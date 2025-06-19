@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "saldi-hero"
+    label: "Intestazione Saldi"
+    folder: "src/content/saldi-hero"
+    create: false
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titolo", name: "titolo", widget: "string"}
+      - {label: "Sottotitolo", name: "sottotitolo", widget: "string"}
+      - {label: "Descrizione", name: "descrizione", widget: "text"}
+      - {label: "Immagine di Sfondo", name: "immagineBackground", widget: "image"}
+
+  - name: "categorie-saldi"
+    label: "Categorie in Saldo"
+    folder: "src/content/categorie-saldi"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nome Categoria", name: "nome", widget: "string"}
+      - {label: "Percentuale Sconto", name: "sconto", widget: "string"}
+      - {label: "Descrizione", name: "descrizione", widget: "text"}
+      - {label: "Immagine", name: "immagine", widget: "image"}
+      - {label: "Numero Articoli", name: "numeroArticoli", widget: "number"}
+      - {label: "Attivo", name: "attivo", widget: "boolean", default: true}
+
+  - name: "prodotti-saldi"
+    label: "Prodotti in Saldo"
+    folder: "src/content/prodotti-saldi"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nome Prodotto", name: "nome", widget: "string"}
+      - {label: "Prezzo Originale (€)", name: "prezzoOriginale", widget: "number"}
+      - {label: "Prezzo Scontato (€)", name: "prezzoScontato", widget: "number"}
+      - {label: "Percentuale Sconto", name: "sconto", widget: "number"}
+      - {label: "Descrizione", name: "descrizione", widget: "text"}
+      - {label: "Immagine Principale", name: "immagine", widget: "image"}
+      - {label: "Categoria", name: "categoria", widget: "select", options: ["Abiti da Cerimonia", "Sportswear", "Accessori", "Altro"]}
+      - {label: "Taglie Disponibili", name: "taglie", widget: "list", field: {label: "Taglia", name: "taglia", widget: "string"}}
+      - {label: "Disponibile", name: "disponibile", widget: "boolean", default: true}
+      - {label: "Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
+      - {label: "Tempo Limitato", name: "limitedTime", widget: "boolean", default: false}
+      - {label: "Ordine di Visualizzazione", name: "ordine", widget: "number", default: 1}
+
+  - name: "settings"
+    label: "Impostazioni Saldi"
+    files:
+      - name: "saldi-settings"
+        label: "Impostazioni Generali Saldi"
+        file: "src/content/settings/saldi-settings.md"
+        fields:
+          - {label: "Saldi Attivi", name: "saldiAttivi", widget: "boolean", default: true}
+          - {label: "Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false}
+          - {label: "Data Inizio Saldi", name: "dataInizio", widget: "datetime"}
+          - {label: "Data Fine Saldi", name: "dataFine", widget: "datetime"}
+          - {label: "Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}

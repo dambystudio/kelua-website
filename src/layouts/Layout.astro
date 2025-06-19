@@ -73,9 +73,29 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 		
 		<!-- Scroll Scrubbing Script -->
 		<script src="/js/scroll-scrubbing.js" is:inline></script>
+		
+		<!-- Netlify Identity Widget (only for admin) -->
+		{Astro.url.pathname.includes('/admin') && (
+			<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" is:inline></script>
+		)}
 	</head>
 	<body>
 		<slot />
+		
+		<!-- Netlify Identity Script (only for admin pages) -->
+		{Astro.url.pathname.includes('/admin') && (
+			<script is:inline>
+				if (window.netlifyIdentity) {
+					window.netlifyIdentity.on("init", user => {
+						if (!user) {
+							window.netlifyIdentity.on("login", () => {
+								document.location.href = "/admin/";
+							});
+						}
+					});
+				}
+			</script>
+		)}
 	</body>
 </html>
 
