@@ -2,62 +2,105 @@ backend:
   name: git-gateway
   branch: master
 
+# Impostazioni locali per sviluppo
+local_backend: true
+
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-collections:
-  - name: "saldi-hero"
-    label: "Intestazione Saldi"
-    folder: "src/content/saldi-hero"
-    create: false
-    slug: "{{slug}}"
-    fields:
-      - {label: "Titolo", name: "titolo", widget: "string"}
-      - {label: "Sottotitolo", name: "sottotitolo", widget: "string"}
-      - {label: "Descrizione", name: "descrizione", widget: "text"}
-      - {label: "Immagine di Sfondo", name: "immagineBackground", widget: "image"}
+# Logo e configurazione admin
+logo_url: "/logo.jpg"
+site_url: "https://kelua.netlify.app"
+display_url: "https://kelua.netlify.app"
 
-  - name: "categorie-saldi"
-    label: "Categorie in Saldo"
-    folder: "src/content/categorie-saldi"
+collections:
+  - name: "saldi-posts"
+    label: "📢 Post Saldi"
+    label_singular: "Post Saldi"
+    folder: "src/content/saldi-posts"
     create: true
-    slug: "{{slug}}"
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "/saldi"
     fields:
-      - {label: "Nome Categoria", name: "nome", widget: "string"}
-      - {label: "Percentuale Sconto", name: "sconto", widget: "string"}
-      - {label: "Descrizione", name: "descrizione", widget: "text"}
-      - {label: "Immagine", name: "immagine", widget: "image"}
-      - {label: "Numero Articoli", name: "numeroArticoli", widget: "number"}
-      - {label: "Attivo", name: "attivo", widget: "boolean", default: true}
+      - {label: "📝 Titolo Post", name: "titolo", widget: "string", hint: "Es: Saldi Estivi 2025"}
+      - {label: "📋 Sottotitolo", name: "sottotitolo", widget: "string", hint: "Es: Fino al 70% di sconto"}
+      - {label: "📄 Descrizione Breve", name: "descrizione", widget: "text", hint: "Descrizione che apparirà sotto il titolo"}
+      - {label: "🏷️ Percentuale Sconto Principale", name: "scontoMax", widget: "string", hint: "Es: 70%"}
+      - {label: "📅 Data Inizio", name: "dataInizio", widget: "datetime"}
+      - {label: "📅 Data Fine", name: "dataFine", widget: "datetime"}
+      - {label: "🖼️ Immagine Hero", name: "immagineHero", widget: "image", hint: "Immagine principale per l'intestazione"}
+      - {label: "✅ Attivo", name: "attivo", widget: "boolean", default: true}
+      - {label: "🔥 In Evidenza", name: "inEvidenza", widget: "boolean", default: false, hint: "Mostrerà badge speciale"}
+      - {label: "🎯 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1, hint: "1 = primo posto"}
 
   - name: "prodotti-saldi"
-    label: "Prodotti in Saldo"
+    label: "🛍️ Prodotti in Saldo"
+    label_singular: "Prodotto in Saldo"
     folder: "src/content/prodotti-saldi"
     create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "/saldi"
+    fields:
+      - {label: "🏷️ Nome Prodotto", name: "nome", widget: "string"}
+      - {label: "💰 Prezzo Originale (€)", name: "prezzoOriginale", widget: "number", step: 0.01}
+      - {label: "💸 Prezzo Scontato (€)", name: "prezzoScontato", widget: "number", step: 0.01}
+      - {label: "📄 Descrizione Dettagliata", name: "descrizione", widget: "text"}
+      - {label: "🖼️ Immagine Principale", name: "immagine", widget: "image"}
+      - {label: "🖼️ Galleria Immagini", name: "galleria", widget: "list", field: {label: "Immagine", name: "immagine", widget: "image"}, required: false}
+      - label: "📂 Categoria"
+        name: "categoria"
+        widget: "select"
+        options: 
+          - {label: "👔 Abiti da Cerimonia", value: "Abiti da Cerimonia"}
+          - {label: "👕 Sportswear", value: "Sportswear"}
+          - {label: "👜 Accessori", value: "Accessori"}
+          - {label: "👚 Abbigliamento Donna", value: "Abbigliamento Donna"}
+          - {label: "👔 Abbigliamento Uomo", value: "Abbigliamento Uomo"}
+          - {label: "👶 Abbigliamento Bambini", value: "Abbigliamento Bambini"}
+          - {label: "🎯 Altro", value: "Altro"}
+      - {label: "📏 Taglie Disponibili", name: "taglie", widget: "list", field: {label: "Taglia", name: "taglia", widget: "string"}}
+      - {label: "✅ Disponibile", name: "disponibile", widget: "boolean", default: true}
+      - {label: "🆕 Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
+      - {label: "⏰ Tempo Limitato", name: "limitedTime", widget: "boolean", default: false}
+      - {label: "🎯 Ordine di Visualizzazione", name: "ordine", widget: "number", default: 1}
+      - {label: "🏷️ Tag", name: "tags", widget: "list", field: {label: "Tag", name: "tag", widget: "string"}, required: false}
+      - {label: "📱 Post Collegato", name: "postCollegato", widget: "relation", collection: "saldi-posts", search_fields: ["titolo"], value_field: "{{slug}}", display_fields: ["titolo"], required: false}
+
+  - name: "categorie-saldi"
+    label: "📂 Categorie Saldi"
+    label_singular: "Categoria"
+    folder: "src/content/categorie-saldi"
+    create: true
+    delete: true
     slug: "{{slug}}"
     fields:
-      - {label: "Nome Prodotto", name: "nome", widget: "string"}
-      - {label: "Prezzo Originale (€)", name: "prezzoOriginale", widget: "number"}
-      - {label: "Prezzo Scontato (€)", name: "prezzoScontato", widget: "number"}
-      - {label: "Percentuale Sconto", name: "sconto", widget: "number"}
-      - {label: "Descrizione", name: "descrizione", widget: "text"}
-      - {label: "Immagine Principale", name: "immagine", widget: "image"}
-      - {label: "Categoria", name: "categoria", widget: "select", options: ["Abiti da Cerimonia", "Sportswear", "Accessori", "Altro"]}
-      - {label: "Taglie Disponibili", name: "taglie", widget: "list", field: {label: "Taglia", name: "taglia", widget: "string"}}
-      - {label: "Disponibile", name: "disponibile", widget: "boolean", default: true}
-      - {label: "Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
-      - {label: "Tempo Limitato", name: "limitedTime", widget: "boolean", default: false}
-      - {label: "Ordine di Visualizzazione", name: "ordine", widget: "number", default: 1}
+      - {label: "📂 Nome Categoria", name: "nome", widget: "string"}
+      - {label: "🏷️ Sconto Categoria", name: "sconto", widget: "string", hint: "Es: 50%"}
+      - {label: "📄 Descrizione", name: "descrizione", widget: "text"}
+      - {label: "🖼️ Immagine Categoria", name: "immagine", widget: "image"}
+      - {label: "📊 Numero Articoli", name: "numeroArticoli", widget: "number", hint: "Numero approssimativo di articoli"}
+      - {label: "✅ Attiva", name: "attivo", widget: "boolean", default: true}
+      - {label: "🎯 Ordine", name: "ordine", widget: "number", default: 1}
 
   - name: "settings"
-    label: "Impostazioni Saldi"
+    label: "⚙️ Impostazioni"
     files:
       - name: "saldi-settings"
-        label: "Impostazioni Generali Saldi"
+        label: "🔧 Impostazioni Saldi"
         file: "src/content/settings/saldi-settings.md"
         fields:
-          - {label: "Saldi Attivi", name: "saldiAttivi", widget: "boolean", default: true}
-          - {label: "Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false}
-          - {label: "Data Inizio Saldi", name: "dataInizio", widget: "datetime"}
-          - {label: "Data Fine Saldi", name: "dataFine", widget: "datetime"}
-          - {label: "Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}
+          - {label: "✅ Sezione Saldi Attiva", name: "saldiAttivi", widget: "boolean", default: true}
+          - {label: "📢 Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false, hint: "Messaggio che appare in cima alla pagina saldi"}
+          - {label: "🎨 Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}
+          - {label: "📧 Email per Ordini", name: "emailOrdini", widget: "string", default: "info@kelua.it"}
+          - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}
+
+      - name: "homepage-settings"
+        label: "🏠 Impostazioni Homepage"
+        file: "src/content/settings/homepage-settings.md"
+        fields:
+          - {label: "✅ Mostra Banner Saldi in Homepage", name: "mostraBannerSaldi", widget: "boolean", default: true}
+          - {label: "📝 Testo Banner", name: "testoBanner", widget: "string", default: "🔥 Saldi in corso! Scopri le offerte"}
+          - {label: "🔗 Link Banner", name: "linkBanner", widget: "string", default: "/saldi"}

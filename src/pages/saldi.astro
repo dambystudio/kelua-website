@@ -1,106 +1,151 @@
 ---
-// Pagina Saldi Dedicata
+// Pagina Saldi Dedicata con integrazione CMS
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
 
-// Dati per la sezione hero dei saldi (amministrabile)
-const saldiHero = {
+// Leggi i dati dal CMS (quando disponibili) o usa dati di fallback
+let saldiPosts = [];
+let prodottiSaldi = [];
+let categorieSaldi = [];
+
+try {
+  // Prova a leggere dal CMS
+  saldiPosts = await getCollection('saldi-posts');
+  prodottiSaldi = await getCollection('prodotti-saldi');
+  categorieSaldi = await getCollection('categorie-saldi');
+} catch (error) {
+  console.log('CMS non ancora configurato, uso dati di esempio');
+}
+
+// Fallback data se il CMS non è ancora configurato
+const saldiHeroFallback = {
   titolo: "🔥 Saldi Straordinari",
   sottotitolo: "Scopri le nostre offerte imperdibili",
   descrizione: "Eleganza e stile con sconti fino al 70%. Approfitta delle nostre promozioni esclusive su abiti da cerimonia e sportswear di qualità.",
-  immagineBackground: "/background.png"
+  immagineBackground: "/background.png",
+  scontoMax: "70%",
+  attivo: true
 };
 
-// Dati delle categorie in saldo (amministrabile)
-const categorieSaldi = [
+const categorieFallback = [
   {
-    id: 1,
-    nome: "Abiti da Cerimonia",
-    sconto: "50%",
-    descrizione: "Eleganza per ogni occasione speciale",
-    immagine: "/abiti-cerimonia-eleganti.png",
-    numeroArticoli: 15,
-    attivo: true
+    data: {
+      nome: "Abiti da Cerimonia",
+      sconto: "50%",
+      descrizione: "Eleganza per ogni occasione speciale",
+      immagine: "/abiti-cerimonia-eleganti.png",
+      numeroArticoli: 15,
+      attivo: true,
+      ordine: 1
+    }
   },
   {
-    id: 2,
-    nome: "Sportswear",
-    sconto: "30%",
-    descrizione: "Comfort e stile per il tempo libero",
-    immagine: "/abbigliamento-sportivo.png",
-    numeroArticoli: 22,
-    attivo: true
+    data: {
+      nome: "Sportswear",
+      sconto: "30%",
+      descrizione: "Comfort e stile per il tempo libero",
+      immagine: "/abbigliamento-sportivo.png",
+      numeroArticoli: 22,
+      attivo: true,
+      ordine: 2
+    }
   },
   {
-    id: 3,
-    nome: "Accessori",
-    sconto: "40%",
-    descrizione: "Completa il tuo look con stile",
-    immagine: "/servizio-sartoriale.jpeg",
-    numeroArticoli: 8,
-    attivo: true
+    data: {
+      nome: "Accessori",
+      sconto: "40%",
+      descrizione: "Completa il tuo look con stile",
+      immagine: "/servizio-sartoriale.jpeg",
+      numeroArticoli: 8,
+      attivo: true,
+      ordine: 3
+    }
   }
 ];
 
-// Prodotti specifici in saldo (amministrabile)
-const prodottiSaldi = [
+const prodottiFallback = [
   {
-    id: 1,
-    nome: "Completo Elegante Blu",
-    prezzoOriginale: 450,
-    prezzoScontato: 270,
-    sconto: 40,
-    descrizione: "Completo da cerimonia in tessuto pregiato, perfetto per matrimoni ed eventi importanti.",
-    immagine: "/abiti-cerimonia-1.png",
-    categoria: "Abiti da Cerimonia",
-    taglie: ["48", "50", "52", "54"],
-    disponibile: true,
-    nuovo: false,
-    limitedTime: true
+    data: {
+      nome: "Completo Elegante Blu",
+      prezzoOriginale: 450,
+      prezzoScontato: 270,
+      descrizione: "Completo da cerimonia in tessuto pregiato, perfetto per matrimoni ed eventi importanti.",
+      immagine: "/abiti-cerimonia-1.png",
+      categoria: "Abiti da Cerimonia",
+      taglie: ["48", "50", "52", "54"],
+      disponibile: true,
+      nuovo: false,
+      limitedTime: true,
+      ordine: 1
+    }
   },
   {
-    id: 2,
-    nome: "Abito da Sera Nero",
-    prezzoOriginale: 380,
-    prezzoScontato: 190,
-    sconto: 50,
-    descrizione: "Abito da sera elegante, ideale per cene di gala e eventi serali.",
-    immagine: "/abiti-cerimonia-2.png",
-    categoria: "Abiti da Cerimonia",
-    taglie: ["46", "48", "50"],
-    disponibile: true,
-    nuovo: true,
-    limitedTime: false
+    data: {
+      nome: "Abito da Sera Nero",
+      prezzoOriginale: 380,
+      prezzoScontato: 190,
+      descrizione: "Abito da sera elegante, ideale per cene di gala e eventi serali.",
+      immagine: "/abiti-cerimonia-2.png",
+      categoria: "Abiti da Cerimonia",
+      taglie: ["46", "48", "50"],
+      disponibile: true,
+      nuovo: true,
+      limitedTime: false,
+      ordine: 2
+    }
   },
   {
-    id: 3,
-    nome: "Tuta Sportiva Premium",
-    prezzoOriginale: 120,
-    prezzoScontato: 84,
-    sconto: 30,
-    descrizione: "Tuta sportiva in tessuto tecnico traspirante, perfetta per sport e tempo libero.",
-    immagine: "/sportswear-casual.png",
-    categoria: "Sportswear",
-    taglie: ["S", "M", "L", "XL"],
-    disponibile: true,
-    nuovo: false,
-    limitedTime: false
+    data: {
+      nome: "Tuta Sportiva Premium",
+      prezzoOriginale: 120,
+      prezzoScontato: 84,
+      descrizione: "Tuta sportiva in tessuto tecnico traspirante, perfetta per sport e tempo libero.",
+      immagine: "/sportswear-casual.png",
+      categoria: "Sportswear",
+      taglie: ["S", "M", "L", "XL"],
+      disponibile: true,
+      nuovo: false,
+      limitedTime: false,
+      ordine: 3
+    }
   }
 ];
 
-const categorieAttive = categorieSaldi.filter(cat => cat.attivo);
-const prodottiDisponibili = prodottiSaldi.filter(prod => prod.disponibile);
+// Usa i dati del CMS se disponibili, altrimenti usa i fallback
+const saldiHero = saldiPosts.length > 0 
+  ? saldiPosts.find(post => post.data.attivo)?.data || saldiHeroFallback
+  : saldiHeroFallback;
+
+const categorieAttive = categorieSaldi.length > 0 
+  ? categorieSaldi
+      .filter(cat => cat.data.attivo)
+      .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))
+  : categorieFallback;
+
+const prodottiDisponibili = prodottiSaldi.length > 0
+  ? prodottiSaldi
+      .filter(prod => prod.data.disponibile)
+      .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))
+  : prodottiFallback;
+
+// Calcola le statistiche
+const numeroTotaleProdotti = prodottiDisponibili.length;
+const scontoMassimoCalcolato = prodottiDisponibili.reduce((max, prod) => {
+  const sconto = Math.round(((prod.data.prezzoOriginale - prod.data.prezzoScontato) / prod.data.prezzoOriginale) * 100);
+  return Math.max(max, sconto);
+}, 0);
+---
 ---
 
 <Layout title="Saldi - Kelua | Offerte Speciali su Abbigliamento di Qualità">
   <main>
     <Navbar />
-    
-    <!-- Hero Section Saldi -->
+      <!-- Hero Section Saldi -->
     <section class="saldi-hero">
       <div class="hero-background">
-        <img src={saldiHero.immagineBackground} alt="Saldi Kelua" class="hero-bg-image">
+        <img src={saldiHero.immagineBackground || "/background.png"} alt="Saldi Kelua" class="hero-bg-image">
         <div class="hero-overlay"></div>
       </div>
       
@@ -112,11 +157,11 @@ const prodottiDisponibili = prodottiSaldi.filter(prod => prod.disponibile);
             <p>{saldiHero.descrizione}</p>
             <div class="hero-stats">
               <div class="stat">
-                <span class="number">{prodottiDisponibili.length}</span>
+                <span class="number">{numeroTotaleProdotti}</span>
                 <span class="label">Prodotti in Saldo</span>
               </div>
               <div class="stat">
-                <span class="number">70%</span>
+                <span class="number">{scontoMassimoCalcolato || saldiHero.scontoMax}%</span>
                 <span class="label">Sconto Massimo</span>
               </div>
             </div>
@@ -130,24 +175,27 @@ const prodottiDisponibili = prodottiSaldi.filter(prod => prod.disponibile);
       <div class="container">
         <h2>Categorie in Promozione</h2>
         <div class="categorie-grid">
-          {categorieAttive.map((categoria, index) => (
-            <div class="categoria-card scroll-animate" data-delay={index * 0.2}>
-              <div class="categoria-image">
-                <img src={categoria.immagine} alt={categoria.nome} />
-                <div class="sconto-overlay">
-                  <span>-{categoria.sconto}</span>
+          {categorieAttive.map((categoria, index) => {
+            const cat = categoria.data || categoria;
+            return (
+              <div class="categoria-card scroll-animate" data-delay={index * 0.2}>
+                <div class="categoria-image">
+                  <img src={cat.immagine} alt={cat.nome} />
+                  <div class="sconto-overlay">
+                    <span>-{cat.sconto}</span>
+                  </div>
+                </div>
+                <div class="categoria-content">
+                  <h3>{cat.nome}</h3>
+                  <p>{cat.descrizione}</p>
+                  <div class="categoria-meta">
+                    <span class="articoli">{cat.numeroArticoli} articoli</span>
+                    <span class="sconto-text">Fino a -{cat.sconto}</span>
+                  </div>
                 </div>
               </div>
-              <div class="categoria-content">
-                <h3>{categoria.nome}</h3>
-                <p>{categoria.descrizione}</p>
-                <div class="categoria-meta">
-                  <span class="articoli">{categoria.numeroArticoli} articoli</span>
-                  <span class="sconto-text">Fino a -{categoria.sconto}</span>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -157,57 +205,61 @@ const prodottiDisponibili = prodottiSaldi.filter(prod => prod.disponibile);
       <div class="container">
         <h2>Prodotti in Offerta</h2>
         <div class="prodotti-grid">
-          {prodottiDisponibili.map((prodotto, index) => (
-            <div class="prodotto-card scroll-animate" data-delay={index * 0.1}>
-              <div class="prodotto-image">
-                <img src={prodotto.immagine} alt={prodotto.nome} />
-                <div class="badges">
-                  {prodotto.nuovo && <span class="badge nuovo">Nuovo</span>}
-                  {prodotto.limitedTime && <span class="badge limited">Tempo Limitato</span>}
-                  <span class="badge sconto">-{prodotto.sconto}%</span>
-                </div>
-              </div>
-              
-              <div class="prodotto-content">
-                <div class="prodotto-header">
-                  <h3>{prodotto.nome}</h3>
-                  <span class="categoria-tag">{prodotto.categoria}</span>
-                </div>
-                
-                <p class="descrizione">{prodotto.descrizione}</p>
-                
-                <div class="prezzi">
-                  <span class="prezzo-originale">€{prodotto.prezzoOriginale}</span>
-                  <span class="prezzo-scontato">€{prodotto.prezzoScontato}</span>
-                  <span class="risparmio">Risparmi €{prodotto.prezzoOriginale - prodotto.prezzoScontato}</span>
-                </div>
-                
-                <div class="taglie">
-                  <span class="taglie-label">Taglie disponibili:</span>
-                  <div class="taglie-list">
-                    {prodotto.taglie.map(taglia => (
-                      <span class="taglia">{taglia}</span>
-                    ))}
+          {prodottiDisponibili.map((prodotto, index) => {
+            const prod = prodotto.data || prodotto;
+            const scontoCalcolato = Math.round(((prod.prezzoOriginale - prod.prezzoScontato) / prod.prezzoOriginale) * 100);
+            return (
+              <div class="prodotto-card scroll-animate" data-delay={index * 0.1}>
+                <div class="prodotto-image">
+                  <img src={prod.immagine} alt={prod.nome} />
+                  <div class="badges">
+                    {prod.nuovo && <span class="badge nuovo">Nuovo</span>}
+                    {prod.limitedTime && <span class="badge limited">Tempo Limitato</span>}
+                    <span class="badge sconto">-{scontoCalcolato}%</span>
                   </div>
                 </div>
                 
-                <div class="prodotto-actions">
-                  <a href="#contatti" class="btn-acquista">
-                    <span>Acquista Ora</span>
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M6 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM17 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
-                    </svg>
-                  </a>
-                  <a href="tel:+390882452911" class="btn-info">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                    </svg>
-                    <span>Chiama per Info</span>
-                  </a>
+                <div class="prodotto-content">
+                  <div class="prodotto-header">
+                    <h3>{prod.nome}</h3>
+                    <span class="categoria-tag">{prod.categoria}</span>
+                  </div>
+                  
+                  <p class="descrizione">{prod.descrizione}</p>
+                  
+                  <div class="prezzi">
+                    <span class="prezzo-originale">€{prod.prezzoOriginale}</span>
+                    <span class="prezzo-scontato">€{prod.prezzoScontato}</span>
+                    <span class="risparmio">Risparmi €{prod.prezzoOriginale - prod.prezzoScontato}</span>
+                  </div>
+                  
+                  <div class="taglie">
+                    <span class="taglie-label">Taglie disponibili:</span>
+                    <div class="taglie-list">
+                      {prod.taglie?.map(taglia => (
+                        <span class="taglia">{taglia}</span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div class="prodotto-actions">
+                    <a href="#contatti" class="btn-acquista">
+                      <span>Acquista Ora</span>
+                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M6 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM17 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
+                      </svg>
+                    </a>
+                    <a href="tel:+390882452911" class="btn-info">
+                      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                      </svg>
+                      <span>Chiama per Info</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
