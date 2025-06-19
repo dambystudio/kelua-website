@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kelua.it/sitemap.xml
+
+# Ottimizzazione per i motori di ricerca
+# Blocca l'accesso a file sensibili
+Disallow: /src/
+Disallow: /.env
+Disallow: /node_modules/
+Disallow: /backup/
+
+# Permetti l'accesso alle immagini
+Allow: /public/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.webp
+Allow: /*.svg
+
+# Crawl-delay per essere rispettosi
+Crawl-delay: 1

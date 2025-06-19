@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelua - Abbigliamento dal 1975</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/glida-display" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/glida-display');
+        @font-face {
+            font-family: 'Glida Display Regular';
+            src: url('https://fonts.cdnfonts.com/s/89234/GlidaDisplay-Regular.woff2') format('woff2'),
+                 url('https://fonts.cdnfonts.com/s/89234/GlidaDisplay-Regular.woff') format('woff'),
+                 url('https://fonts.cdnfonts.com/s/89234/GlidaDisplay-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-center">
+                <img src="logo.jpg" alt="Kelua Logo" class="logo">
+                <span class="brand-name">Kelua</span>
+            </div>            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#chi-siamo" class="nav-link">Chi Siamo</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contatti" class="nav-link">Contatti</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">            <div class="hero-center">
+                <p class="hero-subtitle">Eleganza e stile dal 1975</p>
+                <p class="hero-description">
+                    Scopri la nostra collezione di abiti da cerimonia e abbigliamento sportswear 
+                    nel cuore di San Giovanni Rotondo
+                </p>
+                <div class="hero-buttons">
+                    <a href="#chi-siamo" class="btn btn-primary">Scopri di più</a>
+                    <a href="#contatti" class="btn btn-secondary">Contattaci</a>
+                </div>
+            </div>
+            
+            <div class="services-preview">
+                <div class="fashion-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Abiti da Cerimonia</h3>
+                    <p>Eleganza per ogni occasione speciale</p>
+                </div>
+                <div class="fashion-card">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Sportswear</h3>
+                    <p>Comfort e stile per il tempo libero</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chi Siamo Section -->
+    <section id="chi-siamo" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Chi Siamo</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <div class="year-badge">1975</div>
+                        <h3>La Nostra Storia</h3>
+                        <p>
+                            Da quasi cinquant'anni, Kelua è sinonimo di eleganza e qualità nel panorama 
+                            dell'abbigliamento di San Giovanni Rotondo. Fondato nel 1975, il nostro negozio 
+                            ha accompagnato generazioni di clienti nei loro momenti più importanti.
+                        </p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>La Nostra Passione</h3>
+                        <p>
+                            Crediamo che l'abbigliamento sia molto più di semplici vestiti: è espressione 
+                            della personalità, fiducia in se stessi e stile di vita. Per questo selezioniamo 
+                            con cura ogni capo che proponiamo ai nostri clienti.
+                        </p>
+                    </div>
+                </div>
+                  <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-image">
+                            <img src="abiti-cerimonia-1.png" alt="Abiti da Cerimonia Eleganti" class="service-photo">
+                            <div class="service-overlay">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                        </div>
+                        <h4>Abiti da Cerimonia</h4>
+                        <p>Collezioni eleganti per matrimoni, eventi speciali e cerimonie importanti</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-image">
+                            <img src="sportswear-casual.png" alt="Abbigliamento Sportswear" class="service-photo">
+                            <div class="service-overlay">
+                                <i class="fas fa-running"></i>
+                            </div>
+                        </div>
+                        <h4>Abbigliamento Sportswear</h4>                        <p>Capi casual e sportivi per il tempo libero, comfort senza rinunciare allo stile</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-image">
+                            <img src="servizio-sartoriale.jpeg" alt="Servizio Sartoriale" class="service-photo">
+                            <div class="service-overlay">
+                                <i class="fas fa-scissors"></i>
+                            </div>
+                        </div>
+                        <h4>Servizio Sartoriale</h4>
+                        <p>Personalizzazioni e aggiustamenti per un fit perfetto su ogni capo</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-image">
+                            <img src="abiti-cerimonia-2.png" alt="Consulenza Personalizzata" class="service-photo">
+                            <div class="service-overlay">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <h4>Consulenza Personalizzata</h4>
+                        <p>I nostri esperti ti aiutano a trovare il look perfetto per ogni occasione</p>
+                    </div>                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Le Nostre Collezioni</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Scopri la qualità e l'eleganza dei nostri capi</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-large">
+                    <img src="abiti-cerimonia-eleganti.png" alt="Abiti da Cerimonia Eleganti" class="gallery-photo">
+                    <div class="gallery-overlay">
+                        <h3>Abiti da Cerimonia</h3>
+                        <p>Eleganza per ogni occasione speciale</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="abbigliamento-sportivo.png" alt="Abbigliamento Sportivo" class="gallery-photo">
+                    <div class="gallery-overlay">
+                        <h3>Sportswear</h3>
+                        <p>Comfort e stile</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="fotoAbitoManica.png" alt="Dettagli Sartoriali" class="gallery-photo">
+                    <div class="gallery-overlay">
+                        <h3>Dettagli Sartoriali</h3>
+                        <p>Cura artigianale</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item gallery-wide">
+                    <img src="abiti-cerimonia-1.png" alt="Collezione Cerimonia" class="gallery-photo">
+                    <div class="gallery-overlay">
+                        <h3>Collezione Premium</h3>
+                        <p>Per i tuoi momenti importanti</p>
+                    </div>                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">48</div>
+                    <div class="stat-label">Anni di Esperienza</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Clienti Soddisfatti</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Capi Premium</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Made in Italy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contatti Section -->
+    <section id="contatti" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contatti</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Vieni a trovarci nel nostro negozio o contattaci per informazioni</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Indirizzo</h4>
+                            <p>Corso Regina Margherita 110<br>San Giovanni Rotondo (FG)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Orari di Apertura</h4>
+                            <p>
+                                Lunedì - Sabato: 9:00 - 13:00 | 16:00 - 20:00<br>
+                                Domenica: Chiuso
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telefono</h4>
+                            <p>+39 0882 123456</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@kelua.it</p>
+                        </div>
+                    </div>
+                </div>
+                  <div class="contact-form-container">
+                    <div class="form-header">
+                        <h3>Inviaci un messaggio</h3>
+                        <p>Compila il form per ricevere informazioni o richiedere un appuntamento</p>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+                            <label for="name"><i class="fas fa-user"></i> Nome</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="La tua email" required>
+                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Il tuo telefono">
+                            <label for="phone"><i class="fas fa-phone"></i> Telefono</label>
+                        </div>
+                        <div class="form-group">
+                            <select id="request-type" name="request-type">
+                                <option value="">Seleziona il tipo di richiesta</option>
+                                <option value="info">Informazioni generali</option>
+                                <option value="appointment">Richiesta appuntamento</option>
+                                <option value="callback">Richiamami</option>
+                            </select>
+                            <label for="request-type"><i class="fas fa-question-circle"></i> Tipo di richiesta</label>
+                        </div>
+                        <div class="form-group full-width">
+                            <textarea id="message" name="message" rows="4" placeholder="Il tuo messaggio"></textarea>
+                            <label for="message"><i class="fas fa-comment"></i> Messaggio</label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Invia messaggio
+                            </button>
+                            <a href="tel:+390882123456" class="btn btn-secondary">
+                                <i class="fas fa-phone"></i> Chiamaci ora
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map"></i>
+                        <h4>Ci Troviamo Qui</h4>
+                        <p>Corso Regina Margherita 110<br>San Giovanni Rotondo</p>
+                        <a href="https://maps.google.com/?q=Corso+Regina+Margherita+110+San+Giovanni+Rotondo" 
+                           target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> Apri in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="logo.jpg" alt="Kelua Logo" class="footer-logo">
+                    <h3>Kelua</h3>
+                    <p>Eleganza dal 1975</p>
+                </div>
+                <div class="footer-info">
+                    <p>&copy; 2025 Kelua. Tutti i diritti riservati.</p>
+                    <p>Corso Regina Margherita 110 - San Giovanni Rotondo (FG)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

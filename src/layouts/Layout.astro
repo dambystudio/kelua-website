@@ -1,0 +1,294 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giovanni Rotondo. Abiti da cerimonia, sportswear e consulenza personalizzata." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO Meta Tags -->
+		<meta name="keywords" content="abbigliamento, San Giovanni Rotondo, abiti cerimonia, sportswear, moda uomo, moda donna, negozio abbigliamento, Kelua" />
+		<meta name="author" content="Kelua" />
+		<meta name="robots" content="index, follow" />
+		
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://kelua.it" />
+		<meta property="og:image" content="/fotoNegozio_conLogo.png" />
+		
+		<!-- Local Business Schema -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "ClothingStore",
+			"name": "Kelua",
+			"description": "Negozio di abbigliamento elegante dal 1975",
+			"foundingDate": "1975",
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "Corso Regina Margherita 110",
+				"addressLocality": "San Giovanni Rotondo",
+				"addressRegion": "Puglia",
+				"postalCode": "71013",
+				"addressCountry": "IT"
+			},
+			"telephone": "+390882452911",
+			"url": "https://kelua.it",
+			"image": "/fotoNegozio_conLogo.png",
+			"sameAs": [
+				"https://www.facebook.com/kelua.uomo/?locale=it_IT",
+				"https://www.instagram.com/kelua_moda/",
+				"https://www.tiktok.com/@keluafashion"
+			],			"openingHours": [
+				"Mo 09:30-13:00,17:00-20:30",
+				"Tu 09:30-13:00,17:00-20:30", 
+				"We 09:30-13:00,17:00-20:30",
+				"Th 09:30-13:00,17:00-20:30",
+				"Fr 09:30-13:00,17:00-20:30",
+				"Sa 09:30-13:00,17:00-20:30"
+			],
+			"priceRange": "€€",
+			"paymentAccepted": ["Cash", "Credit Card"],
+			"currenciesAccepted": "EUR"
+		}
+		</script>
+		
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.cdnfonts.com/css/glida-display" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<title>{title}</title>
+		
+		<!-- Scroll Scrubbing Script -->
+		<script src="/js/scroll-scrubbing.js" is:inline></script>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/* CSS Variables */
+	:root {
+		--primary-color: #1a1a1a;
+		--secondary-color: #000000;
+		--accent-color: #b8960a;
+		--accent-light: #d4af37;
+		--accent-muted: #8b7355;
+		--light-gray: #f5f5f5;
+		--dark-gray: #2a2a2a;
+		--white: #ffffff;
+		--text-dark: #1a1a1a;
+		--text-light: #666666;
+		--gold-gradient: linear-gradient(135deg, #d4af37 0%, #b8960a 100%);
+		--dark-gradient: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+	}
+
+	/* Reset */
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: 'Poppins', sans-serif;
+		line-height: 1.6;
+		color: var(--text-dark);
+		overflow-x: hidden;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+		width: 100%;
+	}
+
+	/* Utility Classes */
+	.section-title {
+		font-family: 'Playfair Display', serif;
+		font-size: 3rem;
+		font-weight: 600;
+		text-align: center;
+		margin-bottom: 1rem;
+		letter-spacing: 1px;
+	}
+
+	.section-divider {
+		width: 100px;
+		height: 4px;
+		background: var(--gold-gradient);
+		margin: 0 auto 2rem;
+		border-radius: 2px;
+		box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+	}
+
+	.section-subtitle {
+		text-align: center;
+		font-size: 1.1rem;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	/* Stili globali per bottoni */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 16px 32px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+		letter-spacing: 0.5px;
+		cursor: pointer;
+		border: none;
+		justify-content: center;
+	}
+
+	.btn-primary {
+		background: linear-gradient(45deg, #d4af37, #f1c40f);
+		color: #1a1a1a;
+		box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
+		background: linear-gradient(45deg, #f1c40f, #d4af37);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: white;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(10px);
+	}
+
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: #d4af37;
+		color: #f1c40f;
+		transform: translateY(-3px);
+	}
+
+	/* Scroll Scrubbing Animations */
+	@keyframes parallaxMove {
+		from {
+			transform: translateY(0px);
+		}
+		to {
+			transform: translateY(-100px);
+		}
+	}
+
+	@keyframes fadeInScale {
+		from {
+			opacity: 0;
+			transform: scale(0.8) translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1) translateY(0px);
+		}
+	}
+
+	@keyframes slideInLeft {
+		from {
+			opacity: 0;
+			transform: translateX(-100px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0px);
+		}
+	}
+
+	@keyframes slideInRight {
+		from {
+			opacity: 0;
+			transform: translateX(100px);
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0px);
+		}
+	}
+
+	/* Scroll-triggered animations */
+	.scroll-animate {
+		opacity: 0;
+		transform: translateY(50px);
+		transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.scroll-animate.in-view {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.parallax-element {
+		will-change: transform;
+	}
+
+	.scroll-fade {
+		opacity: 0;
+		transition: opacity 1s ease-out;
+	}
+
+	.scroll-fade.visible {
+		opacity: 1;
+	}
+
+	/* Scroll progress indicator */
+	.scroll-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 0%;
+		height: 3px;
+		background: linear-gradient(90deg, #d4af37, #f1c40f);
+		z-index: 10000;
+		transition: width 0.1s ease;
+	}
+
+	.hero-bg-image {
+		will-change: transform;
+		transform: scale(1.1);
+		transition: transform 0.1s ease-out;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.section-title {
+			font-size: 2.2rem;
+		}
+		
+		.container {
+			padding: 0 15px;
+		}
+		
+		.btn {
+			padding: 12px 24px;
+			font-size: 0.9rem;
+		}
+	}
+</style>
