@@ -11,9 +11,11 @@
 		<ul class="nav-menu" id="nav-menu">
 			<li class="nav-item">
 				<a href="#home" class="nav-link">Home</a>
+			</li>			<li class="nav-item">
+				<a href="#chi-siamo" class="nav-link">Chi Siamo</a>
 			</li>
 			<li class="nav-item">
-				<a href="#chi-siamo" class="nav-link">Chi Siamo</a>
+				<a href="#saldi" class="nav-link saldi-link">🔥 Saldi</a>
 			</li>
 			<li class="nav-item">
 				<a href="#gallery" class="nav-link">Gallery</a>
@@ -113,6 +115,30 @@
 
 	.nav-link:hover {
 		color: #f1c40f;
+	}
+
+	.saldi-link {
+		background: linear-gradient(45deg, #e74c3c, #c0392b);
+		color: white !important;
+		padding: 0.5rem 1rem !important;
+		border-radius: 20px;
+		font-weight: 600;
+		animation: pulse-saldi 2s infinite;
+	}
+
+	.saldi-link:hover {
+		background: linear-gradient(45deg, #c0392b, #e74c3c);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+	}
+
+	.saldi-link::after {
+		display: none;
+	}
+
+	@keyframes pulse-saldi {
+		0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+		50% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
 	}
 
 	.hamburger {
