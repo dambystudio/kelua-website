@@ -51,34 +51,38 @@ const saldiHero = saldiPosts.length > 0
   ? saldiPosts.find(post => post.data.attivo)?.data || saldiHeroFallback
   : saldiHeroFallback;
 
-// Statistiche dinamiche basate sui dati CMS
-const numeroTotaleProdotti = prodottiSaldi.filter(p => p.data.disponibile).length;
-const numeroTotaleCategorie = categorieSaldi.filter(c => c.data.attivo).length;
+// Statistiche dinamiche
+const numeroTotaleProdotti = prodottiSaldi.length;
+const scontoMassimoCalcolato = prodottiSaldi.length > 0 
+  ? Math.max(...prodottiSaldi.map(prod => {
+      const sconto = Math.round(((prod.data.prezzoOriginale - prod.data.prezzoScontato) / prod.data.prezzoOriginale) * 100);
+      return sconto || 0;
+    }))
+  : 70;
 
-let scontoMassimoCalcolato = 70; // default
-if (prodottiSaldi.length > 0) {
-  const scontiProdotti = prodottiSaldi
-    .filter(p => p.data.disponibile)
-    .map(p => Math.round(((p.data.prezzoOriginale - p.data.prezzoScontato) / p.data.prezzoOriginale) * 100));
-  scontoMassimoCalcolato = Math.max(...scontiProdotti, 0);
-}
-
-// Se ci sono categorie, prendi anche gli sconti delle categorie
-if (categorieSaldi.length > 0) {
-  const scontiCategorie = categorieSaldi
-    .filter(c => c.data.attivo)
-    .map(c => parseInt(c.data.sconto?.replace('%', '') || '0'));
-  if (scontiCategorie.length > 0) {
-    scontoMassimoCalcolato = Math.max(scontoMassimoCalcolato, ...scontiCategorie);
-  }
-}
+// Applica il colore tema personalizzato
+const temaColore = coloreTema || "#e74c3c";
 ---
 ---
 
 <Layout title="Saldi - Kelua | Offerte Speciali su Abbigliamento di Qualità">
   <main>
     <Navbar />
-      <!-- Hero Section Saldi -->
+    
+    {!saldiAttivi ? (
+      <!-- Messaggio Saldi Non Attivi -->
+      <section class="saldi-disattivati">
+        <div class="container">
+          <div class="message-content">
+            <h1>🔄 Saldi Temporaneamente Non Disponibili</h1>
+            <p>I nostri saldi non sono attualmente attivi. Torna presto per scoprire le nostre offerte speciali!</p>
+            <a href="/" class="btn-home">Torna alla Homepage</a>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <>
+        <!-- Hero Section Saldi -->
     <section class="saldi-hero">
       <div class="hero-background">
         <img src={saldiHero.immagineBackground || "/background.png"} alt="Saldi Kelua" class="hero-bg-image">
@@ -103,6 +107,68 @@ if (categorieSaldi.length > 0) {
             </div>
           </div>
         </div>      </div>    </section>
+
+    <!-- Messaggio Globale Saldi -->
+    {messaggioGlobale && (
+      <section class="messaggio-globale">
+        <div class="container">
+          <div class="messaggio-content">
+            <p>{messaggioGlobale}</p>
+          </div>
+        </div>
+      </section>    )}
+
+    <!-- Filtri Prodotti -->
+    {(categorieSaldi.length > 0 || prodottiSaldi.length > 0) && (
+      <section class="filtri-prodotti">
+        <div class="container">
+          <h2>Filtra per Categoria</h2>
+          <div class="filtri-container">
+            <button class="filtro-btn active" data-filtro="tutti">
+              <span class="filtro-icon">🛍️</span>
+              <span class="filtro-text">Tutti i Prodotti</span>
+              <span class="filtro-count">{prodottiSaldi.filter(p => p.data.disponibile).length}</span>
+            </button>
+            
+            {/* Genera filtri dinamici basati sulle categorie presenti */}
+            {[...new Set(categorieSaldi.map(cat => cat.data.nome))].map(nomeCategoria => {
+              const categoriePer = categorieSaldi.filter(cat => cat.data.nome === nomeCategoria && cat.data.attivo);
+              
+              return categoriePer.map(categoria => {
+                const prodottiCount = prodottiSaldi.filter(p => 
+                  p.data.disponibile && 
+                  p.data.categoria === categoria.data.nome && 
+                  p.data.genere === categoria.data.genere
+                ).length;
+                
+                if (prodottiCount > 0) {
+                  let icon = "👕";
+                  if (categoria.data.nome === "Abiti da Cerimonia") {
+                    icon = categoria.data.genere === "Uomo" ? "🤵" : "👰";
+                  } else if (categoria.data.nome === "Sportswear") {
+                    icon = categoria.data.genere === "Uomo" ? "🏃‍♂️" : "🏃‍♀️";
+                  }
+                  
+                  return (
+                    <button 
+                      class="filtro-btn" 
+                      data-filtro={`${categoria.data.nome}-${categoria.data.genere}`}
+                      data-categoria={categoria.data.nome}
+                      data-genere={categoria.data.genere}
+                    >
+                      <span class="filtro-icon">{icon}</span>
+                      <span class="filtro-text">{categoria.data.nome} {categoria.data.genere}</span>
+                      <span class="filtro-count">{prodottiCount}</span>
+                    </button>
+                  );
+                }
+                return null;
+              });
+            })}
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- Categorie in Saldo (Dinamiche dal CMS) -->
     {categorieSaldi.length > 0 && (
@@ -150,12 +216,17 @@ if (categorieSaldi.length > 0) {
           <div class="prodotti-grid">
             {prodottiSaldi
               .filter(prod => prod.data.disponibile)
-              .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))
-              .map((prodotto, index) => {
+              .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))              .map((prodotto, index) => {
                 const prod = prodotto.data;
                 const scontoCalcolato = Math.round(((prod.prezzoOriginale - prod.prezzoScontato) / prod.prezzoOriginale) * 100);
                 return (
-                  <div class="prodotto-card scroll-animate" data-delay={index * 0.1}>
+                  <div 
+                    class="prodotto-card scroll-animate" 
+                    data-delay={index * 0.1}
+                    data-categoria={prod.categoria}
+                    data-genere={prod.genere}
+                    data-filtro={`${prod.categoria}-${prod.genere}`}
+                  >
                     <div class="prodotto-image">
                       <img src={prod.immagine || "/background.png"} alt={prod.nome} />
                       <div class="badges">
@@ -226,14 +297,84 @@ if (categorieSaldi.length > 0) {
           </div>
         </div>
       </div>
-    </section>
+    </section>      </>
+    )}
 
     <Footer />
   </main>
 </Layout>
 
-<style>
-  /* Hero Section Saldi */
+<style define:vars={{ temaColore }}>
+  /* Variabili CSS dinamiche */
+  :root {
+    --tema-colore: var(--temaColore);
+  }
+
+  /* Saldi Disattivati */
+  .saldi-disattivati {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+  }
+
+  .message-content h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #d4af37;
+  }
+
+  .message-content p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-home {
+    display: inline-block;
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    color: #1a1a1a;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-home:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Messaggio Globale */
+  .messaggio-globale {
+    background: var(--tema-colore);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .messaggio-globale p {
+    margin: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Saldi Hero */
   .saldi-hero {
     min-height: 70vh;
     position: relative;
@@ -333,7 +474,111 @@ if (categorieSaldi.length > 0) {
   .stat .label {
     display: block;
     font-size: 1rem;
-    color: #ccc;    margin-top: 8px;
+    color: #ccc;    margin-top: 8px;  }
+
+  /* Filtri Prodotti */
+  .filtri-prodotti {
+    padding: 80px 0 60px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  }
+
+  .filtri-prodotti h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .filtri-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .filtro-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 15px;
+    color: #ccc;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .filtro-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .filtro-btn:hover::before {
+    left: 100%;
+  }
+
+  .filtro-btn:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.1);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+  }
+
+  .filtro-btn.active {
+    background: linear-gradient(135deg, var(--colore-tema, #e74c3c), #c0392b);
+    border-color: var(--colore-tema, #e74c3c);
+    color: white;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+  }
+
+  .filtro-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4);
+  }
+
+  .filtro-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .filtro-text {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .filtro-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .filtro-btn.active .filtro-count {
+    background: rgba(255, 255, 255, 0.3);
   }
 
   /* Categorie Saldi Dinamiche */
@@ -385,12 +630,11 @@ if (categorieSaldi.length > 0) {
   .categoria-card:hover .categoria-image img {
     transform: scale(1.05);
   }
-
   .sconto-overlay {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    background: linear-gradient(45deg, var(--tema-colore), color-mix(in srgb, var(--tema-colore) 80%, black));
     color: white;
     padding: 10px 20px;
     border-radius: 25px;
@@ -437,9 +681,8 @@ if (categorieSaldi.length > 0) {
     color: #666;
     font-size: 0.9rem;
   }
-
   .sconto-text {
-    color: #e74c3c;
+    color: var(--tema-colore);
     font-weight: 600;
     font-size: 1rem;
   }
@@ -522,9 +765,8 @@ if (categorieSaldi.length > 0) {
     background: linear-gradient(45deg, #e67e22, #f39c12);
     color: white;
   }
-
   .badge.sconto {
-    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    background: linear-gradient(45deg, var(--tema-colore), color-mix(in srgb, var(--tema-colore) 80%, black));
     color: white;
   }
 
@@ -847,6 +1089,10 @@ if (categorieSaldi.length > 0) {
     overflow: hidden;
   }
 
+  .prodotto-card.hidden {
+    display: none;
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .categorie-grid {
@@ -886,10 +1132,32 @@ if (categorieSaldi.length > 0) {
     .hero-stats {
       flex-direction: column;
       gap: 30px;
+    }    .hero-text h1 {
+      font-size: 2.5rem;
     }
 
-    .hero-text h1 {
-      font-size: 2.5rem;
+    /* Filtri responsive */
+    .filtri-prodotti {
+      padding: 60px 0 40px;
+    }
+
+    .filtri-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filtro-btn {
+      width: 100%;
+      max-width: 300px;
+      justify-content: space-between;
+      padding: 14px 20px;
+    }
+
+    .filtro-text {
+      white-space: normal;
+      text-align: center;
+      flex: 1;
     }
 
     .hero-text h2 {
@@ -965,26 +1233,23 @@ if (categorieSaldi.length > 0) {
       // Aggiorna contatori
       aggiornaContatori();
     }
-    
-    // Funzione per aggiornare i contatori
+      // Funzione per aggiornare i contatori
     function aggiornaContatori() {
       filtriBtns.forEach(btn => {
-        const categoria = btn.getAttribute('data-categoria');
-        const genere = btn.getAttribute('data-genere');
+        const filtroTarget = btn.getAttribute('data-filtro');
         const contatore = btn.querySelector('.filtro-count');
         
         let count = 0;
-        if (categoria === 'tutti') {
-          count = prodottiCards.length;
+        if (filtroTarget === 'tutti') {
+          count = document.querySelectorAll('.prodotto-card:not(.hidden)').length;
         } else {
-          count = document.querySelectorAll(`[data-categoria="${categoria}"][data-genere="${genere}"]:not(.hidden)`).length;
+          count = document.querySelectorAll(`[data-filtro="${filtroTarget}"]:not(.hidden)`).length;
         }
         
         contatore.textContent = count;
       });
     }
-    
-    // Event listener per i bottoni filtro
+      // Event listener per i bottoni filtro
     filtriBtns.forEach(btn => {
       btn.addEventListener('click', function() {
         // Rimuovi classe active da tutti i bottoni
@@ -993,12 +1258,22 @@ if (categorieSaldi.length > 0) {
         // Aggiungi classe active al bottone cliccato
         this.classList.add('active');
         
-        // Ottieni categoria e genere target
-        const categoriaTarget = this.getAttribute('data-categoria');
-        const genereTarget = this.getAttribute('data-genere');
+        // Ottieni filtro target
+        const filtroTarget = this.getAttribute('data-filtro');
         
         // Filtra i prodotti
-        filtraProdotti(categoriaTarget, genereTarget);
+        prodottiCards.forEach(card => {
+          const filtroCard = card.getAttribute('data-filtro');
+          
+          if (filtroTarget === 'tutti' || filtroCard === filtroTarget) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        
+        // Aggiorna contatori
+        aggiornaContatori();
         
         // Animazione scroll verso i prodotti
         const prodottiSection = document.querySelector('.prodotti-saldi');
