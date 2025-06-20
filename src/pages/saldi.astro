@@ -29,12 +29,19 @@ try {
   console.log('🔄 Uso dati di fallback');
 }
 
-// Dati delle impostazioni
-const saldiAttivi = saldiSettings?.data?.saldiAttivi ?? true;
-const messaggioGlobale = saldiSettings?.data?.messaggioGlobale ?? "🔥 Saldi straordinari in corso!";
+// Dati delle impostazioni con conversione sicura dei booleani
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+const messaggioGlobale = saldiSettings?.data?.messaggioGlobale || "";
 const coloreTema = saldiSettings?.data?.coloreTema ?? "#e74c3c";
 const emailOrdini = saldiSettings?.data?.emailOrdini ?? "keluafashion@hotmail.it";
 const telefonoOrdini = saldiSettings?.data?.telefonoOrdini ?? "0882302070";
+
+// Debug per verificare i valori
+console.log('🔧 Debug Impostazioni Saldi:');
+console.log('- saldiAttivi (raw):', saldiSettings?.data?.saldiAttivi);
+console.log('- saldiAttivi (processed):', saldiAttivi);
+console.log('- messaggioGlobale:', messaggioGlobale);
+console.log('- coloreTema:', coloreTema);
 
 // Fallback data se il CMS non è ancora configurato
 const saldiHeroFallback = {
@@ -106,10 +113,8 @@ const temaColore = coloreTema || "#e74c3c";
               </div>
             </div>
           </div>
-        </div>      </div>    </section>
-
-    <!-- Messaggio Globale Saldi -->
-    {messaggioGlobale && (
+        </div>      </div>    </section>    <!-- Messaggio Globale Saldi -->
+    {messaggioGlobale && messaggioGlobale.trim() !== "" && (
       <section class="messaggio-globale">
         <div class="container">
           <div class="messaggio-content">
