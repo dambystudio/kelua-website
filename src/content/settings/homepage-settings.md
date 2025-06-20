@@ -1,5 +1,5 @@
 ---
 mostraBannerSaldi: true
-testoBanner: TESTO BANNER
-linkBanner: LINK BANNER
+testoBanner: "🔥 Saldi in corso! Scopri le offerte"
+linkBanner: "/saldi"
 ---
