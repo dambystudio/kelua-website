@@ -72,14 +72,23 @@
 		box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 		transition: all 0.4s ease;
 	}
-
 	.brand-name {
 		font-family: 'Glida Display Regular', 'Playfair Display', serif;
 		font-size: 2rem;
 		font-weight: 400;
-		color: #d4af37;
+		background: linear-gradient(135deg, #d4af37 0%, #CFB53B 50%, #d4af37 100%);
+		background-size: 200% 200%;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 		letter-spacing: 1px;
+		animation: shimmer 3s ease-in-out infinite;
+	}
+
+	@keyframes shimmer {
+		0%, 100% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
 	}
 
 	.nav-menu {
@@ -99,7 +108,6 @@
 		position: relative;
 		padding: 0.5rem 0;
 	}
-
 	.nav-link::after {
 		content: '';
 		position: absolute;
@@ -107,7 +115,7 @@
 		left: 0;
 		width: 0;
 		height: 2px;
-		background: linear-gradient(45deg, #d4af37, #f1c40f);
+		background: linear-gradient(45deg, #d4af37, #CFB53B);
 		transition: width 0.3s ease;
 	}
 
@@ -117,7 +125,7 @@
 	}
 
 	.nav-link:hover {
-		color: #f1c40f;
+		color: #CFB53B;
 	}
 
 	.saldi-link {
