@@ -1,12 +1,18 @@
 ---
-nome: "Abito da Sera Nero Elegante"
-categoria: "Abiti da Cerimonia"
-genere: "Donna"
+nome: Abito da Sera Nero Elegant
+categoria: Abiti da Cerimonia
+genere: Donna
 prezzoOriginale: 380
 prezzoScontato: 209
-descrizione: "Abito da sera lungo in tessuto fluido. Design elegante con dettagli raffinati. Perfetto per cene di gala e eventi serali."
-immagine: "/abiti-cerimonia-2.png"
-taglie: ["38", "40", "42", "44", "46"]
+descrizione: Abito da sera lungo in tessuto fluido. Design elegante con dettagli
+  raffinati. Perfetto per cene di gala e eventi serali.
+immagine: /abiti-cerimonia-2.png
+taglie:
+  - "38"
+  - "40"
+  - "42"
+  - "44"
+  - "46"
 disponibile: true
 nuovo: true
 limitedTime: false
