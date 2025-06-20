@@ -11,10 +11,17 @@ const homePrefix = isHomepage ? '' : '/';
 	<div class="nav-container">
 		<div class="nav-brand">
 			<img src="/logo.jpg" alt="Kelua Logo" class="logo">
-			<span class="brand-name">Kelua</span>
 		</div>
 		
 		<ul class="nav-menu" id="nav-menu">
+			<div class="nav-menu-header">
+				<h3>Menu</h3>
+				<button class="nav-close" id="nav-close">
+					<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+					</svg>
+				</button>
+			</div>
 			<li class="nav-item">
 				<a href={homePrefix + "#home"} class="nav-link home-link">
 					<span class="nav-icon">🏠</span>
@@ -39,22 +46,23 @@ const homePrefix = isHomepage ? '' : '/';
 					<span class="nav-text">Contatti</span>
 				</a>
 			</li>
+			<div class="nav-menu-footer">
+				<div class="nav-contact">
+					<a href="tel:0882302070" class="nav-contact-btn">
+						<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+						</svg>
+						<span>0882 302070</span>
+					</a>
+					<a href="https://wa.me/393272271295?text=Ciao%20Kelua!%20Vorrei%20maggiori%20informazioni%20sui%20vostri%20prodotti." target="_blank" rel="noopener noreferrer" class="nav-contact-btn whatsapp-btn">
+						<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+						</svg>
+						<span>WhatsApp</span>
+					</a>
+				</div>
+			</div>
 		</ul>
-		
-		<div class="nav-actions">
-			<a href="tel:0882302070" class="nav-contact-btn phone-btn">
-				<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-				</svg>
-				<span>Chiama</span>
-			</a>
-			<a href="https://wa.me/393272271295?text=Ciao%20Kelua%21%20Sono%20interessato%2Fa%20ai%20vostri%20capi%20di%20abbigliamento.%20Potreste%20inviarmi%20maggiori%20informazioni%3F%20Grazie%21" target="_blank" rel="noopener noreferrer" class="nav-contact-btn whatsapp-btn">
-				<svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-					<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-				</svg>
-				<span>WhatsApp</span>
-			</a>
-		</div>
 		
 		<div class="hamburger" id="hamburger">
 			<span class="bar"></span>
@@ -85,7 +93,7 @@ const homePrefix = isHomepage ? '' : '/';
 		margin: 0 auto;
 		padding: 0 20px;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		height: 70px;
 		position: relative;
@@ -94,8 +102,7 @@ const homePrefix = isHomepage ? '' : '/';
 	.nav-brand {
 		display: flex;
 		align-items: center;
-		gap: 15px;
-		flex-shrink: 0;
+		justify-content: center;
 		z-index: 10;
 	}
 
@@ -129,55 +136,125 @@ const homePrefix = isHomepage ? '' : '/';
 	@keyframes shimmer {
 		0%, 100% { background-position: 0% 50%; }
 		50% { background-position: 100% 50%; }
-	}
-
-	.nav-menu {
-		display: flex;
-		list-style: none;
-		gap: 1rem;
-		margin: 0;
+	}	.nav-menu {
+		position: fixed;
+		top: 0;
+		right: -400px;
+		width: 350px;
+		height: 100vh;
+		background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 26, 26, 0.95));
+		backdrop-filter: blur(20px);
+		transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		z-index: 10000;
+		box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+		border-left: 2px solid rgba(212, 175, 55, 0.3);
 		padding: 0;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
+		margin: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
 	}
 
-	.nav-item {
+	.nav-menu.active {
+		right: 0;
+	}
+
+	.nav-menu-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px 25px;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+		background: rgba(212, 175, 55, 0.1);
+		flex-shrink: 0;
+	}
+
+	.nav-menu-header h3 {
+		color: #d4af37;
+		margin: 0;
+		font-size: 1.2rem;
+		font-weight: 600;
+		letter-spacing: 1px;
+	}
+
+	.nav-close {
+		background: none;
+		border: none;
+		color: #d4af37;
+		cursor: pointer;
+		padding: 5px;
+		border-radius: 6px;
+		transition: all 0.3s ease;
+	}
+
+	.nav-close:hover {
+		background: rgba(212, 175, 55, 0.2);
+		transform: rotate(90deg);
+	}
+
+	.hamburger {
+		display: flex;
+		flex-direction: column;
+		cursor: pointer;
+		z-index: 10001;
+		position: absolute;
+		right: 20px;
+		padding: 10px;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+	}
+
+	.hamburger:hover {
+		background: rgba(212, 175, 55, 0.1);
+	}
+
+	.bar {
+		width: 25px;
+		height: 3px;
+		background: linear-gradient(45deg, #CFB53B, #d4af37);
+		margin: 3px 0;
+		transition: 0.3s;
+		border-radius: 2px;
+	}
+
+	.hamburger.active .bar:nth-child(1) {
+		transform: rotate(-45deg) translate(-5px, 6px);
+	}
+
+	.hamburger.active .bar:nth-child(2) {
+		opacity: 0;
+	}
+
+	.hamburger.active .bar:nth-child(3) {
+		transform: rotate(45deg) translate(-5px, -6px);
+	}	.nav-item {
 		position: relative;
+		margin: 0;
+		padding: 0 25px;
 	}
 
 	.nav-link {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
-		gap: 4px;
+		gap: 15px;
 		color: white;
 		text-decoration: none;
-		font-weight: 600;
-		font-size: 0.9rem;
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		font-weight: 500;
+		font-size: 1rem;
+		transition: all 0.3s ease;
 		position: relative;
-		padding: 12px 20px;
+		padding: 18px 20px;
+		margin: 8px 0;
 		border-radius: 12px;
-		background: rgba(255, 255, 255, 0.05);
-		backdrop-filter: blur(10px);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		overflow: hidden;
-	}
+		background: transparent;
+		border: 1px solid transparent;	}
 
-	.nav-link::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-		transition: left 0.6s ease;
-	}
-
-	.nav-link:hover::before {
-		left: 100%;
+	.nav-link:hover {
+		background: rgba(212, 175, 55, 0.15);
+		border-color: rgba(212, 175, 55, 0.3);
+		transform: translateX(10px);
+		color: #d4af37;
 	}
 
 	.nav-icon {
@@ -186,17 +263,8 @@ const homePrefix = isHomepage ? '' : '/';
 	}
 
 	.nav-text {
-		font-size: 0.85rem;
+		font-size: 1rem;
 		letter-spacing: 0.5px;
-		text-transform: uppercase;
-	}
-
-	.nav-link:hover {
-		transform: translateY(-2px);
-		background: rgba(212, 175, 55, 0.2);
-		border-color: rgba(212, 175, 55, 0.4);
-		box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-		color: #d4af37;
 	}
 
 	.nav-link:hover .nav-icon {
@@ -205,39 +273,78 @@ const homePrefix = isHomepage ? '' : '/';
 
 	/* Stili specifici per ogni link */
 	.home-link:hover {
-		background: rgba(52, 152, 219, 0.2);
-		border-color: rgba(52, 152, 219, 0.4);
-		box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+		background: rgba(52, 152, 219, 0.15);
+		border-color: rgba(52, 152, 219, 0.3);
 		color: #3498db;
 	}
 
 	.about-link:hover {
-		background: rgba(155, 89, 182, 0.2);
-		border-color: rgba(155, 89, 182, 0.4);
-		box-shadow: 0 8px 25px rgba(155, 89, 182, 0.3);
+		background: rgba(155, 89, 182, 0.15);
+		border-color: rgba(155, 89, 182, 0.3);
 		color: #9b59b6;
 	}
 
 	.contact-link:hover {
-		background: rgba(46, 204, 113, 0.2);
-		border-color: rgba(46, 204, 113, 0.4);
-		box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+		background: rgba(46, 204, 113, 0.15);
+		border-color: rgba(46, 204, 113, 0.3);
 		color: #2ecc71;
 	}
-	.nav-link::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 0;
-		height: 2px;
-		background: linear-gradient(45deg, #d4af37, #CFB53B);
-		transition: width 0.3s ease;
+
+	.saldi-link {
+		background: linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+		border-color: rgba(231, 76, 60, 0.4);
+		animation: pulse-saldi 2s infinite;
 	}
 
-	.nav-link:hover::after,
-	.nav-link.active::after {
-		width: 100%;
+	.saldi-link:hover {
+		background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3));
+		border-color: #e74c3c;
+		color: #e74c3c;
+	}
+
+	@keyframes pulse-saldi {
+		0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+		50% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
+	}
+
+	.nav-menu-footer {
+		margin-top: auto;
+		padding: 20px 25px;
+		border-top: 1px solid rgba(212, 175, 55, 0.2);
+		background: rgba(212, 175, 55, 0.05);
+	}
+
+	.nav-contact {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.nav-contact-btn {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 12px 16px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.05);
+		color: white;
+	}
+
+	.nav-contact-btn:hover {
+		transform: translateX(5px);
+		background: rgba(212, 175, 55, 0.2);
+		border-color: rgba(212, 175, 55, 0.3);
+	}
+
+	.whatsapp-btn:hover {
+		background: rgba(37, 211, 102, 0.2);
+		border-color: rgba(37, 211, 102, 0.3);
+		color: #25d366;
 	}
 
 	.nav-link:hover {
@@ -290,11 +397,11 @@ const homePrefix = isHomepage ? '' : '/';
 			opacity: 0.7;
 		}
 	}
-
 	.hamburger {
-		display: none;
+		display: flex;
 		flex-direction: column;
 		cursor: pointer;
+		z-index: 10;
 	}
 	.bar {
 		width: 25px;
@@ -302,144 +409,10 @@ const homePrefix = isHomepage ? '' : '/';
 		background: linear-gradient(45deg, #CFB53B, #d4af37);
 		margin: 3px 0;
 		transition: 0.3s;
-		border-radius: 2px;
-	}	.nav-actions {
-		display: flex;
-		align-items: center;
-		gap: 16px;
-		flex-shrink: 0;
-		z-index: 10;
-	}
-
-	.nav-contact-btn {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		padding: 12px 18px;
-		border-radius: 12px;
-		text-decoration: none;
-		font-size: 0.9rem;
-		font-weight: 600;
-		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		border: 1px solid transparent;
-		white-space: nowrap;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.nav-contact-btn::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-		transition: left 0.6s ease;
-	}
-
-	.nav-contact-btn:hover::before {
-		left: 100%;
-	}
-
-	.phone-btn {
-		background: linear-gradient(145deg, #d4af37, #CFB53B);
-		color: #1a1a1a;
-		box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-		border: 1px solid rgba(212, 175, 55, 0.5);
-	}
-
-	.phone-btn:hover {
-		background: linear-gradient(145deg, #f1c40f, #d4af37);
-		transform: translateY(-3px) scale(1.05);
-		box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
-		color: #000;
-	}
-
-	.whatsapp-btn {
-		background: linear-gradient(145deg, #25d366, #128c7e);
-		color: white;
-		box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-		border: 1px solid rgba(37, 211, 102, 0.5);
-		position: relative;
-	}
-
-	.whatsapp-btn::after {
-		content: '';
-		position: absolute;
-		top: -2px;
-		right: -2px;
-		width: 8px;
-		height: 8px;
-		background: #00ff88;
-		border-radius: 50%;
-		animation: pulse-dot 2s infinite;
-	}
-	.whatsapp-btn:hover {
-		background: linear-gradient(145deg, #00ff88, #25d366);
-		transform: translateY(-3px) scale(1.05);
-		box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
-		color: white;
-	}/* Responsive Design */
-	@media (max-width: 992px) {
-		.nav-menu {
-			position: static;
-			transform: none;
-			gap: 0.5rem;
-		}
-		
-		.nav-link {
-			padding: 8px 12px;
-			font-size: 0.8rem;
-		}
-		
-		.nav-icon {
-			font-size: 1rem;
-		}
-		
-		.nav-text {
-			font-size: 0.75rem;
-		}
-	}
-
+		border-radius: 2px;	/* Responsive Design */
 	@media (max-width: 768px) {
-		.hamburger {
-			display: flex;
-		}
-
-		.nav-menu {
-			position: fixed;
-			left: -100%;
-			top: 90px;
-			flex-direction: column;
-			background: rgba(0, 0, 0, 0.96);
-			backdrop-filter: blur(20px);
-			width: 100%;
-			text-align: center;
-			transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-			padding: 3rem 0;
-			border-top: 2px solid rgba(212, 175, 55, 0.3);
-			transform: translateX(0);
-		}
-
-		.nav-menu.active {
-			left: 0;
-		}
-
-		.nav-item {
-			margin: 1.5rem 0;
-		}
-
-		.nav-link {
-			padding: 16px 24px;
-			margin: 0 20px;
-			background: rgba(255, 255, 255, 0.08);
-			border: 1px solid rgba(255, 255, 255, 0.15);
-		}
-
-		.nav-actions {
-			display: none;
+		.nav-container {
+			height: 80px;
 		}
 
 		.brand-name {
@@ -448,10 +421,6 @@ const homePrefix = isHomepage ? '' : '/';
 
 		.logo {
 			height: 40px;
-		}
-
-		.nav-container {
-			height: 80px;
 		}
 	}
 
@@ -477,34 +446,69 @@ const homePrefix = isHomepage ? '' : '/';
 		.nav-link {
 			margin: 0 15px;
 			padding: 14px 20px;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 480px) {
+		.nav-menu {
+			width: 100%;
+			right: -100%;
 		}
 
-		.nav-icon {
-			font-size: 1.1rem;
+		.nav-menu-header {
+			padding: 15px 20px;
 		}
 
-		.nav-text {
-			font-size: 0.8rem;
+		.nav-item {
+			padding: 0 20px;
+		}
+
+		.nav-link {
+			padding: 15px 16px;
+		}
+
+		.nav-menu-footer {
+			padding: 15px 20px;
 		}
 	}
 </style>
 
 <script>
-	// Mobile menu toggle
+	// Menu laterale toggle
 	document.addEventListener('DOMContentLoaded', () => {
 		const hamburger = document.getElementById('hamburger');
 		const navMenu = document.getElementById('nav-menu');
+		const navClose = document.getElementById('nav-close');
 
 		if (hamburger && navMenu) {
+			// Apri menu
 			hamburger.addEventListener('click', () => {
-				navMenu.classList.toggle('active');
+				navMenu.classList.add('active');
+				hamburger.classList.add('active');
 			});
 
-			// Close menu when clicking on a link
+			// Chiudi menu con pulsante X
+			if (navClose) {
+				navClose.addEventListener('click', () => {
+					navMenu.classList.remove('active');
+					hamburger.classList.remove('active');
+				});
+			}
+
+			// Chiudi menu quando si clicca su un link
 			document.querySelectorAll('.nav-link').forEach(link => {
 				link.addEventListener('click', () => {
 					navMenu.classList.remove('active');
+					hamburger.classList.remove('active');
 				});
+			});
+
+			// Chiudi menu cliccando fuori
+			document.addEventListener('click', (e) => {
+				if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+					navMenu.classList.remove('active');
+					hamburger.classList.remove('active');
+				}
 			});
 		}
 
@@ -530,8 +534,6 @@ const homePrefix = isHomepage ? '' : '/';
 							});
 						}
 					}
-					// Se siamo su altra pagina, il browser navigherà automaticamente
-					// alla homepage con l'hash
 				}
 			});
 		});
