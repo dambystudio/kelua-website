@@ -1,5 +1,5 @@
 ---
-saldiAttivi: true
+saldiAttivi: false
 messaggioGlobale: SALDI NUOVA STAGIONE
 coloreTema: "#888605"
 emailOrdini: kelua@gmail.com
