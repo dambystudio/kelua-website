@@ -5,6 +5,18 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Headers per il CMS admin
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+
+# Cache control per file di contenuto
+[[headers]]
+  for = "/src/content/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

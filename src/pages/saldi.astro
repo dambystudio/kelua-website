@@ -18,8 +18,15 @@ try {
   saldiPosts = await getCollection('saldi-posts');
   prodottiSaldi = await getCollection('prodotti-saldi');
   categorieSaldi = await getCollection('categorie-saldi');
+  
+  // Debug: log per verificare che i dati vengano letti
+  console.log('🔍 Prodotti caricati:', prodottiSaldi.length);
+  console.log('🔍 Categorie caricate:', categorieSaldi.length);
+  console.log('🔍 Posts caricati:', saldiPosts.length);
+  
 } catch (error) {
-  console.log('CMS non ancora configurato, uso dati di esempio');
+  console.log('❌ Errore CMS:', error.message);
+  console.log('🔄 Uso dati di fallback');
 }
 
 // Dati delle impostazioni

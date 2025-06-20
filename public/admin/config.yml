@@ -2,9 +2,6 @@ backend:
   name: git-gateway
   branch: master
 
-# Impostazioni locali per sviluppo
-local_backend: true
-
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
