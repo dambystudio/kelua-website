@@ -1,10 +1,11 @@
 ---
-nome: "Abiti da Cerimonia"
-genere: "Donna"
-sconto: "45%"
-descrizione: "Eleganza femminile per eventi speciali. Abiti da sera e da cerimonia di classe e raffinatezza."
-immagine: "/abiti-cerimonia-eleganti.png"
-numeroArticoli: 12
+nome: Abiti da Cerimonia
+genere: Donna
+sconto: 0%
+descrizione: Eleganza femminile per eventi speciali. Abiti da sera e da
+  cerimonia di classe e raffinatezza.
+immagine: /abiti-cerimonia-eleganti.png
+numeroArticoli: 0
 attivo: true
 ordine: 2
 ---
