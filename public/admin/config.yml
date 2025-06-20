@@ -83,10 +83,10 @@ collections:
       - {label: "📊 Numero Articoli", name: "numeroArticoli", widget: "number", hint: "Numero approssimativo di articoli"}
       - {label: "✅ Attiva", name: "attivo", widget: "boolean", default: true}
       - {label: "🎯 Ordine", name: "ordine", widget: "number", default: 1}
-
   - name: "settings"
     label: "⚙️ Impostazioni"
-    files:      - name: "saldi-settings"
+    files:
+      - name: "saldi-settings"
         label: "🔧 Impostazioni Saldi"
         file: "src/content/settings/saldi-settings.md"
         fields:
