@@ -7,10 +7,11 @@ const isHomepage = currentPath === '/' || currentPath === '';
 const homePrefix = isHomepage ? '' : '/';
 ---
 
-<nav class="navbar">
-	<div class="nav-container">
+<nav class="navbar">	<div class="nav-container">
 		<div class="nav-brand">
-			<img src="/logo.jpg" alt="Kelua Logo" class="logo">
+			<a href="/" class="logo-link">
+				<img src="/logo.jpg" alt="Kelua Logo" class="logo">
+			</a>
 		</div>
 		
 		<ul class="nav-menu" id="nav-menu">
@@ -98,12 +99,21 @@ const homePrefix = isHomepage ? '' : '/';
 		height: 70px;
 		position: relative;
 	}
-
 	.nav-brand {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		z-index: 10;
+	}
+
+	.logo-link {
+		display: block;
+		text-decoration: none;
+		transition: transform 0.3s ease;
+	}
+
+	.logo-link:hover {
+		transform: scale(1.05);
 	}
 
 	.logo {

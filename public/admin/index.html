@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Admin Panel - Kelua Saldi</title>
   <link rel="icon" type="image/jpg" href="/logo.jpg" />
   
@@ -10,9 +10,33 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   
   <style>
+    :root {
+      --primary-gold: #d4af37;
+      --primary-black: #1a1a1a;
+      --accent-gold: #f1c40f;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --background-dark: #0d0d0d;
+      --border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--primary-black) 0%, var(--background-dark) 100%);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    /* Mobile-first approach */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
     }
     
     /* Loading Screen */
@@ -21,42 +45,136 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-      color: white;
+      height: 100vh;
+      background: linear-gradient(135deg, var(--primary-black) 0%, var(--background-dark) 100%);
+      color: var(--text-light);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      padding: 20px;
     }
     
     .loading-screen img {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       margin-bottom: 20px;
       border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    @media (min-width: 768px) {
+      .loading-screen img {
+        width: 100px;
+        height: 100px;
+      }
     }
     
     .loading-text {
-      font-size: 1.2rem;
-      color: #d4af37;
+      font-size: 1.1rem;
+      color: var(--primary-gold);
       margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    @media (min-width: 768px) {
+      .loading-text {
+        font-size: 1.2rem;
+      }
     }
     
     .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(212, 175, 55, 0.3);
-      border-radius: 50%;
-      border-top: 3px solid #d4af37;
+      width: 35px;
+      height: 35px;
+      border: 3px solid var(--border-color);      border-radius: 50%;
+      border-top: 3px solid var(--primary-gold);
       animation: spin 1s linear infinite;
+    }
+
+    @media (min-width: 768px) {
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+      }
     }
     
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    /* Enhanced CMS Styles */
+    #nc-root {
+      height: 100vh;
+      background: var(--primary-black);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-gold);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-gold);
+    }
+
+    /* Mobile optimization for CMS */
+    @media (max-width: 768px) {
+      .css-1h0lre7 {
+        padding: 10px !important;
+      }
+      
+      .css-button {
+        min-height: 44px !important;
+        font-size: 16px !important;
+      }
+      
+      input, textarea, select {
+        font-size: 16px !important;
+        min-height: 44px !important;
+        padding: 12px !important;
+      }
+    }
+
+    /* Better visibility for form elements */
+    .css-field {
+      margin-bottom: 20px !important;
+    }
+
+    .css-label {
+      color: var(--primary-gold) !important;
+      font-weight: 600 !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* Improved buttons */
+    button[type="submit"], 
+    .css-button-primary {
+      background: linear-gradient(135deg, var(--primary-gold) 0%, var(--accent-gold) 100%) !important;
+      color: var(--primary-black) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+    }
+
+    button[type="submit"]:hover,
+    .css-button-primary:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important;
+    }
+  </style>
     
     .admin-header {
       background: linear-gradient(135deg, #d4af37, #f1c40f);

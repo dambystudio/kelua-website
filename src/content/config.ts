@@ -22,6 +22,21 @@ const saldiSettingsCollection = defineCollection({
   })
 });
 
+// Schema per le categorie dei saldi
+const categorieSaldiCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    nome: z.string(),
+    genere: z.enum(['Uomo', 'Donna', 'Unisex']),
+    sconto: z.string(),
+    descrizione: z.string(),
+    immagine: z.string().optional(),
+    numeroArticoli: z.number(),
+    attivo: z.boolean(),
+    ordine: z.number()
+  })
+});
+
 // Schema per i post dei saldi
 const saldiPostsCollection = defineCollection({
   type: 'content',
@@ -40,29 +55,16 @@ const prodottiSaldiCollection = defineCollection({
   type: 'content',
   schema: z.object({
     nome: z.string(),
-    prezzo: z.number(),
+    categoria: z.enum(['Abiti da Cerimonia', 'Sportswear', 'Accessori']),
+    genere: z.enum(['Uomo', 'Donna', 'Unisex']),
     prezzoOriginale: z.number(),
-    sconto: z.number(),
-    categoria: z.string(),
-    immagine: z.string(),
+    prezzoScontato: z.number(),
     descrizione: z.string(),
+    immagine: z.string().optional(),
+    taglie: z.array(z.string()),
     disponibile: z.boolean(),
-    taglia: z.array(z.string()).optional(),
-    colore: z.array(z.string()).optional(),
-    evidenziato: z.boolean().optional()
-  })
-});
-
-// Schema per le categorie dei saldi
-const categorieSaldiCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    nome: z.string(),
-    sconto: z.number(),
-    numeroArticoli: z.number(),
-    descrizione: z.string(),
-    immagine: z.string(),
-    attivo: z.boolean(),
+    nuovo: z.boolean().optional(),
+    limitedTime: z.boolean().optional(),
     ordine: z.number()
   })
 });

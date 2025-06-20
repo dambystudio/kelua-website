@@ -95,12 +95,46 @@ collections:
           - {label: "📢 Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false, hint: "Messaggio che appare in cima alla pagina saldi"}
           - {label: "🎨 Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}
           - {label: "📧 Email per Ordini", name: "emailOrdini", widget: "string", default: "info@kelua.it"}
-          - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}
-
-      - name: "homepage-settings"
+          - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}      - name: "homepage-settings"
         label: "🏠 Impostazioni Homepage"
         file: "src/content/settings/homepage-settings.md"
         fields:
           - {label: "✅ Mostra Banner Saldi in Homepage", name: "mostraBannerSaldi", widget: "boolean", default: true}
           - {label: "📝 Testo Banner", name: "testoBanner", widget: "string", default: "🔥 Saldi in corso! Scopri le offerte"}
           - {label: "🔗 Link Banner", name: "linkBanner", widget: "string", default: "/saldi"}
+
+  - name: "categorie-saldi"
+    label: "🏷️ Categorie Saldi"
+    folder: "src/content/categorie-saldi"
+    description: "Gestisci le categorie di prodotti in saldo"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "📛 Nome Categoria", name: "nome", widget: "string", required: true}
+      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
+      - {label: "💰 Sconto (%)", name: "sconto", widget: "string", pattern: ['\d+%', "Inserire percentuale con % (es: 30%)"], default: "30%"}
+      - {label: "📝 Descrizione", name: "descrizione", widget: "text"}
+      - {label: "🖼️ Immagine", name: "immagine", widget: "image", required: false}
+      - {label: "📊 Numero Articoli", name: "numeroArticoli", widget: "number", default: 0}
+      - {label: "✅ Attivo", name: "attivo", widget: "boolean", default: true}
+      - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
+
+  - name: "prodotti-saldi"
+    label: "🛍️ Prodotti in Saldo"  
+    folder: "src/content/prodotti-saldi"
+    description: "Gestisci i prodotti in offerta"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "📛 Nome Prodotto", name: "nome", widget: "string", required: true}
+      - {label: "🏷️ Categoria", name: "categoria", widget: "select", options: ["Abiti da Cerimonia", "Sportswear", "Accessori"], required: true}
+      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
+      - {label: "💰 Prezzo Originale (€)", name: "prezzoOriginale", widget: "number", min: 0, step: 5}
+      - {label: "💸 Prezzo Scontato (€)", name: "prezzoScontato", widget: "number", min: 0, step: 5}
+      - {label: "📝 Descrizione", name: "descrizione", widget: "text"}
+      - {label: "🖼️ Immagine Principale", name: "immagine", widget: "image", required: false}
+      - {label: "📏 Taglie Disponibili", name: "taglie", widget: "list", allow_add: true, default: ["S", "M", "L"]}
+      - {label: "✅ Disponibile", name: "disponibile", widget: "boolean", default: true}
+      - {label: "🆕 Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
+      - {label: "⏰ Offerta a Tempo", name: "limitedTime", widget: "boolean", default: false}
+      - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
