@@ -34,55 +34,42 @@ collections:
       - {label: "🔥 In Evidenza", name: "inEvidenza", widget: "boolean", default: false, hint: "Mostrerà badge speciale"}
       - {label: "🎯 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1, hint: "1 = primo posto"}
 
-  - name: "prodotti-saldi"
-    label: "🛍️ Prodotti in Saldo"
-    label_singular: "Prodotto in Saldo"
-    folder: "src/content/prodotti-saldi"
+  - name: "categorie-saldi"
+    label: "🏷️ Categorie Saldi"
+    folder: "src/content/categorie-saldi"
+    description: "Gestisci le categorie di prodotti in saldo"
     create: true
-    delete: true
     slug: "{{slug}}"
-    preview_path: "/saldi"
     fields:
-      - {label: "🏷️ Nome Prodotto", name: "nome", widget: "string"}
-      - {label: "💰 Prezzo Originale (€)", name: "prezzoOriginale", widget: "number", step: 0.01}
-      - {label: "💸 Prezzo Scontato (€)", name: "prezzoScontato", widget: "number", step: 0.01}
-      - {label: "📄 Descrizione Dettagliata", name: "descrizione", widget: "text"}
-      - {label: "🖼️ Immagine Principale", name: "immagine", widget: "image"}
-      - {label: "🖼️ Galleria Immagini", name: "galleria", widget: "list", field: {label: "Immagine", name: "immagine", widget: "image"}, required: false}
-      - label: "📂 Categoria"
-        name: "categoria"
-        widget: "select"
-        options: 
-          - {label: "👔 Abiti da Cerimonia", value: "Abiti da Cerimonia"}
-          - {label: "👕 Sportswear", value: "Sportswear"}
-          - {label: "👜 Accessori", value: "Accessori"}
-          - {label: "👚 Abbigliamento Donna", value: "Abbigliamento Donna"}
-          - {label: "👔 Abbigliamento Uomo", value: "Abbigliamento Uomo"}
-          - {label: "👶 Abbigliamento Bambini", value: "Abbigliamento Bambini"}
-          - {label: "🎯 Altro", value: "Altro"}
-      - {label: "📏 Taglie Disponibili", name: "taglie", widget: "list", field: {label: "Taglia", name: "taglia", widget: "string"}}
+      - {label: "📛 Nome Categoria", name: "nome", widget: "string", required: true}
+      - {label: "� Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
+      - {label: "� Sconto (%)", name: "sconto", widget: "string", pattern: ['\d+%', "Inserire percentuale con % (es: 30%)"], default: "30%"}
+      - {label: "� Descrizione", name: "descrizione", widget: "text"}
+      - {label: "🖼️ Immagine", name: "immagine", widget: "image", required: false}
+      - {label: "� Numero Articoli", name: "numeroArticoli", widget: "number", default: 0}
+      - {label: "✅ Attivo", name: "attivo", widget: "boolean", default: true}
+      - {label: "� Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
+
+  - name: "prodotti-saldi"
+    label: "�️ Prodotti in Saldo"  
+    folder: "src/content/prodotti-saldi"
+    description: "Gestisci i prodotti in offerta"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "� Nome Prodotto", name: "nome", widget: "string", required: true}
+      - {label: "🏷️ Categoria", name: "categoria", widget: "select", options: ["Abiti da Cerimonia", "Sportswear", "Accessori"], required: true}
+      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
+      - {label: "💰 Prezzo Originale (€)", name: "prezzoOriginale", widget: "number", min: 0, step: 5}
+      - {label: "💸 Prezzo Scontato (€)", name: "prezzoScontato", widget: "number", min: 0, step: 5}
+      - {label: "� Descrizione", name: "descrizione", widget: "text"}
+      - {label: "�️ Immagine Principale", name: "immagine", widget: "image", required: false}
+      - {label: "� Taglie Disponibili", name: "taglie", widget: "list", allow_add: true, default: ["S", "M", "L"]}
       - {label: "✅ Disponibile", name: "disponibile", widget: "boolean", default: true}
       - {label: "🆕 Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
-      - {label: "⏰ Tempo Limitato", name: "limitedTime", widget: "boolean", default: false}
-      - {label: "🎯 Ordine di Visualizzazione", name: "ordine", widget: "number", default: 1}
-      - {label: "🏷️ Tag", name: "tags", widget: "list", field: {label: "Tag", name: "tag", widget: "string"}, required: false}
-      - {label: "📱 Post Collegato", name: "postCollegato", widget: "relation", collection: "saldi-posts", search_fields: ["titolo"], value_field: "{{slug}}", display_fields: ["titolo"], required: false}
+      - {label: "⏰ Offerta a Tempo", name: "limitedTime", widget: "boolean", default: false}
+      - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
 
-  - name: "categorie-saldi"
-    label: "📂 Categorie Saldi"
-    label_singular: "Categoria"
-    folder: "src/content/categorie-saldi"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "📂 Nome Categoria", name: "nome", widget: "string"}
-      - {label: "🏷️ Sconto Categoria", name: "sconto", widget: "string", hint: "Es: 50%"}
-      - {label: "📄 Descrizione", name: "descrizione", widget: "text"}
-      - {label: "🖼️ Immagine Categoria", name: "immagine", widget: "image"}
-      - {label: "📊 Numero Articoli", name: "numeroArticoli", widget: "number", hint: "Numero approssimativo di articoli"}
-      - {label: "✅ Attiva", name: "attivo", widget: "boolean", default: true}
-      - {label: "🎯 Ordine", name: "ordine", widget: "number", default: 1}
   - name: "settings"
     label: "⚙️ Impostazioni"
     files:
@@ -103,39 +90,3 @@ collections:
           - {label: "✅ Mostra Banner Saldi in Homepage", name: "mostraBannerSaldi", widget: "boolean", default: true}
           - {label: "📝 Testo Banner", name: "testoBanner", widget: "string", default: "🔥 Saldi in corso! Scopri le offerte"}
           - {label: "🔗 Link Banner", name: "linkBanner", widget: "string", default: "/saldi"}
-
-  - name: "categorie-saldi"
-    label: "🏷️ Categorie Saldi"
-    folder: "src/content/categorie-saldi"
-    description: "Gestisci le categorie di prodotti in saldo"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "📛 Nome Categoria", name: "nome", widget: "string", required: true}
-      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
-      - {label: "💰 Sconto (%)", name: "sconto", widget: "string", pattern: ['\d+%', "Inserire percentuale con % (es: 30%)"], default: "30%"}
-      - {label: "📝 Descrizione", name: "descrizione", widget: "text"}
-      - {label: "🖼️ Immagine", name: "immagine", widget: "image", required: false}
-      - {label: "📊 Numero Articoli", name: "numeroArticoli", widget: "number", default: 0}
-      - {label: "✅ Attivo", name: "attivo", widget: "boolean", default: true}
-      - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
-
-  - name: "prodotti-saldi"
-    label: "🛍️ Prodotti in Saldo"  
-    folder: "src/content/prodotti-saldi"
-    description: "Gestisci i prodotti in offerta"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "📛 Nome Prodotto", name: "nome", widget: "string", required: true}
-      - {label: "🏷️ Categoria", name: "categoria", widget: "select", options: ["Abiti da Cerimonia", "Sportswear", "Accessori"], required: true}
-      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
-      - {label: "💰 Prezzo Originale (€)", name: "prezzoOriginale", widget: "number", min: 0, step: 5}
-      - {label: "💸 Prezzo Scontato (€)", name: "prezzoScontato", widget: "number", min: 0, step: 5}
-      - {label: "📝 Descrizione", name: "descrizione", widget: "text"}
-      - {label: "🖼️ Immagine Principale", name: "immagine", widget: "image", required: false}
-      - {label: "📏 Taglie Disponibili", name: "taglie", widget: "list", allow_add: true, default: ["S", "M", "L"]}
-      - {label: "✅ Disponibile", name: "disponibile", widget: "boolean", default: true}
-      - {label: "🆕 Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
-      - {label: "⏰ Offerta a Tempo", name: "limitedTime", widget: "boolean", default: false}
-      - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
