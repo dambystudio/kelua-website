@@ -6,10 +6,11 @@
 		<img src="/background.png" alt="Kelua Store Background" class="hero-bg-image parallax-element">
 		<div class="hero-overlay"></div>
 	</div><div class="hero-content">		<div class="container">
-			<div class="hero-text scroll-animate">
-				<div class="hero-logo-section">
+			<div class="hero-text scroll-animate">				<div class="hero-logo-section">
 					<img src="/logo.jpg" alt="Kelua Logo" class="hero-logo">
 					<h1 class="hero-brand-name">Kelua</h1>
+					<p class="hero-brand-subtitle">Moda</p>
+					<p class="hero-brand-owner">di Paky Martino</p>
 				</div>
 						<div class="hero-taglines">
 					<p class="hero-main-tagline">Tradizione e stile dal 1975</p>
@@ -68,7 +69,7 @@
 							</svg>
 						</div>
 						<h3>Esperienza in Atelier</h3>
-						<p>Vieni a trovarci nel nostro negozio, dove l'eleganza trova casa dal 1985</p>
+						<p>Vieni a trovarci nel nostro negozio, dove l'eleganza trova casa dal 1975</p>
 						<a href="#contatti" class="card-link">Dove Siamo</a>
 					</div>
 
@@ -230,8 +231,7 @@
 			0 12px 48px rgba(212, 175, 55, 0.5),
 			0 8px 24px rgba(0, 0, 0, 0.3),
 			inset 0 3px 6px rgba(255, 255, 255, 0.2);
-	}
-	.hero-brand-name {
+	}	.hero-brand-name {
 		font-family: 'Glida Display Regular', 'Playfair Display', serif;
 		font-size: 4rem;
 		font-weight: 300;
@@ -242,10 +242,36 @@
 		background-clip: text;
 		text-shadow: none;
 		letter-spacing: 4px;
-		margin: 0;
+		margin: 0 0 8px 0;
 		position: relative;
 		z-index: 1;
 		animation: shimmerText 4s ease-in-out infinite;
+	}
+
+	.hero-brand-subtitle {
+		font-family: 'Glida Display Regular', 'Playfair Display', serif;
+		font-size: 1.4rem;
+		font-weight: 300;
+		color: #CFB53B;
+		letter-spacing: 6px;
+		text-transform: uppercase;
+		margin: 0 0 4px 0;
+		position: relative;
+		z-index: 1;
+		opacity: 0.9;
+	}
+
+	.hero-brand-owner {
+		font-family: 'Glida Display Regular', 'Playfair Display', serif;
+		font-size: 1rem;
+		font-weight: 300;
+		color: #e0e0e0;
+		letter-spacing: 2px;
+		font-style: italic;
+		margin: 0;
+		position: relative;
+		z-index: 1;
+		opacity: 0.8;
 	}
 
 	@keyframes shimmerText {
@@ -462,11 +488,25 @@
 	.card-link:hover {
 		color: #CFB53B;
 	}
-
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.hero-content {
 			padding: 100px 0 30px;
+		}
+
+		.hero-brand-name {
+			font-size: 2.8rem;
+			letter-spacing: 2px;
+		}
+
+		.hero-brand-subtitle {
+			font-size: 1.1rem;
+			letter-spacing: 4px;
+		}
+
+		.hero-brand-owner {
+			font-size: 0.9rem;
+			letter-spacing: 1px;
 		}
 
 		.hero-title {
@@ -515,10 +555,24 @@
 			height: 50px;
 		}
 	}
-
 	@media (max-width: 480px) {
 		.container {
 			padding: 0 15px;
+		}
+
+		.hero-brand-name {
+			font-size: 2.2rem;
+			letter-spacing: 1px;
+		}
+
+		.hero-brand-subtitle {
+			font-size: 1rem;
+			letter-spacing: 3px;
+		}
+
+		.hero-brand-owner {
+			font-size: 0.8rem;
+			letter-spacing: 1px;
 		}
 
 		.hero-title {
