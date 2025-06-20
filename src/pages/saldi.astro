@@ -3,7 +3,10 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+// Leggi le impostazioni dei saldi
+const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 
 // Leggi i dati dal CMS (quando disponibili) o usa dati di fallback
 let saldiPosts = [];
@@ -19,6 +22,13 @@ try {
   console.log('CMS non ancora configurato, uso dati di esempio');
 }
 
+// Dati delle impostazioni
+const saldiAttivi = saldiSettings?.data?.saldiAttivi ?? true;
+const messaggioGlobale = saldiSettings?.data?.messaggioGlobale ?? "🔥 Saldi straordinari in corso!";
+const coloreTema = saldiSettings?.data?.coloreTema ?? "#e74c3c";
+const emailOrdini = saldiSettings?.data?.emailOrdini ?? "keluafashion@hotmail.it";
+const telefonoOrdini = saldiSettings?.data?.telefonoOrdini ?? "0882302070";
+
 // Fallback data se il CMS non è ancora configurato
 const saldiHeroFallback = {
   titolo: "🔥 Saldi Straordinari",
@@ -26,7 +36,7 @@ const saldiHeroFallback = {
   descrizione: "Eleganza e stile con sconti fino al 70%. Approfitta delle nostre promozioni esclusive su abiti da cerimonia e sportswear di qualità.",
   immagineBackground: "/background.png",
   scontoMax: "70%",
-  attivo: true
+  attivo: saldiAttivi
 };
 
 const categorieFallback = [

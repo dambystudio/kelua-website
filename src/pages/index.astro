@@ -8,11 +8,38 @@ import About from '../components/About.astro';
 import Stats from '../components/Stats.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+
+// Carica le impostazioni della homepage
+const homepageSettings = await getEntry('homepage-settings', 'homepage-settings');
+const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+
+// Dati per le impostazioni
+const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
+const bannerText = homepageSettings?.data?.testoBanner ?? '';
+const bannerLink = homepageSettings?.data?.linkBanner ?? '/saldi';
+const saldiAttivi = saldiSettings?.data?.saldiAttivi ?? false;
 ---
 
 <Layout title="Kelua - Abbigliamento di Qualità a San Giovanni Rotondo">
   <main>
     <Navbar />
+    
+    <!-- Banner Saldi Dinamico -->
+    {showBanner && saldiAttivi && (
+      <div id="saldi-banner" class="saldi-banner">
+        <div class="banner-content">
+          <span class="banner-text">{bannerText}</span>
+          <a href={bannerLink} class="banner-cta">Scopri i Saldi</a>
+        </div>
+        <button class="banner-close" aria-label="Chiudi banner">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    )}
+    
     <Hero />
     <Saldi />
     <About />
@@ -21,6 +48,28 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer />
 </Layout>
+
+<script>
+  // Gestione chiusura banner saldi
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('saldi-banner');
+    const closeBtn = banner?.querySelector('.banner-close');
+    
+    if (closeBtn && banner) {
+      closeBtn.addEventListener('click', () => {
+        banner.style.animation = 'slideUp 0.3s ease-out forwards';
+        setTimeout(() => {
+          banner.style.display = 'none';
+          // Rimuovi compensazione del banner dalle sezioni
+          const sections = document.querySelectorAll('section');
+          sections.forEach(section => {
+            section.style.scrollMarginTop = '100px'; // Solo navbar
+          });
+        }, 300);
+      });
+    }
+  });
+</script>
 
 <style>
   main {
@@ -46,9 +95,149 @@ import Footer from '../components/Footer.astro';
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
   
+  /* Banner Saldi Dinamico */
+  .saldi-banner {
+    position: fixed;
+    top: 100px; /* Sotto la navbar */
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    padding: 12px 20px;
+    z-index: 9998;
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    animation: slideDown 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+
+  .banner-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .banner-text {
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .banner-cta {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .banner-cta:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .banner-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+  }
+
+  .banner-close:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  /* Compensazione per banner + navbar */
+  .saldi-banner + * {
+    margin-top: 60px; /* Altezza del banner */
+  }
+  
   /* Compensazione per navbar fissa */
   section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 140px; /* navbar + banner */
+  }
+
+  /* Responsive per il banner */
+  @media (max-width: 768px) {
+    .saldi-banner {
+      top: 80px; /* Navbar mobile più bassa */
+      padding: 10px 15px;
+    }
+
+    .banner-content {
+      gap: 15px;
+    }
+
+    .banner-text {
+      font-size: 0.9rem;
+    }
+
+    .banner-cta {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    section {
+      scroll-margin-top: 120px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner-content {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .banner-text {
+      font-size: 0.85rem;
+    }
+
+    .banner-cta {
+      padding: 5px 10px;
+      font-size: 0.75rem;
+    }
   }
   
   /* Accessibility: migliora il focus */
