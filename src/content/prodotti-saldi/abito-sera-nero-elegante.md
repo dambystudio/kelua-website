@@ -1,5 +1,5 @@
 ---
-nome: Abito da Sera Nero Elegant
+nome: Abito da Sera Nero Ele
 categoria: Abiti da Cerimonia
 genere: Donna
 prezzoOriginale: 380
