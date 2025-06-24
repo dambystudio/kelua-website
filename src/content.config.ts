@@ -27,9 +27,12 @@ const categorieSaldiCollection = defineCollection({
   type: 'content',
   schema: z.object({
     nome: z.string(),
+    genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
     descrizione: z.string().optional(),
-    attiva: z.boolean(),
-    ordinamento: z.number().optional(),
+    sconto: z.string().optional(),
+    immagine: z.string().optional(),
+    attivo: z.boolean(),
+    ordine: z.number().optional(),
   }),
 });
 
@@ -39,15 +42,16 @@ const prodottiSaldiCollection = defineCollection({
   schema: z.object({
     nome: z.string(),
     categoria: z.string(),
-    genere: z.enum(['donna', 'uomo', 'unisex']),
+    genere: z.enum(['Donna', 'Uomo', 'Unisex']),
     prezzoOriginale: z.number(),
     prezzoScontato: z.number(),
-    sconto: z.number(),
     descrizione: z.string().optional(),
     immagine: z.string().optional(),
+    taglie: z.array(z.string()).optional(),
     disponibile: z.boolean(),
-    novita: z.boolean().optional(),
-    ordinamento: z.number().optional(),
+    nuovo: z.boolean().optional(),
+    limitedTime: z.boolean().optional(),
+    ordine: z.number().optional(),
   }),
 });
 
