@@ -66,10 +66,10 @@ collections:
       - {label: "🆕 Nuovo Arrivo", name: "nuovo", widget: "boolean", default: false}
       - {label: "⏰ Offerta a Tempo", name: "limitedTime", widget: "boolean", default: false}
       - {label: "📋 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
-
   - name: "settings"
     label: "⚙️ Impostazioni"
-    files:      - name: "saldi-settings"
+    files:
+      - name: "saldi-settings"
         label: "🔧 Impostazioni Saldi"
         file: "src/content/saldi-settings/saldi-settings.md"
         fields:
@@ -77,7 +77,8 @@ collections:
           - {label: "📢 Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false, hint: "Messaggio che appare in cima alla pagina saldi"}
           - {label: "🎨 Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}
           - {label: "📧 Email per Ordini", name: "emailOrdini", widget: "string", default: "info@kelua.it"}
-          - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}      - name: "homepage-settings"
+          - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}
+      - name: "homepage-settings"
         label: "🏠 Impostazioni Homepage"
         file: "src/content/homepage-settings/homepage-settings.md"
         fields:
