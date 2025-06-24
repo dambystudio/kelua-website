@@ -1,10 +1,19 @@
 ---
 // Navbar Component - Gestisce navigazione tra pagine
+import { getEntry } from 'astro:content';
+
 const currentPath = Astro.url.pathname;
 
 // Determina se siamo sulla homepage o su altra pagina
 const isHomepage = currentPath === '/' || currentPath === '';
 const homePrefix = isHomepage ? '' : '/';
+
+// Carica le impostazioni dei saldi per controllare se mostrarli nella navbar
+const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+
+// Debug navbar
+console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 ---
 
 <nav class="navbar">	<div class="nav-container">
@@ -28,19 +37,20 @@ const homePrefix = isHomepage ? '' : '/';
 					<span class="nav-icon">🏠</span>
 					<span class="nav-text">Home</span>
 				</a>
-			</li>
-			<li class="nav-item">
+			</li>			<li class="nav-item">
 				<a href={homePrefix + "#chi-siamo"} class="nav-link about-link">
 					<span class="nav-icon">👥</span>
 					<span class="nav-text">Chi Siamo</span>
 				</a>
 			</li>
+			{saldiAttivi && (
 			<li class="nav-item">
 				<a href="/saldi" class="nav-link saldi-link">
 					<span class="nav-icon">🔥</span>
 					<span class="nav-text">Saldi</span>
 				</a>
 			</li>
+			)}
 			<li class="nav-item">
 				<a href={homePrefix + "#contatti"} class="nav-link contact-link">
 					<span class="nav-icon">📞</span>
