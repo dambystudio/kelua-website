@@ -1,6 +1,12 @@
 ---
 // Saldi Section Component
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+
+// Leggi le impostazioni dei saldi dal CMS
+const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+
+// Controlla se i saldi sono attivi (con conversione sicura da string a boolean)
+const saldiGlobalmenteAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
 
 // Per ora uso dati di esempio, poi integreremo con CMS
 const saldi = [
@@ -12,7 +18,7 @@ const saldi = [
     sconto: "50%",
     validoFino: "31 Marzo 2025",
     immagine: "/abiti-cerimonia-1.png",
-    link: "#gallery",
+    link: "/saldi",
     attivo: true
   },
   {
@@ -23,12 +29,18 @@ const saldi = [
     sconto: "30%",
     validoFino: "30 Aprile 2025",
     immagine: "/abiti-cerimonia-eleganti.png",
-    link: "#gallery",
+    link: "/saldi",
     attivo: true
   }
 ];
 
-const saldiAttivi = saldi.filter(sale => sale.attivo);
+// Filtra solo i saldi attivi E se i saldi sono attivi globalmente
+const saldiAttivi = saldiGlobalmenteAttivi ? saldi.filter(sale => sale.attivo) : [];
+
+// Debug
+console.log('🔧 Debug Componente Saldi:');
+console.log('- saldiGlobalmenteAttivi:', saldiGlobalmenteAttivi);
+console.log('- saldiAttivi.length:', saldiAttivi.length);
 ---
 
 {saldiAttivi.length > 0 && (

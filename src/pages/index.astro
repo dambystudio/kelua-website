@@ -18,7 +18,15 @@ const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
 const bannerText = homepageSettings?.data?.testoBanner ?? '';
 const bannerLink = homepageSettings?.data?.linkBanner ?? '/saldi';
-const saldiAttivi = saldiSettings?.data?.saldiAttivi ?? false;
+// Conversione sicura del booleano
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+
+// Debug homepage
+console.log('🔧 Debug Homepage:');
+console.log('- showBanner:', showBanner);
+console.log('- saldiAttivi (raw):', saldiSettings?.data?.saldiAttivi);
+console.log('- saldiAttivi (processed):', saldiAttivi);
+console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
 ---
 
 <Layout title="Kelua - Abbigliamento di Qualità a San Giovanni Rotondo">
