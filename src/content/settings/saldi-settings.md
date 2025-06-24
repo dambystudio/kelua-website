@@ -1,5 +1,5 @@
 ---
-saldiAttivi: true
+saldiAttivi: false
 messaggioGlobale: SALDI OPTIONAL
 coloreTema: "#ff0000"
 emailOrdini: kelua@hotmail.com
