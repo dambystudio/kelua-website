@@ -1,8 +1,11 @@
 ---
-nome: "Sportswear Uomo"
+nome: "Sportswear"
+genere: "Uomo"
 descrizione: "Abbigliamento sportivo e casual per uomo"
-attiva: true
-ordinamento: 4
+sconto: "45%"
+immagine: "/images/sportswear-uomo.jpg"
+attivo: true
+ordine: 4
 ---
 
 Collezione di abbigliamento sportivo e casual per uomo, per un look dinamico e confortevole.

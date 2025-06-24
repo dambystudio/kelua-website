@@ -75,7 +75,7 @@ collections:
         fields:
           - {label: "✅ Sezione Saldi Attiva", name: "saldiAttivi", widget: "boolean", default: true}
           - {label: "📢 Messaggio Globale", name: "messaggioGlobale", widget: "text", required: false, hint: "Messaggio che appare in cima alla pagina saldi"}
-          - {label: "🎨 Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#e74c3c"}
+          - {label: "🎨 Colore Tema Saldi", name: "coloreTema", widget: "color", default: "#d4af37"}
           - {label: "📧 Email per Ordini", name: "emailOrdini", widget: "string", default: "info@kelua.it"}
           - {label: "📞 Telefono Ordini", name: "telefonoOrdini", widget: "string", default: "+390882452911"}
       - name: "homepage-settings"

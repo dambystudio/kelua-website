@@ -1,8 +1,11 @@
 ---
-nome: "Abiti Cerimonia Donna"
+nome: "Abiti da Cerimonia"
+genere: "Donna"
 descrizione: "Eleganti abiti da cerimonia per donna"
-attiva: true
-ordinamento: 1
+sconto: "40%"
+immagine: "/images/abiti-cerimonia-donna.jpg"
+attivo: true
+ordine: 1
 ---
 
 Collezione di eleganti abiti da cerimonia per donna, perfetti per eventi speciali e occasioni formali.

@@ -32,7 +32,7 @@ try {
 // Dati delle impostazioni con conversione sicura dei booleani
 const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
 const messaggioGlobale = saldiSettings?.data?.messaggioGlobale || "";
-const coloreTema = saldiSettings?.data?.coloreTema ?? "#e74c3c";
+const coloreTema = saldiSettings?.data?.coloreTema ?? "#d4af37";
 const emailOrdini = saldiSettings?.data?.emailOrdini ?? "keluafashion@hotmail.it";
 const telefonoOrdini = saldiSettings?.data?.telefonoOrdini ?? "0882302070";
 
@@ -68,7 +68,7 @@ const scontoMassimoCalcolato = prodottiSaldi.length > 0
   : 70;
 
 // Applica il colore tema personalizzato
-const temaColore = coloreTema || "#e74c3c";
+const temaColore = coloreTema || "#d4af37";
 ---
 ---
 
@@ -121,174 +121,69 @@ const temaColore = coloreTema || "#e74c3c";
             <p>{messaggioGlobale}</p>
           </div>
         </div>
-      </section>    )}
-
-    <!-- Filtri Prodotti -->
-    {(categorieSaldi.length > 0 || prodottiSaldi.length > 0) && (
-      <section class="filtri-prodotti">
-        <div class="container">
-          <h2>Filtra per Categoria</h2>
-          <div class="filtri-container">
-            <button class="filtro-btn active" data-filtro="tutti">
-              <span class="filtro-icon">🛍️</span>
-              <span class="filtro-text">Tutti i Prodotti</span>
-              <span class="filtro-count">{prodottiSaldi.filter(p => p.data.disponibile).length}</span>
-            </button>
-            
-            {/* Genera filtri dinamici basati sulle categorie presenti */}
-            {[...new Set(categorieSaldi.map(cat => cat.data.nome))].map(nomeCategoria => {
-              const categoriePer = categorieSaldi.filter(cat => cat.data.nome === nomeCategoria && cat.data.attivo);
-              
-              return categoriePer.map(categoria => {
-                const prodottiCount = prodottiSaldi.filter(p => 
-                  p.data.disponibile && 
-                  p.data.categoria === categoria.data.nome && 
-                  p.data.genere === categoria.data.genere
-                ).length;
-                
-                if (prodottiCount > 0) {
-                  let icon = "👕";
-                  if (categoria.data.nome === "Abiti da Cerimonia") {
-                    icon = categoria.data.genere === "Uomo" ? "🤵" : "👰";
-                  } else if (categoria.data.nome === "Sportswear") {
-                    icon = categoria.data.genere === "Uomo" ? "🏃‍♂️" : "🏃‍♀️";
-                  }
-                  
-                  return (
-                    <button 
-                      class="filtro-btn" 
-                      data-filtro={`${categoria.data.nome}-${categoria.data.genere}`}
-                      data-categoria={categoria.data.nome}
-                      data-genere={categoria.data.genere}
-                    >
-                      <span class="filtro-icon">{icon}</span>
-                      <span class="filtro-text">{categoria.data.nome} {categoria.data.genere}</span>
-                      <span class="filtro-count">{prodottiCount}</span>
-                    </button>
-                  );
-                }
-                return null;
-              });
-            })}
+      </section>    )}    <!-- Sistema di Selezione a Step: Genere → Categoria → Prodotti -->
+    <section class="selezione-saldi">
+      <div class="container">
+        <!-- Step 1: Selezione Genere -->
+        <div id="step-genere" class="step-container active">
+          <h2>👤 Seleziona il Genere</h2>
+          <p class="step-description">Scegli per chi stai cercando i prodotti in saldo</p>
+          <div class="genere-grid">
+            <div class="genere-card" data-genere="Donna">
+              <div class="genere-icon">👩</div>
+              <h3>Donna</h3>
+              <p>Scopri le offerte per donna</p>
+              <div class="genere-count">{prodottiSaldi.filter(p => p.data.genere === "Donna" && p.data.disponibile).length} prodotti</div>
+            </div>
+            <div class="genere-card" data-genere="Uomo">
+              <div class="genere-icon">👨</div>
+              <h3>Uomo</h3>
+              <p>Scopri le offerte per uomo</p>
+              <div class="genere-count">{prodottiSaldi.filter(p => p.data.genere === "Uomo" && p.data.disponibile).length} prodotti</div>
+            </div>
           </div>
         </div>
-      </section>
-    )}
 
-    <!-- Categorie in Saldo (Dinamiche dal CMS) -->
-    {categorieSaldi.length > 0 && (
-      <section class="categorie-saldi">
-        <div class="container">
-          <h2>Categorie in Promozione</h2>
-          <div class="categorie-grid">
-            {categorieSaldi
-              .filter(cat => cat.data.attivo)
-              .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))
-              .map((categoria, index) => {
-                const cat = categoria.data;
-                return (
-                  <div class="categoria-card scroll-animate" data-delay={index * 0.2}>
-                    <div class="categoria-image">
-                      <img src={cat.immagine || "/background.png"} alt={cat.nome} />
-                      <div class="sconto-overlay">
-                        <span>-{cat.sconto}</span>
-                      </div>
-                      <div class="genere-badge">
-                        <span>{cat.genere}</span>
-                      </div>
-                    </div>
-                    <div class="categoria-content">
-                      <h3>{cat.nome}</h3>
-                      <p>{cat.descrizione}</p>
-                      <div class="categoria-meta">
-                        <span class="articoli">{cat.numeroArticoli} articoli</span>
-                        <span class="sconto-text">Fino a -{cat.sconto}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+        <!-- Step 2: Selezione Categoria -->
+        <div id="step-categoria" class="step-container">
+          <div class="step-header">
+            <button class="btn-back" onclick="tornaAlGenere()">← Torna Indietro</button>
+            <div class="step-info">
+              <h2>🏷️ Seleziona la Categoria</h2>
+              <p class="step-description">Scegli il tipo di prodotto che ti interessa</p>
+            </div>
+          </div>
+          
+          <div class="categorie-grid" id="categorie-per-genere">
+            {/* Le categorie verranno popolate dinamicamente via JavaScript */}
           </div>
         </div>
-      </section>
-    )}
 
-    <!-- Prodotti in Saldo (Dinamici dal CMS) -->
-    {prodottiSaldi.length > 0 && (
-      <section class="prodotti-saldi">
-        <div class="container">
-          <h2>Prodotti in Offerta</h2>
-          <div class="prodotti-grid">
-            {prodottiSaldi
-              .filter(prod => prod.data.disponibile)
-              .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0))              .map((prodotto, index) => {
-                const prod = prodotto.data;
-                const scontoCalcolato = Math.round(((prod.prezzoOriginale - prod.prezzoScontato) / prod.prezzoOriginale) * 100);
-                return (
-                  <div 
-                    class="prodotto-card scroll-animate" 
-                    data-delay={index * 0.1}
-                    data-categoria={prod.categoria}
-                    data-genere={prod.genere}
-                    data-filtro={`${prod.categoria}-${prod.genere}`}
-                  >
-                    <div class="prodotto-image">
-                      <img src={prod.immagine || "/background.png"} alt={prod.nome} />
-                      <div class="badges">
-                        {prod.nuovo && <span class="badge nuovo">Nuovo</span>}
-                        {prod.limitedTime && <span class="badge limited">Tempo Limitato</span>}
-                        <span class="badge sconto">-{scontoCalcolato}%</span>
-                      </div>
-                      <div class="genere-badge-prod">
-                        <span>{prod.genere}</span>
-                      </div>
-                    </div>
-                    
-                    <div class="prodotto-content">
-                      <div class="prodotto-header">
-                        <h3>{prod.nome}</h3>
-                        <span class="categoria-tag">{prod.categoria}</span>
-                      </div>
-                      
-                      <p class="descrizione">{prod.descrizione}</p>
-                      
-                      <div class="prezzi">
-                        <span class="prezzo-originale">€{prod.prezzoOriginale}</span>
-                        <span class="prezzo-scontato">€{prod.prezzoScontato}</span>
-                        <span class="risparmio">Risparmi €{prod.prezzoOriginale - prod.prezzoScontato}</span>
-                      </div>
-                      
-                      <div class="taglie">
-                        <span class="taglie-label">Taglie disponibili:</span>
-                        <div class="taglie-list">
-                          {prod.taglie?.map(taglia => (
-                            <span class="taglia">{taglia}</span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div class="prodotto-actions">
-                        <a href="#contatti" class="btn-acquista">
-                          <span>Acquista Ora</span>
-                          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M6 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM17 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
-                          </svg>
-                        </a>
-                        <a href="tel:0882302070" class="btn-info">
-                          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                          </svg>
-                          <span>Chiama per Info</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+        <!-- Step 3: Visualizzazione Prodotti -->
+        <div id="step-prodotti" class="step-container">
+          <div class="step-header">
+            <button class="btn-back" onclick="tornaAlleCategorie()">← Torna alle Categorie</button>
+            <div class="step-info">
+              <h2 id="titolo-prodotti">🛍️ Prodotti in Saldo</h2>
+              <p class="step-description" id="descrizione-prodotti">I migliori prodotti selezionati per te</p>
+            </div>
+          </div>
+          
+          <div class="prodotti-grid" id="prodotti-filtrati">
+            {/* I prodotti verranno popolati dinamicamente via JavaScript */}
           </div>
         </div>
-      </section>
-    )}
+      </div>
+    </section>
+
+    <!-- Dati JSON per JavaScript -->
+    <script type="application/json" id="saldi-data">
+      {JSON.stringify({
+        categorie: categorieSaldi.filter(cat => cat.data.attivo).map(cat => cat.data),
+        prodotti: prodottiSaldi.filter(prod => prod.data.disponibile).map(prod => prod.data),
+        colore: temaColore
+      })}
+    </script>
 
     <!-- Call to Action -->
     <section class="cta-saldi">
@@ -357,16 +252,16 @@ const temaColore = coloreTema || "#e74c3c";
   .btn-home:hover {
     transform: translateY(-2px);
   }
-
   /* Messaggio Globale */
   .messaggio-globale {
-    background: var(--tema-colore);
-    color: white;
+    background: linear-gradient(135deg, #d4af37, #b8941f);
+    color: #1a1a1a;
     padding: 20px 0;
     text-align: center;
     font-weight: 600;
     font-size: 1.1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid rgba(26, 26, 26, 0.1);
   }
 
   .messaggio-globale p {
@@ -548,17 +443,15 @@ const temaColore = coloreTema || "#e74c3c";
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
   }
-
   .filtro-btn.active {
-    background: linear-gradient(135deg, var(--colore-tema, #e74c3c), #c0392b);
-    border-color: var(--colore-tema, #e74c3c);
-    color: white;
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+    background: linear-gradient(135deg, var(--tema-colore, #d4af37), #b8941f);
+    border-color: var(--tema-colore, #d4af37);
+    color: #1a1a1a;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
   }
-
   .filtro-btn.active:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4);
+    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
   }
 
   .filtro-icon {
@@ -585,11 +478,10 @@ const temaColore = coloreTema || "#e74c3c";
   .filtro-btn.active .filtro-count {
     background: rgba(255, 255, 255, 0.3);
   }
-
   /* Categorie Saldi Dinamiche */
   .categorie-saldi {
     padding: 100px 0;
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   }
 
   .categorie-saldi h2 {
@@ -691,6 +583,255 @@ const temaColore = coloreTema || "#e74c3c";
     font-weight: 600;
     font-size: 1rem;
   }
+  /* Sistema di Selezione a Step */
+  .selezione-saldi {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    min-height: 80vh;
+  }
+
+  .step-container {
+    display: none;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+  }
+
+  .step-container.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .btn-back {
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-back:hover {
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    color: #1a1a1a;
+    border-color: #d4af37;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+  }
+
+  .step-info {
+    flex: 1;
+  }
+
+  .step-info h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .step-info .step-description {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin: 8px 0 0 0;
+  }
+
+  /* Titoli degli Step */
+  .step-container h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .step-container .step-description {
+    text-align: center;
+    color: #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Step 1: Selezione Genere */
+  .genere-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .genere-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .genere-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #d4af37;
+  }
+
+  .genere-card.selected {
+    border-color: #d4af37;
+    background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+    transform: scale(1.02);
+  }
+
+  .genere-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .genere-card h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+
+  .genere-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .genere-count {
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+  }
+
+  /* Step 2: Selezione Categoria */
+  .categorie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .categoria-card-step {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .categoria-card-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: #d4af37;
+  }
+
+  .categoria-card-step.selected {
+    border-color: #d4af37;
+    background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+    transform: scale(1.02);
+  }
+
+  .categoria-icon {
+    font-size: 3rem;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .categoria-info h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+
+  .categoria-info p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .categoria-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .sconto-badge {
+    background: linear-gradient(45deg, #d4af37, #b8941f);
+    color: #1a1a1a;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .prodotti-count {
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* Step 3: Visualizzazione Prodotti */
+  .prodotti-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+  }
+
+  .prodotto-card-final {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .prodotto-card-final.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .prodotto-card-final:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
 
   /* Prodotti Saldi Dinamici */
   .prodotti-saldi {
@@ -769,10 +910,9 @@ const temaColore = coloreTema || "#e74c3c";
   .badge.limited {
     background: linear-gradient(45deg, #e67e22, #f39c12);
     color: white;
-  }
-  .badge.sconto {
-    background: linear-gradient(45deg, var(--tema-colore), color-mix(in srgb, var(--tema-colore) 80%, black));
-    color: white;
+  }  .badge.sconto {
+    background: linear-gradient(45deg, #d4af37, #b8941f);
+    color: #1a1a1a;
   }
 
   .genere-badge-prod {
@@ -1209,89 +1349,205 @@ const temaColore = coloreTema || "#e74c3c";
 </style>
 
 <script>
-  // Funzionalità filtri categoria
+  // Sistema di navigazione a step per i saldi
   document.addEventListener('DOMContentLoaded', function() {
-    const filtriBtns = document.querySelectorAll('.filtro-btn');
-    const prodottiCards = document.querySelectorAll('.prodotto-card');
+    // Carica i dati dal JSON
+    const saldiDataElement = document.getElementById('saldi-data');
+    const saldiData = JSON.parse(saldiDataElement.textContent);
     
-    // Funzione per filtrare i prodotti
-    function filtraProdotti(categoriaTarget, genereTarget) {
-      prodottiCards.forEach(card => {
-        const categoriaCard = card.getAttribute('data-categoria');
-        const genereCard = card.getAttribute('data-genere');
+    let genereSelezionato = null;
+    let categoriaSelezionata = null;
+    
+    console.log('📊 Dati Saldi caricati:', saldiData);
+    
+    // Gestione click su card genere
+    document.querySelectorAll('.genere-card').forEach(card => {
+      card.addEventListener('click', function() {
+        genereSelezionato = this.getAttribute('data-genere');
+        console.log('🚺🚹 Genere selezionato:', genereSelezionato);
         
-        let mostra = false;
+        // Aggiorna stile card selezionata
+        document.querySelectorAll('.genere-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
         
-        if (categoriaTarget === 'tutti') {
-          mostra = true;
-        } else {
-          mostra = categoriaCard === categoriaTarget && genereCard === genereTarget;
-        }
-        
-        if (mostra) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-      
-      // Aggiorna contatori
-      aggiornaContatori();
-    }
-      // Funzione per aggiornare i contatori
-    function aggiornaContatori() {
-      filtriBtns.forEach(btn => {
-        const filtroTarget = btn.getAttribute('data-filtro');
-        const contatore = btn.querySelector('.filtro-count');
-        
-        let count = 0;
-        if (filtroTarget === 'tutti') {
-          count = document.querySelectorAll('.prodotto-card:not(.hidden)').length;
-        } else {
-          count = document.querySelectorAll(`[data-filtro="${filtroTarget}"]:not(.hidden)`).length;
-        }
-        
-        contatore.textContent = count;
-      });
-    }
-      // Event listener per i bottoni filtro
-    filtriBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Rimuovi classe active da tutti i bottoni
-        filtriBtns.forEach(b => b.classList.remove('active'));
-        
-        // Aggiungi classe active al bottone cliccato
-        this.classList.add('active');
-        
-        // Ottieni filtro target
-        const filtroTarget = this.getAttribute('data-filtro');
-        
-        // Filtra i prodotti
-        prodottiCards.forEach(card => {
-          const filtroCard = card.getAttribute('data-filtro');
-          
-          if (filtroTarget === 'tutti' || filtroCard === filtroTarget) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
-        });
-        
-        // Aggiorna contatori
-        aggiornaContatori();
-        
-        // Animazione scroll verso i prodotti
-        const prodottiSection = document.querySelector('.prodotti-saldi');
-        if (prodottiSection) {
-          prodottiSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+        // Passa al step categorie
+        setTimeout(() => {
+          mostraStepCategorie();
+        }, 300);
       });
     });
     
-    // Inizializzazione - mostra tutti i prodotti
-    aggiornaContatori();
+    // Funzione per mostrare step categorie
+    function mostraStepCategorie() {
+      document.getElementById('step-genere').classList.remove('active');
+      document.getElementById('step-categoria').classList.add('active');
+      
+      // Popola le categorie per il genere selezionato
+      const categorieContainer = document.getElementById('categorie-per-genere');
+      const categoriePerGenere = saldiData.categorie.filter(cat => cat.genere === genereSelezionato);
+      
+      categorieContainer.innerHTML = '';
+      
+      categoriePerGenere.forEach((categoria, index) => {
+        const prodottiCount = saldiData.prodotti.filter(p => 
+          p.categoria === categoria.nome && p.genere === categoria.genere
+        ).length;
+        
+        if (prodottiCount > 0) {
+          const icon = categoria.nome === "Abiti da Cerimonia" 
+            ? (categoria.genere === "Uomo" ? "🤵" : "👰")
+            : (categoria.genere === "Uomo" ? "🏃‍♂️" : "🏃‍♀️");
+          
+          const cardHTML = `
+            <div class="categoria-card-step" data-categoria="${categoria.nome}" data-genere="${categoria.genere}">
+              <div class="categoria-icon">${icon}</div>
+              <div class="categoria-info">
+                <h3>${categoria.nome}</h3>
+                <p>${categoria.descrizione}</p>
+                <div class="categoria-meta">
+                  <span class="sconto-badge">-${categoria.sconto}</span>
+                  <span class="prodotti-count">${prodottiCount} prodotti</span>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          categorieContainer.innerHTML += cardHTML;
+        }
+      });
+      
+      // Aggiungi event listener alle nuove card categorie
+      document.querySelectorAll('.categoria-card-step').forEach(card => {
+        card.addEventListener('click', function() {
+          categoriaSelezionata = this.getAttribute('data-categoria');
+          console.log('🏷️ Categoria selezionata:', categoriaSelezionata);
+          
+          // Aggiorna stile card selezionata
+          document.querySelectorAll('.categoria-card-step').forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+          
+          // Passa al step prodotti
+          setTimeout(() => {
+            mostraStepProdotti();
+          }, 300);
+        });
+      });
+      
+      // Scroll smooth al container
+      document.getElementById('step-categoria').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    // Funzione per mostrare step prodotti
+    function mostraStepProdotti() {
+      document.getElementById('step-categoria').classList.remove('active');
+      document.getElementById('step-prodotti').classList.add('active');
+      
+      // Aggiorna titolo
+      document.getElementById('titolo-prodotti').textContent = 
+        `🛍️ ${categoriaSelezionata} - ${genereSelezionato}`;
+      document.getElementById('descrizione-prodotti').textContent = 
+        `Scopri i migliori prodotti in saldo per ${genereSelezionato.toLowerCase()}`;
+      
+      // Filtra e mostra prodotti
+      const prodottiFiltrati = saldiData.prodotti.filter(p => 
+        p.categoria === categoriaSelezionata && p.genere === genereSelezionato
+      );
+      
+      const prodottiContainer = document.getElementById('prodotti-filtrati');
+      prodottiContainer.innerHTML = '';
+      
+      prodottiFiltrati.forEach((prodotto, index) => {
+        const scontoCalcolato = Math.round(((prodotto.prezzoOriginale - prodotto.prezzoScontato) / prodotto.prezzoOriginale) * 100);
+        
+        const taglieHTML = prodotto.taglie ? prodotto.taglie.map(t => `<span class="taglia">${t}</span>`).join('') : '';
+        
+        const cardHTML = `
+          <div class="prodotto-card-final" data-delay="${index * 0.1}">
+            <div class="prodotto-image">
+              <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" />
+              <div class="badges">
+                ${prodotto.nuovo ? '<span class="badge nuovo">Nuovo</span>' : ''}
+                ${prodotto.limitedTime ? '<span class="badge limited">Tempo Limitato</span>' : ''}
+                <span class="badge sconto">-${scontoCalcolato}%</span>
+              </div>
+            </div>
+            
+            <div class="prodotto-content">
+              <div class="prodotto-header">
+                <h3>${prodotto.nome}</h3>
+                <span class="categoria-tag">${prodotto.categoria}</span>
+              </div>
+              
+              <p class="descrizione">${prodotto.descrizione}</p>
+              
+              <div class="prezzi">
+                <span class="prezzo-originale">€${prodotto.prezzoOriginale}</span>
+                <span class="prezzo-scontato">€${prodotto.prezzoScontato}</span>
+                <span class="risparmio">Risparmi €${(prodotto.prezzoOriginale - prodotto.prezzoScontato).toFixed(2)}</span>
+              </div>
+              
+              <div class="taglie">
+                <span class="taglie-label">Taglie disponibili:</span>
+                <div class="taglie-list">${taglieHTML}</div>
+              </div>
+              
+              <div class="prodotto-actions">
+                <a href="#contatti" class="btn-acquista">
+                  <span>Acquista Ora</span>
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 1.5M6 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM17 16.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"/>
+                  </svg>
+                </a>
+                <a href="tel:0882302070" class="btn-info">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                  <span>Chiama per Info</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        prodottiContainer.innerHTML += cardHTML;
+      });
+      
+      // Animazioni di entrata
+      setTimeout(() => {
+        document.querySelectorAll('.prodotto-card-final').forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('animate-in');
+          }, index * 100);
+        });
+      }, 100);
+      
+      // Scroll smooth al container
+      document.getElementById('step-prodotti').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    // Funzioni di navigazione indietro
+    window.tornaAlGenere = function() {
+      document.getElementById('step-categoria').classList.remove('active');
+      document.getElementById('step-genere').classList.add('active');
+      genereSelezionato = null;
+      
+      // Reset selezioni
+      document.querySelectorAll('.genere-card').forEach(c => c.classList.remove('selected'));
+    };
+    
+    window.tornaAlleCategorie = function() {
+      document.getElementById('step-prodotti').classList.remove('active');
+      document.getElementById('step-categoria').classList.add('active');
+      categoriaSelezionata = null;
+      
+      // Reset selezioni
+      document.querySelectorAll('.categoria-card-step').forEach(c => c.classList.remove('selected'));
+    };
   });
 </script>

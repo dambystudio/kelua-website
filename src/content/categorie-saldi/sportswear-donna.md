@@ -1,8 +1,11 @@
 ---
-nome: "Sportswear Donna"
+nome: "Sportswear"
+genere: "Donna"
 descrizione: "Abbigliamento sportivo e casual per donna"
-attiva: true
-ordinamento: 3
+sconto: "50%"
+immagine: "/images/sportswear-donna.jpg"
+attivo: true
+ordine: 3
 ---
 
 Collezione di abbigliamento sportivo e casual per donna, per un look dinamico e confortevole.
