@@ -139,26 +139,56 @@
 
     /* MOBILE RESPONSIVE DESIGN - COMPLETELY FIXED */
     
-    /* Mobile-only styles - AGGRESSIVE OVERRIDE */
+    /* ULTRA AGGRESSIVE MOBILE OVERRIDE - NUCLEAR OPTION */
     @media screen and (max-width: 768px) {
+      /* FORCE EVERYTHING TO MOBILE LAYOUT */
+      *, *::before, *::after {
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* KILL ALL FLEXBOX AND GRID THAT ISN'T MOBILE */
+      div:not([class*="mobile"]):not([class*="Mobile"]) {
+        display: block !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
+      }
       /* Force mobile viewport */
       html, body {
-        width: 100% !important;
+        width: 100vw !important;
         height: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         overflow-x: hidden !important;
+        position: relative !important;
       }
       
       /* Force mobile layout on root */
       #nc-root, #nc-root > div, [class*="App"] {
         display: flex !important;
         flex-direction: column !important;
-        width: 100% !important;
+        width: 100vw !important;
         height: 100% !important;
         overflow: hidden !important;
         margin: 0 !important;
         padding: 0 !important;
+      }
+      
+      /* NUCLEAR OPTION FOR NESTED CONTAINERS */
+      #nc-root div, #nc-root section, #nc-root main, #nc-root aside {
+        max-width: 100vw !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      /* FORCE SINGLE COLUMN ON ALL CONTAINERS */
+      div[style*="display: flex"], div[style*="display:flex"] {
+        flex-direction: column !important;
+      }
+      
+      div[style*="display: grid"], div[style*="display:grid"] {
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
       }
       
       /* Mobile body adjustments */
@@ -263,21 +293,54 @@
         min-width: auto !important;
       }
       
-      /* Content and Media tabs - force horizontal layout */
-      [class*="TabList"], [class*="tab-list"], [role="tablist"] {
+      /* FORCE HORIZONTAL TABS - ULTRA SPECIFIC */
+      [class*="TabList"], [class*="tab-list"], [role="tablist"],
+      div:has(> button:contains("Contents")), div:has(> button:contains("Media")),
+      div:has(> [class*="Tab"]), div:has(> [role="tab"]) {
         display: flex !important;
         flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: stretch !important;
+        align-items: stretch !important;
         width: 100% !important;
         gap: 8px !important;
         margin-bottom: 16px !important;
+        padding: 0 !important;
+        height: auto !important;
+        min-height: 48px !important;
       }
       
-      /* Tab buttons - equal width */
-      [class*="Tab"], [role="tab"], button[class*="tab"] {
-        flex: 1 !important;
+      /* FORCE TAB BUTTONS HORIZONTAL - NUCLEAR */
+      [class*="Tab"], [role="tab"], button[class*="tab"],
+      button:has-text("Contents"), button:has-text("Media"),
+      [class*="TabList"] > button, [class*="TabList"] > a,
+      [role="tablist"] > button, [role="tablist"] > a {
+        flex: 1 1 50% !important;
         width: auto !important;
         min-width: 0 !important;
-        max-width: none !important;
+        max-width: 50% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 48px !important;
+        margin: 0 !important;
+        float: none !important;
+        position: relative !important;
+      }
+      
+      /* SPECIFIC CONTENTS/MEDIA BUTTONS */
+      button[class*="gold"], button[style*="background"][style*="gold"],
+      button[style*="background"][style*="rgb(212, 175, 55)"],
+      button[style*="background"][style*="#d4af37"] {
+        background: var(--kelua-gold) !important;
+        color: var(--kelua-dark) !important;
+        border-radius: 12px !important;
+        font-weight: 600 !important;
+        padding: 12px 20px !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
       }
       
       /* Mobile Collections Card */
@@ -1099,6 +1162,67 @@
       return window.innerWidth <= 768;
     }
     
+    // FORCE MOBILE LAYOUT WITH JAVASCRIPT
+    function forceMobileLayout() {
+      if (!checkIfMobile()) return;
+      
+      console.log('Forcing mobile layout...');
+      
+      // Find and fix tab containers
+      const allDivs = document.querySelectorAll('div');
+      allDivs.forEach(div => {
+        // Check if this might be a tab container
+        const buttons = div.querySelectorAll('button');
+        if (buttons.length === 2) {
+          const hasContents = Array.from(buttons).some(btn => 
+            btn.textContent.includes('Contents') || btn.textContent.includes('Media')
+          );
+          
+          if (hasContents) {
+            console.log('Found tab container, fixing layout...');
+            div.style.display = 'flex';
+            div.style.flexDirection = 'row';
+            div.style.width = '100%';
+            div.style.gap = '8px';
+            
+            buttons.forEach(btn => {
+              btn.style.flex = '1';
+              btn.style.width = 'auto';
+              btn.style.minWidth = '0';
+              btn.style.height = '48px';
+            });
+          }
+        }
+        
+        // Force single column on other containers
+        if (div.style.display === 'grid' || div.style.display === 'flex') {
+          const isTabContainer = Array.from(div.children).some(child => 
+            child.textContent && (child.textContent.includes('Contents') || child.textContent.includes('Media'))
+          );
+          
+          if (!isTabContainer) {
+            div.style.flexDirection = 'column';
+            div.style.gridTemplateColumns = '1fr';
+          }
+        }
+      });
+      
+      // Fix main content width
+      const mainContent = document.querySelector('.css-1wxrih3') || 
+                         document.querySelector('[class*="Main"]') ||
+                         document.querySelector('main');
+      
+      if (mainContent) {
+        mainContent.style.width = '100vw';
+        mainContent.style.maxWidth = '100vw';
+        mainContent.style.marginLeft = '0';
+        mainContent.style.marginRight = '0';
+        mainContent.style.paddingLeft = '16px';
+        mainContent.style.paddingRight = '16px';
+        mainContent.style.boxSizing = 'border-box';
+      }
+    }
+    
     function initMobileMenu() {
       if (mobileMenuInitialized) return;
       
@@ -1178,16 +1302,44 @@
           clearInterval(checkCMS);
           if (sidebar) {
             console.log('CMS loaded, initializing mobile menu...');
-            setTimeout(initMobileMenu, 500);
+            setTimeout(() => {
+              initMobileMenu();
+              forceMobileLayout();
+            }, 500);
           } else {
             console.log('CMS elements not found after', attempts, 'attempts');
           }
+          
+          // Force layout multiple times to catch dynamic content
+          setTimeout(forceMobileLayout, 1000);
+          setTimeout(forceMobileLayout, 2000);
+          setTimeout(forceMobileLayout, 3000);
         }
       }, 500);
     }
     
     // Start initialization after page load
     setTimeout(waitForCMSAndInit, 2000);
+    
+    // Also force layout on various events
+    window.addEventListener('load', () => setTimeout(forceMobileLayout, 1000));
+    window.addEventListener('DOMContentLoaded', () => setTimeout(forceMobileLayout, 1500));
+    
+    // Force layout when mutations occur
+    const layoutObserver = new MutationObserver(() => {
+      if (checkIfMobile()) {
+        forceMobileLayout();
+      }
+    });
+    
+    setTimeout(() => {
+      layoutObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+    }, 3000);
     
     // Handle window resize
     window.addEventListener('resize', function() {
