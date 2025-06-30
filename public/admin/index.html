@@ -717,132 +717,238 @@
       });
     }
     
-    // Custom CMS Configuration
-    CMS.registerPreviewStyle('/admin/preview.css');
-    
-    // Add custom dashboard widgets
-    CMS.registerWidget('emoji', {
-      pattern: /^emoji:(.+)$/,
-      fromBlock: match => match[1],
-      toBlock: value => `emoji:${value}`,
-      toPreview: value => `${value}`
-    });
-
-    // Configurazione personalizzata per Kelua
-    CMS.init({
-      config: {
-        load_config_file: true,
-        display_url: 'https://kelua.netlify.app',
-        logo_url: '/logo.jpg'
+    // Custom CMS Configuration - Safe
+    try {
+      if (window.CMS) {
+        CMS.registerPreviewStyle('/admin/preview.css');
       }
-    });
+    } catch (e) {
+      console.warn('CMS preview style error:', e);
+    }
+
+    // Configurazione personalizzata per Kelua - Safe
+    try {
+      if (window.CMS && typeof CMS.init === 'function') {
+        CMS.init({
+          config: {
+            load_config_file: true,
+            display_url: 'https://kelua.netlify.app',
+            logo_url: '/logo.jpg'
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('CMS init config error:', e);
+    }
     
-    // Mobile Menu Management
+    // Mobile Menu Management - Safe Implementation
     function initializeMobileMenu() {
+      // Wait for CMS to be fully loaded
+      if (!document.querySelector('#nc-root') || !window.CMS) {
+        return;
+      }
+      
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const mobileOverlay = document.getElementById('mobileOverlay');
       let sidebar = null;
+      let isInitialized = false;
       
-      // Function to find sidebar
+      // Function to safely find sidebar
       function findSidebar() {
-        return document.querySelector('.css-1f8sh1y') || 
-               document.querySelector('[class*="sidebar"]') ||
-               document.querySelector('nav');
-      }
-      
-      // Toggle mobile menu
-      function toggleMobileMenu() {
-        sidebar = findSidebar();
-        if (!sidebar) return;
-        
-        const isOpen = sidebar.classList.contains('mobile-open');
-        
-        if (isOpen) {
-          // Close menu
-          sidebar.classList.remove('mobile-open');
-          mobileOverlay.classList.remove('active');
-          mobileMenuBtn.classList.remove('active');
-          document.body.style.overflow = 'auto';
-        } else {
-          // Open menu
-          sidebar.classList.add('mobile-open');
-          mobileOverlay.classList.add('active');
-          mobileMenuBtn.classList.add('active');
-          document.body.style.overflow = 'hidden';
+        try {
+          return document.querySelector('.css-1f8sh1y') || 
+                 document.querySelector('[class*="sidebar"]') ||
+                 document.querySelector('nav[class*="css-"]');
+        } catch (e) {
+          console.warn('Sidebar not found:', e);
+          return null;
         }
       }
       
-      // Event listeners
-      if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-      }
-      
-      if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', toggleMobileMenu);
-      }
-      
-      // Close menu when clicking on navigation items
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('.css-1f8sh1y a') || e.target.closest('[class*="sidebar"] a')) {
-          setTimeout(toggleMobileMenu, 300);
+      // Safe toggle mobile menu
+      function toggleMobileMenu(event) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-      });
-      
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
+        
+        try {
           sidebar = findSidebar();
-          if (sidebar) {
+          if (!sidebar || !mobileMenuBtn || !mobileOverlay) return;
+          
+          const isOpen = sidebar.classList.contains('mobile-open');
+          
+          if (isOpen) {
+            // Close menu
             sidebar.classList.remove('mobile-open');
             mobileOverlay.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
+          } else {
+            // Open menu
+            sidebar.classList.add('mobile-open');
+            mobileOverlay.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
           }
+        } catch (e) {
+          console.warn('Toggle menu error:', e);
         }
-      });
+      }
+      
+      // Safe event listeners
+      function addEventListeners() {
+        if (isInitialized) return;
+        
+        try {
+          if (mobileMenuBtn) {
+            mobileMenuBtn.removeEventListener('click', toggleMobileMenu);
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+          }
+          
+          if (mobileOverlay) {
+            mobileOverlay.removeEventListener('click', toggleMobileMenu);
+            mobileOverlay.addEventListener('click', toggleMobileMenu);
+          }
+          
+          // Close menu when clicking on navigation items
+          document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+              const navLink = e.target.closest('.css-1f8sh1y a') || e.target.closest('[class*="sidebar"] a');
+              if (navLink) {
+                setTimeout(() => {
+                  try {
+                    toggleMobileMenu();
+                  } catch (err) {
+                    console.warn('Nav click error:', err);
+                  }
+                }, 100);
+              }
+            }
+          }, { passive: true });
+          
+          // Handle window resize
+          window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+              try {
+                sidebar = findSidebar();
+                if (sidebar) {
+                  sidebar.classList.remove('mobile-open');
+                  mobileOverlay.classList.remove('active');
+                  mobileMenuBtn.classList.remove('active');
+                  document.body.style.overflow = '';
+                }
+              } catch (e) {
+                console.warn('Resize error:', e);
+              }
+            }
+          }, { passive: true });
+          
+          isInitialized = true;
+        } catch (e) {
+          console.warn('Event listener error:', e);
+        }
+      }
+      
+      // Initialize with delay
+      setTimeout(addEventListeners, 100);
     }
 
-    // Enhanced loading and initialization
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('🎨 Kelua Mobile Admin Interface caricata');
+    // Safe CMS and Mobile Menu Initialization
+    let cmsInitialized = false;
+    let mobileMenuInitialized = false;
+    
+    function safeCMSInit() {
+      if (cmsInitialized) return;
       
-      // Initialize mobile menu
-      initializeMobileMenu();
-      
-      // Wait for CMS to load and reinitialize
-      const checkCMSLoaded = setInterval(() => {
-        const cmsElements = document.querySelector('#nc-root');
-        if (cmsElements && cmsElements.children.length > 0) {
-          setTimeout(() => {
-            initializeMobileMenu();
-            console.log('📱 Mobile menu inizializzato');
-          }, 1000);
-          clearInterval(checkCMSLoaded);
-        }
-      }, 500);
-      
-      // Aggiungi effetti di caricamento
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'childList') {
-            mutation.addedNodes.forEach(function(node) {
-              if (node.nodeType === 1) {
-                node.classList.add('loading');
-                setTimeout(() => {
-                  node.classList.remove('loading');
-                  // Reinitialize mobile menu when new elements are added
-                  initializeMobileMenu();
-                }, 1000);
+      try {
+        console.log('🎨 Kelua Mobile Admin Interface - Inizializzazione sicura');
+        
+        // Wait for CMS to be fully loaded
+        const waitForCMS = () => {
+          const cmsRoot = document.querySelector('#nc-root');
+          const hasCMSContent = cmsRoot && (cmsRoot.children.length > 0 || window.CMS);
+          
+          if (hasCMSContent && !mobileMenuInitialized) {
+            setTimeout(() => {
+              try {
+                initializeMobileMenu();
+                mobileMenuInitialized = true;
+                console.log('📱 Mobile menu inizializzato con successo');
+              } catch (e) {
+                console.warn('Mobile menu init error:', e);
               }
-            });
+            }, 1500);
+          } else if (!hasCMSContent) {
+            setTimeout(waitForCMS, 1000);
+          }
+        };
+        
+        waitForCMS();
+        cmsInitialized = true;
+        
+      } catch (e) {
+        console.warn('CMS init error:', e);
+      }
+    }
+    
+    // Safe DOM observation
+    function setupSafeObserver() {
+      try {
+        const observer = new MutationObserver(function(mutations) {
+          let shouldReinitialize = false;
+          
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+              mutation.addedNodes.forEach(function(node) {
+                if (node.nodeType === 1 && node.classList) {
+                  // Only add loading class to non-CMS elements
+                  if (!node.closest('#nc-root')) {
+                    node.classList.add('loading');
+                    setTimeout(() => {
+                      if (node.classList) {
+                        node.classList.remove('loading');
+                      }
+                    }, 500);
+                  }
+                  
+                  // Check if we need to reinitialize mobile menu
+                  if (node.querySelector && (node.querySelector('.css-1f8sh1y') || node.classList.contains('css-1f8sh1y'))) {
+                    shouldReinitialize = true;
+                  }
+                }
+              });
+            }
+          });
+          
+          // Reinitialize mobile menu if needed
+          if (shouldReinitialize && !mobileMenuInitialized) {
+            setTimeout(() => {
+              try {
+                initializeMobileMenu();
+                mobileMenuInitialized = true;
+              } catch (e) {
+                console.warn('Observer reinit error:', e);
+              }
+            }, 500);
           }
         });
-      });
-      
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+        
+      } catch (e) {
+        console.warn('Observer setup error:', e);
+      }
+    }
+    
+    // Initialize everything safely
+    document.addEventListener('DOMContentLoaded', safeCMSInit);
+    window.addEventListener('load', () => {
+      setTimeout(safeCMSInit, 500);
+      setupSafeObserver();
     });
 
     // Prevent zoom on input focus (iOS Safari)
