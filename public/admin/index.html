@@ -139,14 +139,26 @@
 
     /* MOBILE RESPONSIVE DESIGN - COMPLETELY FIXED */
     
-    /* Mobile-only styles */
+    /* Mobile-only styles - AGGRESSIVE OVERRIDE */
     @media screen and (max-width: 768px) {
-      /* Force mobile layout */
-      #nc-root {
+      /* Force mobile viewport */
+      html, body {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+      }
+      
+      /* Force mobile layout on root */
+      #nc-root, #nc-root > div, [class*="App"] {
         display: flex !important;
         flex-direction: column !important;
-        height: 100vh !important;
+        width: 100% !important;
+        height: 100% !important;
         overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
       }
       
       /* Mobile body adjustments */
@@ -157,8 +169,9 @@
         padding: 0 !important;
       }
       
-      /* FORCE HIDE SIDEBAR ON MOBILE */
-      .css-1f8sh1y, [class*="Sidebar"], nav[class*="css-"] {
+      /* COMPLETELY REMOVE SIDEBAR ON MOBILE */
+      .css-1f8sh1y, [class*="Sidebar"], [class*="sidebar"], nav[class*="css-"], 
+      aside, [class*="Navigation"], [class*="navigation"], [class*="LeftPanel"] {
         display: none !important;
         position: fixed !important;
         top: 0 !important;
@@ -178,17 +191,34 @@
         left: 0 !important;
       }
       
-      /* FORCE FULL WIDTH MAIN CONTENT */
-      .css-1wxrih3, [class*="Main"], main[class*="css-"] {
+      /* FORCE ABSOLUTE FULL WIDTH MAIN CONTENT */
+      .css-1wxrih3, [class*="Main"], [class*="main"], main, 
+      [class*="Content"], [class*="content"], [class*="Container"] > div:not([class*="Sidebar"]),
+      #nc-root > div > div:not([class*="Sidebar"]):not([class*="Header"]) {
+        position: relative !important;
+        left: 0 !important;
+        right: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        padding: 20px 16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
         width: 100% !important;
         max-width: 100% !important;
-        min-height: 100vh !important;
-        flex: 1 !important;
+        min-width: 100% !important;
+        box-sizing: border-box !important;
+        flex: 1 1 auto !important;
         overflow-y: auto !important;
+        overflow-x: hidden !important;
         background: var(--kelua-darker) !important;
+      }
+      
+      /* Force full width on all nested containers */
+      .css-1wxrih3 > *, [class*="Main"] > *, main > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
       
       /* Mobile header */
@@ -208,6 +238,48 @@
         color: var(--kelua-gold) !important;
       }
       
+      /* FORCE REMOVE TWO-COLUMN LAYOUT */
+      [class*="TwoColumn"], [class*="two-column"], [class*="Split"], [class*="split"],
+      [class*="Grid"], [class*="grid"], .css-grid, .css-flex-row {
+        display: block !important;
+        grid-template-columns: none !important;
+        flex-direction: column !important;
+        width: 100% !important;
+      }
+      
+      /* Force all grid/flex children to full width */
+      [class*="TwoColumn"] > *, [class*="Grid"] > *, [class*="Split"] > *,
+      .css-grid > *, .css-flex-row > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        grid-column: auto !important;
+        flex: none !important;
+      }
+      
+      /* Remove any fixed widths */
+      [style*="width"], [style*="max-width"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: auto !important;
+      }
+      
+      /* Content and Media tabs - force horizontal layout */
+      [class*="TabList"], [class*="tab-list"], [role="tablist"] {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        gap: 8px !important;
+        margin-bottom: 16px !important;
+      }
+      
+      /* Tab buttons - equal width */
+      [class*="Tab"], [role="tab"], button[class*="tab"] {
+        flex: 1 !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+      }
+      
       /* Mobile Collections Card */
       [class*="Collections"], .css-collections {
         background: var(--kelua-dark) !important;
@@ -215,6 +287,8 @@
         border-radius: 16px !important;
         padding: 20px !important;
         margin-bottom: 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
       
       /* Mobile Collections Title */
@@ -223,6 +297,40 @@
         font-size: 1.8rem !important;
         margin-bottom: 20px !important;
         text-align: center !important;
+      }
+      
+      /* Product Detail View - Force Single Column */
+      [class*="EditForm"], [class*="edit-form"], [class*="Form"], form {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+      }
+      
+      /* Product card in list view */
+      [class*="Card"][class*="product"], [class*="ListItem"], [class*="list-item"],
+      [class*="CollectionItem"], [class*="collection-item"] {
+        width: 100% !important;
+        margin-bottom: 16px !important;
+        padding: 16px !important;
+        background: var(--kelua-dark) !important;
+        border: 1px solid rgba(212, 175, 55, 0.2) !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* Product fields container */
+      [class*="FieldGroup"], [class*="field-group"], [class*="FormGroup"], 
+      [class*="form-group"], fieldset {
+        width: 100% !important;
+        margin-bottom: 20px !important;
+        padding: 0 !important;
+      }
+      
+      /* Individual form fields */
+      [class*="Field"]:not([class*="field-group"]), [class*="FormField"], 
+      [class*="form-field"], .form-control, .field {
+        width: 100% !important;
+        margin-bottom: 16px !important;
       }
       
       /* Mobile Search */
