@@ -137,203 +137,226 @@
       background: var(--kelua-gold-light);
     }
 
-    /* MOBILE-FIRST RESPONSIVE DESIGN */
+    /* MOBILE RESPONSIVE DESIGN - FIXED */
     
-    /* Base mobile styles */
-    @media (max-width: 768px) {
+    /* Mobile-only styles */
+    @media screen and (max-width: 768px) {
+      /* Mobile body adjustments */
       body {
         font-size: 16px !important;
         -webkit-text-size-adjust: 100% !important;
       }
       
-      /* Hide desktop sidebar on mobile */
-      .css-1f8sh1y, [class*="sidebar"] {
-        transform: translateX(-100%) !important;
-        transition: transform 0.3s ease !important;
+      /* Mobile sidebar - hidden by default */
+      .css-1f8sh1y {
         position: fixed !important;
         top: 0 !important;
-        left: 0 !important;
+        left: -100% !important;
         width: 280px !important;
         height: 100vh !important;
         z-index: 1000 !important;
+        transition: left 0.3s ease !important;
         overflow-y: auto !important;
+        background: var(--kelua-dark) !important;
       }
       
-      .css-1f8sh1y.mobile-open, [class*="sidebar"].mobile-open {
-        transform: translateX(0) !important;
+      /* Mobile sidebar open state */
+      .css-1f8sh1y.mobile-open {
+        left: 0 !important;
       }
       
-      /* Mobile header adjustments */
-      .css-1yh6bts, [class*="header"] {
-        padding: 12px 60px 12px 16px !important;
+      /* Mobile main content */
+      .css-1wxrih3 {
+        margin-left: 0 !important;
+        padding: 20px 16px !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+      }
+      
+      /* Mobile header */
+      .css-1yh6bts {
+        padding: 12px 16px 12px 60px !important;
         position: sticky !important;
         top: 0 !important;
         z-index: 999 !important;
       }
       
-      .css-1yh6bts h1, [class*="header"] h1 {
-        font-size: 1.4rem !important;
+      .css-1yh6bts h1 {
+        font-size: 1.3rem !important;
         margin: 0 !important;
       }
       
-      /* Main content mobile */
-      .css-1wxrih3, [class*="main"] {
-        margin-left: 0 !important;
-        padding: 16px !important;
-        width: 100% !important;
-      }
-      
-      /* Form optimizations */
-      .css-1h0lre7 {
-        padding: 16px !important;
-      }
-      
-      /* Touch-friendly buttons */
-      .css-button, button {
-        min-height: 48px !important;
-        font-size: 16px !important;
-        padding: 12px 20px !important;
-        margin-bottom: 12px !important;
-        width: 100% !important;
-        border-radius: 12px !important;
-        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important;
-      }
-      
-      /* Touch-friendly inputs */
+      /* Mobile form elements */
       input, textarea, select {
         font-size: 16px !important;
-        min-height: 48px !important;
-        padding: 14px 16px !important;
-        margin-bottom: 16px !important;
+        min-height: 44px !important;
+        padding: 12px 16px !important;
         width: 100% !important;
-        border-radius: 12px !important;
-        -webkit-appearance: none !important;
-        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important;
-      }
-      
-      /* Select dropdown mobile */
-      select {
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
-        background-repeat: no-repeat !important;
-        background-position: right 16px center !important;
-        background-size: 20px !important;
-        padding-right: 50px !important;
-      }
-      
-      /* Collection items mobile */
-      .css-1wxrih3 ul li, [class*="collection"] li {
-        padding: 16px !important;
+        box-sizing: border-box !important;
         margin-bottom: 16px !important;
-        border-radius: 12px !important;
-        min-height: 60px !important;
-        display: flex !important;
-        align-items: center !important;
       }
       
-      /* Typography mobile */
+      /* Mobile buttons */
+      button, .css-button {
+        min-height: 44px !important;
+        font-size: 16px !important;
+        padding: 12px 20px !important;
+        width: 100% !important;
+        margin-bottom: 12px !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* Mobile navigation */
+      .css-1f8sh1y a {
+        padding: 16px 20px !important;
+        font-size: 1rem !important;
+        display: block !important;
+        min-height: 48px !important;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1) !important;
+      }
+      
+      /* Mobile collection items */
+      .css-1wxrih3 ul li {
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+        min-height: 60px !important;
+      }
+      
+      /* Mobile typography */
       h1 { font-size: 1.8rem !important; }
       h2 { font-size: 1.5rem !important; }
       h3 { font-size: 1.3rem !important; }
       
-      /* Labels mobile */
-      label, .css-label {
-        font-size: 1rem !important;
-        margin-bottom: 8px !important;
-        display: block !important;
-      }
-      
-      /* Modal mobile */
-      [class*="modal"], .css-modal {
-        padding: 16px !important;
-        max-height: 90vh !important;
-        overflow-y: auto !important;
-        border-radius: 16px 16px 0 0 !important;
+      /* Mobile modals */
+      [role="dialog"] {
         position: fixed !important;
         bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
         top: auto !important;
-        transform: translateY(100%) !important;
-        transition: transform 0.3s ease !important;
+        max-height: 90vh !important;
+        border-radius: 16px 16px 0 0 !important;
+        overflow-y: auto !important;
       }
       
-      [class*="modal"].open, .css-modal.open {
-        transform: translateY(0) !important;
-      }
-      
-      /* Textarea mobile */
-      textarea {
-        min-height: 120px !important;
-        resize: vertical !important;
-      }
-      
-      /* Card spacing mobile */
-      .css-1wxrih3 > div, [class*="card"] {
-        margin-bottom: 20px !important;
+      /* Mobile editor */
+      .css-editor-container, [class*="editor"] {
+        font-size: 16px !important;
         padding: 16px !important;
-        border-radius: 16px !important;
       }
       
-      /* Navigation items mobile */
-      .css-1f8sh1y a, [class*="nav"] a {
-        padding: 16px 20px !important;
-        font-size: 1.1rem !important;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.1) !important;
-        display: flex !important;
-        align-items: center !important;
-        min-height: 56px !important;
+      /* Mobile file upload */
+      input[type="file"] {
+        padding: 20px !important;
+        text-align: center !important;
+      }
+      
+      /* Mobile preview */
+      .css-preview {
+        padding: 16px !important;
+        font-size: 14px !important;
       }
     }
     
-    /* Tablet optimizations */
-    @media (min-width: 481px) and (max-width: 768px) {
-      .css-1wxrih3, [class*="main"] {
-        padding: 24px !important;
+    /* Tablet adjustments */
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+      .css-1wxrih3 {
+        padding: 30px 24px !important;
       }
       
-      .css-button, button {
+      button, .css-button {
         width: auto !important;
         display: inline-block !important;
         margin-right: 12px !important;
-        min-width: 140px !important;
+        min-width: 120px !important;
       }
-      
-      h1 { font-size: 2rem !important; }
-      h2 { font-size: 1.7rem !important; }
       
       input, textarea, select {
         max-width: 400px !important;
       }
     }
     
-    /* Desktop styles */
-    @media (min-width: 769px) {
-      .mobile-menu-btn {
-        display: none !important;
-      }
-      
-      .css-1f8sh1y, [class*="sidebar"] {
+    /* Desktop - ensure no mobile styles interfere */
+    @media screen and (min-width: 769px) {
+      /* Reset any mobile overrides */
+      .css-1f8sh1y {
         position: relative !important;
-        transform: translateX(0) !important;
-        width: 280px !important;
-        height: auto !important;
-      }
-      
-      .css-1wxrih3, [class*="main"] {
-        margin-left: 280px !important;
-        padding: 40px !important;
-      }
-      
-      .css-button, button {
+        left: auto !important;
         width: auto !important;
-        display: inline-block !important;
-        margin-right: 12px !important;
-        margin-bottom: 0 !important;
+        height: auto !important;
+        z-index: auto !important;
+        transition: none !important;
+        overflow-y: visible !important;
+      }
+      
+      .css-1wxrih3 {
+        margin-left: auto !important;
+        padding: auto !important;
+        width: auto !important;
+        min-height: auto !important;
+      }
+      
+      .css-1yh6bts {
+        padding: auto !important;
+        position: relative !important;
+        top: auto !important;
+        z-index: auto !important;
+      }
+      
+      .css-1yh6bts h1 {
+        font-size: auto !important;
+        margin: auto !important;
       }
       
       input, textarea, select {
-        max-width: 500px !important;
+        font-size: auto !important;
+        min-height: auto !important;
+        padding: auto !important;
         width: auto !important;
+        margin-bottom: auto !important;
+      }
+      
+      button, .css-button {
+        min-height: auto !important;
+        font-size: auto !important;
+        padding: auto !important;
+        width: auto !important;
+        margin-bottom: auto !important;
+      }
+      
+      .css-1f8sh1y a {
+        padding: auto !important;
+        font-size: auto !important;
+        display: auto !important;
+        min-height: auto !important;
+        border-bottom: auto !important;
+      }
+      
+      .css-1wxrih3 ul li {
+        padding: auto !important;
+        margin-bottom: auto !important;
+        min-height: auto !important;
+      }
+      
+      h1, h2, h3 {
+        font-size: auto !important;
+      }
+      
+      [role="dialog"] {
+        position: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        max-height: auto !important;
+        border-radius: auto !important;
+        overflow-y: auto !important;
+      }
+      
+      /* Hide mobile elements on desktop */
+      .mobile-menu-btn,
+      .mobile-overlay {
+        display: none !important;
       }
     }
 
@@ -719,54 +742,111 @@
       });
     }
 
-    // Simple Mobile Menu - No DOM manipulation
+    // Enhanced Mobile Menu Management
     let mobileMenuInitialized = false;
+    let isMobile = false;
+    
+    function checkIfMobile() {
+      return window.innerWidth <= 768;
+    }
     
     function initMobileMenu() {
-      if (mobileMenuInitialized || window.innerWidth > 768) return;
+      if (mobileMenuInitialized) return;
+      
+      isMobile = checkIfMobile();
+      if (!isMobile) return;
       
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const mobileOverlay = document.getElementById('mobileOverlay');
       
-      if (!mobileMenuBtn || !mobileOverlay) return;
-      
-      function toggleMenu() {
-        const sidebar = document.querySelector('.css-1f8sh1y');
-        if (!sidebar) return;
-        
-        const isOpen = sidebar.classList.contains('mobile-open');
-        sidebar.classList.toggle('mobile-open', !isOpen);
-        mobileOverlay.classList.toggle('active', !isOpen);
-        mobileMenuBtn.classList.toggle('active', !isOpen);
-        document.body.style.overflow = isOpen ? '' : 'hidden';
+      if (!mobileMenuBtn || !mobileOverlay) {
+        console.log('Mobile menu elements not found');
+        return;
       }
       
+      function toggleMenu(event) {
+        if (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        
+        const sidebar = document.querySelector('.css-1f8sh1y');
+        if (!sidebar) {
+          console.log('Sidebar not found');
+          return;
+        }
+        
+        const isOpen = sidebar.classList.contains('mobile-open');
+        
+        if (isOpen) {
+          // Close menu
+          sidebar.classList.remove('mobile-open');
+          mobileOverlay.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+          document.body.style.overflow = '';
+        } else {
+          // Open menu
+          sidebar.classList.add('mobile-open');
+          mobileOverlay.classList.add('active');
+          mobileMenuBtn.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+        
+        console.log('Menu toggled:', !isOpen);
+      }
+      
+      // Add event listeners
       mobileMenuBtn.addEventListener('click', toggleMenu);
       mobileOverlay.addEventListener('click', toggleMenu);
       
-      // Close on nav click
+      // Close menu when clicking navigation items
       document.addEventListener('click', function(e) {
-        if (e.target.closest('.css-1f8sh1y a')) {
-          setTimeout(toggleMenu, 200);
+        if (checkIfMobile() && e.target.closest('.css-1f8sh1y a')) {
+          setTimeout(() => {
+            const sidebar = document.querySelector('.css-1f8sh1y');
+            if (sidebar && sidebar.classList.contains('mobile-open')) {
+              toggleMenu();
+            }
+          }, 300);
         }
       });
       
       mobileMenuInitialized = true;
+      console.log('Mobile menu initialized successfully');
     }
     
     // Initialize mobile menu after CMS loads
-    setTimeout(() => {
+    function waitForCMSAndInit() {
+      let attempts = 0;
+      const maxAttempts = 20;
+      
       const checkCMS = setInterval(() => {
-        if (document.querySelector('#nc-root .css-1f8sh1y')) {
-          initMobileMenu();
+        attempts++;
+        const cmsRoot = document.querySelector('#nc-root');
+        const sidebar = document.querySelector('.css-1f8sh1y');
+        
+        if ((cmsRoot && sidebar) || attempts >= maxAttempts) {
           clearInterval(checkCMS);
+          if (sidebar) {
+            console.log('CMS loaded, initializing mobile menu...');
+            setTimeout(initMobileMenu, 500);
+          } else {
+            console.log('CMS elements not found after', attempts, 'attempts');
+          }
         }
-      }, 1000);
-    }, 3000);
+      }, 500);
+    }
+    
+    // Start initialization after page load
+    setTimeout(waitForCMSAndInit, 2000);
     
     // Handle window resize
     window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
+      const wasMobile = isMobile;
+      isMobile = checkIfMobile();
+      
+      if (wasMobile && !isMobile) {
+        // Switched from mobile to desktop
         const sidebar = document.querySelector('.css-1f8sh1y');
         const overlay = document.getElementById('mobileOverlay');
         const btn = document.getElementById('mobileMenuBtn');
@@ -775,6 +855,12 @@
         if (overlay) overlay.classList.remove('active');
         if (btn) btn.classList.remove('active');
         document.body.style.overflow = '';
+        
+        console.log('Switched to desktop mode');
+      } else if (!wasModal && isMobile && !mobileMenuInitialized) {
+        // Switched from desktop to mobile
+        setTimeout(initMobileMenu, 300);
+        console.log('Switched to mobile mode');
       }
     });
   </script>
