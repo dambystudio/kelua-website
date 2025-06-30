@@ -1,5 +1,6 @@
 ---
 nome: "Sportswear"
+emoji: "👟"
 genere: "Donna"
 descrizione: "Abbigliamento sportivo e casual per donna"
 sconto: "50%"

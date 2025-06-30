@@ -27,6 +27,7 @@ const categorieSaldiCollection = defineCollection({
   type: 'content',
   schema: z.object({
     nome: z.string(),
+    emoji: z.string().optional(),
     genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
     descrizione: z.string().optional(),
     sconto: z.string().optional(),

@@ -10,6 +10,10 @@ logo_url: "/logo.jpg"
 site_url: "https://kelua.netlify.app"
 display_url: "https://kelua.netlify.app"
 
+# Configurazione editor
+editor:
+  preview: false
+
 collections:
   - name: "saldi-posts"
     label: "📢 Post Saldi"
@@ -39,13 +43,14 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "📛 Nome Categoria", name: "nome", widget: "string", required: true}
-      - {label: "� Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
-      - {label: "� Sconto (%)", name: "sconto", widget: "string", pattern: ['\d+%', "Inserire percentuale con % (es: 30%)"], default: "30%"}
-      - {label: "� Descrizione", name: "descrizione", widget: "text"}
+      - {label: "😊 Emoji/Icona", name: "emoji", widget: "string", required: true, default: "🛍️", hint: "Inserisci un'emoji che rappresenta la categoria (es: 👔, 👗, 👟)"}
+      - {label: "👥 Genere", name: "genere", widget: "select", options: ["Uomo", "Donna", "Unisex"], default: "Unisex"}
+      - {label: "💰 Sconto (%)", name: "sconto", widget: "string", pattern: ['\d+%', "Inserire percentuale con % (es: 30%)"], default: "30%"}
+      - {label: "📝 Descrizione", name: "descrizione", widget: "text"}
       - {label: "🖼️ Immagine", name: "immagine", widget: "image", required: false}
-      - {label: "� Numero Articoli", name: "numeroArticoli", widget: "number", default: 0}
+      - {label: "🔢 Numero Articoli", name: "numeroArticoli", widget: "number", default: 0}
       - {label: "✅ Attivo", name: "attivo", widget: "boolean", default: true}
-      - {label: "� Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
+      - {label: "📊 Ordine Visualizzazione", name: "ordine", widget: "number", default: 1}
 
   - name: "prodotti-saldi"
     label: "�️ Prodotti in Saldo"  

@@ -2,15 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Admin Panel - Kelua Saldi</title>
   <link rel="icon" type="image/jpg" href="/logo.jpg" />
   
   <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   
+  <!-- Stili personalizzati per dark theme -->
   <style>
     :root {
+      --kelua-gold: #d4af37;
+      --kelua-gold-light: #f1c40f;
+      --kelua-dark: #1a1a1a;
+      --kelua-darker: #0d0d0d;
       --primary-gold: #d4af37;
       --primary-black: #1a1a1a;
       --accent-gold: #f1c40f;
@@ -27,8 +35,8 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
-      background: linear-gradient(135deg, var(--primary-black) 0%, var(--background-dark) 100%);
-      color: var(--text-light);
+      background: var(--kelua-darker) !important;
+      color: #e0e0e0 !important;
       line-height: 1.6;
     }
     
@@ -117,33 +125,215 @@
     }
 
     ::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--kelua-darker);
     }
 
     ::-webkit-scrollbar-thumb {
-      background: var(--primary-gold);
+      background: var(--kelua-gold);
       border-radius: 4px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-gold);
+      background: var(--kelua-gold-light);
     }
 
-    /* Mobile optimization for CMS */
+    /* MOBILE-FIRST RESPONSIVE DESIGN */
+    
+    /* Base mobile styles */
     @media (max-width: 768px) {
-      .css-1h0lre7 {
-        padding: 10px !important;
+      body {
+        font-size: 16px !important;
+        -webkit-text-size-adjust: 100% !important;
       }
       
-      .css-button {
-        min-height: 44px !important;
+      /* Hide desktop sidebar on mobile */
+      .css-1f8sh1y, [class*="sidebar"] {
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 280px !important;
+        height: 100vh !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+      }
+      
+      .css-1f8sh1y.mobile-open, [class*="sidebar"].mobile-open {
+        transform: translateX(0) !important;
+      }
+      
+      /* Mobile header adjustments */
+      .css-1yh6bts, [class*="header"] {
+        padding: 12px 60px 12px 16px !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 999 !important;
+      }
+      
+      .css-1yh6bts h1, [class*="header"] h1 {
+        font-size: 1.4rem !important;
+        margin: 0 !important;
+      }
+      
+      /* Main content mobile */
+      .css-1wxrih3, [class*="main"] {
+        margin-left: 0 !important;
+        padding: 16px !important;
+        width: 100% !important;
+      }
+      
+      /* Form optimizations */
+      .css-1h0lre7 {
+        padding: 16px !important;
+      }
+      
+      /* Touch-friendly buttons */
+      .css-button, button {
+        min-height: 48px !important;
         font-size: 16px !important;
+        padding: 12px 20px !important;
+        margin-bottom: 12px !important;
+        width: 100% !important;
+        border-radius: 12px !important;
+        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important;
+      }
+      
+      /* Touch-friendly inputs */
+      input, textarea, select {
+        font-size: 16px !important;
+        min-height: 48px !important;
+        padding: 14px 16px !important;
+        margin-bottom: 16px !important;
+        width: 100% !important;
+        border-radius: 12px !important;
+        -webkit-appearance: none !important;
+        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.3) !important;
+      }
+      
+      /* Select dropdown mobile */
+      select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 16px center !important;
+        background-size: 20px !important;
+        padding-right: 50px !important;
+      }
+      
+      /* Collection items mobile */
+      .css-1wxrih3 ul li, [class*="collection"] li {
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+        border-radius: 12px !important;
+        min-height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+      
+      /* Typography mobile */
+      h1 { font-size: 1.8rem !important; }
+      h2 { font-size: 1.5rem !important; }
+      h3 { font-size: 1.3rem !important; }
+      
+      /* Labels mobile */
+      label, .css-label {
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+      }
+      
+      /* Modal mobile */
+      [class*="modal"], .css-modal {
+        padding: 16px !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+        border-radius: 16px 16px 0 0 !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        transform: translateY(100%) !important;
+        transition: transform 0.3s ease !important;
+      }
+      
+      [class*="modal"].open, .css-modal.open {
+        transform: translateY(0) !important;
+      }
+      
+      /* Textarea mobile */
+      textarea {
+        min-height: 120px !important;
+        resize: vertical !important;
+      }
+      
+      /* Card spacing mobile */
+      .css-1wxrih3 > div, [class*="card"] {
+        margin-bottom: 20px !important;
+        padding: 16px !important;
+        border-radius: 16px !important;
+      }
+      
+      /* Navigation items mobile */
+      .css-1f8sh1y a, [class*="nav"] a {
+        padding: 16px 20px !important;
+        font-size: 1.1rem !important;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1) !important;
+        display: flex !important;
+        align-items: center !important;
+        min-height: 56px !important;
+      }
+    }
+    
+    /* Tablet optimizations */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .css-1wxrih3, [class*="main"] {
+        padding: 24px !important;
+      }
+      
+      .css-button, button {
+        width: auto !important;
+        display: inline-block !important;
+        margin-right: 12px !important;
+        min-width: 140px !important;
+      }
+      
+      h1 { font-size: 2rem !important; }
+      h2 { font-size: 1.7rem !important; }
+      
+      input, textarea, select {
+        max-width: 400px !important;
+      }
+    }
+    
+    /* Desktop styles */
+    @media (min-width: 769px) {
+      .mobile-menu-btn {
+        display: none !important;
+      }
+      
+      .css-1f8sh1y, [class*="sidebar"] {
+        position: relative !important;
+        transform: translateX(0) !important;
+        width: 280px !important;
+        height: auto !important;
+      }
+      
+      .css-1wxrih3, [class*="main"] {
+        margin-left: 280px !important;
+        padding: 40px !important;
+      }
+      
+      .css-button, button {
+        width: auto !important;
+        display: inline-block !important;
+        margin-right: 12px !important;
+        margin-bottom: 0 !important;
       }
       
       input, textarea, select {
-        font-size: 16px !important;
-        min-height: 44px !important;
-        padding: 12px !important;
+        max-width: 500px !important;
+        width: auto !important;
       }
     }
 
@@ -174,24 +364,324 @@
       transform: translateY(-2px) !important;
       box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important;
     }
-  </style>
-    
-    .admin-header {
-      background: linear-gradient(135deg, #d4af37, #f1c40f);
-      color: #1a1a1a;
-      padding: 1rem;
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.2rem;
+
+    /* Dark Theme Override */
+    body {
+      background: var(--kelua-darker) !important;
+      color: #e0e0e0 !important;
     }
     
-    /* Custom CMS Styles */
-    .css-1t67c7q-AppHeaderContent {
-      background: linear-gradient(135deg, #d4af37, #f1c40f) !important;
+    /* Header personalizzato */
+    .css-1yh6bts {
+      background: linear-gradient(135deg, var(--kelua-dark), var(--kelua-darker)) !important;
+      border-bottom: 2px solid var(--kelua-gold) !important;
+    }
+    
+    /* Logo e titolo */
+    .css-1yh6bts h1 {
+      color: var(--kelua-gold) !important;
+      font-weight: 700 !important;
+    }
+    
+    /* Sidebar */
+    .css-1f8sh1y {
+      background: var(--kelua-dark) !important;
+      border-right: 1px solid var(--kelua-gold) !important;
+    }
+    
+    /* Navigation items */
+    .css-1f8sh1y a {
+      color: #e0e0e0 !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    .css-1f8sh1y a:hover {
+      background: rgba(212, 175, 55, 0.1) !important;
+      color: var(--kelua-gold) !important;
+    }
+    
+    .css-1f8sh1y a.active {
+      background: var(--kelua-gold) !important;
+      color: var(--kelua-dark) !important;
+    }
+    
+    /* Main content area */
+    .css-1wxrih3 {
+      background: var(--kelua-darker) !important;
+    }
+    
+    /* Cards e form */
+    .css-1wxrih3 > div {
+      background: var(--kelua-dark) !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
+      border-radius: 12px !important;
+    }
+    
+    /* Input fields */
+    input, textarea, select {
+      background: var(--kelua-darker) !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+      color: #e0e0e0 !important;
+      border-radius: 8px !important;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--kelua-gold) !important;
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+    }
+    
+    /* Labels */
+    label {
+      color: var(--kelua-gold) !important;
+      font-weight: 600 !important;
+    }
+    
+    /* Buttons */
+    button {
+      background: var(--kelua-gold) !important;
+      color: var(--kelua-dark) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    button:hover {
+      background: var(--kelua-gold-light) !important;
+      transform: translateY(-2px) !important;
+    }
+    
+    /* Collection list */
+    .css-1wxrih3 ul li {
+      background: var(--kelua-dark) !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
+      border-radius: 8px !important;
+      margin-bottom: 10px !important;
+    }
+    
+    .css-1wxrih3 ul li:hover {
+      border-color: var(--kelua-gold) !important;
+      transform: translateY(-2px) !important;
+    }
+    
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--kelua-gold) !important;
+    }
+    
+    /* Text */
+    p, span, div {
+      color: #e0e0e0 !important;
+    }
+    
+    /* Animation per caricamento */
+    @keyframes kelua-glow {
+      0%, 100% { box-shadow: 0 0 5px var(--kelua-gold); }
+      50% { box-shadow: 0 0 20px var(--kelua-gold), 0 0 30px var(--kelua-gold); }
+    }
+    
+    .loading {
+      animation: kelua-glow 2s infinite;
+    }
+
+    /* MOBILE MENU HAMBURGER */
+    .mobile-menu-btn {
+      position: fixed !important;
+      top: 15px !important;
+      left: 15px !important;
+      z-index: 1001 !important;
+      background: var(--kelua-gold) !important;
+      border: none !important;
+      border-radius: 8px !important;
+      padding: 10px !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+      width: 44px !important;
+      height: 44px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+    .mobile-menu-btn span {
+      display: block !important;
+      width: 20px !important;
+      height: 2px !important;
+      background: var(--kelua-dark) !important;
+      margin: 2px 0 !important;
+      transition: 0.3s !important;
+      border-radius: 1px !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-4px, 4px) !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+      opacity: 0 !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-4px, -4px) !important;
+    }
+
+    /* Mobile Overlay */
+    .mobile-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100vh !important;
+      background: rgba(0, 0, 0, 0.7) !important;
+      z-index: 999 !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* Show mobile menu button only on mobile */
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex !important;
+      }
+      
+      .mobile-overlay {
+        display: block !important;
+      }
+    }
+
+    /* Hide mobile elements on desktop */
+    @media (min-width: 769px) {
+      .mobile-menu-btn,
+      .mobile-overlay {
+        display: none !important;
+      }
+    }
+
+    /* ADDITIONAL MOBILE ENHANCEMENTS */
+    
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth !important;
+    }
+    
+    /* Better touch targets */
+    @media (max-width: 768px) {
+      a, button, input, select, textarea {
+        min-height: 44px !important;
+        min-width: 44px !important;
+      }
+      
+      /* Improved form styling */
+      .css-field-wrapper, .form-control {
+        margin-bottom: 20px !important;
+      }
+      
+      /* Better spacing for collections */
+      .css-collection-top {
+        padding: 16px !important;
+        margin-bottom: 20px !important;
+      }
+      
+      /* Improved modal behavior */
+      [role="dialog"], .css-modal-content {
+        border-radius: 16px 16px 0 0 !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      
+      /* Better editor experience */
+      .css-editor, [class*="editor"] {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+        padding: 16px !important;
+      }
+      
+      /* Improved list items */
+      .css-collection-card, [class*="collection-card"] {
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      }
+      
+      /* Better file upload */
+      .css-file-input, [type="file"] {
+        padding: 20px !important;
+        border: 2px dashed var(--kelua-gold) !important;
+        border-radius: 12px !important;
+        text-align: center !important;
+        background: rgba(212, 175, 55, 0.05) !important;
+      }
+      
+      /* Improved preview */
+      .css-preview-pane {
+        padding: 16px !important;
+        border-radius: 12px !important;
+      }
+      
+      /* Better error messages */
+      .css-error, [class*="error"] {
+        padding: 12px 16px !important;
+        border-radius: 8px !important;
+        margin-bottom: 16px !important;
+        font-size: 14px !important;
+      }
+      
+      /* Loading states */
+      .css-loading, [class*="loading"] {
+        padding: 20px !important;
+        text-align: center !important;
+        border-radius: 12px !important;
+      }
+    }
+    
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .css-1f8sh1y, .css-1wxrih3, input, textarea, select {
+        border-width: 2px !important;
+      }
+    }
+    
+    /* Focus management */
+    *:focus {
+      outline: 2px solid var(--kelua-gold) !important;
+      outline-offset: 2px !important;
+    }
+    
+    /* Prevent horizontal scroll */
+    body, html {
+      overflow-x: hidden !important;
     }
   </style>
 </head>
 <body>
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" style="display: none;">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" style="display: none;"></div>
+
   <!-- Loading Screen -->
   <div class="loading-screen" id="loadingScreen">
     <img src="/logo.jpg" alt="Kelua Logo" />
@@ -237,6 +727,134 @@
       toBlock: value => `emoji:${value}`,
       toPreview: value => `${value}`
     });
+
+    // Configurazione personalizzata per Kelua
+    CMS.init({
+      config: {
+        load_config_file: true,
+        display_url: 'https://kelua.netlify.app',
+        logo_url: '/logo.jpg'
+      }
+    });
+    
+    // Mobile Menu Management
+    function initializeMobileMenu() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      let sidebar = null;
+      
+      // Function to find sidebar
+      function findSidebar() {
+        return document.querySelector('.css-1f8sh1y') || 
+               document.querySelector('[class*="sidebar"]') ||
+               document.querySelector('nav');
+      }
+      
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        sidebar = findSidebar();
+        if (!sidebar) return;
+        
+        const isOpen = sidebar.classList.contains('mobile-open');
+        
+        if (isOpen) {
+          // Close menu
+          sidebar.classList.remove('mobile-open');
+          mobileOverlay.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        } else {
+          // Open menu
+          sidebar.classList.add('mobile-open');
+          mobileOverlay.classList.add('active');
+          mobileMenuBtn.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+      
+      // Event listeners
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      }
+      
+      if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+      }
+      
+      // Close menu when clicking on navigation items
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.css-1f8sh1y a') || e.target.closest('[class*="sidebar"] a')) {
+          setTimeout(toggleMobileMenu, 300);
+        }
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          sidebar = findSidebar();
+          if (sidebar) {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            document.body.style.overflow = 'auto';
+          }
+        }
+      });
+    }
+
+    // Enhanced loading and initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🎨 Kelua Mobile Admin Interface caricata');
+      
+      // Initialize mobile menu
+      initializeMobileMenu();
+      
+      // Wait for CMS to load and reinitialize
+      const checkCMSLoaded = setInterval(() => {
+        const cmsElements = document.querySelector('#nc-root');
+        if (cmsElements && cmsElements.children.length > 0) {
+          setTimeout(() => {
+            initializeMobileMenu();
+            console.log('📱 Mobile menu inizializzato');
+          }, 1000);
+          clearInterval(checkCMSLoaded);
+        }
+      }, 500);
+      
+      // Aggiungi effetti di caricamento
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeType === 1) {
+                node.classList.add('loading');
+                setTimeout(() => {
+                  node.classList.remove('loading');
+                  // Reinitialize mobile menu when new elements are added
+                  initializeMobileMenu();
+                }, 1000);
+              }
+            });
+          }
+        });
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+
+    // Prevent zoom on input focus (iOS Safari)
+    document.addEventListener('touchstart', function() {}, {passive: true});
+    
+    // Add viewport meta tag if not present
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const viewport = document.createElement('meta');
+      viewport.name = 'viewport';
+      viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0';
+      document.head.appendChild(viewport);
+    }
   </script>
 </body>
 </html>

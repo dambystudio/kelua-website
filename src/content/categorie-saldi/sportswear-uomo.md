@@ -1,5 +1,6 @@
 ---
 nome: "Sportswear"
+emoji: "🏃‍♂️"
 genere: "Uomo"
 descrizione: "Abbigliamento sportivo e casual per uomo"
 sconto: "45%"

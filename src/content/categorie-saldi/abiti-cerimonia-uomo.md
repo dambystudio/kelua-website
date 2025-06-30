@@ -1,5 +1,6 @@
 ---
 nome: "Abiti da Cerimonia"
+emoji: "👔"
 genere: "Uomo"
 descrizione: "Eleganti abiti da cerimonia per uomo"
 sconto: "35%"

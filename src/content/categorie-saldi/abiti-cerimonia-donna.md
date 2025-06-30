@@ -1,5 +1,6 @@
 ---
 nome: "Abiti da Cerimonia"
+emoji: "👗"
 genere: "Donna"
 descrizione: "Eleganti abiti da cerimonia per donna"
 sconto: "40%"
