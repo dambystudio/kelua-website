@@ -10,12 +10,14 @@ const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 
 // Leggi i dati dal CMS
 let saldiPosts = [];
+let saldiHero = [];
 let prodottiSaldi = [];
 let categorieSaldi = [];
 
 try {
   // Prova a leggere dal CMS
   saldiPosts = await getCollection('saldi-posts');
+  saldiHero = await getCollection('saldi-hero');
   prodottiSaldi = await getCollection('prodotti-saldi');
   categorieSaldi = await getCollection('categorie-saldi');
   
@@ -23,6 +25,7 @@ try {
   console.log('🔍 Prodotti caricati:', prodottiSaldi.length);
   console.log('🔍 Categorie caricate:', categorieSaldi.length);
   console.log('🔍 Posts caricati:', saldiPosts.length);
+  console.log('🔍 Hero caricati:', saldiHero.length);
   
 } catch (error) {
   console.log('❌ Errore CMS:', error.message);
@@ -54,8 +57,8 @@ const saldiHeroFallback = {
 };
 
 // Usa i dati del CMS se disponibili, altrimenti usa i fallback
-const saldiHero = saldiPosts.length > 0 
-  ? saldiPosts.find(post => post.data.attivo)?.data || saldiHeroFallback
+const saldiHeroData = saldiHero.length > 0 
+  ? saldiHero.find(hero => hero.data.attivo)?.data || saldiHeroFallback
   : saldiHeroFallback;
 
 // Statistiche dinamiche
@@ -92,23 +95,23 @@ const temaColore = coloreTema || "#d4af37";
         <!-- Hero Section Saldi -->
     <section class="saldi-hero">
       <div class="hero-background">
-        <img src={saldiHero.immagineBackground || "/background.png"} alt="Saldi Kelua" class="hero-bg-image">
+        <img src={saldiHeroData.immagineBackground || "/background.png"} alt="Saldi Kelua" class="hero-bg-image">
         <div class="hero-overlay"></div>
       </div>
       
       <div class="hero-content">
         <div class="container">
           <div class="hero-text">
-            <h1>{saldiHero.titolo}</h1>
-            <h2>{saldiHero.sottotitolo}</h2>
-            <p>{saldiHero.descrizione}</p>
+            <h1>{saldiHeroData.titolo}</h1>
+            <h2>{saldiHeroData.sottotitolo}</h2>
+            <p>{saldiHeroData.descrizione}</p>
             <div class="hero-stats">
               <div class="stat">
                 <span class="number">{numeroTotaleProdotti}</span>
                 <span class="label">Prodotti in Saldo</span>
               </div>
               <div class="stat">
-                <span class="number">{scontoMassimoCalcolato || saldiHero.scontoMax}%</span>
+                <span class="number">{scontoMassimoCalcolato || saldiHeroData.scontoMax}%</span>
                 <span class="label">Sconto Massimo</span>
               </div>
             </div>
