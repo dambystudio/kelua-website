@@ -147,12 +147,7 @@
         box-sizing: border-box !important;
       }
       
-      /* KILL ALL FLEXBOX AND GRID THAT ISN'T MOBILE */
-      div:not([class*="mobile"]):not([class*="Mobile"]) {
-        display: block !important;
-        flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-      }
+      /* REMOVED - This was too aggressive and causing issues */
       /* Force mobile viewport */
       html, body {
         width: 100vw !important;
@@ -1162,28 +1157,33 @@
       return window.innerWidth <= 768;
     }
     
-    // FORCE MOBILE LAYOUT WITH JAVASCRIPT
+    // FORCE MOBILE LAYOUT WITH JAVASCRIPT - OPTIMIZED
     function forceMobileLayout() {
       if (!checkIfMobile()) return;
       
-      console.log('Forcing mobile layout...');
+      // Only log once
+      if (!forceMobileLayout.hasLogged) {
+        console.log('Forcing mobile layout...');
+        forceMobileLayout.hasLogged = true;
+      }
       
-      // Find and fix tab containers
-      const allDivs = document.querySelectorAll('div');
+      // Find and fix tab containers - only if not already fixed
+      const allDivs = document.querySelectorAll('div:not([data-mobile-fixed])');
       allDivs.forEach(div => {
         // Check if this might be a tab container
         const buttons = div.querySelectorAll('button');
         if (buttons.length === 2) {
           const hasContents = Array.from(buttons).some(btn => 
-            btn.textContent.includes('Contents') || btn.textContent.includes('Media')
+            btn.textContent && (btn.textContent.includes('Contents') || btn.textContent.includes('Media'))
           );
           
-          if (hasContents) {
+          if (hasContents && !div.hasAttribute('data-mobile-fixed')) {
             console.log('Found tab container, fixing layout...');
             div.style.display = 'flex';
             div.style.flexDirection = 'row';
             div.style.width = '100%';
             div.style.gap = '8px';
+            div.setAttribute('data-mobile-fixed', 'true');
             
             buttons.forEach(btn => {
               btn.style.flex = '1';
@@ -1193,24 +1193,12 @@
             });
           }
         }
-        
-        // Force single column on other containers
-        if (div.style.display === 'grid' || div.style.display === 'flex') {
-          const isTabContainer = Array.from(div.children).some(child => 
-            child.textContent && (child.textContent.includes('Contents') || child.textContent.includes('Media'))
-          );
-          
-          if (!isTabContainer) {
-            div.style.flexDirection = 'column';
-            div.style.gridTemplateColumns = '1fr';
-          }
-        }
       });
       
-      // Fix main content width
-      const mainContent = document.querySelector('.css-1wxrih3') || 
-                         document.querySelector('[class*="Main"]') ||
-                         document.querySelector('main');
+      // Fix main content width - only once
+      const mainContent = document.querySelector('.css-1wxrih3:not([data-mobile-fixed])') || 
+                         document.querySelector('[class*="Main"]:not([data-mobile-fixed])') ||
+                         document.querySelector('main:not([data-mobile-fixed])');
       
       if (mainContent) {
         mainContent.style.width = '100vw';
@@ -1220,6 +1208,7 @@
         mainContent.style.paddingLeft = '16px';
         mainContent.style.paddingRight = '16px';
         mainContent.style.boxSizing = 'border-box';
+        mainContent.setAttribute('data-mobile-fixed', 'true');
       }
     }
     
@@ -1325,21 +1314,34 @@
     window.addEventListener('load', () => setTimeout(forceMobileLayout, 1000));
     window.addEventListener('DOMContentLoaded', () => setTimeout(forceMobileLayout, 1500));
     
-    // Force layout when mutations occur
+    // Force layout when mutations occur - WITH DEBOUNCE TO PREVENT LOOPS
+    let layoutTimeout = null;
+    let isApplyingLayout = false;
+    
     const layoutObserver = new MutationObserver(() => {
-      if (checkIfMobile()) {
-        forceMobileLayout();
+      if (checkIfMobile() && !isApplyingLayout) {
+        clearTimeout(layoutTimeout);
+        layoutTimeout = setTimeout(() => {
+          isApplyingLayout = true;
+          forceMobileLayout();
+          setTimeout(() => {
+            isApplyingLayout = false;
+          }, 500);
+        }, 200);
       }
     });
     
+    // Only observe after initial load
     setTimeout(() => {
-      layoutObserver.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['style', 'class']
-      });
-    }, 3000);
+      if (checkIfMobile()) {
+        layoutObserver.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: false, // Disable attribute observation to prevent loops
+          characterData: false
+        });
+      }
+    }, 5000);
     
     // Handle window resize
     window.addEventListener('resize', function() {
