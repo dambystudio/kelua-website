@@ -7,6 +7,7 @@
     <title>TinaCMS</title>
     <script type="module" crossorigin src="/admin/assets/index-125363db.js"></script>
     <link rel="stylesheet" href="/admin/assets/index-be768d34.css">
+    <link rel="stylesheet" href="/admin/mobile-fix.css">
   </head>
   <body class="tina-tailwind">
     <div id="root"></div>
@@ -65,6 +66,80 @@
           handleLoadError()
         }
       }, 2000)
+    </script>
+    
+    <!-- Mobile Menu Handler -->
+    <script>
+      // Mobile menu toggle functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Add mobile menu toggle button
+        function addMobileMenuToggle() {
+          if (window.innerWidth <= 768) {
+            let toggleBtn = document.querySelector('.tina-sidebar-toggle');
+            if (!toggleBtn) {
+              toggleBtn = document.createElement('button');
+              toggleBtn.className = 'tina-sidebar-toggle';
+              toggleBtn.innerHTML = '☰';
+              toggleBtn.setAttribute('aria-label', 'Toggle Menu');
+              document.body.appendChild(toggleBtn);
+            }
+            
+            // Toggle functionality
+            toggleBtn.addEventListener('click', function() {
+              document.body.classList.toggle('sidebar-open');
+              const sidebar = document.querySelector('[data-testid="sidebar"]');
+              if (sidebar) {
+                sidebar.classList.toggle('is-open');
+              }
+            });
+            
+            // Close on overlay click
+            document.addEventListener('click', function(e) {
+              if (document.body.classList.contains('sidebar-open') && 
+                  !e.target.closest('[data-testid="sidebar"]') && 
+                  !e.target.closest('.tina-sidebar-toggle')) {
+                document.body.classList.remove('sidebar-open');
+                const sidebar = document.querySelector('[data-testid="sidebar"]');
+                if (sidebar) {
+                  sidebar.classList.remove('is-open');
+                }
+              }
+            });
+            
+            // Close on sidebar item click
+            const sidebarLinks = document.querySelectorAll('[data-testid="sidebar"] a');
+            sidebarLinks.forEach(link => {
+              link.addEventListener('click', function() {
+                setTimeout(() => {
+                  document.body.classList.remove('sidebar-open');
+                  const sidebar = document.querySelector('[data-testid="sidebar"]');
+                  if (sidebar) {
+                    sidebar.classList.remove('is-open');
+                  }
+                }, 100);
+              });
+            });
+          }
+        }
+        
+        // Run on load and resize
+        addMobileMenuToggle();
+        window.addEventListener('resize', addMobileMenuToggle);
+        
+        // Re-run when Tina loads (since it's a SPA)
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+              setTimeout(addMobileMenuToggle, 100);
+            }
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
     </script>
     
   </body>

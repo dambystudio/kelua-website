@@ -31,6 +31,13 @@ export default defineConfig({
     publicFolder: "public",
     basePath: "", // Ensure no base path issues
   },
+  
+  // UI Configuration for better mobile experience
+  admin: {
+    auth: {
+      useLocalAuth: isLocal
+    }
+  },
   media: {
     tina: {
       mediaRoot: "uploads",

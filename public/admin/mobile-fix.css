@@ -1,0 +1,164 @@
+/* TinaCMS Mobile Fixes */
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  
+  /* Make sidebar overlay on mobile */
+  [data-testid="sidebar"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+  }
+  
+  /* Show sidebar when opened */
+  [data-testid="sidebar"].is-open,
+  [data-testid="sidebar"]:target {
+    transform: translateX(0) !important;
+  }
+  
+  /* Add close button to sidebar on mobile */
+  [data-testid="sidebar"]::before {
+    content: "✕" !important;
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    font-size: 24px !important;
+    color: #666 !important;
+    cursor: pointer !important;
+    z-index: 1001 !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Content area adjustments */
+  [data-testid="main-content"] {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 10px !important;
+  }
+  
+  /* Form adjustments for mobile */
+  .tina-form {
+    padding: 15px !important;
+  }
+  
+  /* Field adjustments */
+  [data-testid="field"] {
+    margin-bottom: 20px !important;
+  }
+  
+  /* Input styling */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px !important;
+  }
+  
+  /* Toggle switches */
+  .tina-toggle {
+    transform: scale(1.2) !important;
+  }
+  
+  /* Collection list improvements */
+  [data-testid="collection-list"] {
+    padding: 10px !important;
+  }
+  
+  /* Mobile navigation toggle */
+  .tina-sidebar-toggle {
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+    z-index: 999 !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 769px) and (max-width: 1024px) {
+  [data-testid="sidebar"] {
+    width: 280px !important;
+  }
+  
+  [data-testid="main-content"] {
+    margin-left: 280px !important;
+  }
+}
+
+/* Touch improvements for all devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  button, a, .tina-field-toggle {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Better spacing for touch */
+  .tina-field {
+    margin-bottom: 24px !important;
+  }
+}
+
+/* Additional mobile-specific improvements */
+@media (max-width: 768px) {
+  
+  /* Hide sidebar initially */
+  body.tina-admin [data-testid="sidebar"] {
+    transform: translateX(-100%) !important;
+  }
+  
+  /* Show when menu is active */
+  body.sidebar-open [data-testid="sidebar"] {
+    transform: translateX(0) !important;
+  }
+  
+  /* Overlay when sidebar is open */
+  body.sidebar-open::after {
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    z-index: 999 !important;
+  }
+  
+  /* Better form styling */
+  .tina-form-wrapper {
+    padding: 20px 15px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Improved field labels */
+  .tina-field-label {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Description text */
+  .tina-field-description {
+    font-size: 14px !important;
+    color: #666 !important;
+    margin-top: 4px !important;
+  }
+} 
