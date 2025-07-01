@@ -366,30 +366,7 @@ export default defineConfig({
             label: "Data Fine",
             description: "Data di fine validità del post",
           },
-          {
-            type: "boolean",
-            name: "mostraInHomepage",
-            label: "Mostra in Homepage",
-            description: "Mostra questo post come 'Offerta Speciale' nella homepage",
-          },
-          {
-            type: "string",
-            name: "sconto",
-            label: "Sconto",
-            description: "Es: 50%, 30%, etc. (solo per homepage)",
-          },
-          {
-            type: "string",
-            name: "validoFino",
-            label: "Valido Fino",
-            description: "Es: 31 Marzo 2025 (solo per homepage)",
-          },
-          {
-            type: "image",
-            name: "immagineHomepage",
-            label: "Immagine Homepage",
-            description: "Immagine da mostrare nella homepage (diversa da quella del post se necessario)",
-          },
+
           {
             type: "number",
             name: "ordinamento",

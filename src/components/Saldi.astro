@@ -22,8 +22,8 @@ const saldiPerHomepage = saldiGlobalmenteAttivi ? saldiPosts.filter(post => {
   // Deve essere attivo
   if (!post.data.attivo) return false;
   
-  // Deve essere marcato per la homepage
-  if (!post.data.mostraInHomepage) return false;
+  // Temporaneamente disabilitato finché TinaCMS non si sincronizza
+  // if (!post.data.mostraInHomepage) return false;
   
   // Controlla validità date
   if (post.data.dataInizio || post.data.dataFine) {

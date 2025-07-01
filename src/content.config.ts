@@ -66,10 +66,7 @@ const saldiPostsCollection = defineCollection({
     attivo: z.boolean(),
     dataInizio: z.string().optional(),
     dataFine: z.string().optional(),
-    mostraInHomepage: z.boolean().optional(),
-    sconto: z.string().optional(),
-    validoFino: z.string().optional(),
-    immagineHomepage: z.string().optional(),
+
     ordinamento: z.number().optional(),
   }),
 });
