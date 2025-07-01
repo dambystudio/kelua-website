@@ -4,11 +4,27 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:tina": "tinacms dev -c \"astro dev\"",
+    "dev:local": "set \"TINA_PUBLIC_IS_LOCAL=true\" && tinacms dev -c \"astro dev --host\"",
+    "dev:mobile": "set \"TINA_PUBLIC_IS_LOCAL=true\" && tinacms dev -c \"astro dev --host 0.0.0.0\"",
+    "proxy": "node proxy-server.js",
+    "dev:mobile-full": "start /B npm run proxy && npm run dev:mobile",
     "build": "astro build",
+    "build:tina": "tinacms build && astro build",
+    "build:local": "tinacms build --local && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "tina:build": "tinacms build",
+    "tina:dev": "tinacms dev"
   },
   "dependencies": {
-    "astro": "^5.10.0"
+    "@tinacms/auth": "^1.0.12",
+    "@tinacms/cli": "^1.9.9",
+    "astro": "^5.10.0",
+    "http-proxy": "^1.18.1",
+    "tinacms": "^2.7.9"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.8"
   }
 }
