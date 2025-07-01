@@ -1,52 +1,91 @@
-/* TinaCMS Mobile Fixes */
+/* TinaCMS Mobile Fixes - Simplified Approach */
 
 /* Mobile responsive improvements */
 @media (max-width: 768px) {
   
-  /* Make sidebar overlay on mobile */
-  [data-testid="sidebar"] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    height: 100vh !important;
-    z-index: 1000 !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(10px) !important;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1) !important;
+  /* Hide sidebar by default and make it overlay */
+  .tina-sidebar,
+  [class*="sidebar"],
+  nav[class*="sidebar"],
+  aside,
+  [data-testid="sidebar"],
+  .css-175oi2r > div:first-child {
     transform: translateX(-100%) !important;
     transition: transform 0.3s ease !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2) !important;
   }
   
-  /* Show sidebar when opened */
-  [data-testid="sidebar"].is-open,
-  [data-testid="sidebar"]:target {
+  /* Show sidebar when tapped/opened */
+  .tina-sidebar:hover,
+  [class*="sidebar"]:hover,
+  nav[class*="sidebar"]:hover,
+  aside:hover,
+  [data-testid="sidebar"]:hover,
+  .css-175oi2r > div:first-child:hover,
+  .sidebar-open .tina-sidebar,
+  .sidebar-open [class*="sidebar"],
+  .sidebar-open nav[class*="sidebar"],
+  .sidebar-open aside,
+  .sidebar-open [data-testid="sidebar"],
+  .sidebar-open .css-175oi2r > div:first-child {
     transform: translateX(0) !important;
   }
-  
-  /* Add close button to sidebar on mobile */
-  [data-testid="sidebar"]::before {
-    content: "✕" !important;
-    position: absolute !important;
-    top: 15px !important;
-    right: 15px !important;
-    font-size: 24px !important;
-    color: #666 !important;
+
+  /* Add close button to ALL potential sidebars */
+  .tina-sidebar::after,
+  [class*="sidebar"]::after,
+  nav[class*="sidebar"]::after,
+  aside::after,
+  [data-testid="sidebar"]::after,
+  .css-175oi2r > div:first-child::after {
+    content: "✕ Chiudi Menu" !important;
+    position: fixed !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #ff4444 !important;
+    color: white !important;
+    padding: 8px 12px !important;
+    border-radius: 20px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
     cursor: pointer !important;
-    z-index: 1001 !important;
-    width: 30px !important;
-    height: 30px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    background: rgba(0, 0, 0, 0.1) !important;
+    z-index: 10000 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    border: 2px solid white !important;
   }
   
-  /* Content area adjustments */
-  [data-testid="main-content"] {
+  /* Content area adjustments - make sure content takes full width */
+  [data-testid="main-content"],
+  main,
+  .tina-main,
+  [class*="main"],
+  .css-175oi2r > div:last-child {
     margin-left: 0 !important;
     width: 100% !important;
-    padding: 10px !important;
+    padding: 15px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Add a visible menu button */
+  body::before {
+    content: "☰ MENU" !important;
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 20px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    z-index: 9998 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+    font-size: 14px !important;
+    border: 2px solid white !important;
   }
   
   /* Form adjustments for mobile */
