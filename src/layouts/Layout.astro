@@ -13,7 +13,13 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- Favicon - Logo Kelua -->
+		<link rel="icon" type="image/png" sizes="32x32" href="/logoKelua_32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/logoKelua_16x16.png" />
+		<link rel="icon" type="image/png" href="/logoKelua.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/logoKelua_180x180.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#d4af37" />
 		<meta name="generator" content={Astro.generator} />
 		
 		<!-- SEO Meta Tags -->
@@ -26,7 +32,10 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://kelua.it" />
-		<meta property="og:image" content="/fotoNegozio_conLogo.png" />
+		<meta property="og:image" content="/logoKelua.png" />
+		<meta property="og:image:width" content="1244" />
+		<meta property="og:image:height" content="1245" />
+		<meta property="og:image:type" content="image/png" />
 		
 		<!-- Local Business Schema -->
 		<script type="application/ld+json">
@@ -46,7 +55,7 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 			},
 			"telephone": "+390882452911",
 			"url": "https://kelua.it",
-			"image": "/fotoNegozio_conLogo.png",
+			"image": "/logoKelua.png",
 			"sameAs": [
 				"https://www.facebook.com/kelua.uomo/?locale=it_IT",
 				"https://www.instagram.com/kelua_moda/",
