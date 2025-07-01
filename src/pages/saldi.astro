@@ -178,7 +178,7 @@ const temaColore = coloreTema || "#d4af37";
               </div>
               <h2 id="titolo-prodotti">🛍️ Prodotti in Saldo</h2>
               <div class="descrizione-container">
-                <p class="step-description" id="descrizione-prodotti">I migliori prodotti selezionati per te</p>
+              <p class="step-description" id="descrizione-prodotti">I migliori prodotti selezionati per te</p>
                 <span class="prodotti-trovati" id="prodotti-trovati-header" style="display: none;">• <span id="numero-prodotti-header">0</span> prodotti trovati</span>
               </div>
             </div>
@@ -1025,7 +1025,7 @@ const temaColore = coloreTema || "#d4af37";
 
     .genere-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+    gap: 20px;
       max-width: 400px;
     }
 
@@ -2299,11 +2299,11 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="categoria-meta" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <span class="sconto-badge" style="background: #ffe082; color: #b8860b; border-radius: 8px; padding: 4px 8px; font-weight: 600; font-size: 0.8rem;">Sconto ${categoria.sconto}</span>
                 <span class="prodotti-count" style="color: #666; font-weight: 600; font-size: 0.85rem;">${prodottiPerCategoria.length} prodotti</span>
+                </div>
               </div>
             </div>
-          </div>
-        `;
-        
+          `;
+          
         categorieContainer.innerHTML += categoriaHTML;
       });
         // Aggiungi event listener alle nuove card categorie
@@ -2365,8 +2365,8 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         // Filtra per categoria e genere specifici
         prodottiFiltrati = saldiData.prodotti.filter(p => 
-          p.categoria === categoriaSelezionata && p.genere === genereSelezionato
-        );
+        p.categoria === categoriaSelezionata && p.genere === genereSelezionato
+      );
       }
       
       console.log(`📦 Prodotti filtrati per ${categoriaSelezionata}:`, prodottiFiltrati.length);
