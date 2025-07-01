@@ -6,41 +6,50 @@ import { getCollection, getEntry } from 'astro:content';
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 
 // Controlla se i saldi sono attivi (con conversione sicura da string a boolean)
-const saldiGlobalmenteAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+const saldiGlobalmenteAttivi = saldiSettings?.data?.saldiAttivi === true;
 
-// Per ora uso dati di esempio, poi integreremo con CMS
-const saldi = [
-  {
-    id: 1,
-    titolo: "Saldi Invernali",
-    sottotitolo: "Fino al 50% di sconto",
-    descrizione: "Scopri la nostra selezione di abiti da cerimonia e sportswear in promozione",
-    sconto: "50%",
-    validoFino: "31 Marzo 2025",
-    immagine: "/abiti-cerimonia-1.png",
-    link: "/saldi",
-    attivo: true
-  },
-  {
-    id: 2,
-    titolo: "Offerta Primavera",
-    sottotitolo: "Nuova collezione",
-    descrizione: "Abiti eleganti per la stagione primavera-estate con sconti speciali",
-    sconto: "30%",
-    validoFino: "30 Aprile 2025",
-    immagine: "/abiti-cerimonia-eleganti.png",
-    link: "/saldi",
-    attivo: true
+// Carica i Post Saldi dal CMS
+let saldiPosts: any[] = [];
+try {
+  saldiPosts = await getCollection('saldi-posts');
+} catch (error) {
+  console.log('❌ Errore caricamento Post Saldi:', (error as Error).message);
+}
+
+// Filtro per homepage: deve essere attivo, mostraInHomepage true, e valido per data
+const dataOggi = new Date();
+const saldiPerHomepage = saldiGlobalmenteAttivi ? saldiPosts.filter(post => {
+  // Deve essere attivo
+  if (!post.data.attivo) return false;
+  
+  // Deve essere marcato per la homepage
+  if (!post.data.mostraInHomepage) return false;
+  
+  // Controlla validità date
+  if (post.data.dataInizio || post.data.dataFine) {
+    const dataInizio = post.data.dataInizio ? new Date(post.data.dataInizio) : new Date('1900-01-01');
+    const dataFine = post.data.dataFine ? new Date(post.data.dataFine) : new Date('2100-12-31');
+    
+    return dataOggi >= dataInizio && dataOggi <= dataFine;
   }
-];
+  
+  return true;
+}).sort((a, b) => {
+  // Ordina per ordinamento se presente
+  if (a.data.ordinamento && b.data.ordinamento) {
+    return a.data.ordinamento - b.data.ordinamento;
+  }
+  return 0;
+}) : [];
 
-// Filtra solo i saldi attivi E se i saldi sono attivi globalmente
-const saldiAttivi = saldiGlobalmenteAttivi ? saldi.filter(sale => sale.attivo) : [];
+// Dati di fallback in caso non ci siano Post Saldi
+const saldiAttivi = saldiPerHomepage.length > 0 ? saldiPerHomepage : [];
 
 // Debug
 console.log('🔧 Debug Componente Saldi:');
 console.log('- saldiGlobalmenteAttivi:', saldiGlobalmenteAttivi);
-console.log('- saldiAttivi.length:', saldiAttivi.length);
+console.log('- saldiPosts totali:', saldiPosts.length);
+console.log('- saldiPerHomepage:', saldiPerHomepage.length);
 ---
 
 {saldiAttivi.length > 0 && (
@@ -52,33 +61,37 @@ console.log('- saldiAttivi.length:', saldiAttivi.length);
       </div>
 
       <div class="saldi-grid">
-        {saldiAttivi.map((sale, index) => (
+        {saldiAttivi.map((post, index) => (
           <div class="saldi-card scroll-animate" data-delay={`${index * 0.2}`}>
             <div class="saldi-image">
-              <img src={sale.immagine} alt={sale.titolo} />
-              <div class="sconto-badge">
-                <span>-{sale.sconto}</span>
-              </div>
+              <img src={post.data.immagineHomepage || "/abiti-cerimonia-1.png"} alt={post.data.titolo} />
+              {post.data.sconto && (
+                <div class="sconto-badge">
+                  <span>-{post.data.sconto}</span>
+                </div>
+              )}
             </div>
             
             <div class="saldi-content">
               <div class="saldi-text">
-                <h3>{sale.titolo}</h3>
-                <h4>{sale.sottotitolo}</h4>
-                <p>{sale.descrizione}</p>
+                <h3>{post.data.titolo}</h3>
+                {post.data.sottotitolo && <h4>{post.data.sottotitolo}</h4>}
+                <p>{post.data.descrizione}</p>
                 
-                <div class="saldi-meta">
-                  <div class="valido-fino">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Valido fino al {sale.validoFino}</span>
+                {post.data.validoFino && (
+                  <div class="saldi-meta">
+                    <div class="valido-fino">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span>Valido fino al {post.data.validoFino}</span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               
               <div class="saldi-action">
-                <a href={sale.link} class="btn-saldi">
+                <a href="/saldi" class="btn-saldi">
                   <span>Scopri l'Offerta</span>
                   <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
