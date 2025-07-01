@@ -1,5 +1,6 @@
 ---
-mostraBannerSaldi: true
-testoBanner: 🔥 Saldi in corso! Scopri le offerte
+mostraBannerSaldi: false
+testoBanner: "\U0001F525 Saldi in corso! Scopri le offerte"
 linkBanner: /saldi
 ---
+
