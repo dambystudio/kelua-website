@@ -15,9 +15,16 @@ export default defineConfig({
   branch,
 
   // Get this from tina.io - For local development, these can be undefined
-  clientId: isLocal ? undefined : process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  clientId: isLocal ? undefined : process.env.PUBLIC_TINA_CLIENT_ID,
   // Get this from tina.io - For local development, these can be undefined
   token: isLocal ? undefined : process.env.TINA_TOKEN,
+
+  search: {
+    tina: {
+      indexerToken: isLocal ? undefined : process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ['ita']
+    }
+  },
 
   build: {
     outputFolder: "admin",
