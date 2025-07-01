@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  SECRETS_SCAN_OMIT_PATHS = "dist/admin/assets/**,public/admin/assets/**,tina/__generated__/**"
 
 # Headers per il CMS admin
 [[headers]]
