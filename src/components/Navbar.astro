@@ -10,7 +10,7 @@ const homePrefix = isHomepage ? '' : '/';
 
 // Carica le impostazioni dei saldi per controllare se mostrarli nella navbar
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
-const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
 
 // Debug navbar
 console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
@@ -99,6 +99,21 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 		border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 		will-change: transform, background;
+	}
+
+	/* Enhanced scrolled state */
+	.navbar.scrolled {
+		background: rgba(0, 0, 0, 0.95);
+		padding: 0.7rem 0;
+		box-shadow: 
+			0 10px 40px rgba(0, 0, 0, 0.6),
+			0 4px 12px rgba(212, 175, 55, 0.3);
+		border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+	}
+
+	.navbar.scrolled .logo {
+		height: 40px;
+		box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
 	}	.nav-container {
 		max-width: 1400px;
 		margin: 0 auto;
@@ -162,22 +177,48 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 		right: -400px;
 		width: 350px;
 		height: 100vh;
-		background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 26, 26, 0.95));
-		backdrop-filter: blur(20px);
-		transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(26, 26, 26, 0.95));
+		backdrop-filter: blur(30px) saturate(180%);
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.1, 1);
 		z-index: 10000;
-		box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-		border-left: 2px solid rgba(212, 175, 55, 0.3);
+		box-shadow: 
+			-20px 0 60px rgba(0, 0, 0, 0.8),
+			-5px 0 20px rgba(212, 175, 55, 0.2);
+		border-left: 3px solid rgba(212, 175, 55, 0.6);
 		padding: 0;
 		margin: 0;
 		list-style: none;
 		display: flex;
 		flex-direction: column;
 		overflow-y: auto;
+		transform: translateX(50px);
+		opacity: 0;
 	}
 
 	.nav-menu.active {
 		right: 0;
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	/* Mobile menu backdrop */
+	.nav-menu::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: -100vw;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.7);
+		backdrop-filter: blur(5px);
+		transition: all 0.4s ease;
+		opacity: 0;
+		z-index: -1;
+	}
+
+	.nav-menu.active::before {
+		left: -350px;
+		opacity: 1;
 	}
 
 	.nav-menu-header {
@@ -220,34 +261,50 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 		z-index: 10001;
 		position: absolute;
 		right: 20px;
-		padding: 10px;
-		border-radius: 8px;
-		transition: all 0.3s ease;
+		padding: 12px;
+		border-radius: 12px;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(212, 175, 55, 0.2);
 	}
 
 	.hamburger:hover {
-		background: rgba(212, 175, 55, 0.1);
+		background: rgba(212, 175, 55, 0.15);
+		border-color: rgba(212, 175, 55, 0.4);
+		transform: scale(1.05);
+		box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
 	}
 
 	.bar {
-		width: 25px;
+		width: 28px;
 		height: 3px;
 		background: linear-gradient(45deg, #CFB53B, #d4af37);
 		margin: 3px 0;
-		transition: 0.3s;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		border-radius: 2px;
+		box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+	}
+
+	.hamburger.active {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: rgba(212, 175, 55, 0.6);
+		transform: scale(1.1) rotate(180deg);
 	}
 
 	.hamburger.active .bar:nth-child(1) {
-		transform: rotate(-45deg) translate(-5px, 6px);
+		transform: rotate(45deg) translate(6px, 6px);
+		background: linear-gradient(45deg, #e74c3c, #c0392b);
 	}
 
 	.hamburger.active .bar:nth-child(2) {
 		opacity: 0;
+		transform: scale(0);
 	}
 
 	.hamburger.active .bar:nth-child(3) {
-		transform: rotate(45deg) translate(-5px, -6px);
+		transform: rotate(-45deg) translate(6px, -6px);
+		background: linear-gradient(45deg, #e74c3c, #c0392b);
 	}	.nav-item {
 		position: relative;
 		margin: 0;
@@ -262,19 +319,75 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 		text-decoration: none;
 		font-weight: 500;
 		font-size: 1rem;
-		transition: all 0.3s ease;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		position: relative;
 		padding: 18px 20px;
 		margin: 8px 0;
-		border-radius: 12px;
+		border-radius: 16px;
 		background: transparent;
-		border: 1px solid transparent;	}
+		border: 1px solid transparent;
+		transform: translateX(-30px);
+		opacity: 0;
+		animation: slideInStagger 0.6s ease-out forwards;
+	}
+
+	/* Staggered animation for menu items */
+	.nav-item:nth-child(2) .nav-link { animation-delay: 0.1s; }
+	.nav-item:nth-child(3) .nav-link { animation-delay: 0.2s; }
+	.nav-item:nth-child(4) .nav-link { animation-delay: 0.3s; }
+	.nav-item:nth-child(5) .nav-link { animation-delay: 0.4s; }
+	
+	/* Force visibility for saldi link */
+	.nav-item .saldi-link {
+		opacity: 1 !important;
+		visibility: visible !important;
+		display: flex !important;
+		font-size: 1rem !important;
+		text-indent: 0 !important;
+		overflow: visible !important;
+	}
+	
+	/* Debug style - temporary */
+	.saldi-link .nav-icon,
+	.saldi-link .nav-text {
+		color: #e74c3c !important;
+		font-size: 1rem !important;
+		opacity: 1 !important;
+		visibility: visible !important;
+	}
+
+	@keyframes slideInStagger {
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
 
 	.nav-link:hover {
-		background: rgba(212, 175, 55, 0.15);
-		border-color: rgba(212, 175, 55, 0.3);
-		transform: translateX(10px);
+		background: rgba(212, 175, 55, 0.2);
+		border-color: rgba(212, 175, 55, 0.5);
+		transform: translateX(15px) scale(1.02);
 		color: #d4af37;
+		box-shadow: 
+			0 8px 25px rgba(212, 175, 55, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+	}
+
+	/* Glass morphism effect on hover */
+	.nav-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+		transition: left 0.5s ease;
+		border-radius: inherit;
+	}
+
+	.nav-link:hover::before {
+		left: 100%;
 	}
 
 	.nav-icon {
@@ -311,15 +424,16 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 	}
 
 	.saldi-link {
-		background: linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
-		border-color: rgba(231, 76, 60, 0.4);
+		background: linear-gradient(45deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2)) !important;
+		border-color: rgba(231, 76, 60, 0.4) !important;
+		color: #e74c3c !important;
 		animation: pulse-saldi 2s infinite;
 	}
 
 	.saldi-link:hover {
-		background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3));
-		border-color: #e74c3c;
-		color: #e74c3c;
+		background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3)) !important;
+		border-color: #e74c3c !important;
+		color: #ff6b47 !important;
 	}
 
 	@keyframes pulse-saldi {
@@ -370,53 +484,7 @@ console.log('🔧 Debug Navbar - Saldi Attivi:', saldiAttivi);
 	.nav-link:hover {
 		color: #CFB53B;
 	}
-	.saldi-link {
-		background: linear-gradient(145deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3)) !important;
-		border: 1px solid rgba(231, 76, 60, 0.5) !important;
-		color: #e74c3c !important;
-		position: relative;
-		animation: pulse-saldi 3s infinite;
-	}
 
-	.saldi-link::after {
-		content: '';
-		position: absolute;
-		top: -2px;
-		right: -2px;
-		width: 8px;
-		height: 8px;
-		background: #e74c3c;
-		border-radius: 50%;
-		animation: pulse-dot 2s infinite;
-	}
-
-	.saldi-link:hover {
-		background: linear-gradient(145deg, rgba(231, 76, 60, 0.5), rgba(192, 57, 43, 0.5)) !important;
-		border-color: #e74c3c !important;
-		box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
-		color: #ff6b47 !important;
-		transform: translateY(-3px) scale(1.05);
-	}
-
-	@keyframes pulse-saldi {
-		0%, 100% { 
-			box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4);
-		}
-		50% { 
-			box-shadow: 0 0 0 15px rgba(231, 76, 60, 0);
-		}
-	}
-
-	@keyframes pulse-dot {
-		0%, 100% {
-			transform: scale(1);
-			opacity: 1;
-		}
-		50% {
-			transform: scale(1.5);
-			opacity: 0.7;
-		}
-	}
 	.hamburger {
 		display: flex;
 		flex-direction: column;

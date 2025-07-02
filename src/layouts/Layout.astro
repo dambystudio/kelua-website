@@ -75,13 +75,18 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 		</script>
 		
 		<!-- Fonts -->
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 		<link href="https://fonts.cdnfonts.com/css/glida-display" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		
+		<!-- Modern Design System -->
+		<link rel="stylesheet" href="/styles/modern-design-system.css">
+		<link rel="stylesheet" href="/styles/ux-enhancements.css">
 		<title>{title}</title>
 		
-		<!-- Scroll Scrubbing Script -->
+		<!-- Scripts -->
 		<script src="/js/scroll-scrubbing.js" is:inline></script>
+		<script src="/js/ux-enhancements.js" is:inline></script>
 		
 		<!-- Netlify Identity Widget (only for admin) -->
 		{Astro.url.pathname.includes('/admin') && (

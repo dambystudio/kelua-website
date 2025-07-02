@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Saldi from '../components/Saldi.astro';
 import About from '../components/About.astro';
-import Stats from '../components/Stats.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { getEntry } from 'astro:content';
@@ -19,7 +18,7 @@ const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
 const bannerText = homepageSettings?.data?.testoBanner ?? '';
 const bannerLink = homepageSettings?.data?.linkBanner ?? '/saldi';
 // Conversione sicura del booleano
-const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
 
 // Debug homepage
 console.log('🔧 Debug Homepage:');
@@ -51,7 +50,6 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     <Hero />
     <Saldi />
     <About />
-    <Stats />
     <Contact />
   </main>
   <Footer />

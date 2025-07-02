@@ -81,51 +81,85 @@
 				</div>
 			</div>
 			
-			<div class="services-grid">
-				<div class="service-item">
-					<div class="service-image">
-						<img src="/abiti-cerimonia-1.png" alt="Abiti da Cerimonia Eleganti" class="service-photo">
-						<div class="service-overlay">
-							<i class="fas fa-crown"></i>
-						</div>
+			<!-- Sezione Servizi -->
+			<div class="servizi-section scroll-animate" data-delay="1.0">
+				<h3 class="servizi-title">I Nostri Servizi</h3>
+				<p class="servizi-subtitle">Esperienza, qualità e attenzione al dettaglio per ogni tua esigenza</p>
+			</div>
+			
+					<div class="services-grid">
+			<div class="service-item scroll-animate service-card-1" data-delay="0.1">
+				<div class="service-image">
+					<img src="/abiti-cerimonia-1.png" alt="Abiti da Cerimonia Eleganti" class="service-photo">
+					<div class="service-overlay">
+						<i class="fas fa-crown service-icon"></i>
 					</div>
+					<div class="service-badge premium">Premium</div>
+				</div>
+				<div class="service-content">
 					<h4>Abiti da Cerimonia</h4>
 					<p>Collezioni eleganti per matrimoni, eventi speciali e cerimonie importanti</p>
-				</div>
-				
-				<div class="service-item">
-					<div class="service-image">
-						<img src="/sportswear-casual.png" alt="Abbigliamento Sportswear" class="service-photo">
-						<div class="service-overlay">
-							<i class="fas fa-running"></i>
-						</div>
+					<div class="service-features">
+						<span class="feature-tag">✨ Eleganza</span>
+						<span class="feature-tag">👑 Luxury</span>
 					</div>
-					<h4>Abbigliamento Sportswear</h4>
-					<p>Capi casual e sportivi per il tempo libero, comfort senza rinunciare allo stile</p>
-				</div>
-				
-				<div class="service-item">
-					<div class="service-image">
-						<img src="/servizio-sartoriale.jpeg" alt="Servizio Sartoriale" class="service-photo">
-						<div class="service-overlay">
-							<i class="fas fa-scissors"></i>
-						</div>
-					</div>
-					<h4>Servizio Sartoriale</h4>
-					<p>Personalizzazioni e aggiustamenti per un fit perfetto su ogni capo</p>
-				</div>
-				
-				<div class="service-item">
-					<div class="service-image">
-						<img src="/abiti-cerimonia-2.png" alt="Consulenza Personalizzata" class="service-photo">
-						<div class="service-overlay">
-							<i class="fas fa-star"></i>
-						</div>
-					</div>
-					<h4>Consulenza Personalizzata</h4>
-					<p>I nostri esperti ti aiutano a trovare il look perfetto per ogni occasione</p>
 				</div>
 			</div>
+			
+			<div class="service-item scroll-animate service-card-2" data-delay="0.2">
+				<div class="service-image">
+					<img src="/sportswear-casual.png" alt="Abbigliamento Sportswear" class="service-photo">
+					<div class="service-overlay">
+						<i class="fas fa-running service-icon"></i>
+					</div>
+					<div class="service-badge sport">Sport</div>
+				</div>
+				<div class="service-content">
+					<h4>Abbigliamento Sportswear</h4>
+					<p>Capi casual e sportivi per il tempo libero, comfort senza rinunciare allo stile</p>
+					<div class="service-features">
+						<span class="feature-tag">🏃 Comfort</span>
+						<span class="feature-tag">⚡ Performance</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="service-item scroll-animate service-card-3" data-delay="0.3">
+				<div class="service-image">
+					<img src="/servizio-sartoriale.jpeg" alt="Servizio Sartoriale" class="service-photo">
+					<div class="service-overlay">
+						<i class="fas fa-scissors service-icon"></i>
+					</div>
+					<div class="service-badge craft">Artigianale</div>
+				</div>
+				<div class="service-content">
+					<h4>Servizio Sartoriale</h4>
+					<p>Personalizzazioni e aggiustamenti per un fit perfetto su ogni capo</p>
+					<div class="service-features">
+						<span class="feature-tag">✂️ Su Misura</span>
+						<span class="feature-tag">🎯 Precisione</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="service-item scroll-animate service-card-4" data-delay="0.4">
+				<div class="service-image">
+					<img src="/abiti-cerimonia-2.png" alt="Consulenza Personalizzata" class="service-photo">
+					<div class="service-overlay">
+						<i class="fas fa-star service-icon"></i>
+					</div>
+					<div class="service-badge exclusive">Esclusiva</div>
+				</div>
+				<div class="service-content">
+					<h4>Consulenza Personalizzata</h4>
+					<p>I nostri esperti ti aiutano a trovare il look perfetto per ogni occasione</p>
+					<div class="service-features">
+						<span class="feature-tag">👨‍💼 Expert</span>
+						<span class="feature-tag">🎨 Style</span>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
 	</div>
 </section>
@@ -284,6 +318,31 @@
 		line-height: 1.6;
 	}
 
+	/* Sezione Servizi */
+	.servizi-section {
+		margin: 4rem 0 3rem 0;
+		text-align: center;
+	}
+
+	.servizi-title {
+		font-family: 'Playfair Display', serif;
+		color: var(--accent-light);
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+		font-weight: 600;
+		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.servizi-subtitle {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 1.2rem;
+		margin-bottom: 0;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: 1.6;
+	}
+
 	.foto-storia-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -398,84 +457,303 @@
 
 	.services-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2.5rem;
+		perspective: 1000px;
 	}
 
 	.service-item {
 		background: rgba(0, 0, 0, 0.4);
-		border-radius: 20px;
+		border-radius: 25px;
 		overflow: hidden;
-		transition: all 0.4s ease;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 		border: 1px solid rgba(212, 175, 55, 0.2);
-		backdrop-filter: blur(15px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(20px);
+		box-shadow: 
+			0 10px 40px rgba(0, 0, 0, 0.3),
+			0 0 0 1px rgba(212, 175, 55, 0.1);
 		position: relative;
+		transform: translateY(50px);
+		opacity: 0;
+		will-change: transform, opacity;
 	}
 
+	/* Staggered Entry Animation */
+	.service-item.scroll-animate.visible {
+		transform: translateY(0);
+		opacity: 1;
+		animation: slideInUp 0.8s ease-out both;
+	}
+
+	.service-card-1.visible { animation-delay: 0.1s; }
+	.service-card-2.visible { animation-delay: 0.2s; }
+	.service-card-3.visible { animation-delay: 0.3s; }
+	.service-card-4.visible { animation-delay: 0.4s; }
+
+	@keyframes slideInUp {
+		0% {
+			transform: translateY(60px) rotateX(15deg);
+			opacity: 0;
+		}
+		50% {
+			transform: translateY(-10px) rotateX(0deg);
+			opacity: 0.8;
+		}
+		100% {
+			transform: translateY(0) rotateX(0deg);
+			opacity: 1;
+		}
+	}
+
+	/* Advanced Hover Effects */
 	.service-item:hover {
-		transform: translateY(-8px);
-		box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+		transform: translateY(-15px) rotateX(5deg) rotateY(2deg);
+		box-shadow: 
+			0 25px 60px rgba(0, 0, 0, 0.5),
+			0 0 0 1px rgba(212, 175, 55, 0.4),
+			0 0 30px rgba(212, 175, 55, 0.2);
 		border-color: var(--accent-color);
+	}
+
+	/* Parallax Effect on Hover */
+	.service-item:hover .service-image {
+		transform: scale(1.05) translateZ(20px);
+	}
+
+	.service-item:hover .service-content {
+		transform: translateZ(10px);
 	}
 
 	.service-image {
 		width: 100%;
-		height: 200px;
+		height: 240px;
 		position: relative;
 		overflow: hidden;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.service-photo {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.3s ease;
+		transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+		filter: brightness(0.9) contrast(1.1);
+	}
+
+	/* Service Badge Styles */
+	.service-badge {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), rgba(212, 175, 55, 0.7));
+		color: var(--secondary-color);
+		padding: 6px 14px;
+		border-radius: 20px;
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		backdrop-filter: blur(10px);
+		box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+		z-index: 2;
+		transform: translateY(-10px);
+		opacity: 0;
+		animation: slideInBadge 0.6s ease-out 0.8s both;
+	}
+
+	@keyframes slideInBadge {
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	/* Badge Color Variations */
+	.service-badge.premium {
+		background: linear-gradient(135deg, #9b59b6, #8e44ad);
+		box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+	}
+
+	.service-badge.sport {
+		background: linear-gradient(135deg, #3498db, #2980b9);
+		box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+	}
+
+	.service-badge.craft {
+		background: linear-gradient(135deg, #e67e22, #d35400);
+		box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+	}
+
+	.service-badge.exclusive {
+		background: linear-gradient(135deg, #e74c3c, #c0392b);
+		box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
 	}
 
 	.service-overlay {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
-		background: rgba(0, 0, 0, 0.7);
+		transform: translate(-50%, -50%) scale(0.8);
+		background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(212, 175, 55, 0.2));
 		border-radius: 50%;
-		width: 60px;
-		height: 60px;
+		width: 80px;
+		height: 80px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		opacity: 0;
-		transition: all 0.3s ease;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		border: 2px solid rgba(212, 175, 55, 0.3);
 	}
 
-	.service-overlay i {
+	.service-icon {
 		color: var(--accent-light);
-		font-size: 1.5rem;
+		font-size: 2rem;
+		transition: all 0.4s ease;
+		text-shadow: 0 2px 8px rgba(212, 175, 55, 0.5);
 	}
 
+	/* Advanced Hover Animations */
 	.service-item:hover .service-photo {
-		transform: scale(1.1);
+		transform: scale(1.15);
+		filter: brightness(1.1) contrast(1.2);
 	}
 
 	.service-item:hover .service-overlay {
 		opacity: 1;
+		transform: translate(-50%, -50%) scale(1) rotate(360deg);
+	}
+
+	.service-item:hover .service-icon {
+		transform: scale(1.2);
+		animation: iconPulse 1s infinite alternate;
+	}
+
+	@keyframes iconPulse {
+		0% { transform: scale(1.2); filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5)); }
+		100% { transform: scale(1.4); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); }
+	}
+
+	/* Service Content Area */
+	.service-content {
+		padding: 2rem;
+		transition: all 0.6s ease;
+		transform: translateY(0);
 	}
 
 	.service-item h4 {
 		font-family: 'Playfair Display', serif;
 		color: var(--accent-light);
-		font-size: 1.3rem;
-		margin: 1.5rem 0 1rem;
-		padding: 0 1.5rem;
+		font-size: 1.4rem;
+		margin: 0 0 1rem 0;
 		font-weight: 600;
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+		transition: all 0.3s ease;
 	}
 
 	.service-item p {
-		color: rgba(255, 255, 255, 0.8);
-		line-height: 1.6;
-		padding: 0 1.5rem 1.5rem;
-		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.85);
+		line-height: 1.7;
+		font-size: 1rem;
+		margin-bottom: 1.5rem;
+		transition: all 0.3s ease;
+	}
+
+	/* Feature Tags */
+	.service-features {
+		display: flex;
+		gap: 0.8rem;
+		flex-wrap: wrap;
+		margin-top: 1rem;
+		opacity: 0;
+		transform: translateY(20px);
+		animation: fadeInFeatures 0.6s ease-out 1.2s both;
+	}
+
+	@keyframes fadeInFeatures {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.feature-tag {
+		background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+		color: rgba(255, 255, 255, 0.9);
+		padding: 6px 12px;
+		border-radius: 15px;
+		font-size: 0.85rem;
+		font-weight: 500;
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		backdrop-filter: blur(5px);
+		transition: all 0.3s ease;
+		cursor: default;
+	}
+
+	.feature-tag:hover {
+		background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(212, 175, 55, 0.2));
+		border-color: rgba(212, 175, 55, 0.6);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+	}
+
+	/* Enhanced Hover Effects for Content */
+	.service-item:hover h4 {
+		color: #ffffff;
+		transform: translateX(5px);
+	}
+
+	.service-item:hover p {
+		color: rgba(255, 255, 255, 0.95);
+		transform: translateX(3px);
+	}
+
+	.service-item:hover .feature-tag {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4);
+	}
+
+	/* Ripple Effect */
+	.service-ripple {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+		animation: rippleEffect 0.6s ease-out;
+		pointer-events: none;
+		z-index: 1;
+	}
+
+	@keyframes rippleEffect {
+		0% {
+			width: 0;
+			height: 0;
+			opacity: 1;
+		}
+		100% {
+			width: 300px;
+			height: 300px;
+			margin: -150px 0 0 -150px;
+			opacity: 0;
+		}
+	}
+
+	/* Floating Animation for Cards */
+	.service-item.visible {
+		animation: cardFloat 6s ease-in-out infinite;
+	}
+
+	.service-card-1.visible { animation-delay: 0s; }
+	.service-card-2.visible { animation-delay: 1.5s; }
+	.service-card-3.visible { animation-delay: 3s; }
+	.service-card-4.visible { animation-delay: 4.5s; }
+
+	@keyframes cardFloat {
+		0%, 100% { transform: translateY(0px); }
+		50% { transform: translateY(-8px); }
 	}
 
 	@media (max-width: 768px) {
@@ -490,7 +768,8 @@
 
 		.services-grid {
 			grid-template-columns: 1fr;
-			gap: 1.5rem;
+			gap: 2rem;
+			perspective: none;
 		}
 
 		.about-card {
@@ -498,7 +777,44 @@
 		}
 
 		.service-image {
-			height: 180px;
+			height: 200px;
+		}
+
+		.service-content {
+			padding: 1.5rem;
+		}
+
+		/* Disable complex 3D transforms on mobile */
+		.service-item:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+		}
+
+		/* Simplified animations for mobile */
+		.service-item.visible {
+			animation: slideInUpMobile 0.6s ease-out both;
+		}
+
+		@keyframes slideInUpMobile {
+			0% {
+				transform: translateY(30px);
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
+
+		/* Reduce floating animation on mobile */
+		@keyframes cardFloat {
+			0%, 100% { transform: translateY(0px); }
+			50% { transform: translateY(-4px); }
+		}
+
+		.feature-tag {
+			font-size: 0.8rem;
+			padding: 5px 10px;
 		}
 
 		/* Storia Fotografica - Mobile */
@@ -513,6 +829,19 @@
 		.storia-subtitle {
 			font-size: 1.1rem;
 			margin-bottom: 2rem;
+		}
+
+		/* Sezione Servizi - Mobile */
+		.servizi-section {
+			margin: 3rem 0 2rem 0;
+		}
+
+		.servizi-title {
+			font-size: 2rem;
+		}
+
+		.servizi-subtitle {
+			font-size: 1.1rem;
 		}
 
 		.foto-storia-grid {
@@ -565,6 +894,15 @@
 			margin-bottom: 1.5rem;
 		}
 
+		/* Sezione Servizi - Piccoli schermi */
+		.servizi-title {
+			font-size: 1.8rem;
+		}
+
+		.servizi-subtitle {
+			font-size: 1rem;
+		}
+
 		.foto-storia-grid {
 			gap: 1.5rem;
 		}
@@ -595,3 +933,62 @@
 		}
 	}
 </style>
+
+<script>
+	// Service Cards Animation Observer
+	function initServiceAnimations() {
+		const serviceCards = document.querySelectorAll('.service-item.scroll-animate');
+		
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					// Add visible class with a small delay for smoother effect
+					setTimeout(() => {
+						entry.target.classList.add('visible');
+					}, 100);
+					observer.unobserve(entry.target);
+				}
+			});
+		}, {
+			threshold: 0.2,
+			rootMargin: '50px 0px -50px 0px'
+		});
+
+		serviceCards.forEach((card) => {
+			observer.observe(card);
+		});
+	}
+
+	// Enhanced hover effects for service cards
+	function initServiceHoverEffects() {
+		const serviceItems = document.querySelectorAll('.service-item');
+		
+		serviceItems.forEach((item) => {
+			item.addEventListener('mouseenter', () => {
+				// Add ripple effect
+				const ripple = document.createElement('div');
+				ripple.className = 'service-ripple';
+				item.appendChild(ripple);
+				
+				// Remove ripple after animation
+				setTimeout(() => {
+					if (ripple.parentNode) {
+						ripple.parentNode.removeChild(ripple);
+					}
+				}, 600);
+			});
+		});
+	}
+
+	// Initialize when DOM is loaded
+	document.addEventListener('DOMContentLoaded', () => {
+		initServiceAnimations();
+		initServiceHoverEffects();
+	});
+
+	// Reinitialize on Astro page navigation
+	document.addEventListener('astro:page-load', () => {
+		initServiceAnimations();
+		initServiceHoverEffects();
+	});
+</script>

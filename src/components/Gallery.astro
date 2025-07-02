@@ -1,176 +1,988 @@
 ---
-// Gallery Section Component
+// Gallery Section Component - Modern UX Design
 ---
 
-<section id="gallery" class="gallery-section">	<div class="container">
+<section id="gallery" class="gallery-section">
+	<div class="container">
 		<div class="section-header scroll-animate">
 			<h2 class="section-title">Le Nostre Collezioni</h2>
 			<div class="section-divider"></div>
-			<p class="section-subtitle">Scopri la qualità e l'eleganza dei nostri capi</p>
+			<p class="section-subtitle">Scopri la qualità e l'eleganza dei nostri capi attraverso una gallery interattiva</p>
 		</div>
 		
-		<div class="gallery-grid">
-			<div class="gallery-item gallery-large scroll-animate" data-delay="0.1">
-				<img src="/abiti-cerimonia-eleganti.png" alt="Abiti da Cerimonia Eleganti" class="gallery-photo">
-				<div class="gallery-overlay">
-					<h3>Abiti da Cerimonia</h3>
-					<p>Eleganza per ogni occasione speciale</p>
+		<!-- Gallery Filters -->
+		<div class="gallery-filters scroll-animate" data-delay="0.1">
+			<button class="filter-btn active" data-filter="all">Tutti</button>
+			<button class="filter-btn" data-filter="cerimonia">Cerimonia</button>
+			<button class="filter-btn" data-filter="sportswear">Sportswear</button>
+			<button class="filter-btn" data-filter="dettagli">Dettagli</button>
+		</div>
+		
+		<!-- Gallery Grid -->
+		<div class="gallery-grid" id="galleryGrid">
+			<div class="gallery-item scroll-animate hover-glow" data-category="cerimonia" data-delay="0.1" onclick="openLightbox('/abiti-cerimonia-eleganti.png', 'Abiti da Cerimonia Eleganti', 'Eleganza senza tempo per le tue occasioni speciali. Ogni capo è realizzato con tessuti pregiati e cura artigianale.')">
+				<div class="gallery-image-container">
+					<img src="/abiti-cerimonia-eleganti.png" alt="Abiti da Cerimonia Eleganti" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
 				</div>
+				<div class="gallery-overlay">
+					<div class="overlay-content">
+						<h3>Abiti da Cerimonia</h3>
+						<p>Eleganza per ogni occasione speciale</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge">Premium</div>
 			</div>
 			
-			<div class="gallery-item scroll-animate" data-delay="0.2">
-				<img src="/abbigliamento-sportivo.png" alt="Abbigliamento Sportivo" class="gallery-photo">
-				<div class="gallery-overlay">
-					<h3>Sportswear</h3>
-					<p>Comfort e stile</p>
+			<div class="gallery-item scroll-animate hover-glow" data-category="sportswear" data-delay="0.2" onclick="openLightbox('/abbigliamento-sportivo.png', 'Abbigliamento Sportivo', 'La linea sportswear unisce comfort e stile per la vita quotidiana e le attività sportive.')">
+				<div class="gallery-image-container">
+					<img src="/abbigliamento-sportivo.png" alt="Abbigliamento Sportivo" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
 				</div>
+				<div class="gallery-overlay">
+					<div class="overlay-content">
+						<h3>Sportswear</h3>
+						<p>Comfort e stile per ogni giorno</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge sport">Sport</div>
 			</div>
 			
-			<div class="gallery-item scroll-animate" data-delay="0.3">
-				<img src="/fotoAbitoManica.png" alt="Dettagli Sartoriali" class="gallery-photo">
-				<div class="gallery-overlay">
-					<h3>Dettagli Sartoriali</h3>
-					<p>Cura artigianale</p>
+			<div class="gallery-item scroll-animate hover-glow" data-category="dettagli" data-delay="0.3" onclick="openLightbox('/fotoAbitoManica.png', 'Dettagli Sartoriali', 'Ogni dettaglio racconta la nostra passione per la sartoria tradizionale e la qualità artigianale.')">
+				<div class="gallery-image-container">
+					<img src="/fotoAbitoManica.png" alt="Dettagli Sartoriali" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
 				</div>
+				<div class="gallery-overlay">
+					<div class="overlay-content">
+						<h3>Dettagli Sartoriali</h3>
+						<p>Cura artigianale in ogni cucitura</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge craft">Artigianale</div>
 			</div>
 			
-			<div class="gallery-item gallery-wide">
-				<img src="/abiti-cerimonia-1.png" alt="Collezione Cerimonia" class="gallery-photo">
+			<div class="gallery-item gallery-wide scroll-animate hover-glow" data-category="cerimonia" data-delay="0.4" onclick="openLightbox('/abiti-cerimonia-1.png', 'Collezione Premium Cerimonia', 'La nostra collezione premium offre abiti su misura per matrimoni, eventi e cerimonie importanti.')">
+				<div class="gallery-image-container">
+					<img src="/abiti-cerimonia-1.png" alt="Collezione Cerimonia" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
+				</div>
 				<div class="gallery-overlay">
-					<h3>Collezione Premium</h3>
-					<p>Per i tuoi momenti importanti</p>
+					<div class="overlay-content">
+						<h3>Collezione Premium</h3>
+						<p>Per i tuoi momenti più importanti</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge premium">Esclusiva</div>
+			</div>
+			
+			<!-- Additional Items -->
+			<div class="gallery-item scroll-animate hover-glow" data-category="cerimonia" data-delay="0.5" onclick="openLightbox('/abiti-cerimonia-2.png', 'Abiti da Cerimonia Donna', 'Collezione femminile raffinata per cerimonie ed eventi speciali.')">
+				<div class="gallery-image-container">
+					<img src="/abiti-cerimonia-2.png" alt="Abiti Cerimonia Donna" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
+				</div>
+				<div class="gallery-overlay">
+					<div class="overlay-content">
+						<h3>Cerimonia Donna</h3>
+						<p>Raffinatezza femminile</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge">Donna</div>
+			</div>
+			
+			<div class="gallery-item scroll-animate hover-glow" data-category="sportswear" data-delay="0.6" onclick="openLightbox('/sportswear-casual.png', 'Sportswear Casual', 'Linea casual per il tempo libero con materiali tecnici e design contemporaneo.')">
+				<div class="gallery-image-container">
+					<img src="/sportswear-casual.png" alt="Sportswear Casual" class="gallery-photo" loading="lazy">
+					<div class="image-loading-skeleton"></div>
+				</div>
+				<div class="gallery-overlay">
+					<div class="overlay-content">
+						<h3>Casual Wear</h3>
+						<p>Stile rilassato e contemporaneo</p>
+						<div class="gallery-actions">
+							<button class="action-btn primary">
+								<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								Visualizza
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="gallery-badge casual">Casual</div>
+			</div>
+		</div>
+		
+		<!-- Stats Counter -->
+		<div class="gallery-stats scroll-animate" data-delay="0.8">
+			<div class="stat-item">
+				<div class="stat-number" data-count="500">0</div>
+				<div class="stat-label">Capi in Collezione</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-number" data-count="50">0</div>
+				<div class="stat-label">Anni di Esperienza</div>
+			</div>
+			<div class="stat-item">
+				<div class="stat-number" data-count="1000">0</div>
+				<div class="stat-label">Clienti Soddisfatti</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Lightbox -->
+	<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+		<div class="lightbox-container" onclick="event.stopPropagation()">
+			<button class="lightbox-close" onclick="closeLightbox()">
+				<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+			</button>
+			<div class="lightbox-content">
+				<div class="lightbox-image-container">
+					<img id="lightboxImage" src="" alt="" class="lightbox-image">
+					<div class="lightbox-loading"></div>
+				</div>
+				<div class="lightbox-info">
+					<h3 id="lightboxTitle"></h3>
+					<p id="lightboxDescription"></p>
+					<div class="lightbox-actions">
+						<button class="btn btn-primary" onclick="window.showToast('Contattaci per maggiori informazioni!', 'info')">
+							Richiedi Info
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
+<script>
+// Gallery Functionality
+document.addEventListener('DOMContentLoaded', function() {
+	// Filter functionality
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	const galleryItems = document.querySelectorAll('.gallery-item');
+	
+	filterBtns.forEach(btn => {
+		btn.addEventListener('click', () => {
+			// Update active filter
+			filterBtns.forEach(b => b.classList.remove('active'));
+			btn.classList.add('active');
+			
+			const filter = btn.dataset.filter;
+			
+			// Filter items with animation
+			galleryItems.forEach((item, index) => {
+				const category = item.dataset.category;
+				const shouldShow = filter === 'all' || category === filter;
+				
+				setTimeout(() => {
+					if (shouldShow) {
+						item.style.display = 'block';
+						setTimeout(() => {
+							item.style.opacity = '1';
+							item.style.transform = 'scale(1)';
+						}, 50);
+					} else {
+						item.style.opacity = '0';
+						item.style.transform = 'scale(0.8)';
+						setTimeout(() => {
+							item.style.display = 'none';
+						}, 300);
+					}
+				}, index * 50);
+			});
+		});
+	});
+	
+	// Stats counter animation
+	const statNumbers = document.querySelectorAll('.stat-number');
+	const observerOptions = {
+		threshold: 0.5,
+		rootMargin: '0px'
+	};
+	
+	const statsObserver = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+				entry.target.classList.add('counted');
+				animateNumber(entry.target);
+			}
+		});
+	}, observerOptions);
+	
+	statNumbers.forEach(stat => {
+		statsObserver.observe(stat);
+	});
+	
+	function animateNumber(element) {
+		const target = parseInt(element.dataset.count);
+		const duration = 2000;
+		const increment = target / (duration / 16);
+		let current = 0;
+		
+		const updateNumber = () => {
+			current += increment;
+			if (current < target) {
+				element.textContent = Math.floor(current);
+				requestAnimationFrame(updateNumber);
+			} else {
+				element.textContent = target;
+			}
+		};
+		
+		updateNumber();
+	}
+	
+	// Image loading
+	const images = document.querySelectorAll('.gallery-photo');
+	images.forEach(img => {
+		const skeleton = img.nextElementSibling;
+		
+		img.addEventListener('load', () => {
+			if (skeleton && skeleton.style) {
+				skeleton.style.display = 'none';
+			}
+			img.style.opacity = '1';
+		});
+		
+		img.addEventListener('error', () => {
+			if (skeleton && skeleton.style) {
+				skeleton.style.display = 'none';
+			}
+			img.style.opacity = '0.5';
+		});
+	});
+});
+
+// Lightbox functionality
+function openLightbox(imageSrc, title, description) {
+	const overlay = document.getElementById('lightboxOverlay');
+	const image = document.getElementById('lightboxImage');
+	const titleEl = document.getElementById('lightboxTitle');
+	const descEl = document.getElementById('lightboxDescription');
+	const loading = document.querySelector('.lightbox-loading');
+	
+	// Check if all elements exist
+	if (!overlay || !image || !titleEl || !descEl || !loading) {
+		console.error('Lightbox elements not found');
+		return;
+	}
+	
+	// Show overlay
+	overlay.classList.add('active');
+	document.body.style.overflow = 'hidden';
+	
+	// Show loading
+	loading.style.display = 'block';
+	image.style.opacity = '0';
+	
+	// Set content
+	titleEl.textContent = title;
+	descEl.textContent = description;
+	
+	// Load image
+	image.onload = () => {
+		if (loading && image) {
+			loading.style.display = 'none';
+			image.style.opacity = '1';
+		}
+	};
+	
+	image.src = imageSrc;
+	image.alt = title;
+}
+
+function closeLightbox() {
+	const overlay = document.getElementById('lightboxOverlay');
+	if (overlay) {
+		overlay.classList.remove('active');
+		document.body.style.overflow = '';
+	}
+}
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape') {
+		closeLightbox();
+	}
+});
+</script>
+
 <style>
 	.gallery-section {
-		padding: 100px 0;
-		background: var(--light-gray);
+		padding: 120px 0;
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 		position: relative;
 		scroll-margin-top: 120px;
+		overflow: hidden;
+	}
+
+	.gallery-section::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+		pointer-events: none;
 	}
 
 	.gallery-section .section-title {
 		color: var(--text-dark);
+		font-size: 3.5rem;
+		margin-bottom: 1.5rem;
 	}
 
 	.gallery-section .section-subtitle {
 		color: var(--text-light);
+		font-size: 1.3rem;
+		max-width: 700px;
 	}
 
+	/* Gallery Filters */
+	.gallery-filters {
+		display: flex;
+		justify-content: center;
+		gap: 16px;
+		margin: 60px 0 80px;
+		flex-wrap: wrap;
+	}
+
+	.filter-btn {
+		background: rgba(255, 255, 255, 0.8);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		color: var(--text-dark);
+		padding: 12px 28px;
+		border-radius: 50px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		backdrop-filter: blur(20px);
+		position: relative;
+		overflow: hidden;
+		font-size: 15px;
+	}
+
+	.filter-btn::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+		transition: left 0.6s ease;
+	}
+
+	.filter-btn:hover::before,
+	.filter-btn.active::before {
+		left: 100%;
+	}
+
+	.filter-btn:hover,
+	.filter-btn.active {
+		background: linear-gradient(135deg, #d4af37, #f1c40f);
+		border-color: #d4af37;
+		color: #1a1a1a;
+		transform: translateY(-2px) scale(1.05);
+		box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+	}
+
+	/* Gallery Grid */
 	.gallery-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 20px;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 30px;
 		margin-top: 3rem;
-		max-width: 1200px;
+		max-width: 1400px;
 		margin-left: auto;
 		margin-right: auto;
+		position: relative;
+		z-index: 2;
 	}
 
 	.gallery-item {
 		position: relative;
-		border-radius: 15px;
+		border-radius: 20px;
 		overflow: hidden;
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-		transition: all 0.4s ease;
-		background: var(--white);
-		height: 300px;
-	}
-
-	.gallery-item.gallery-large {
-		grid-column: span 2;
-		height: 400px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		background: white;
+		height: 350px;
+		cursor: pointer;
+		backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
 
 	.gallery-item.gallery-wide {
 		grid-column: span 2;
-		height: 250px;
+		height: 280px;
+	}
+
+	.gallery-image-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 	}
 
 	.gallery-photo {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.4s ease;
+		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		opacity: 0;
+	}
+
+	.image-loading-skeleton {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+		background-size: 200% 100%;
+		animation: skeleton-loading 1.5s infinite;
 	}
 
 	.gallery-item:hover {
-		transform: translateY(-10px);
-		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+		transform: translateY(-15px) scale(1.02);
+		box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
 	}
 
 	.gallery-item:hover .gallery-photo {
-		transform: scale(1.05);
+		transform: scale(1.08);
+		filter: brightness(1.1);
 	}
 
+	/* Gallery Overlay */
 	.gallery-overlay {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+		background: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.9) 0%,
+			rgba(0, 0, 0, 0.7) 40%,
+			transparent 100%
+		);
 		color: white;
-		padding: 2rem;
+		padding: 30px;
 		transform: translateY(100%);
-		transition: transform 0.4s ease;
+		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		backdrop-filter: blur(20px);
 	}
 
 	.gallery-item:hover .gallery-overlay {
 		transform: translateY(0);
 	}
 
+	.overlay-content {
+		transform: translateY(30px);
+		transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+		opacity: 0;
+		transition: opacity 0.5s ease 0.2s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+	}
+
+	.gallery-item:hover .overlay-content {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
 	.gallery-overlay h3 {
 		font-family: 'Playfair Display', serif;
-		font-size: 1.5rem;
-		margin-bottom: 0.5rem;
-		color: var(--accent-light);
+		font-size: 1.8rem;
+		margin-bottom: 0.8rem;
+		color: #d4af37;
+		font-weight: 600;
 	}
 
 	.gallery-overlay p {
 		color: rgba(255, 255, 255, 0.9);
-		font-size: 1rem;
+		font-size: 1.1rem;
+		line-height: 1.5;
+		margin-bottom: 1.5rem;
+	}
+
+	/* Gallery Actions */
+	.gallery-actions {
+		margin-top: 1rem;
+	}
+
+	.action-btn {
+		background: rgba(212, 175, 55, 0.2);
+		border: 2px solid rgba(212, 175, 55, 0.5);
+		color: #d4af37;
+		padding: 10px 20px;
+		border-radius: 25px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font-weight: 600;
+		font-size: 14px;
+		backdrop-filter: blur(10px);
+	}
+
+	.action-btn:hover {
+		background: #d4af37;
+		color: #1a1a1a;
+		transform: scale(1.05);
+	}
+
+	/* Gallery Badges */
+	.gallery-badge {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: linear-gradient(135deg, #d4af37, #f1c40f);
+		color: #1a1a1a;
+		padding: 6px 12px;
+		border-radius: 15px;
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+		z-index: 3;
+		backdrop-filter: blur(10px);
+	}
+
+	.gallery-badge.sport {
+		background: linear-gradient(135deg, #28a745, #20c997);
+		color: white;
+	}
+
+	.gallery-badge.craft {
+		background: linear-gradient(135deg, #6f42c1, #e83e8c);
+		color: white;
+	}
+
+	.gallery-badge.premium {
+		background: linear-gradient(135deg, #fd7e14, #ffc107);
+		color: #1a1a1a;
+	}
+
+	.gallery-badge.casual {
+		background: linear-gradient(135deg, #6c757d, #495057);
+		color: white;
+	}
+
+	/* Gallery Stats */
+	.gallery-stats {
+		display: flex;
+		justify-content: center;
+		gap: 80px;
+		margin-top: 100px;
+		padding: 60px 0;
+		background: rgba(255, 255, 255, 0.6);
+		backdrop-filter: blur(20px);
+		border-radius: 20px;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.stat-item {
+		text-align: center;
+	}
+
+	.stat-number {
+		font-size: 3.5rem;
+		font-weight: 700;
+		background: linear-gradient(135deg, #d4af37, #f1c40f);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		margin-bottom: 0.5rem;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.stat-label {
+		color: var(--text-light);
+		font-weight: 600;
+		font-size: 1.1rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	/* Lightbox */
+	.lightbox-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.95);
+		backdrop-filter: blur(10px);
+		z-index: 10000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.lightbox-overlay.active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.lightbox-container {
+		max-width: 90vw;
+		max-height: 90vh;
+		background: rgba(26, 26, 26, 0.9);
+		border-radius: 20px;
+		overflow: hidden;
+		position: relative;
+		backdrop-filter: blur(30px);
+		border: 1px solid rgba(212, 175, 55, 0.3);
+		box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+		transform: scale(0.8);
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.lightbox-overlay.active .lightbox-container {
+		transform: scale(1);
+	}
+
+	.lightbox-content {
+		display: flex;
+		max-height: 90vh;
+	}
+
+	.lightbox-image-container {
+		flex: 2;
+		position: relative;
+		min-height: 400px;
+		background: #000;
+	}
+
+	.lightbox-image {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		transition: opacity 0.3s ease;
+	}
+
+	.lightbox-loading {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 50px;
+		height: 50px;
+		border: 3px solid rgba(212, 175, 55, 0.3);
+		border-top: 3px solid #d4af37;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		display: none;
+	}
+
+	.lightbox-info {
+		flex: 1;
+		padding: 40px;
+		color: white;
+		min-width: 300px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.lightbox-info h3 {
+		font-family: 'Playfair Display', serif;
+		font-size: 2rem;
+		color: #d4af37;
+		margin-bottom: 1rem;
+		font-weight: 600;
+	}
+
+	.lightbox-info p {
+		color: rgba(255, 255, 255, 0.9);
+		line-height: 1.6;
+		font-size: 1.1rem;
+		margin-bottom: 2rem;
+	}
+
+	.lightbox-actions {
+		margin-top: auto;
+	}
+
+	.lightbox-close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		background: rgba(0, 0, 0, 0.7);
+		border: 2px solid rgba(212, 175, 55, 0.3);
+		color: white;
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		backdrop-filter: blur(10px);
+		z-index: 10001;
+	}
+
+	.lightbox-close:hover {
+		background: rgba(212, 175, 55, 0.2);
+		border-color: #d4af37;
+		transform: scale(1.1);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1200px) {
+		.gallery-grid {
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 25px;
+		}
+
+		.gallery-item.gallery-wide {
+			grid-column: auto;
+		}
+
+		.gallery-stats {
+			gap: 60px;
+		}
 	}
 
 	@media (max-width: 768px) {
 		.gallery-section {
-			padding: 80px 0;
+			padding: 100px 0;
+		}
+
+		.gallery-section .section-title {
+			font-size: 2.8rem;
+		}
+
+		.gallery-filters {
+			gap: 12px;
+			margin: 50px 0 60px;
+		}
+
+		.filter-btn {
+			padding: 10px 20px;
+			font-size: 14px;
 		}
 
 		.gallery-grid {
 			grid-template-columns: 1fr;
-			gap: 15px;
+			gap: 20px;
 		}
 
-		.gallery-item.gallery-large,
-		.gallery-item.gallery-wide {
-			grid-column: auto;
+		.gallery-item {
+			height: 300px;
+		}
+
+		.gallery-overlay {
+			padding: 25px;
+		}
+
+		.gallery-overlay h3 {
+			font-size: 1.5rem;
+		}
+
+		.gallery-stats {
+			flex-direction: column;
+			gap: 40px;
+			margin-top: 80px;
+			padding: 40px 20px;
+		}
+
+		.stat-number {
+			font-size: 2.8rem;
+		}
+
+		.lightbox-content {
+			flex-direction: column;
+		}
+
+		.lightbox-info {
+			min-width: auto;
+			padding: 30px;
+		}
+
+		.lightbox-info h3 {
+			font-size: 1.6rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.gallery-section {
+			padding: 80px 0;
+		}
+
+		.gallery-section .section-title {
+			font-size: 2.2rem;
+		}
+
+		.gallery-filters {
+			gap: 8px;
+			margin: 40px 0 50px;
+		}
+
+		.filter-btn {
+			padding: 8px 16px;
+			font-size: 13px;
+		}
+
+		.gallery-item {
 			height: 250px;
 		}
 
 		.gallery-overlay {
-			padding: 1.5rem;
+			padding: 20px;
 		}
 
 		.gallery-overlay h3 {
 			font-size: 1.3rem;
 		}
+
+		.gallery-overlay p {
+			font-size: 1rem;
+		}
+
+		.gallery-stats {
+			gap: 30px;
+			padding: 30px 15px;
+		}
+
+		.stat-number {
+			font-size: 2.5rem;
+		}
+
+		.stat-label {
+			font-size: 1rem;
+		}
+
+		.lightbox-container {
+			max-width: 95vw;
+			max-height: 95vh;
+		}
+
+		.lightbox-info {
+			padding: 20px;
+		}
+
+		.lightbox-info h3 {
+			font-size: 1.4rem;
+		}
+
+		.lightbox-info p {
+			font-size: 1rem;
+		}
 	}
 
-	@media (max-width: 480px) {
+	/* Animations */
+	@keyframes skeleton-loading {
+		0% { background-position: 200% 0; }
+		100% { background-position: -200% 0; }
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	/* Dark mode considerations */
+	@media (prefers-color-scheme: dark) {
+		.gallery-section {
+			background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+		}
+
+		.filter-btn {
+			background: rgba(0, 0, 0, 0.6);
+			color: white;
+		}
+
 		.gallery-item {
-			height: 200px;
+			background: rgba(26, 26, 26, 0.8);
+			border-color: rgba(212, 175, 55, 0.2);
 		}
 
-		.gallery-overlay {
-			padding: 1rem;
+		.gallery-stats {
+			background: rgba(0, 0, 0, 0.6);
 		}
 
-		.gallery-overlay h3 {
-			font-size: 1.2rem;
+		.image-loading-skeleton {
+			background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+		}
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.gallery-item,
+		.gallery-photo,
+		.gallery-overlay,
+		.filter-btn,
+		.lightbox-overlay,
+		.lightbox-container {
+			transition: none !important;
+			animation: none !important;
+		}
+
+		.image-loading-skeleton {
+			animation: none !important;
+			background: #f0f0f0;
+		}
+
+		.lightbox-loading {
+			animation: none !important;
 		}
 	}
 </style>
