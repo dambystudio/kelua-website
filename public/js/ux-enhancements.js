@@ -277,14 +277,15 @@ class KeluaUXEnhancements {
   }
 
   createSmartBackButton() {
-    if (document.referrer && document.referrer.includes(window.location.origin)) {
-      const backBtn = document.createElement('button');
-      backBtn.className = 'smart-back-btn';
-      backBtn.innerHTML = '← Indietro';
-      backBtn.onclick = () => window.history.back();
-      
-      document.body.appendChild(backBtn);
-    }
+    // Smart back button disabled per richiesta utente
+    // if (document.referrer && document.referrer.includes(window.location.origin)) {
+    //   const backBtn = document.createElement('button');
+    //   backBtn.className = 'smart-back-btn';
+    //   backBtn.innerHTML = '← Indietro';
+    //   backBtn.onclick = () => window.history.back();
+    //   
+    //   document.body.appendChild(backBtn);
+    // }
   }
 
   // Accessibility Enhancements
@@ -639,8 +640,8 @@ uxStyles.textContent = `
     font-weight: 500;
   }
 
-  /* Smart Back Button */
-  .smart-back-btn {
+  /* Smart Back Button - Disabled */
+  /* .smart-back-btn {
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -659,7 +660,7 @@ uxStyles.textContent = `
   .smart-back-btn:hover {
     background: rgba(212, 175, 55, 0.2);
     border-color: #d4af37;
-  }
+  } */
 
   /* Ripple Effect */
   @keyframes rippleExpand {
@@ -680,9 +681,9 @@ uxStyles.textContent = `
       display: none;
     }
     
-    .smart-back-btn {
+    /* .smart-back-btn {
       bottom: 80px;
-    }
+    } */
   }
 
   /* Reduced Motion */
@@ -704,8 +705,8 @@ document.head.appendChild(uxStyles);
 document.addEventListener('DOMContentLoaded', () => {
   new KeluaUXEnhancements();
   
-  // Example toast on page load
-  setTimeout(() => {
-    window.showToast?.('Benvenuto su Kelua! 🌟', 'success', 3000);
-  }, 1000);
+  // Toast notification removed per user request
+  // setTimeout(() => {
+  //   window.showToast?.('Benvenuto su Kelua! 🌟', 'success', 3000);
+  // }, 1000);
 }); 

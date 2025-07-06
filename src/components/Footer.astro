@@ -67,14 +67,24 @@
 
         <!-- Orari -->
         <div class="footer-section">
-          <h3>Orari di Apertura</h3>          <div class="schedule">
+          <h3>Orari di Apertura</h3>
+          <div class="schedule">
             <div class="schedule-item">
-              <span class="day">Lunedì - Sabato</span>
-              <span class="time">09:30 - 13:00<br>17:00 - 20:30</span>
+              <div class="day-column">
+                <span class="day">Lunedì - Sabato</span>
+              </div>
+              <div class="time-column">
+                <span class="time">09:30 - 13:00</span>
+                <span class="time">17:00 - 20:30</span>
+              </div>
             </div>
             <div class="schedule-item">
-              <span class="day">Domenica</span>
-              <span class="time">Chiuso</span>
+              <div class="day-column">
+                <span class="day">Domenica</span>
+              </div>
+              <div class="time-column">
+                <span class="time closed">Chiuso</span>
+              </div>
             </div>
           </div>
         </div>
@@ -97,7 +107,13 @@
     <div class="container">
       <div class="footer-bottom-content">
         <p>&copy; 2024 Kelua. Tutti i diritti riservati.</p>
-        <p>Progettato con ❤️ per San Giovanni Rotondo</p>
+        <div class="design-credit">
+          <span>Realizzato da </span>
+          <a href="https://linktr.ee/dambystudio" target="_blank" rel="noopener noreferrer" class="dambystudio-link">
+            <img src="/dambystudio-logo.png" alt="dambystudio" class="dambystudio-logo">
+            <span>dambystudio</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -121,8 +137,9 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1.2fr 1.3fr 1fr;
     gap: 40px;
+    align-items: start;
   }
 
   .footer-brand .logo {
@@ -132,10 +149,18 @@
   .logo-text {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(45deg, #d4af37, #CFB53B);
+    background: linear-gradient(135deg, #ffd700 0%, #d4af37 50%, #ffd700 100%);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: shimmerText 6s var(--ease-luxury) infinite;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+  }
+
+  @keyframes shimmerText {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
   .brand-description {
@@ -156,11 +181,11 @@
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: rgba(212, 175, 55, 0.1);
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
     border-radius: 12px;
-    color: #d4af37;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #ffd700;
+    transition: all 0.4s var(--ease-luxury);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -183,7 +208,7 @@
 
   .social-links a:hover {
     transform: translateY(-4px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
   }
 
   .social-links a.facebook:hover {
@@ -220,7 +245,7 @@
     visibility: hidden;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     z-index: 1000;
   }
 
@@ -240,51 +265,92 @@
     bottom: 130%;
   }
 
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+  }
+
   .footer-section h3 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #d4af37;
+    color: #ffd700;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
   }
 
   .contact-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 15px;
     color: #ccc;
+    padding: 2px 0;
   }
 
   .contact-item svg {
     flex-shrink: 0;
-    color: #d4af37;
+    color: #ffd700;
   }
 
   .contact-item a {
     color: #ccc;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s var(--ease-luxury);
   }
 
   .contact-item a:hover {
-    color: #d4af37;
+    color: #ffd700;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);
+  }
+
+  .schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .schedule-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: start;
     color: #ccc;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .schedule-item:last-child {
+    border-bottom: none;
+  }
+
+  .day-column {
+    display: flex;
+    align-items: flex-start;
   }
 
   .schedule-item .day {
     font-weight: 500;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .time-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
   }
 
   .schedule-item .time {
-    text-align: right;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .schedule-item .time.closed {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
   }
 
   .footer-links {
@@ -293,7 +359,7 @@
   }
 
   .footer-links li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .footer-links a {
@@ -301,11 +367,13 @@
     text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
+    padding: 2px 0;
   }
 
   .footer-links a:hover {
-    color: #d4af37;
+    color: #ffd700;
     transform: translateX(4px);
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);
   }
 
   .footer-bottom {
@@ -320,6 +388,41 @@
     align-items: center;
     font-size: 0.9rem;
     color: #999;
+  }
+
+  .design-credit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dambystudio-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #999;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .dambystudio-link:hover {
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-1px);
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);
+  }
+
+  .dambystudio-logo {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+  }
+
+  .dambystudio-link:hover .dambystudio-logo {
+    transform: scale(1.1);
   }
 
   /* Responsive Design */
@@ -343,15 +446,28 @@
     }
 
     .schedule-item {
-      flex-direction: column;
+      grid-template-columns: 1fr;
+      gap: 8px;
       text-align: center;
-      gap: 4px;
+      padding: 12px 0;
+    }
+
+    .day-column {
+      justify-content: center;
+    }
+
+    .time-column {
+      text-align: center;
     }
 
     .footer-bottom-content {
       flex-direction: column;
       gap: 8px;
       text-align: center;
+    }
+
+    .design-credit {
+      justify-content: center;
     }
   }
 

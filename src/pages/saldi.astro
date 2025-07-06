@@ -251,7 +251,12 @@ function formatDateRange(dataInizio, dataFine) {
         <!-- Step 2: Selezione Categoria -->
         <div id="step-categoria" class="step-container">
           <div class="step-header">
-            <button class="btn-back" onclick="tornaAlGenere()">← Torna Indietro</button>
+            <button class="btn-back" onclick="tornaAlGenere()">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Indietro
+            </button>
             <div class="step-info">
               <div class="breadcrumb">
                 <span class="breadcrumb-item">Genere: <strong id="breadcrumb-genere">-</strong></span>
@@ -271,7 +276,12 @@ function formatDateRange(dataInizio, dataFine) {
         <!-- Step 3: Visualizzazione Prodotti -->
         <div id="step-prodotti" class="step-container">
           <div class="step-header">
-            <button class="btn-back" onclick="tornaAlleCategorie()">← Torna alle Categorie</button>
+            <button class="btn-back" onclick="tornaAlleCategorie()">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Indietro
+            </button>
             <div class="step-info">
               <div class="breadcrumb">
                 <span class="breadcrumb-item">Genere: <strong id="breadcrumb-genere-prodotti">-</strong></span>
@@ -750,35 +760,58 @@ function formatDateRange(dataInizio, dataFine) {
   .step-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 30px;
     margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
   }
 
   .btn-back {
-    background: linear-gradient(45deg, #1a1a1a, #333);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px;
     color: #d4af37;
-    border: 2px solid #d4af37;
-    padding: 12px 24px;
-    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    min-width: 120px;
   }
 
   .btn-back:hover {
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
-    color: #1a1a1a;
-    border-color: #d4af37;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-50%);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    color: #f1c40f;
+  }
+
+  .btn-back svg {
+    transition: transform 0.3s ease;
+  }
+
+  .btn-back:hover svg {
+    transform: translateX(-2px);
   }
 
   .step-info {
     flex: 1;
+    text-align: center;
+    position: relative;
   }
 
   .step-info h2 {
@@ -790,11 +823,13 @@ function formatDateRange(dataInizio, dataFine) {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
   }
   .step-info .step-description {
     color: #ccc;
     font-size: 1.1rem;
     margin: 8px 0 0 0;
+    text-align: center;
   }
 
   /* Titoli degli Step */
@@ -1026,11 +1061,230 @@ function formatDateRange(dataInizio, dataFine) {
   /* Step 3: Visualizzazione Prodotti */
   .prodotti-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
+  }
+
+  /* Card Prodotti Compatte */
+  .prodotto-card-compact {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  .prodotto-card-compact:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 5px 15px rgba(255, 215, 0, 0.2);
+  }
+
+  .prodotto-image-compact {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(13, 13, 13, 0.6) 100%);
+  }
+
+  .prodotto-image-compact img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .prodotto-card-compact:hover .prodotto-image-compact img {
+    transform: scale(1.05);
+  }
+
+  .badges-compact {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 3;
+  }
+
+  .badges-compact .badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .badges-compact .badge.nuovo {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+  }
+
+  .badges-compact .badge.limited {
+    background: linear-gradient(45deg, #e67e22, #f39c12);
+    color: white;
+  }
+
+  .badges-compact .badge.sconto {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    font-weight: 800;
+  }
+
+  .prodotto-content-compact {
+    padding: 16px;
+    color: #e0e0e0;
+  }
+
+  .prodotto-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .prodotto-header-compact h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .prodotto-header-compact .categoria-tag {
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.1) 100%);
+    color: #ffd700;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .prezzi-compact {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    padding: 8px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  .prezzi-compact .prezzo-originale {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .prezzi-compact .prezzo-scontato {
+    color: #ffd700;
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  .prezzi-compact .risparmio {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: auto;
+  }
+
+  .taglie-compact {
+    margin-bottom: 12px;
+  }
+
+  .taglie-compact .taglie-label {
+    display: block;
+    color: #ccc;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+  }
+
+  .taglie-compact .taglie-list {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .taglie-compact .taglia {
+    background: rgba(255, 215, 0, 0.15);
+    color: #e0e0e0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .prodotto-actions-compact {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-whatsapp-compact {
+    flex: 1;
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+  }
+
+  .btn-whatsapp-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  }
+
+  .btn-call-compact {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    padding: 8px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .btn-call-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
   }
 
   /* Breadcrumb Navigation */
@@ -1064,40 +1318,19 @@ function formatDateRange(dataInizio, dataFine) {
     position: relative;
     margin-bottom: 40px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
   }
 
   .step-info {
     width: 100%;
     text-align: center;
+    flex: 1;
   }
 
-  .btn-back {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(212, 175, 55, 0.1);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    color: #d4af37;
-    padding: 12px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    z-index: 10;
-  }
 
-  .btn-back:hover {
-    background: rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
-    transform: translateY(-50%) translateX(-5px);
-  }
-
-  .btn-back-spacer {
-    display: none;
-  }
 
   /* RESPONSIVE DESIGN */
   @media (max-width: 1024px) {
@@ -1158,19 +1391,7 @@ function formatDateRange(dataInizio, dataFine) {
       padding-top: 60px;
     }
 
-    .btn-back {
-      position: fixed;
-      left: 15px;
-      top: 120px;
-      transform: none;
-      padding: 10px 16px;
-      font-size: 0.85rem;
-      z-index: 1000;
-    }
 
-    .btn-back:hover {
-      transform: translateX(-5px);
-    }
 
     .descrizione-container {
       flex-direction: column;
@@ -1242,43 +1463,63 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .categoria-card-step {
-    background: #fff !important;
-    color: #222 !important;
-    border: 2px solid #d4af37 !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%) !important;
+    color: #e0e0e0 !important;
+    border: 2px solid rgba(255, 215, 0, 0.4) !important;
     border-radius: 20px !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(255, 215, 0, 0.2) !important;
     padding: 32px !important;
     display: flex !important;
     align-items: center !important;
     gap: 24px !important;
+    backdrop-filter: blur(20px) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: 120px !important;
   }
   .categoria-card-step .categoria-icon {
     font-size: 2.5rem !important;
-    background: #f8f9fa !important;
-    color: #222 !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%) !important;
+    color: #ffd700 !important;
     border-radius: 20px !important;
     width: 70px !important;
     height: 70px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2) !important;
   }
   .categoria-card-step .categoria-info h3 {
-    color: #222 !important;
+    color: #e0e0e0 !important;
     font-size: 1.3rem !important;
     font-weight: 700 !important;
+    margin-bottom: 8px !important;
   }
   .categoria-card-step .categoria-info p {
-    color: #444 !important;
+    color: #ccc !important;
+    margin-bottom: 12px !important;
   }
   .categoria-card-step .sconto-badge {
-    background: #ffe082 !important;
-    color: #b8860b !important;
+    background: linear-gradient(45deg, #ffd700, #ffed4e) !important;
+    color: #1a1a1a !important;
     border-radius: 12px !important;
     padding: 4px 10px !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
   }
   .categoria-card-step .prodotti-count {
-    color: #444 !important;
+    color: #ccc !important;
+    font-size: 0.9rem !important;
+    background: rgba(255, 215, 0, 0.1) !important;
+    padding: 4px 8px !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 215, 0, 0.2) !important;
   }
 
   .categoria-card-step::before {
@@ -1299,11 +1540,11 @@ function formatDateRange(dataInizio, dataFine) {
 
   .categoria-card-step:hover {
     transform: translateY(-8px) scale(1.02) !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
-    border-color: rgba(212, 175, 55, 0.5) !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(13, 13, 13, 0.95) 100%) !important;
+    border-color: rgba(255, 215, 0, 0.6) !important;
     box-shadow: 
-      0 20px 50px rgba(0, 0, 0, 0.15),
-      0 8px 25px rgba(212, 175, 55, 0.1) !important;
+      0 25px 60px rgba(0, 0, 0, 0.6),
+      0 10px 30px rgba(255, 215, 0, 0.3) !important;
   }
 
   .categoria-card-step.selected {
@@ -1332,12 +1573,13 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .categoria-card-step:hover .categoria-icon {
-    background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%) !important;
-    color: white !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.2) 100%) !important;
+    color: #ffd700 !important;
     transform: scale(1.1) rotate(5deg) !important;
+    border-color: rgba(255, 215, 0, 0.5) !important;
     box-shadow: 
-      0 12px 30px rgba(212, 175, 55, 0.3),
-      inset 0 1px 3px rgba(255, 255, 255, 0.3) !important;
+      0 8px 25px rgba(255, 215, 0, 0.4),
+      inset 0 1px 3px rgba(255, 255, 255, 0.1) !important;
   }
 
   .categoria-info {
@@ -1461,10 +1703,11 @@ function formatDateRange(dataInizio, dataFine) {
   /* Step 3: Visualizzazione Prodotti */
   .prodotti-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 35px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 20px;
   }
 
   .prodotto-card-final {
@@ -2296,46 +2539,79 @@ function formatDateRange(dataInizio, dataFine) {
     box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
   }
 
-  /* STILI CARD CATEGORIE E PRODOTTI - DARK THEME FORZATO */
+  /* STILI CARD CATEGORIE E PRODOTTI - LUXURY THEME */
   .categoria-card-step {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%) !important;
-    color: #e0e0e0 !important;
-    border: 2px solid #d4af37 !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
-    padding: 32px !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 24px !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    color: #e0e0e0;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(255, 215, 0, 0.1);
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
+  
+  .categoria-card-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .categoria-card-step:hover::before {
+    transform: scaleX(1);
+  }
+  
   .categoria-card-step .categoria-icon {
-    font-size: 2.5rem !important;
-    background: rgba(248, 249, 250, 0.1) !important;
-    color: #e0e0e0 !important;
-    border-radius: 20px !important;
-    width: 70px !important;
-    height: 70px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+    color: #ffd700;
+    border-radius: 20px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
   }
+  
   .categoria-card-step .categoria-info h3 {
-    color: #e0e0e0 !important;
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
+    color: #e0e0e0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
   }
+  
   .categoria-card-step .categoria-info p {
-    color: #ccc !important;
+    color: #ccc;
+    margin-bottom: 12px;
   }
+  
   .categoria-card-step .sconto-badge {
-    background: linear-gradient(45deg, #d4af37, #f1c40f) !important;
-    color: #1a1a1a !important;
-    border-radius: 12px !important;
-    padding: 4px 10px !important;
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-weight: 600;
+    font-size: 0.8rem;
   }
+  
   .categoria-card-step .prodotti-count {
-    color: #ccc !important;
+    color: #ccc;
+    font-size: 0.9rem;
   }
 
   .prodotto-card-final {
@@ -2363,12 +2639,18 @@ function formatDateRange(dataInizio, dataFine) {
     background: #27ae60 !important;
   }
 
-  /* HOVER EFFECTS PER CARD - DARK THEME */
+  /* HOVER EFFECTS PER CARD - LUXURY THEME */
   .categoria-card-step:hover {
-    transform: translateY(-5px) scale(1.02) !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6) !important;
-    border-color: #f1c40f !important;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(13, 13, 13, 0.95) 100%) !important;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(255, 215, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.6);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(13, 13, 13, 0.95) 100%);
+  }
+  
+  .categoria-card-step:hover .categoria-icon {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: scale(1.1);
   }
 
   .prodotto-card-final:hover {
@@ -2391,6 +2673,283 @@ function formatDateRange(dataInizio, dataFine) {
     box-shadow: 0 8px 25px rgba(212,175,55,0.4) !important;
   }
 
+  /* PRODOTTO CARD COMPACT - STILI MANCANTI */
+  .prodotto-card-compact {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
+    color: #e0e0e0;
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    min-height: 420px;
+  }
+
+  .prodotto-card-compact.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .prodotto-card-compact:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(212, 175, 55, 0.3);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .prodotto-image-compact {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  .prodotto-image-compact img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .prodotto-card-compact:hover .prodotto-image-compact img {
+    transform: scale(1.08);
+  }
+
+  .badges-compact {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 3;
+  }
+
+  .badges-compact .badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .badges-compact .badge.nuovo {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+  }
+
+  .badges-compact .badge.limited {
+    background: linear-gradient(45deg, #e67e22, #f39c12);
+    color: white;
+  }
+
+  .badges-compact .badge.sconto {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+
+  .prodotto-content-compact {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: calc(100% - 180px);
+  }
+
+  .prodotto-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .prodotto-header-compact h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .prodotto-header-compact .categoria-tag {
+    background: linear-gradient(45deg, rgba(212, 175, 55, 0.15) 0%, rgba(241, 196, 15, 0.1) 100%);
+    color: #ffd700;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    white-space: nowrap;
+  }
+
+  .prezzi-compact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    margin-bottom: 8px;
+  }
+
+  .prezzi-compact .prezzo-originale {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .prezzi-compact .prezzo-scontato {
+    color: #ffd700;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .prezzi-compact .risparmio {
+    background: linear-gradient(45deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: auto;
+  }
+
+  .taglie-compact {
+    margin-bottom: 12px;
+  }
+
+  .taglie-compact .taglie-label {
+    display: block;
+    color: #ccc;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .taglie-compact .taglie-list {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .taglie-compact .taglia {
+    background: rgba(212, 175, 55, 0.15);
+    color: #e0e0e0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .taglie-compact .taglia:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1a1a1a;
+    transform: scale(1.05);
+  }
+
+  .prodotto-actions-compact {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .btn-whatsapp-compact,
+  .btn-call-compact {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-whatsapp-compact {
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+  }
+
+  .btn-whatsapp-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  }
+
+  .btn-call-compact {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  }
+
+  .btn-call-compact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  }
+
+  /* NESSUN PRODOTTO STYLES */
+  .nessun-prodotto {
+    text-align: center;
+    padding: 60px 20px;
+    color: #ccc;
+    grid-column: 1 / -1;
+  }
+
+  .nessun-prodotto-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .nessun-prodotto h3 {
+    font-size: 1.8rem;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+  }
+
+  .nessun-prodotto p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .btn-torna-categorie {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-torna-categorie:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+  }
+
   /* RESPONSIVITÀ EXTRA PER STILI INLINE */
   @media (max-width: 768px) {
     .categoria-card-step:hover {
@@ -2400,12 +2959,57 @@ function formatDateRange(dataInizio, dataFine) {
     .prodotto-card-final:hover {
       transform: translateY(-5px) scale(1.01) !important;
     }
+
+    .prodotto-card-compact:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .prodotto-card-compact {
+      min-height: 380px;
+    }
+
+    .prodotto-content-compact {
+      padding: 16px;
+    }
+
+    .prodotto-actions-compact {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .step-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .btn-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: none;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+
+    .step-info {
+      width: 100%;
+      padding-top: 60px;
+    }
   }
 
   @media (max-width: 480px) {
     .categoria-card-step:hover,
     .prodotto-card-final:hover {
       transform: none !important;
+    }
+
+    .btn-back {
+      padding: 8px 12px;
+      font-size: 0.85rem;
     }
   }
 </style>
@@ -2534,21 +3138,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (tuttiProdottiCount > 0) {
         const tuttiArticoliHTML = `
-          <div class="categoria-card-step tutti-articoli" data-categoria="Tutti gli articoli" data-genere="${genereSelezionato}" 
-               style="background: white; color: #222; border: 3px solid #d4af37; border-radius: 15px; 
-                      padding: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer;
-                      box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin: 0 auto 20px auto; max-width: 100%;
-                      transition: all 0.3s ease; width: 100%;">
-            <div class="categoria-icon" 
-                 style="font-size: 2.2rem; background: #d4af37; color: white; border-radius: 12px;
-                        width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; 
-                        flex-shrink: 0;">🛍️</div>
-            <div class="categoria-info" style="flex: 1; min-width: 0;">
-              <h3 style="color: #222; font-size: 1.2rem; font-weight: 700; margin: 0 0 6px 0; line-height: 1.2;">Tutti gli articoli</h3>
-              <p style="color: #666; margin: 0 0 12px 0; font-size: 0.9rem; line-height: 1.4;">Visualizza tutti i prodotti in saldo per ${genereSelezionato.toLowerCase()}</p>
-              <div class="categoria-meta" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                <span class="sconto-badge" style="background: #ffe082; color: #b8860b; border-radius: 8px; padding: 4px 8px; font-weight: 600; font-size: 0.8rem;">Offerte speciali</span>
-                <span class="prodotti-count" style="color: #666; font-weight: 600; font-size: 0.85rem;">${tuttiProdottiCount} prodotti</span>
+          <div class="categoria-card-step tutti-articoli" data-categoria="Tutti gli articoli" data-genere="${genereSelezionato}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; border: 2px solid rgba(255, 215, 0, 0.4); border-radius: 20px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(255, 215, 0, 0.2); padding: 32px; display: flex; align-items: center; gap: 24px; backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; overflow: hidden; min-height: 120px;">
+            <div class="categoria-icon" style="font-size: 2.5rem; background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%); color: #ffd700; border-radius: 20px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 215, 0, 0.3); transition: all 0.3s ease; flex-shrink: 0; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);">🛍️</div>
+            <div class="categoria-info" style="flex: 1;">
+              <h3 style="color: #e0e0e0; font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">Tutti gli articoli</h3>
+              <p style="color: #ccc; margin-bottom: 12px;">Visualizza tutti i prodotti in saldo per ${genereSelezionato.toLowerCase()}</p>
+              <div class="categoria-meta" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <span class="sconto-badge" style="background: linear-gradient(45deg, #ffd700, #ffed4e); color: #1a1a1a; border-radius: 12px; padding: 4px 10px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);">Offerte speciali</span>
+                <span class="prodotti-count" style="color: #ccc; font-size: 0.9rem; background: rgba(255, 215, 0, 0.1); padding: 4px 8px; border-radius: 8px; border: 1px solid rgba(255, 215, 0, 0.2);">${tuttiProdottiCount} prodotti</span>
               </div>
             </div>
           </div>
@@ -2576,25 +3173,18 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`📦 Prodotti per ${categoria.nome}:`, prodottiPerCategoria.length);
         
         const categoriaHTML = `
-          <div class="categoria-card-step" data-categoria="${categoria.nome}" data-genere="${categoria.genere}" 
-               style="background: white; color: #222; border: 2px solid #d4af37; border-radius: 15px; 
-                      padding: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer;
-                      box-shadow: 0 8px 25px rgba(0,0,0,0.15); margin: 0 auto 20px auto; max-width: 100%;
-                      transition: all 0.3s ease; width: 100%;">
-            <div class="categoria-icon" 
-                 style="font-size: 2.2rem; background: #f8f9fa; color: #222; border-radius: 12px;
-                        width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; 
-                        flex-shrink: 0;">${categoria.emoji}</div>
-            <div class="categoria-info" style="flex: 1; min-width: 0;">
-              <h3 style="color: #222; font-size: 1.2rem; font-weight: 700; margin: 0 0 6px 0; line-height: 1.2;">${categoria.nome}</h3>
-              <p style="color: #666; margin: 0 0 12px 0; font-size: 0.9rem; line-height: 1.4;">${categoria.descrizione}</p>
-              <div class="categoria-meta" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                <span class="sconto-badge" style="background: #ffe082; color: #b8860b; border-radius: 8px; padding: 4px 8px; font-weight: 600; font-size: 0.8rem;">Sconto ${categoria.sconto}</span>
-                <span class="prodotti-count" style="color: #666; font-weight: 600; font-size: 0.85rem;">${prodottiPerCategoria.length} prodotti</span>
-                </div>
+          <div class="categoria-card-step" data-categoria="${categoria.nome}" data-genere="${categoria.genere}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; border: 2px solid rgba(255, 215, 0, 0.4); border-radius: 20px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(255, 215, 0, 0.2); padding: 32px; display: flex; align-items: center; gap: 24px; backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; overflow: hidden; min-height: 120px;">
+            <div class="categoria-icon" style="font-size: 2.5rem; background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%); color: #ffd700; border-radius: 20px; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 215, 0, 0.3); transition: all 0.3s ease; flex-shrink: 0; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);">${categoria.emoji}</div>
+            <div class="categoria-info" style="flex: 1;">
+              <h3 style="color: #e0e0e0; font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">${categoria.nome}</h3>
+              <p style="color: #ccc; margin-bottom: 12px;">${categoria.descrizione}</p>
+              <div class="categoria-meta" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <span class="sconto-badge" style="background: linear-gradient(45deg, #ffd700, #ffed4e); color: #1a1a1a; border-radius: 12px; padding: 4px 10px; font-weight: 600; font-size: 0.8rem; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);">Sconto ${categoria.sconto}</span>
+                <span class="prodotti-count" style="color: #ccc; font-size: 0.9rem; background: rgba(255, 215, 0, 0.1); padding: 4px 8px; border-radius: 8px; border: 1px solid rgba(255, 215, 0, 0.2);">${prodottiPerCategoria.length} prodotti</span>
               </div>
             </div>
-          `;
+          </div>
+        `;
           
         categorieContainer.innerHTML += categoriaHTML;
       });
@@ -2695,51 +3285,45 @@ document.addEventListener('DOMContentLoaded', function() {
         const taglieHTML = prodotto.taglie ? prodotto.taglie.map(t => `<span class="taglia" style="background: rgba(212,175,55,0.15); color: #e0e0e0; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(212,175,55,0.3); transition: all 0.3s ease; min-width: 30px; text-align: center;">${t}</span>`).join('') : '';
         
         const cardHTML = `
-          <div class="prodotto-card-final" data-delay="${index * 0.1}"
-               style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; border-radius: 15px; overflow: hidden;
-                      box-shadow: 0 15px 35px rgba(0,0,0,0.4); margin: 0 auto 25px auto; max-width: 100%;
-                      transition: all 0.4s ease; border: 1px solid rgba(212,175,55,0.3); width: 100%;">
-            <div class="prodotto-image" style="position: relative; height: 250px; overflow: hidden; background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(13, 13, 13, 0.6) 100%);">
-              <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" 
-                   style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" />
-              <div class="badges" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 3;">
-                ${prodotto.nuovo ? '<span class="badge nuovo" style="padding: 6px 12px; border-radius: 16px; font-weight: 700; font-size: 0.75rem; background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">Nuovo</span>' : ''}
-                ${prodotto.limitedTime ? '<span class="badge limited" style="padding: 6px 12px; border-radius: 16px; font-weight: 700; font-size: 0.75rem; background: linear-gradient(45deg, #e67e22, #f39c12); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">Limitato</span>' : ''}
-                <span class="badge sconto" style="padding: 6px 12px; border-radius: 16px; font-weight: 800; font-size: 0.75rem; background: linear-gradient(45deg, #d4af37, #f1c40f); color: #1a1a1a; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">-${scontoCalcolato}%</span>
+          <div class="prodotto-card-compact" data-delay="${index * 0.1}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; backdrop-filter: blur(20px); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; min-height: 420px;">
+            <div class="prodotto-image-compact" style="position: relative; height: 180px; overflow: hidden; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+              <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" />
+              <div class="badges-compact" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 3;">
+                ${prodotto.nuovo ? '<span class="badge nuovo" style="padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.7rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(45deg, #27ae60, #2ecc71); color: white;">Nuovo</span>' : ''}
+                ${prodotto.limitedTime ? '<span class="badge limited" style="padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.7rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(45deg, #e67e22, #f39c12); color: white;">Limitato</span>' : ''}
+                <span class="badge sconto" style="padding: 4px 8px; border-radius: 12px; font-weight: 700; font-size: 0.7rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(45deg, #ffd700, #ffed4e); color: #1a1a1a;">-${scontoCalcolato}%</span>
               </div>
             </div>
             
-            <div class="prodotto-content" style="padding: 20px; color: #e0e0e0;">
-              <div class="prodotto-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 10px; flex-wrap: wrap;">
-                <h3 style="font-size: 1.2rem; font-weight: 700; color: #e0e0e0; margin: 0; line-height: 1.3; flex: 1; min-width: 0;">${prodotto.nome}</h3>
-                <span class="categoria-tag" style="background: linear-gradient(45deg, rgba(212,175,55,0.15) 0%, rgba(241,196,15,0.1) 100%); color: #d4af37; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(212,175,55,0.3); white-space: nowrap; flex-shrink: 0;">${prodotto.categoria}</span>
+            <div class="prodotto-content-compact" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: calc(100% - 180px);">
+              <div class="prodotto-header-compact" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px;">
+                <h3 style="font-size: 1.1rem; font-weight: 600; color: #e0e0e0; margin: 0; line-height: 1.3; flex: 1;">${prodotto.nome}</h3>
+                <span class="categoria-tag" style="background: linear-gradient(45deg, rgba(212, 175, 55, 0.15) 0%, rgba(241, 196, 15, 0.1) 100%); color: #ffd700; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.3); white-space: nowrap;">${prodotto.categoria}</span>
               </div>
               
-              <p class="descrizione" style="color: #ccc; line-height: 1.5; margin-bottom: 16px; font-size: 0.9rem;">${prodotto.descrizione}</p>
-              
-              <div class="prezzi" style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; padding: 12px; background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(241,196,15,0.05) 100%); border-radius: 10px; border: 1px solid rgba(212,175,55,0.2);">
+              <div class="prezzi-compact" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 8px;">
                 <span class="prezzo-originale" style="color: #888; text-decoration: line-through; font-size: 0.9rem; font-weight: 500;">€${prodotto.prezzoOriginale}</span>
-                <span class="prezzo-scontato" style="color: #d4af37; font-size: 1.3rem; font-weight: 800;">€${prodotto.prezzoScontato}</span>
-                <span class="risparmio" style="background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 700; margin-left: auto;">Risparmi €${(prodotto.prezzoOriginale - prodotto.prezzoScontato).toFixed(2)}</span>
+                <span class="prezzo-scontato" style="color: #ffd700; font-size: 1.2rem; font-weight: 700;">€${prodotto.prezzoScontato}</span>
+                <span class="risparmio" style="background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; margin-left: auto;">-€${(prodotto.prezzoOriginale - prodotto.prezzoScontato).toFixed(2)}</span>
               </div>
               
-              <div class="taglie" style="margin-bottom: 20px;">
-                <span class="taglie-label" style="display: block; color: #ccc; font-weight: 600; margin-bottom: 6px; font-size: 0.85rem;">Taglie disponibili:</span>
-                <div class="taglie-list" style="display: flex; gap: 6px; flex-wrap: wrap;">${taglieHTML}</div>
+              <div class="taglie-compact" style="margin-bottom: 12px;">
+                <span class="taglie-label" style="display: block; color: #ccc; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Taglie:</span>
+                <div class="taglie-list" style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: center;">${taglieHTML}</div>
               </div>
               
-              <div class="prodotto-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://wa.me/393272271295?text=Ciao! Sono interessato al prodotto: ${prodotto.nome}. Potreste darmi maggiori informazioni?" target="_blank" class="btn-whatsapp" style="flex: 1; background: linear-gradient(45deg, #25D366, #128C7E); color: white; padding: 12px 20px; border-radius: 20px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s ease; min-width: 120px; font-size: 0.9rem;">
-                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <div class="prodotto-actions-compact" style="display: flex; gap: 8px; margin-top: auto;">
+                <a href="https://wa.me/393272271295?text=Ciao! Sono interessato al prodotto: ${prodotto.nome}. Potreste darmi maggiori informazioni?" target="_blank" class="btn-whatsapp-compact" style="flex: 1; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.3s ease; border: none; cursor: pointer; background: linear-gradient(45deg, #25D366, #128C7E); color: white; box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);">
+                  <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.787"/>
                   </svg>
-                  <span>WhatsApp</span>
+                  WhatsApp
                 </a>
-                <a href="tel:0882302070" class="btn-call" style="background: linear-gradient(45deg, #d4af37, #f1c40f); color: #1a1a1a; padding: 12px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.3s ease; font-size: 0.85rem;">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="tel:0882302070" class="btn-call-compact" style="flex: 1; padding: 8px 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.3s ease; border: none; cursor: pointer; background: linear-gradient(45deg, #ffd700, #ffed4e); color: #1a1a1a; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);">
+                  <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                   </svg>
-                  <span>Chiama</span>
+                  Chiama
                 </a>
               </div>
             </div>
@@ -2751,10 +3335,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Animazioni di entrata
       setTimeout(() => {
-        document.querySelectorAll('.prodotto-card-final').forEach((card, index) => {
+        document.querySelectorAll('.prodotto-card-compact').forEach((card, index) => {
           setTimeout(() => {
             card.classList.add('animate-in');
-          }, index * 100);
+          }, index * 50);
         });
       }, 100);
       

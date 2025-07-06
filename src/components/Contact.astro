@@ -1,376 +1,175 @@
 ---
-// Componente Contact per Kelua - Professional Modern Design
+// Componente Contact Minimal per Kelua
 ---
 
 <section id="contatti" class="contact-section">
   <div class="container">
-    <!-- Header Section -->
-    <div class="section-header scroll-animate">
-      <div class="header-badge">
-        <span class="badge-icon">💬</span>
-        <span>Entra in Contatto</span>
-        <div class="trust-indicators">
-          <span class="trust-badge">⭐ 4.9/5</span>
-          <span class="trust-badge">✅ Verificato</span>
-        </div>
-      </div>
-      <h2 class="section-title">Parliamo del Tuo Stile</h2>
-      <p class="section-subtitle">
-        Il nostro team di esperti è pronto ad aiutarti a trovare l'outfit perfetto. 
-        <strong>Risposta media in 5 minuti</strong> • Contattaci per una consulenza personalizzata o visita il nostro showroom.
-      </p>
-      <div class="response-guarantee">
-        <span class="guarantee-icon">⚡</span>
-        <span>Risposta garantita entro 1 ora durante gli orari di apertura</span>
-      </div>
+    <!-- Header Minimal -->
+    <div class="section-header">
+      <h2 class="section-title">Contatti</h2>
+      <p class="section-subtitle">Siamo qui per aiutarti a trovare il tuo stile perfetto</p>
     </div>
 
-
-    
-    <!-- Main Contact Grid -->
-    <div class="contact-main-grid">
-      <!-- Contact Methods Cards -->
-      <div class="contact-cards-grid scroll-animate" data-delay="0.2">
+    <!-- Grid Principale -->
+    <div class="contact-grid">
+      
+      <!-- Contatti Rapidi -->
+      <div class="contact-methods">
         
-        <!-- Location Card -->
-        <div class="contact-card location-card hover-glow">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- WhatsApp - Prioritario -->
+        <div class="contact-card whatsapp-card">
+          <div class="card-icon">
+            <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>WhatsApp</h3>
+            <p>Risposta immediata</p>
+            <span class="contact-value">327 227 1295</span>
+          </div>
+          <a href="https://wa.me/393272271295" target="_blank" class="card-action">
+            <span>Chatta</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Telefono -->
+        <div class="contact-card phone-card">
+          <div class="card-icon">
+            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Telefono</h3>
+            <p>Chiamata diretta</p>
+            <span class="contact-value">0882 302070</span>
+          </div>
+          <a href="tel:0882302070" class="card-action">
+            <span>Chiama</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-card email-card">
+          <div class="card-icon">
+            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Email</h3>
+            <p>Richieste dettagliate</p>
+            <span class="contact-value">keluafashion@hotmail.it</span>
+          </div>
+          <a href="mailto:keluafashion@hotmail.it" class="card-action">
+            <span>Scrivi</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Informazioni Negozio -->
+      <div class="store-info">
+        
+        <!-- Indirizzo -->
+        <div class="info-card location-card">
+          <div class="info-header">
+            <div class="info-icon">
+              <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </div>
-            <h3>Showroom Fisico</h3>
+            <h3>Negozio</h3>
           </div>
-          <div class="card-content">
-            <p class="location-address">
+          <div class="info-content">
+            <p class="address">
               <strong>Corso Regina Margherita 110</strong><br>
               71013 San Giovanni Rotondo (FG)
             </p>
-            <div class="location-features">
-              <div class="feature-item">
-                <span class="feature-icon">🅿️</span>
-                <span>Parcheggio disponibile</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">♿</span>
-                <span>Accessibile</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">🏪</span>
-                <span>In centro storico</span>
-              </div>
-            </div>
-          </div>
-          <div class="card-action">
-            <button class="action-button" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
-              <span>Ottieni Indicazioni</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button class="info-action" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
+              <span>Indicazioni</span>
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
               </svg>
             </button>
           </div>
         </div>
 
-        <!-- Phone Contact Card -->
-        <div class="contact-card phone-card hover-glow">
-          <div class="card-header">
-            <div class="card-icon phone">
-              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-              </svg>
-            </div>
-            <h3>Chiamata Diretta</h3>
-          </div>
-          <div class="card-content">
-            <p class="phone-description">
-              Parla direttamente con i nostri consulenti per consigli personalizzati
-            </p>
-            <div class="phone-numbers">
-              <div class="phone-number">
-                <span class="number-label">📞 Negozio</span>
-                <span class="number">0882 302070</span>
-              </div>
-              <div class="phone-number">
-                <span class="number-label">📱 Cellulare</span>
-                <span class="number">327 227 1295</span>
-              </div>
-              <span class="availability">🟢 Disponibile ora</span>
-            </div>
-          </div>
-          <div class="card-action">
-            <div class="phone-buttons">
-              <a href="tel:0882302070" class="action-button primary">
-                <span>Chiama Negozio</span>
-              </a>
-              <a href="tel:3272271295" class="action-button secondary">
-                <span>Chiama Cellulare</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- WhatsApp Card - FEATURED/PRIORITY -->
-        <div class="contact-card whatsapp-card hover-glow featured-contact">
-          <div class="priority-badge">
-            <span class="priority-icon">⚡</span>
-            <span>Più Veloce</span>
-          </div>
-          <div class="card-header">
-            <div class="card-icon whatsapp">
-              <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-              </svg>
-            </div>
-            <h3>Chat WhatsApp</h3>
-            <div class="pulse-indicator"></div>
-            <div class="online-status">🟢 Online ora</div>
-          </div>
-          <div class="card-content">
-            <p class="whatsapp-description">
-              <strong>Contatto preferito:</strong> Ricevi assistenza immediata via chat. Invia foto e ricevi consigli in tempo reale
-            </p>
-            <div class="whatsapp-features">
-              <span class="feature-tag">📱 Risposta immediata</span>
-              <span class="feature-tag">📸 Invia foto prodotti</span>
-              <span class="feature-tag premium">👨‍💼 Consulente dedicato</span>
-            </div>
-                         <div class="response-stats">
-               <div class="stat-item">
-                 <span class="stat-value">~2min</span>
-                 <span class="stat-label">Tempo risposta</span>
-               </div>
-              <div class="stat-item">
-                <span class="stat-value">98%</span>
-                <span class="stat-label">Soddisfazione</span>
-              </div>
-            </div>
-          </div>
-          <div class="card-action">
-            <a href="https://wa.me/393272271295?text=Ciao%20Kelua%21%20Sono%20interessato%2Fa%20ai%20vostri%20capi%20di%20abbigliamento.%20Potreste%20inviarmi%20maggiori%20informazioni%3F%20Grazie%21" target="_blank" rel="noopener noreferrer" class="action-button whatsapp priority">
-              <span>💬 Chatta Subito</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Email Card -->
-        <div class="contact-card email-card hover-glow">
-          <div class="card-header">
-            <div class="card-icon email">
-              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-            </div>
-            <h3>Email Professionale</h3>
-          </div>
-          <div class="card-content">
-            <p class="email-description">
-              Per richieste dettagliate, cataloghi o informazioni commerciali
-            </p>
-            <div class="email-address">
-              <span class="address">keluafashion@hotmail.it</span>
-              <span class="response-time">📧 Risposta entro 24h</span>
-            </div>
-          </div>
-          <div class="card-action">
-            <a href="mailto:keluafashion@hotmail.it" class="action-button">
-              <span>Invia Email</span>
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Business Info Sidebar -->
-      <div class="business-info-sidebar scroll-animate" data-delay="0.4">
-        
-        <!-- Opening Hours Card -->
+        <!-- Orari -->
         <div class="info-card hours-card">
-          <div class="hours-header">
-            <div class="info-header">
-              <div class="info-icon clock-icon">
-                <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12,6 12,12 16,14"/>
-                </svg>
-              </div>
-              <div class="header-content">
-                <h3>Orari Boutique</h3>
-                <p class="hours-subtitle">Sempre aperti per te</p>
-              </div>
+          <div class="info-header">
+            <div class="info-icon">
+              <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+              </svg>
             </div>
+            <h3>Orari</h3>
           </div>
-
-          <div class="schedule-modern">
-            <div class="schedule-week">
-              <div class="schedule-item active">
-                <div class="day-info">
-                  <span class="day-icon">📅</span>
-                  <span class="day">Lun - Sab</span>
-                </div>
+          <div class="info-content">
+            <div class="schedule">
+              <div class="schedule-item">
+                <span class="days">Lun - Sab</span>
                 <div class="times">
-                  <div class="time-slot morning">
-                    <span class="time-label">Mattina</span>
-                    <span class="time">09:30 - 13:00</span>
-                  </div>
-                  <div class="time-slot afternoon">
-                    <span class="time-label">Pomeriggio</span>
-                    <span class="time">17:00 - 20:30</span>
-                  </div>
+                  <span>09:30 - 13:00</span>
+                  <span>17:00 - 20:30</span>
                 </div>
               </div>
-              
-              <div class="schedule-item weekend">
-                <div class="day-info">
-                  <span class="day-icon">🏖️</span>
-                  <span class="day">Domenica</span>
-                </div>
-                <div class="times">
-                  <div class="time-slot closed">
-                    <span class="time closed">Riposo</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="hours-footer">
-              <div class="contact-hours">
-                <span class="footer-icon">📞</span>
-                <span>Chiamate: sempre durante gli orari di apertura</span>
+              <div class="schedule-item">
+                <span class="days">Domenica</span>
+                <span class="closed">Chiuso</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Social Media Card -->
+        <!-- Social -->
         <div class="info-card social-card">
           <div class="info-header">
-            <div class="info-icon social-main-icon">
+            <div class="info-icon">
               <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
             </div>
-            <div class="social-header-text">
-              <h3>Community Kelua</h3>
-              <p>Unisciti alla nostra famiglia fashion</p>
-            </div>
+            <h3>Seguici</h3>
           </div>
-
-          <div class="social-links-direct">
-            <a href="https://www.facebook.com/kelua.uomo/?locale=it_IT" target="_blank" rel="noopener noreferrer" class="social-button facebook">
-              <div class="social-icon-large">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <div class="info-content">
+            <div class="social-links">
+              <a href="https://www.facebook.com/kelua.uomo/?locale=it_IT" target="_blank" class="social-link facebook">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
-              </div>
-              <div class="social-content">
-                <span class="social-title">Facebook</span>
-                <span class="social-subtitle">Seguici per le novità</span>
-              </div>
-              <div class="social-arrow">→</div>
-            </a>
-            
-            <a href="https://www.instagram.com/kelua_moda/" target="_blank" rel="noopener noreferrer" class="social-button instagram">
-              <div class="social-icon-large">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.40z"/>
+                <span>Facebook</span>
+              </a>
+              <a href="https://www.instagram.com/kelua_moda/" target="_blank" class="social-link instagram">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
-              </div>
-              <div class="social-content">
-                <span class="social-title">Instagram</span>
-                <span class="social-subtitle">Foto e storie</span>
-              </div>
-              <div class="social-arrow">→</div>
-            </a>
-            
-            <a href="https://www.tiktok.com/@keluafashion" target="_blank" rel="noopener noreferrer" class="social-button tiktok">
-              <div class="social-icon-large">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <span>Instagram</span>
+              </a>
+              <a href="https://www.tiktok.com/@keluafashion" target="_blank" class="social-link tiktok">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                 </svg>
-              </div>
-              <div class="social-content">
-                <span class="social-title">TikTok</span>
-                <span class="social-subtitle">Video fashion</span>
-              </div>
-              <div class="social-arrow">→</div>
-            </a>
-          </div>
-
-          <div class="social-footer">
-            <div class="engagement-tip">
-              <span class="tip-icon">💡</span>
-              <span>Tagga @kelua_moda per essere ripostato!</span>
+                <span>TikTok</span>
+              </a>
             </div>
           </div>
         </div>
 
+      </div>
 
-      </div>
-    </div>
-
-    <!-- Interactive Location Section -->
-    <div class="location-section scroll-animate" data-delay="0.6">
-      <div class="location-header">
-        <h3>Trova la Nostra Boutique</h3>
-        <p>Nel cuore di San Giovanni Rotondo, facilmente raggiungibile</p>
-      </div>
-      
-      <div class="location-content">
-        <div class="map-modern" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
-          <div class="map-overlay">
-            <div class="map-info">
-              <div class="map-pin">
-                <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-              </div>
-              <div class="map-details">
-                <h4>Kelua Fashion</h4>
-                <p>Corso Regina Margherita 110</p>
-                <span class="map-action">📍 Apri in Google Maps</span>
-              </div>
-            </div>
-            <div class="map-background">
-              <div class="map-grid"></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="directions-info">
-          <h4>Come Raggiungerci</h4>
-          <div class="transport-options">
-            <div class="transport-item">
-              <div class="transport-icon">🚗</div>
-              <div class="transport-details">
-                <span class="transport-title">In Auto</span>
-                <span class="transport-desc">Parcheggio disponibile nelle vicinanze</span>
-              </div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-icon">🚌</div>
-              <div class="transport-details">
-                <span class="transport-title">Trasporto Pubblico</span>
-                <span class="transport-desc">Fermata bus a 100m dal negozio</span>
-              </div>
-            </div>
-            <div class="transport-item">
-              <div class="transport-icon">🚶</div>
-              <div class="transport-details">
-                <span class="transport-title">A Piedi</span>
-                <span class="transport-desc">Centro storico pedonale</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -391,8 +190,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+    background: 
+      radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
     pointer-events: none;
   }
 
@@ -404,220 +204,104 @@
     z-index: 2;
   }
 
-  /* Header Badge Styles */
-  .header-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 50px;
-    padding: 15px 30px;
-    margin-bottom: 25px;
-    backdrop-filter: blur(10px);
-    color: #d4af37;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header-badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    animation: shine-badge 3s linear infinite;
-  }
-
-  @keyframes shine-badge {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-
-  .badge-icon {
-    font-size: 1.2rem;
-    animation: bounce-icon 2s ease-in-out infinite;
-  }
-
-  @keyframes bounce-icon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-  }
-
-  .trust-indicators {
-    display: flex;
-    gap: 8px;
-  }
-
-  .trust-badge {
-    background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.1));
-    border: 1px solid rgba(46, 204, 113, 0.3);
-    border-radius: 15px;
-    padding: 4px 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #2ecc71;
-    white-space: nowrap;
-  }
-
-  .response-guarantee {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(41, 128, 185, 0.1));
-    border: 1px solid rgba(52, 152, 219, 0.2);
-    border-radius: 25px;
-    padding: 8px 16px;
-    margin-top: 15px;
-    color: #3498db;
-    font-size: 0.9rem;
-    font-weight: 500;
-    backdrop-filter: blur(5px);
-  }
-
-  .guarantee-icon {
-    animation: pulse-guarantee 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse-guarantee {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  /* Main Grid Layout */
-  .contact-main-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 60px;
-    margin-bottom: 60px;
-  }
-
-  .contact-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-  }
-
+  /* Header */
   .section-header {
     text-align: center;
     margin-bottom: 80px;
   }
 
-  .section-header h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #d4af37 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 20px;
-    position: relative;
-    animation: shimmer 3s ease-in-out infinite;
-  }
-
   .section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #d4af37 0%, #f1c40f 50%, #d4af37 100%);
+    font-size: 3.5rem;
+    font-weight: 300;
+    background: linear-gradient(135deg, #ffd700 0%, #d4af37 50%, #ffd700 100%);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 20px;
-    position: relative;
-    animation: shimmer 3s ease-in-out infinite;
+    animation: shimmerText 6s var(--ease-luxury) infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
   }
 
   .section-subtitle {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
-    line-height: 1.6;
+    font-weight: 300;
   }
 
-  @keyframes shimmer {
+  @keyframes shimmerText {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
   }
 
-  .section-header h2::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
-    border-radius: 2px;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-  }
-
-  .section-header p {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
+  /* Grid Layout */
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    margin-bottom: 80px;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: start;
   }
 
-  /* Contact Cards Styles */
+  /* Contact Methods */
+  .contact-methods {
+    display: grid;
+    gap: 30px;
+  }
+
   .contact-card {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(0, 0, 0, 0.8));
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 20px;
-    padding: 0;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.5s var(--ease-luxury);
     position: relative;
+    overflow: hidden;
   }
 
   .contact-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #d4af37, transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .contact-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.05), transparent);
+    transition: left 0.8s var(--ease-luxury);
   }
 
   .contact-card:hover::before {
-    opacity: 1;
+    left: 100%;
   }
 
-  .card-header {
-    padding: 25px 25px 15px 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
+  .contact-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 8px 20px rgba(255, 215, 0, 0.2);
   }
 
+  /* WhatsApp Card Special */
+  .whatsapp-card {
+    border-color: rgba(37, 211, 102, 0.3);
+    background: rgba(37, 211, 102, 0.05);
+  }
+
+  .whatsapp-card:hover {
+    border-color: rgba(37, 211, 102, 0.5);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 8px 20px rgba(37, 211, 102, 0.3);
+  }
+
+  /* Card Elements */
   .card-icon {
     width: 60px;
     height: 60px;
@@ -625,1562 +309,199 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ffd700, #d4af37);
     color: #1a1a1a;
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-    transition: all 0.3s ease;
+    transition: all 0.4s var(--ease-luxury);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
   }
 
-  .card-icon.phone {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+  .whatsapp-card .card-icon {
+    background: linear-gradient(45deg, #25d366, #128c7e);
     color: white;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
   }
 
-  .card-icon.whatsapp {
-    background: linear-gradient(135deg, #25d366, #128c7e);
+  .phone-card .card-icon {
+    background: linear-gradient(45deg, #3498db, #2980b9);
     color: white;
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
   }
 
-  .card-icon.email {
-    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  .email-card .card-icon {
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
     color: white;
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.3);
   }
 
   .contact-card:hover .card-icon {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
   }
 
-  .card-header h3 {
-    color: #d4af37;
+  .card-content h3 {
     font-size: 1.3rem;
     font-weight: 600;
-    margin: 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffd700;
+    margin-bottom: 5px;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
   }
 
-  .card-content {
-    padding: 0 25px 20px 25px;
+  .whatsapp-card .card-content h3 {
+    color: #25d366;
+    text-shadow: 0 0 6px rgba(37, 211, 102, 0.3);
+  }
+
+  .card-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .contact-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
   }
 
   .card-action {
-    padding: 0 25px 25px 25px;
-  }
-
-  .action-button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     padding: 12px 20px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 12px;
-    color: #d4af37;
+    color: #ffd700;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-  }
-
-  .action-button:hover {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.2));
-    border-color: rgba(212, 175, 55, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-    color: #f1c40f;
-  }
-
-  .action-button.primary {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    border-color: #3498db;
-    color: white;
-  }
-
-  .action-button.primary:hover {
-    background: linear-gradient(135deg, #2980b9, #1f5f99);
-    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
-  }
-
-  .action-button.whatsapp {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    border-color: #25d366;
-    color: white;
-  }
-
-  .action-button.whatsapp:hover {
-    background: linear-gradient(135deg, #128c7e, #0f6b5c);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-  }
-
-  .action-button.secondary {
-    background: linear-gradient(135deg, rgba(149, 165, 166, 0.2), rgba(127, 140, 141, 0.1));
-    border-color: rgba(149, 165, 166, 0.3);
-    color: #95a5a6;
-  }
-
-  .action-button.secondary:hover {
-    background: linear-gradient(135deg, rgba(149, 165, 166, 0.3), rgba(127, 140, 141, 0.2));
-    border-color: rgba(149, 165, 166, 0.6);
-    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.3);
-    color: #bdc3c7;
-  }
-
-  /* Phone Card Specific Styles */
-  .phone-numbers {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 15px;
-  }
-
-  .phone-number {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-  }
-
-  .number-label {
     font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.7);
-    min-width: 80px;
+    transition: all 0.3s var(--ease-luxury);
+    white-space: nowrap;
   }
 
-  .number {
-    font-size: 1.1rem;
-    font-weight: 600;
+  .whatsapp-card .card-action {
+    background: rgba(37, 211, 102, 0.1);
+    border-color: rgba(37, 211, 102, 0.3);
+    color: #25d366;
+  }
+
+  .phone-card .card-action {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: rgba(52, 152, 219, 0.3);
     color: #3498db;
-    font-family: 'JetBrains Mono', monospace;
   }
 
-  .availability {
-    font-size: 0.85rem;
-    color: #2ecc71;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .phone-buttons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .phone-buttons .action-button {
-    flex: 1;
-    min-width: 120px;
-    justify-content: center;
-  }
-
-  /* Location Card Specific Styles */
-  .location-address {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 1rem;
-  }
-
-  .location-features {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-  }
-
-  .feature-icon {
-    font-size: 1rem;
-  }
-
-  /* Phone Card Specific Styles */
-  .phone-description {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-  }
-
-  .phone-number {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .number {
-    color: #d4af37;
-    font-size: 1.3rem;
-    font-weight: 700;
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .availability {
-    color: #2ecc71;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-
-  /* Featured Contact Card */
-  .featured-contact {
-    position: relative;
-    background: linear-gradient(145deg, rgba(37, 211, 102, 0.1), rgba(18, 140, 126, 0.08));
-    border: 2px solid rgba(37, 211, 102, 0.3);
-    transform: scale(1.025);
-    z-index: 2;
-  }
-
-  .featured-contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #25d366, #20c997, #25d366);
-    background-size: 200% 100%;
-    animation: priority-shine 2s linear infinite;
-  }
-
-  @keyframes priority-shine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  .priority-badge {
-    position: absolute;
-    top: -8px;
-    right: 15px;
-    background: linear-gradient(135deg, #25d366, #20c997);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    z-index: 3;
-  }
-
-  .priority-icon {
-    animation: flash 1s ease-in-out infinite alternate;
-  }
-
-  @keyframes flash {
-    from { opacity: 1; }
-    to { opacity: 0.7; }
-  }
-
-  .online-status {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.1));
-    border: 1px solid rgba(46, 204, 113, 0.3);
-    border-radius: 12px;
-    padding: 3px 8px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #2ecc71;
-    animation: glow-online 2s ease-in-out infinite;
-  }
-
-  @keyframes glow-online {
-    0%, 100% { box-shadow: 0 0 5px rgba(46, 204, 113, 0.3); }
-    50% { box-shadow: 0 0 15px rgba(46, 204, 113, 0.6); }
-  }
-
-  /* WhatsApp Card Specific Styles */
-  .whatsapp-description {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-  }
-
-  .whatsapp-features {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-  }
-
-  .feature-tag {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 15px;
-    padding: 4px 10px;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-  }
-
-  .feature-tag.premium {
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(142, 68, 173, 0.1));
-    border-color: rgba(138, 43, 226, 0.3);
+  .email-card .card-action {
+    background: rgba(155, 89, 182, 0.1);
+    border-color: rgba(155, 89, 182, 0.3);
     color: #9b59b6;
   }
 
-  .response-stats {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
+  .card-action:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
   }
 
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .whatsapp-card .card-action:hover {
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
   }
 
-  .stat-value {
-    color: #25d366;
-    font-size: 0.9rem;
-    font-weight: 700;
-    line-height: 1;
+  .phone-card .card-action:hover {
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
   }
 
-  .stat-label {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.7rem;
-    margin-top: 2px;
+  .email-card .card-action:hover {
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
   }
 
-  .action-button.priority {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    border-color: #25d366;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 14px 24px;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .action-button.priority::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s ease;
-  }
-
-  .action-button.priority:hover::before {
-    left: 100%;
-  }
-
-  .action-button.priority:hover {
-    background: linear-gradient(135deg, #128c7e, #0f6b5c);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
-  }
-
-  .pulse-indicator {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 12px;
-    height: 12px;
-    background: #25d366;
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.5);
-      opacity: 0.7;
-    }
-  }
-
-  /* Email Card Specific Styles */
-  .email-description {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-  }
-
-  .email-address {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .address {
-    color: #d4af37;
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
-  }
-
-  .response-time {
-    color: #3498db;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-
-  /* Business Info Sidebar */
-  .business-info-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  /* Store Info */
+  .store-info {
+    display: grid;
+    gap: 30px;
   }
 
   .info-card {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.8));
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 20px;
-    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .info-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37);
-    background-size: 200% 100%;
-    animation: shine 2s linear infinite;
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.4s var(--ease-luxury);
   }
 
   .info-card:hover {
-    border-color: rgba(212, 175, 55, 0.4);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .hours-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 215, 0, 0.25);
+    transform: translateY(-3px);
   }
 
   .info-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex: 1;
-  }
-
-  .social-card .info-header {
-    display: flex;
-    align-items: flex-start;
     gap: 15px;
     margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .info-header h3 {
-    color: #d4af37;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  .info-header p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .social-header-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .social-header-text h3 {
-    color: #d4af37;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 0 5px 0;
-  }
-
-  .social-header-text p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .header-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
   }
 
   .info-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #d4af37, #f1c40f);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  }
-
-  .status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #2ecc71;
-    font-size: 0.9rem;
-    font-weight: 500;
-    position: relative;
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    background: #2ecc71;
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
-  }
-
-  .live-indicator {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 8px;
-    animation: live-blink 1.5s ease-in-out infinite;
-    margin-left: 8px;
-  }
-
-  @keyframes live-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* Hours Card Redesign */
-  .header-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .hours-subtitle {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.8rem;
-    margin: 0;
-    font-style: italic;
-  }
-
-  .current-status-banner {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-
-  .status-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .status-emoji {
-    font-size: 1.5rem;
-    animation: pulse-clock 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-clock {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  .status-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .current-time {
-    color: #d4af37;
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .next-event {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.85rem;
-  }
-
-  .schedule-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .schedule-week {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .schedule-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 15px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-
-  .schedule-item:hover {
-    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-    border-color: rgba(212, 175, 55, 0.2);
-  }
-
-  .schedule-item.active {
-    background: linear-gradient(145deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.08));
-    border-color: rgba(212, 175, 55, 0.3);
-  }
-
-  .schedule-item.weekend {
-    background: linear-gradient(145deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
-    border-color: rgba(231, 76, 60, 0.2);
-  }
-
-  .day-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .day-icon {
-    font-size: 1.1rem;
-  }
-
-  .day {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  .times {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-end;
-  }
-
-  .time-slot {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-  }
-
-  .time-label {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.7rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .time {
-    color: #d4af37;
-    font-size: 0.85rem;
-    font-weight: 600;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    background: rgba(212, 175, 55, 0.1);
-    padding: 3px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-  }
-
-  .time.closed {
-    color: #e74c3c;
-    background: rgba(231, 76, 60, 0.1);
-    border-color: rgba(231, 76, 60, 0.2);
-  }
-
-  .hours-footer {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .contact-hours {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-  }
-
-  .footer-icon {
-    font-size: 0.9rem;
-  }
-
-  /* Social Platforms Showcase */
-  .social-platforms-showcase {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-
-  .platform-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .platform-item:hover {
-    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-    border-color: rgba(212, 175, 55, 0.3);
-    transform: translateY(-2px);
-  }
-
-  .platform-logo {
     width: 50px;
     height: 50px;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(212, 175, 55, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #ffd700;
   }
 
-  .facebook-logo {
-    background: linear-gradient(135deg, #1877f2, #1451a0);
-    color: white;
-  }
-
-  .instagram-logo {
-    background: linear-gradient(135deg, #e4405f, #a02b7a, #c93592);
-    color: white;
-  }
-
-  .tiktok-logo {
-    background: linear-gradient(135deg, #000000, #333333);
-    color: white;
-  }
-
-  .platform-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    flex: 1;
-  }
-
-  .platform-name {
-    color: #d4af37;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .platform-description {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    line-height: 1.3;
-  }
-
-  /* Social Links Direct Styles */
-  .social-links-direct {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-  }
-
-  .social-button {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 20px;
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.6));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .social-button:hover::before {
-    left: 100%;
-  }
-
-  .social-button.facebook {
-    border-color: rgba(24, 119, 242, 0.3);
-  }
-
-  .social-button.facebook:hover {
-    background: linear-gradient(145deg, rgba(24, 119, 242, 0.1), rgba(24, 119, 242, 0.05));
-    border-color: rgba(24, 119, 242, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.2);
-  }
-
-  .social-button.instagram {
-    border-color: rgba(225, 48, 108, 0.3);
-  }
-
-  .social-button.instagram:hover {
-    background: linear-gradient(145deg, rgba(225, 48, 108, 0.1), rgba(225, 48, 108, 0.05));
-    border-color: rgba(225, 48, 108, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(225, 48, 108, 0.2);
-  }
-
-  .social-button.tiktok {
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .social-button.tiktok:hover {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-  }
-
-  .social-icon-large {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-
-  .social-button.facebook .social-icon-large {
-    background: linear-gradient(135deg, #1877f2, #166fe5);
-    color: white;
-  }
-
-  .social-button.instagram .social-icon-large {
-    background: linear-gradient(135deg, #e1306c, #fd1d1d, #fcb045);
-    color: white;
-  }
-
-  .social-button.tiktok .social-icon-large {
-    background: linear-gradient(135deg, #000000, #ff0050);
-    color: white;
-  }
-
-  .social-button:hover .social-icon-large {
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  .social-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .social-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-  }
-
-  .social-subtitle {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .social-arrow {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
-  }
-
-  .social-button:hover .social-arrow {
-    color: rgba(255, 255, 255, 0.8);
-    transform: translateX(5px);
-  }
-
-  /* Social CTA Buttons */
-  .social-links-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-
-  .social-cta-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 20px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .social-cta-button:hover::before {
-    left: 100%;
-  }
-
-  .social-cta-button.facebook {
-    background: linear-gradient(135deg, #1877f2, #1451a0);
-    color: white;
-    border: 1px solid #1877f2;
-  }
-
-  .social-cta-button.facebook:hover {
-    background: linear-gradient(135deg, #1451a0, #0f3d7a);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
-  }
-
-  .social-cta-button.instagram {
-    background: linear-gradient(135deg, #e4405f, #a02b7a);
-    color: white;
-    border: 1px solid #e4405f;
-  }
-
-  .social-cta-button.instagram:hover {
-    background: linear-gradient(135deg, #a02b7a, #7d1f5a);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(228, 64, 95, 0.4);
-  }
-
-  .social-cta-button.tiktok {
-    background: linear-gradient(135deg, #000000, #333333);
-    color: white;
-    border: 1px solid #333333;
-  }
-
-  .social-cta-button.tiktok:hover {
-    background: linear-gradient(135deg, #333333, #1a1a1a);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    text-decoration: none;
-    color: white;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-link.featured {
-    background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-    border-color: rgba(212, 175, 55, 0.2);
-  }
-
-  .social-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .social-link:hover::before {
-    left: 100%;
-  }
-
-  .social-link:hover {
-    transform: translateY(-2px);
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  .social-platform-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-  }
-
-  .social-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .facebook .social-icon {
-    background: linear-gradient(135deg, #1877f2, #1451a0);
-  }
-
-  .instagram .social-icon {
-    background: linear-gradient(135deg, #e4405f, #a02b7a, #c93592);
-  }
-
-  .tiktok .social-icon {
-    background: linear-gradient(135deg, #000000, #333333);
-  }
-
-  .social-info {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-    gap: 1px;
-  }
-
-  .social-name {
-    color: #d4af37;
-    font-weight: 600;
-    font-size: 0.9rem;
-    line-height: 1.2;
-  }
-
-  .social-handle {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.75rem;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .social-metric {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
-    font-weight: 500;
-  }
-
-  .social-cta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .cta-text {
-    color: #d4af37;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  .cta-arrow {
-    color: #d4af37;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .social-link:hover .cta-arrow {
-    transform: translateX(3px);
-  }
-
-  .social-footer {
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .engagement-tip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(142, 68, 173, 0.05));
-    border: 1px solid rgba(138, 43, 226, 0.2);
-    border-radius: 8px;
-    padding: 10px;
-  }
-
-  .tip-icon {
-    font-size: 0.9rem;
-    animation: tip-glow 2s ease-in-out infinite;
-  }
-
-  @keyframes tip-glow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-
-  }
-
-  /* Location Section */
-  .location-section {
-    margin-top: 40px;
-  }
-
-  .location-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .location-header h3 {
-    color: #d4af37;
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin: 0 0 10px 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .location-header p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
-    margin: 0;
-  }
-
-  .location-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-  }
-
-  .map-modern {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.8));
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 20px;
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .map-modern:hover {
-    border-color: rgba(212, 175, 55, 0.4);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .map-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(26, 26, 26, 0.8));
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .map-info {
-    text-align: center;
-    z-index: 2;
-  }
-
-  .map-pin {
-    color: #d4af37;
-    margin-bottom: 15px;
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-  }
-
-  .map-details h4 {
-    color: #d4af37;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-  }
-
-  .map-details p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    margin: 0 0 12px 0;
-  }
-
-  .map-action {
-    color: #d4af37;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .map-background {
-    position: absolute;
-    inset: 0;
-    opacity: 0.1;
-  }
-
-  .map-grid {
-    width: 100%;
-    height: 100%;
-    background-image: 
-      linear-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-    animation: grid-move 20s linear infinite;
-  }
-
-  @keyframes grid-move {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(20px, 20px); }
-  }
-
-  .directions-info h4 {
-    color: #d4af37;
+  .info-header h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    margin: 0 0 20px 0;
+    color: #ffd700;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
   }
 
-  .transport-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .transport-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .transport-item:hover {
-    border-color: rgba(212, 175, 55, 0.3);
-    transform: translateX(5px);
-  }
-
-  .transport-icon {
-    font-size: 1.5rem;
-    width: 40px;
-    text-align: center;
-  }
-
-  .transport-details {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .transport-title {
-    color: #d4af37;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-  }
-
-  .transport-desc {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
-    line-height: 1.3;
-  }
-
-  /* Hover Glow Effect */
-  .hover-glow {
-    position: relative;
-  }
-
-  .hover-glow::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.3), transparent);
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-    filter: blur(10px);
-  }
-
-  .hover-glow:hover::before {
-    opacity: 1;
-  }
-
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .location-card,
-  .hours-card {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.8));
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 20px;
-    padding: 35px;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .location-card::before,
-  .hours-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37);
-    background-size: 200% 100%;
-    animation: shine 2s linear infinite;
-  }
-
-  @keyframes shine {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  .info-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .info-card .icon {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
-  }
-
-  .info-content h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #d4af37;
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-  }
-
-  .info-content p {
-    color: rgba(255, 255, 255, 0.9);
+  .info-content {
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
-    margin: 0;
-    font-size: 1.1rem;
   }
 
-  .contact-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  /* Location Specific */
+  .address {
+    margin-bottom: 15px;
   }
 
-  .contact-btn {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 24px 28px;
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(0, 0, 0, 0.9));
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    text-decoration: none;
-    color: white;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-  }
-
-  .contact-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.6s ease;
-  }
-
-  .contact-btn:hover::before {
-    left: 100%;
-  }
-
-  .contact-btn:hover {
-    transform: translateY(-4px);
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .btn-icon {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  .phone-btn .btn-icon {
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
-    color: #1a1a1a;
-  }
-
-  .email-btn .btn-icon {
-    background: linear-gradient(45deg, #6c63ff, #5a52d5);
-    color: white;
-  }
-
-  .whatsapp-btn .btn-icon {
-    background: linear-gradient(45deg, #25d366, #128c7e);
-    color: white;
-  }
-
-  .btn-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btn-label {
-    font-size: 1.1rem;
+  .info-action {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffd700;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 4px;
-    color: white;
-  }
-
-  .btn-number {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'Courier New', monospace;
-  }
-
-  .whatsapp-btn.featured {
-    background: linear-gradient(145deg, rgba(37, 211, 102, 0.15), rgba(18, 140, 126, 0.15));
-    border-color: rgba(37, 211, 102, 0.4);
-    position: relative;
-  }
-
-  .whatsapp-btn.featured:hover {
-    border-color: #25d366;
-    background: linear-gradient(145deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 126, 0.25));
-  }
-
-  .whatsapp-pulse {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 20px;
-    height: 20px;
-    background: #25d366;
-    border-radius: 50%;
-    animation: pulse-dot 2s infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.3);
-      opacity: 0.7;
-    }
-  }
-
-  .contact-info-secondary {
+    cursor: pointer;
+    transition: all 0.3s var(--ease-luxury);
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    align-items: center;
+    gap: 6px;
   }
 
+  .info-action:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Schedule */
   .schedule {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    gap: 12px;
   }
 
   .schedule-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -2188,494 +509,105 @@
     border-bottom: none;
   }
 
-  .day {
+  .days {
     font-weight: 600;
-    color: #d4af37;
-  }
-
-  .hours {
-    text-align: right;
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.4;
   }
 
-  .hours.closed {
-    color: #e74c3c;
-    font-weight: 500;
-  }
-
-  .social-section {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.8));
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 20px;
-    padding: 35px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .social-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37);
-    background-size: 200% 100%;
-    animation: shine 2s linear infinite;
-  }
-
-  .social-section h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #d4af37;
-    margin-bottom: 25px;
-    letter-spacing: 0.5px;
-  }
-
-  .social-links {
+  .times {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    text-align: right;
+    font-size: 0.9rem;
+    gap: 2px;
+  }
+
+  .closed {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+  }
+
+  /* Social Links */
+  .social-links {
+    display: grid;
+    gap: 10px;
   }
 
   .social-link {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
-    border-radius: 16px;
-    color: #1a1a1a;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s var(--ease-luxury);
   }
 
   .social-link:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+    color: #ffd700;
+    transform: translateY(-1px);
   }
 
-  .map-container {
-    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(0, 0, 0, 0.8));
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 24px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    position: relative;
+  .social-link.facebook:hover {
+    border-color: rgba(24, 119, 242, 0.5);
+    color: #1877f2;
   }
 
-  .map-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37);
-    background-size: 200% 100%;
-    animation: shine 2s linear infinite;
-    z-index: 1;
+  .social-link.instagram:hover {
+    border-color: rgba(225, 48, 108, 0.5);
+    color: #e1306c;
   }
 
-  .map-placeholder {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
+  .social-link.tiktok:hover {
+    border-color: rgba(255, 0, 80, 0.5);
+    color: #ff0050;
   }
 
-  .map-placeholder:hover {
-    color: white;
-    background: rgba(212, 175, 55, 0.1);
-  }
-
-  .map-icon {
-    color: #d4af37;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .map-placeholder:hover .map-icon {
-    transform: scale(1.1);
-    color: #f1c40f;
-  }
-
-  .map-placeholder p {
-    font-weight: 600;
-    margin: 0 0 8px 0;
-    font-size: 1.2rem;
-  }
-
-  .map-placeholder small {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-  }
-
-  /* Responsive Design */
+  /* Responsive */
   @media (max-width: 768px) {
-    .contact-section {
-      padding: 80px 0;
-    }
-
-    .section-header h2,
-    .section-title {
-      font-size: 2.5rem;
-    }
-
-    .contact-main-grid {
+    .contact-grid {
       grid-template-columns: 1fr;
       gap: 40px;
     }
 
-    .contact-cards-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 60px;
-    }
-
-    .location-card,
-    .hours-card,
-    .social-section,
-    .info-card {
-      padding: 20px;
-    }
-
-    .contact-btn {
-      padding: 20px 24px;
-    }
-
-    .btn-icon {
-      width: 45px;
-      height: 45px;
-    }
-
-    .btn-label {
-      font-size: 1rem;
-    }
-
-    .btn-number {
-      font-size: 0.9rem;
-    }
-
-    .map-placeholder,
-    .map-modern {
-      height: 250px;
-    }
-
-    .social-links {
+    .contact-card {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
       gap: 15px;
     }
 
-    .social-link {
-      width: 55px;
-      height: 55px;
+    .card-action {
+      grid-column: 1 / -1;
+      justify-self: center;
     }
 
-    .location-content {
-      grid-template-columns: 1fr;
-      gap: 25px;
-    }
-
-    .company-stats {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .stat {
-      padding: 10px;
-    }
-
-    .transport-item {
-      padding: 12px;
+    .section-title {
+      font-size: 2.5rem;
     }
   }
 
   @media (max-width: 480px) {
-    .container {
-      padding: 0 15px;
+    .contact-section {
+      padding: 60px 0;
     }
 
-    .section-header h2,
-    .section-title {
-      font-size: 2rem;
-    }
-
-    .section-header p,
-    .section-subtitle {
-      font-size: 1rem;
-    }
-
-    .contact-cards-grid {
-      gap: 15px;
+    .section-header {
+      margin-bottom: 50px;
     }
 
     .contact-card {
-      border-radius: 15px;
+      padding: 20px;
     }
 
-    .card-header {
-      padding: 20px 20px 10px 20px;
-    }
-
-    .card-content {
-      padding: 0 20px 15px 20px;
-    }
-
-    .card-action {
-      padding: 0 20px 20px 20px;
-    }
-
-    .card-icon {
-      width: 50px;
-      height: 50px;
-    }
-
-    .location-card,
-    .hours-card,
-    .social-section,
     .info-card {
-      padding: 15px;
-    }
-
-    .contact-btn {
-      padding: 18px 20px;
-      gap: 16px;
-    }
-
-    .btn-icon {
-      width: 40px;
-      height: 40px;
-    }
-
-    .info-card .icon,
-    .info-icon {
-      width: 35px;
-      height: 35px;
-    }
-
-    .info-content h3,
-    .info-header h3 {
-      font-size: 1.1rem;
-    }
-
-    .social-section h3 {
-      font-size: 1.2rem;
-    }
-
-    .social-link {
-      width: 50px;
-      height: 50px;
-      padding: 12px;
-    }
-
-    .social-icon {
-      width: 35px;
-      height: 35px;
-    }
-
-    .location-header h3 {
-      font-size: 1.5rem;
-    }
-
-    .map-modern {
-      height: 220px;
-    }
-
-    .transport-item {
-      padding: 10px;
-      gap: 10px;
-    }
-
-    .transport-icon {
-      font-size: 1.2rem;
-      width: 30px;
-    }
-
-    .action-button {
-      padding: 10px 16px;
-      font-size: 0.9rem;
+      padding: 20px;
     }
   }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Real-time Business Status System
-  function updateBusinessStatus() {
-    const now = new Date();
-    const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-    const currentTime = now.getHours() * 60 + now.getMinutes(); // Minutes since midnight
-    
-    const statusElement = document.getElementById('business-status');
-    const statusText = document.getElementById('status-text');
-    const statusDot = statusElement?.querySelector('.status-dot');
-    
-    if (!statusElement || !statusText || !statusDot) return;
-    
-    let isOpen = false;
-    let nextChange = '';
-    
-    // Business Hours: Monday-Saturday 9:30-13:00 and 17:00-20:30, Sunday closed
-    if (currentDay >= 1 && currentDay <= 6) { // Monday to Saturday
-      const morning = currentTime >= 570 && currentTime < 780; // 9:30-13:00
-      const afternoon = currentTime >= 1020 && currentTime < 1230; // 17:00-20:30
-      isOpen = morning || afternoon;
-      
-      if (currentTime < 570) nextChange = 'Apre alle 9:30';
-      else if (currentTime >= 570 && currentTime < 780) nextChange = 'Chiude alle 13:00';
-      else if (currentTime >= 780 && currentTime < 1020) nextChange = 'Riapre alle 17:00';
-      else if (currentTime >= 1020 && currentTime < 1230) nextChange = 'Chiude alle 20:30';
-      else nextChange = 'Apre domani alle 9:30';
-    } else { // Sunday
-      isOpen = false;
-      nextChange = 'Apre lunedì alle 9:30';
-    }
-    
-    // Update UI
-    if (isOpen) {
-      statusText.textContent = 'Aperto ora';
-      statusElement.className = 'status-indicator open';
-      statusDot.style.background = '#2ecc71';
-      statusDot.style.boxShadow = '0 0 10px rgba(46, 204, 113, 0.5)';
-    } else {
-      statusText.textContent = 'Chiuso';
-      statusElement.className = 'status-indicator closed';
-      statusDot.style.background = '#e74c3c';
-      statusDot.style.boxShadow = '0 0 10px rgba(231, 76, 60, 0.5)';
-    }
-    
-    // Add next change info
-    const existingNextChange = statusElement.querySelector('.next-change');
-    if (existingNextChange) existingNextChange.remove();
-    
-    const nextChangeElement = document.createElement('span');
-    nextChangeElement.className = 'next-change';
-    nextChangeElement.textContent = nextChange;
-    nextChangeElement.style.cssText = `
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-left: 10px;
-      font-weight: 400;
-    `;
-    statusElement.appendChild(nextChangeElement);
-  }
-  
-  // Contact Button Loading States
-  function addLoadingStates() {
-    const actionButtons = document.querySelectorAll('.action-button');
-    
-    actionButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        const target = e.currentTarget;
-        const mouseEvent = e;
-        if (target && target.href && (target.href.includes('tel:') || target.href.includes('mailto:'))) {
-          // Don't prevent default for tel/mailto links, just add visual feedback
-          target.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            target.style.transform = '';
-          }, 150);
-        }
-        
-        // Add ripple effect
-        const ripple = document.createElement('span');
-        const rect = target.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = mouseEvent.clientX - rect.left - size / 2;
-        const y = mouseEvent.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          left: ${x}px;
-          top: ${y}px;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          transform: scale(0);
-          animation: ripple 0.6s linear;
-          pointer-events: none;
-        `;
-        
-        target.appendChild(ripple);
-        
-        setTimeout(() => {
-          ripple.remove();
-        }, 600);
-      });
-    });
-  }
-  
-  // Social Links Analytics
-  function trackSocialInteractions() {
-    const socialLinks = document.querySelectorAll('.social-link');
-    
-    socialLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        const platform = this.href.includes('facebook') ? 'Facebook' : 
-                        this.href.includes('instagram') ? 'Instagram' : 'TikTok';
-        
-        // Visual feedback
-        this.style.transform = 'translateX(15px) scale(1.05)';
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 300);
-        
-        // Could add analytics tracking here
-        console.log(`Social interaction: ${platform}`);
-      });
-    });
-  }
-  
-  // Initialize all enhancements
-  updateBusinessStatus();
-  addLoadingStates();
-  trackSocialInteractions();
-  
-  // Update business status every minute
-  setInterval(updateBusinessStatus, 60000);
-  
-  // Add CSS for ripple animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
-    
-    .status-indicator.closed .status-dot {
-      background: #e74c3c !important;
-      animation: pulse-red 2s infinite;
-    }
-    
-    @keyframes pulse-red {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.2);
-        opacity: 0.7;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-});
-</script>
