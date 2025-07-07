@@ -8,8 +8,9 @@
       <div class="footer-grid">
         <!-- Logo e Info Principali -->
         <div class="footer-brand">
-          <div class="logo">
-            <span class="logo-text">Kelua</span>
+          <div class="logo-footer">
+            <img src="/logo.jpg" alt="Kelua" class="footer-logo-img">
+            <span class="logo-text-footer">KELUA</span>
           </div>
           <p class="brand-description">
             Il tuo negozio di abbigliamento di fiducia a San Giovanni Rotondo. 
@@ -146,9 +147,26 @@
     margin-bottom: 20px;
   }
 
-  .logo-text {
+  .footer-brand .logo-footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+    border: 2px solid rgba(255, 215, 0, 0.6);
+  }
+
+  .logo-text-footer {
+    font-family: 'Glida Display Regular', 'Playfair Display', serif;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 300;
     background: linear-gradient(135deg, #ffd700 0%, #d4af37 50%, #ffd700 100%);
     background-size: 200% 200%;
     -webkit-background-clip: text;
@@ -156,6 +174,7 @@
     background-clip: text;
     animation: shimmerText 6s var(--ease-luxury) infinite;
     filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+    letter-spacing: 4px;
   }
 
   @keyframes shimmerText {
@@ -484,7 +503,7 @@
       gap: 25px;
     }
 
-    .logo-text {
+    .logo-text-footer {
       font-size: 1.8rem;
     }
   }

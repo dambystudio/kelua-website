@@ -29,7 +29,7 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
 ---
 
 <Layout title="Kelua - Abbigliamento di Qualità a San Giovanni Rotondo">
-  <main>
+  <main class={showBanner && saldiAttivi ? 'has-saldi-banner' : ''}>
     <Navbar />
     
     <!-- Banner Saldi Dinamico -->
@@ -74,6 +74,33 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
         }, 300);
       });
     }
+
+    // Gestione dinamica altezza navbar per banner saldi
+    if (banner) {
+      const navbar = document.querySelector('.modern-navbar');
+      const root = document.documentElement;
+      
+      // Funzione per aggiornare l'altezza della navbar
+      const updateNavbarHeight = () => {
+        if (navbar) {
+          const navbarHeight = navbar.offsetHeight;
+          root.style.setProperty('--navbar-height', `${navbarHeight}px`);
+        }
+      };
+
+      // Aggiorna subito
+      updateNavbarHeight();
+
+      // Aggiorna durante lo scroll per gestire la navbar scrolled
+      let scrollTimeout;
+      window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateNavbarHeight, 50);
+      });
+
+      // Aggiorna al resize della finestra
+      window.addEventListener('resize', updateNavbarHeight);
+    }
   });
 </script>
 
@@ -104,7 +131,7 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
   /* Banner Saldi Dinamico */
   .saldi-banner {
     position: fixed;
-    top: 100px; /* Sotto la navbar */
+    top: var(--navbar-height, 80px); /* Usa variabile CSS dinamica */
     left: 0;
     right: 0;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
@@ -117,6 +144,7 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: top 0.3s ease; /* Transizione fluida per il movimento */
   }
 
   @keyframes slideDown {
@@ -204,45 +232,41 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     scroll-margin-top: 140px; /* navbar + banner */
   }
 
+  /* Riduzione padding Hero quando presente banner saldi */
+  main.has-saldi-banner section#home .hero-content {
+    padding-top: 60px; /* Ridotto da 120px per compensare il banner */
+  }
+
   /* Responsive per il banner */
   @media (max-width: 768px) {
     .saldi-banner {
-      top: 80px; /* Navbar mobile più bassa */
       padding: 10px 15px;
+      font-size: 0.9rem;
+      --navbar-height: 70px; /* Altezza navbar mobile */
     }
-
+    
     .banner-content {
       gap: 15px;
     }
-
+    
     .banner-text {
       font-size: 0.9rem;
     }
-
+    
     .banner-cta {
       padding: 6px 12px;
       font-size: 0.8rem;
     }
-
-    section {
-      scroll-margin-top: 120px;
+    
+    /* Compensazione mobile per hero */
+    main.has-saldi-banner section#home .hero-content {
+      padding-top: 40px;
     }
   }
 
   @media (max-width: 480px) {
-    .banner-content {
-      flex-direction: column;
-      gap: 8px;
-      text-align: center;
-    }
-
-    .banner-text {
-      font-size: 0.85rem;
-    }
-
-    .banner-cta {
-      padding: 5px 10px;
-      font-size: 0.75rem;
+    .saldi-banner {
+      --navbar-height: 65px; /* Altezza navbar mobile piccolo */
     }
   }
   
