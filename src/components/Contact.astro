@@ -81,7 +81,7 @@
       <!-- Informazioni Negozio -->
       <div class="store-info">
         
-        <!-- Indirizzo -->
+        <!-- Indirizzi Negozi -->
         <div class="info-card location-card">
           <div class="info-header">
             <div class="info-icon">
@@ -90,19 +90,38 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
               </svg>
             </div>
-            <h3>Negozio</h3>
+            <h3>I Nostri Negozi</h3>
           </div>
           <div class="info-content">
-            <p class="address">
-              <strong>Corso Regina Margherita 110</strong><br>
-              71013 San Giovanni Rotondo (FG)
-            </p>
-            <button class="info-action" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
-              <span>Indicazioni</span>
-              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
-            </button>
+            <div class="store-locations">
+              <div class="store-location">
+                <div class="store-type">👔 Abbigliamento Uomo</div>
+                <p class="address">
+                  <strong>Corso Regina Margherita 108-110</strong><br>
+                  71013 San Giovanni Rotondo (FG)
+                </p>
+                <button class="store-directions-btn" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
+                  <span>Indicazioni Uomo</span>
+                  <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="store-divider"></div>
+              <div class="store-location">
+                <div class="store-type">👗 Abbigliamento Donna</div>
+                <p class="address">
+                  <strong>Via Cristoforo Colombo 13</strong><br>
+                  71013 San Giovanni Rotondo (FG)
+                </p>
+                <button class="store-directions-btn" onclick="window.open('https://www.google.com/maps/dir/41.1049822,16.876965/Via+Cristoforo+Colombo,+13,+71013+San+Giovanni+Rotondo+FG/@41.3895517,14.900648,362018m/data=!3m2!1e3!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x1337742e36c31edf:0x1cc6437cdb47e509!2m2!1d15.7267792!2d41.7065787?entry=ttu&g_ep=EgoyMDI1MDcwNi4wIKXMDSoASAFQAw%3D%3D', '_blank')">
+                  <span>Indicazioni Donna</span>
+                  <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -467,8 +486,60 @@
   }
 
   /* Location Specific */
+  .store-locations {
+    margin-bottom: 20px;
+  }
+
+  .store-location {
+    margin-bottom: 16px;
+  }
+
+  .store-location:last-child {
+    margin-bottom: 0;
+  }
+
+  .store-type {
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+  }
+
+  .store-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    margin: 16px 0;
+  }
+
+
+
   .address {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+  }
+
+  .store-directions-btn {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffd700;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-luxury);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+  }
+
+  .store-directions-btn:hover {
+    background: rgba(255, 215, 0, 0.25);
+    border-color: rgba(255, 215, 0, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
   }
 
   .info-action {

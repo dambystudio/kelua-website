@@ -14,7 +14,7 @@
           </div>
           <p class="brand-description">
             Il tuo negozio di abbigliamento di fiducia a San Giovanni Rotondo. 
-            Qualità, stile e tradizione dal 1975.
+            Qualità, stile e tradizione dal 1975. Due punti vendita specializzati per uomo e donna.
           </p>          <div class="social-links">
             <a href="https://www.facebook.com/kelua.uomo/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-link facebook hover-glow">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
@@ -40,12 +40,43 @@
         <!-- Contatti Rapidi -->
         <div class="footer-section">
           <h3>Contatti</h3>
-          <div class="contact-item">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <span>Corso Regina Margherita 110, San Giovanni Rotondo (FG)</span>
+          <div class="stores-section">
+                         <div class="store-item">
+               <div class="store-header">
+                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                 </svg>
+                 <span class="store-label">👔 Uomo</span>
+               </div>
+               <div class="store-details">
+                 <span class="store-address">Corso Regina Margherita 108-110, San Giovanni Rotondo (FG)</span>
+                 <button class="footer-directions-btn" onclick="window.open('https://maps.app.goo.gl/iztw4CndMBvQ3Ejw6', '_blank')">
+                   <span>Indicazioni</span>
+                   <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                   </svg>
+                 </button>
+               </div>
+             </div>
+             <div class="store-item">
+               <div class="store-header">
+                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                 </svg>
+                 <span class="store-label">👗 Donna</span>
+               </div>
+               <div class="store-details">
+                 <span class="store-address">Via Cristoforo Colombo 13, San Giovanni Rotondo (FG)</span>
+                 <button class="footer-directions-btn" onclick="window.open('https://www.google.com/maps/dir/41.1049822,16.876965/Via+Cristoforo+Colombo,+13,+71013+San+Giovanni+Rotondo+FG/@41.3895517,14.900648,362018m/data=!3m2!1e3!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x1337742e36c31edf:0x1cc6437cdb47e509!2m2!1d15.7267792!2d41.7065787?entry=ttu&g_ep=EgoyMDI1MDcwNi4wIKXMDSoASAFQAw%3D%3D', '_blank')">
+                   <span>Indicazioni</span>
+                   <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                   </svg>
+                 </button>
+               </div>
+             </div>
           </div>          <div class="contact-item">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
@@ -297,6 +328,76 @@
     text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
   }
 
+  .stores-section {
+    margin-bottom: 15px;
+  }
+
+  .store-item {
+    margin-bottom: 12px;
+    padding: 8px 0;
+  }
+
+  .store-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .store-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .store-header svg {
+    flex-shrink: 0;
+    color: #ffd700;
+  }
+
+  .store-label {
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+  }
+
+  .store-details {
+    margin-left: 24px;
+  }
+
+  .store-address {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .footer-directions-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: #ffd700;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-luxury);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+  }
+
+  .footer-directions-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+  }
+
+
+
   .contact-item {
     display: flex;
     align-items: center;
@@ -476,6 +577,11 @@
     }
 
     .time-column {
+      text-align: center;
+    }
+
+    .store-details {
+      margin-left: 0;
       text-align: center;
     }
 
