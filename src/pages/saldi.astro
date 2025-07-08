@@ -1103,17 +1103,18 @@ function formatDateRange(dataInizio, dataFine) {
     padding: 0 20px;
   }
 
-  /* Step 3: Visualizzazione Prodotti */
+  /* Step 3: Visualizzazione Prodotti - Layout E-commerce Professionale */
   .prodotti-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 320px));
+    gap: 16px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
+    justify-content: center;
   }
 
-  /* Card Prodotti Compatte */
+  /* Card Prodotti Compatte - Design E-commerce Professionale */
   .prodotto-card-compact {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
     backdrop-filter: blur(20px);
@@ -1123,6 +1124,10 @@ function formatDateRange(dataInizio, dataFine) {
     transition: all 0.3s ease;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     cursor: pointer;
+    width: 320px;
+    max-width: 320px;
+    min-width: 320px;
+    margin: 0 auto;
   }
 
   .prodotto-card-compact:hover {
@@ -1379,6 +1384,17 @@ function formatDateRange(dataInizio, dataFine) {
 
   /* RESPONSIVE DESIGN */
   @media (max-width: 1024px) {
+    .prodotti-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
+      gap: 14px;
+    }
+
+    .prodotto-card-compact {
+      width: 280px;
+      max-width: 280px;
+      min-width: 280px;
+    }
+
     .prodotti-trovati {
       position: static;
       transform: none;
@@ -1389,6 +1405,19 @@ function formatDateRange(dataInizio, dataFine) {
     .descrizione-container {
       flex-direction: column;
       gap: 10px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .prodotti-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+      gap: 12px;
+    }
+
+    .prodotto-card-compact {
+      width: 250px;
+      max-width: 250px;
+      min-width: 250px;
     }
   }
 
@@ -1426,9 +1455,15 @@ function formatDateRange(dataInizio, dataFine) {
 
     .prodotti-grid {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
       max-width: none;
       padding: 0 10px;
+    }
+
+    .prodotto-card-compact {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: auto !important;
     }
 
     .step-header {
@@ -3298,10 +3333,10 @@ document.addEventListener('DOMContentLoaded', function() {
       prodottiFiltrati.forEach((prodotto, index) => {
         const scontoCalcolato = Math.round(((prodotto.prezzoOriginale - prodotto.prezzoScontato) / prodotto.prezzoOriginale) * 100);
         
-        const taglieHTML = prodotto.taglie ? prodotto.taglie.map(t => `<span class="taglia" style="background: rgba(212,175,55,0.15); color: #e0e0e0; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(212,175,55,0.3); transition: all 0.3s ease; min-width: 30px; text-align: center;">${t}</span>`).join('') : '';
+        const taglieHTML = prodotto.taglie ? prodotto.taglie.map(t => `<span class="taglia" style="background: rgba(212,175,55,0.2); color: #ffffff; padding: 6px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(212,175,55,0.4); transition: all 0.3s ease; min-width: 32px; text-align: center; box-shadow: 0 1px 4px rgba(212,175,55,0.2);">${t}</span>`).join('') : '';
         
         const cardHTML = `
-          <div class="prodotto-card-compact" data-delay="${index * 0.1}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; backdrop-filter: blur(20px); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; min-height: 420px;">
+          <div class="prodotto-card-compact" data-delay="${index * 0.1}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; backdrop-filter: blur(20px); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; min-height: 420px; width: 320px; max-width: 320px; min-width: 320px; margin: 0 auto;">
             <div class="prodotto-image-compact" style="position: relative; height: 180px; overflow: hidden; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
               <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" />
               <div class="badges-compact" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 3;">
@@ -3312,20 +3347,24 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             
             <div class="prodotto-content-compact" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: calc(100% - 180px);">
-              <div class="prodotto-header-compact" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px;">
-                <h3 style="font-size: 1.1rem; font-weight: 600; color: #e0e0e0; margin: 0; line-height: 1.3; flex: 1;">${prodotto.nome}</h3>
-                <span class="categoria-tag" style="background: linear-gradient(45deg, rgba(212, 175, 55, 0.15) 0%, rgba(241, 196, 15, 0.1) 100%); color: #ffd700; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.3); white-space: nowrap;">${prodotto.categoria}</span>
+              <div class="prodotto-header-compact" style="margin-bottom: 12px; text-align: center;">
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #ffffff; margin: 0 0 8px 0; line-height: 1.3; letter-spacing: 0.3px;">${prodotto.nome}</h3>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="categoria-tag" style="background: linear-gradient(45deg, #ffd700 0%, #f1c40f 100%); color: #1a1a1a; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3); white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px;">${prodotto.categoria}</span>
+                  <div style="width: 4px; height: 4px; background: rgba(255, 215, 0, 0.5); border-radius: 50%; flex-shrink: 0;"></div>
+                  <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.8rem; font-weight: 500;">${prodotto.genere}</span>
+                </div>
               </div>
               
-              <div class="prezzi-compact" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 10px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%); border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.2); margin-bottom: 8px;">
+              <div class="prezzi-compact" style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 12px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(241, 196, 15, 0.08) 100%); border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 8px; text-align: center;">
                 <span class="prezzo-originale" style="color: #888; text-decoration: line-through; font-size: 0.9rem; font-weight: 500;">€${prodotto.prezzoOriginale}</span>
-                <span class="prezzo-scontato" style="color: #ffd700; font-size: 1.2rem; font-weight: 700;">€${prodotto.prezzoScontato}</span>
-                <span class="risparmio" style="background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; margin-left: auto;">-€${(prodotto.prezzoOriginale - prodotto.prezzoScontato).toFixed(2)}</span>
+                <span class="prezzo-scontato" style="color: #ffd700; font-size: 1.3rem; font-weight: 800; text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);">€${prodotto.prezzoScontato}</span>
+                <span class="risparmio" style="background: linear-gradient(45deg, #27ae60, #2ecc71); color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);">-€${(prodotto.prezzoOriginale - prodotto.prezzoScontato).toFixed(2)}</span>
               </div>
               
-              <div class="taglie-compact" style="margin-bottom: 12px;">
-                <span class="taglie-label" style="display: block; color: #ccc; font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Taglie:</span>
-                <div class="taglie-list" style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: center;">${taglieHTML}</div>
+              <div class="taglie-compact" style="margin-bottom: 12px; text-align: center;">
+                <span class="taglie-label" style="display: block; color: #ccc; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Taglie disponibili</span>
+                <div class="taglie-list" style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; align-items: center;">${taglieHTML}</div>
               </div>
               
               <div class="prodotto-actions-compact" style="display: flex; gap: 8px; margin-top: auto;">
