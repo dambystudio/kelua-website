@@ -32,12 +32,6 @@ export default defineConfig({
     basePath: "", // Ensure no base path issues
   },
   
-  // UI Configuration for better mobile experience
-  admin: {
-    auth: {
-      useLocalAuth: isLocal
-    }
-  },
   media: {
     tina: {
       mediaRoot: "uploads",
@@ -378,6 +372,146 @@ export default defineConfig({
             name: "body",
             label: "Contenuto",
             isBody: true,
+          },
+        ],
+      },
+      
+      // Galleria Sportswear
+      {
+        name: "galleria_sportswear",
+        label: "Galleria Sportswear",
+        path: "src/content/galleria-sportswear",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome dell'immagine che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Fitness, Running, Casual)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+      
+      // Galleria Abiti da Cerimonia
+      {
+        name: "galleria_abiti_cerimonia",
+        label: "Galleria Abiti da Cerimonia",
+        path: "src/content/galleria-abiti-cerimonia",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome dell'abito che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Elegante, Matrimonio, Cocktail)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
         ],
       },

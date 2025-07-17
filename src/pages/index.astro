@@ -7,11 +7,24 @@ import Saldi from '../components/Saldi.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 // Carica le impostazioni della homepage
 const homepageSettings = await getEntry('homepage-settings', 'homepage-settings');
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+
+// Carica le immagini delle gallerie
+const galleriaSporstwear = await getCollection('galleria-sportswear');
+const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
+
+// Filtra solo le immagini attive e ordinate
+const sportswearAttive = galleriaSporstwear
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
+
+const abitiAttivi = galleriaAbiti
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 // Dati per le impostazioni
 const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
@@ -50,6 +63,138 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     <Hero />
     <Saldi />
     <About />
+    
+    <!-- Sezione Galleria -->
+    <section class="galleria-section">
+      <div class="container">
+        <!-- Intestazione Galleria -->
+        <div class="galleria-header">
+          <h2 class="galleria-title">
+            <span class="title-icon">📸</span>
+            Galleria
+          </h2>
+          <p class="galleria-description">
+            Scopri la nostra collezione attraverso le immagini. Dai un'occhiata ai nostri capi 
+            più belli e trova l'ispirazione per il tuo prossimo acquisto.
+          </p>
+        </div>
+
+        <!-- Sezione Abiti da Cerimonia -->
+        <div class="galleria-category">
+          <h3 class="category-title">
+            <span class="category-icon">🤵👰</span>
+            I nostri Abiti da Cerimonia
+          </h3>
+          <p class="category-description">
+            Eleganza e stile per i tuoi momenti speciali. Scopri la nostra selezione di abiti da cerimonia.
+          </p>
+          
+          <div class="carousel-container">
+            <div class="carousel-wrapper">
+              <div class="carousel-track" id="carousel-abiti">
+                {abitiAttivi.map((item, index) => (
+                  <div class="carousel-slide" data-index={index}>
+                    <div class="image-card">
+                      <img 
+                        src={item.data.immagine || '/background.png'} 
+                        alt={item.data.titolo}
+                        loading="lazy"
+                      />
+                      <div class="image-overlay">
+                        <h4>{item.data.titolo}</h4>
+                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
+                        <span class="image-category">{item.data.categoria}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Controlli Carousel -->
+            <button class="carousel-btn carousel-prev" data-carousel="carousel-abiti">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button class="carousel-btn carousel-next" data-carousel="carousel-abiti">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+            
+            <!-- Indicatori -->
+            <div class="carousel-indicators">
+              {abitiAttivi.map((_, index) => (
+                <button 
+                  class={`indicator ${index === 0 ? 'active' : ''}`}
+                  data-carousel="carousel-abiti"
+                  data-slide={index}
+                ></button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione Sportswear -->
+        <div class="galleria-category">
+          <h3 class="category-title">
+            <span class="category-icon">🏃‍♂️🏃‍♀️</span>
+            Il nostro Sportswear
+          </h3>
+          <p class="category-description">
+            Comfort e performance per il tuo stile di vita attivo. Esplora la nostra collezione sportiva.
+          </p>
+          
+          <div class="carousel-container">
+            <div class="carousel-wrapper">
+              <div class="carousel-track" id="carousel-sportswear">
+                {sportswearAttive.map((item, index) => (
+                  <div class="carousel-slide" data-index={index}>
+                    <div class="image-card">
+                      <img 
+                        src={item.data.immagine || '/background.png'} 
+                        alt={item.data.titolo}
+                        loading="lazy"
+                      />
+                      <div class="image-overlay">
+                        <h4>{item.data.titolo}</h4>
+                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
+                        <span class="image-category">{item.data.categoria}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <!-- Controlli Carousel -->
+            <button class="carousel-btn carousel-prev" data-carousel="carousel-sportswear">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button class="carousel-btn carousel-next" data-carousel="carousel-sportswear">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+            
+            <!-- Indicatori -->
+            <div class="carousel-indicators">
+              {sportswearAttive.map((_, index) => (
+                <button 
+                  class={`indicator ${index === 0 ? 'active' : ''}`}
+                  data-carousel="carousel-sportswear"
+                  data-slide={index}
+                ></button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <Contact />
   </main>
   <Footer />
@@ -101,7 +246,159 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
       // Aggiorna al resize della finestra
       window.addEventListener('resize', updateNavbarHeight);
     }
+
+    // Inizializza i caroselli della galleria
+    initGalleryCarousels();
   });
+
+  // Funzionalità Carousel per la Galleria
+  class GalleryCarousel {
+    constructor(element) {
+      this.carousel = element;
+      this.track = element.querySelector('.carousel-track');
+      this.slides = element.querySelectorAll('.carousel-slide');
+      this.prevBtn = element.querySelector('.carousel-prev');
+      this.nextBtn = element.querySelector('.carousel-next');
+      this.indicators = element.querySelectorAll('.indicator');
+      
+      this.currentSlide = 0;
+      this.slidesToShow = 3; // Mostra 3 elementi alla volta
+      this.totalSlides = this.slides.length;
+      this.maxSlide = Math.max(0, this.totalSlides - this.slidesToShow);
+      this.autoPlayInterval = null;
+      this.isAutoPlaying = true;
+      
+      this.init();
+    }
+    
+    init() {
+      this.updateCarousel();
+      this.bindEvents();
+      this.startAutoPlay();
+      this.updateIndicators();
+    }
+    
+    bindEvents() {
+      this.prevBtn.addEventListener('click', () => this.prevSlide());
+      this.nextBtn.addEventListener('click', () => this.nextSlide());
+      
+      this.indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => this.goToSlide(index));
+      });
+      
+      // Pausa l'autoplay al hover
+      this.carousel.addEventListener('mouseenter', () => this.pauseAutoPlay());
+      this.carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+      
+      // Gestione touch per mobile
+      this.handleTouchEvents();
+      
+      // Gestione resize
+      window.addEventListener('resize', () => this.handleResize());
+    }
+    
+    handleResize() {
+      // Aggiorna slidesToShow per mobile
+      if (window.innerWidth <= 768) {
+        this.slidesToShow = 1;
+      } else if (window.innerWidth <= 1024) {
+        this.slidesToShow = 2;
+      } else {
+        this.slidesToShow = 3;
+      }
+      
+      this.maxSlide = Math.max(0, this.totalSlides - this.slidesToShow);
+      
+      // Assicurati che currentSlide sia valido
+      if (this.currentSlide > this.maxSlide) {
+        this.currentSlide = this.maxSlide;
+      }
+      
+      this.updateCarousel();
+    }
+    
+    handleTouchEvents() {
+      let startX = 0;
+      let isDragging = false;
+      
+      this.track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        this.pauseAutoPlay();
+      });
+      
+      this.track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+      });
+      
+      this.track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            this.nextSlide();
+          } else {
+            this.prevSlide();
+          }
+        }
+        
+        isDragging = false;
+        this.startAutoPlay();
+      });
+    }
+    
+    prevSlide() {
+      this.currentSlide = this.currentSlide === 0 ? this.maxSlide : this.currentSlide - 1;
+      this.updateCarousel();
+    }
+    
+    nextSlide() {
+      this.currentSlide = this.currentSlide === this.maxSlide ? 0 : this.currentSlide + 1;
+      this.updateCarousel();
+    }
+    
+    goToSlide(index) {
+      this.currentSlide = Math.min(index, this.maxSlide);
+      this.updateCarousel();
+    }
+    
+    updateCarousel() {
+      const translateX = -this.currentSlide * (100 / this.slidesToShow);
+      this.track.style.transform = `translateX(${translateX}%)`;
+      this.updateIndicators();
+    }
+    
+    updateIndicators() {
+      this.indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === this.currentSlide);
+      });
+    }
+    
+    startAutoPlay() {
+      if (!this.isAutoPlaying || this.totalSlides <= this.slidesToShow) return;
+      
+      this.autoPlayInterval = setInterval(() => {
+        this.nextSlide();
+      }, 5000); // Cambia slide ogni 5 secondi
+    }
+    
+    pauseAutoPlay() {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+        this.autoPlayInterval = null;
+      }
+    }
+  }
+  
+  // Inizializza i caroselli
+  function initGalleryCarousels() {
+    const carousels = document.querySelectorAll('.carousel-container');
+    carousels.forEach(carousel => new GalleryCarousel(carousel));
+  }
 </script>
 
 <style>
@@ -278,6 +575,538 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
   select:focus {
     outline: 2px solid #ddbb76;
     outline-offset: 2px;
+  }
+
+  /* Container base */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Stili per la Galleria - Versione Moderna */
+  .galleria-section {
+    padding: 140px 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .galleria-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(221, 187, 118, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(221, 187, 118, 0.02) 0%, transparent 50%),
+      linear-gradient(45deg, transparent 40%, rgba(221, 187, 118, 0.01) 50%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .galleria-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ddbb76 20%, #c9a961 50%, #ddbb76 80%, transparent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .galleria-header {
+    text-align: center;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .galleria-title {
+    font-size: 4rem;
+    font-weight: 200;
+    color: #ffffff;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+  }
+
+  .galleria-title::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ddbb76, #c9a961, #ddbb76, transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(221, 187, 118, 0.5);
+  }
+
+  .title-icon {
+    font-size: 3.5rem;
+    color: #ddbb76;
+    margin-right: 15px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .galleria-description {
+    font-size: 1.3rem;
+    color: #b8b8b8;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-weight: 300;
+    text-align: center;
+    opacity: 0.9;
+  }
+
+  .galleria-category {
+    margin-bottom: 120px;
+    position: relative;
+    z-index: 1;
+    padding: 60px 0;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(221, 187, 118, 0.08);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .galleria-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .category-title {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .category-title::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ddbb76, transparent);
+    border-radius: 2px;
+  }
+
+  .category-icon {
+    font-size: 2.8rem;
+    color: #ddbb76;
+    margin-right: 15px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    vertical-align: middle;
+  }
+
+  .category-description {
+    font-size: 1.2rem;
+    color: #b8b8b8;
+    margin-bottom: 60px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: 1.7;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  .carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    background: transparent;
+  }
+
+  .carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(221, 187, 118, 0.15);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.5),
+      0 15px 30px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .carousel-wrapper:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 35px 70px rgba(0, 0, 0, 0.6),
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(221, 187, 118, 0.25);
+  }
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(221, 187, 118, 0.2);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .carousel-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 12px 24px rgba(0, 0, 0, 0.3);
+    border-color: rgba(221, 187, 118, 0.4);
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: transparent;
+  }
+
+  .carousel-slide {
+    min-width: 33.333%;
+    flex: 0 0 33.333%;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .image-card {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(221, 187, 118, 0.1);
+    box-shadow: 
+      0 15px 30px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .image-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(221, 187, 118, 0.3);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(221, 187, 118, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    filter: brightness(0.85) contrast(1.1) saturate(1.1);
+  }
+
+  .image-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(1) contrast(1.2) saturate(1.2);
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 0, 0, 0.3) 20%,
+      rgba(0, 0, 0, 0.8) 60%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+    color: white;
+    padding: 35px 25px 25px;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+  }
+
+  .image-card:hover .image-overlay {
+    transform: translateY(0);
+  }
+
+  .image-overlay h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    letter-spacing: 0.5px;
+  }
+
+  .image-overlay p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 18px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: #e0e0e0;
+  }
+    margin-bottom: 15px;
+    line-height: 1.4;
+    font-weight: 300;
+    color: #cccccc;
+  }
+
+  .image-category {
+    background: linear-gradient(135deg, #ddbb76, #c9a961);
+    color: #0a0a0a;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-block;
+    box-shadow: 
+      0 4px 15px rgba(221, 187, 118, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    transition: all 0.3s ease;
+  }
+
+  .image-category:hover {
+    background: linear-gradient(135deg, #c9a961, #ddbb76);
+    transform: translateY(-3px);
+    box-shadow: 
+      0 8px 25px rgba(221, 187, 118, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ddbb76;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: #ddbb76;
+    font-size: 1.3rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .carousel-prev {
+    left: 30px;
+  }
+
+  .carousel-next {
+    right: 30px;
+  }
+
+  .carousel-btn:hover {
+    background: linear-gradient(135deg, #ddbb76, #c9a961);
+    color: #0a0a0a;
+    border-color: #c9a961;
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 
+      0 12px 35px rgba(221, 187, 118, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 40px;
+    padding: 20px 0;
+  }
+
+  .indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(221, 187, 118, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .indicator.active {
+    background: linear-gradient(135deg, #ddbb76, #c9a961);
+    border-color: #ddbb76;
+    transform: scale(1.4);
+    box-shadow: 
+      0 6px 20px rgba(221, 187, 118, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .indicator:hover {
+    background: linear-gradient(135deg, #ddbb76, #c9a961);
+    border-color: #ddbb76;
+    transform: scale(1.2);
+    box-shadow: 
+      0 5px 15px rgba(221, 187, 118, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive Design Galleria */
+  @media (max-width: 1024px) {
+    .carousel-slide {
+      min-width: 50%;
+      flex: 0 0 50%;
+    }
+    
+    .galleria-section {
+      padding: 80px 0;
+    }
+
+    .galleria-title {
+      font-size: 2.8rem;
+    }
+
+    .category-title {
+      font-size: 2.2rem;
+    }
+
+    .image-card {
+      height: 350px;
+    }
+
+    .carousel-btn {
+      width: 45px;
+      height: 45px;
+      font-size: 1rem;
+    }
+
+    .carousel-prev {
+      left: 15px;
+    }
+
+    .carousel-next {
+      right: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-slide {
+      min-width: 100%;
+      flex: 0 0 100%;
+      padding: 0 5px;
+    }
+    
+    .galleria-section {
+      padding: 60px 0;
+    }
+
+    .galleria-title {
+      font-size: 2.5rem;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .galleria-title::before,
+    .galleria-title::after {
+      display: none;
+    }
+
+    .category-title {
+      font-size: 2rem;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .image-card {
+      height: 300px;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 0.9rem;
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+    
+    .galleria-category {
+      padding: 30px 0;
+      margin-bottom: 60px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .galleria-title {
+      font-size: 2rem;
+    }
+
+    .category-title {
+      font-size: 1.8rem;
+    }
+
+    .image-card {
+      height: 250px;
+    }
+    
+    .image-overlay {
+      padding: 20px 15px 15px;
+    }
+    
+    .image-overlay h4 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    
+    .image-overlay p {
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    
+    .image-category {
+      padding: 4px 12px;
+      font-size: 0.7rem;
+    }
   }
   
   /* Performance: migliora le animazioni */

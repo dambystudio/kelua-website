@@ -83,6 +83,34 @@ const saldiHeroCollection = defineCollection({
   }),
 });
 
+// Schema per le immagini della galleria sportswear
+const galleriaSporstwearCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    titolo: z.string(),
+    descrizione: z.string().optional(),
+    immagine: z.string(),
+    categoria: z.string().optional(),
+    genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
+    attivo: z.boolean(),
+    ordine: z.number().optional(),
+  }),
+});
+
+// Schema per le immagini della galleria abiti da cerimonia
+const galleriaAbitiCerimonia = defineCollection({
+  type: 'content',
+  schema: z.object({
+    titolo: z.string(),
+    descrizione: z.string().optional(),
+    immagine: z.string(),
+    categoria: z.string().optional(),
+    genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
+    attivo: z.boolean(),
+    ordine: z.number().optional(),
+  }),
+});
+
 // Esporta le collezioni
 export const collections = {
   'saldi-settings': saldiSettingsCollection,
@@ -91,4 +119,6 @@ export const collections = {
   'prodotti-saldi': prodottiSaldiCollection,
   'saldi-posts': saldiPostsCollection,
   'saldi-hero': saldiHeroCollection,
+  'galleria-sportswear': galleriaSporstwearCollection,
+  'galleria-abiti-cerimonia': galleriaAbitiCerimonia,
 };

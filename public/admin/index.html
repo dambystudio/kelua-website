@@ -2,143 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TinaCMS</title>
-    <script type="module" crossorigin src="/admin/assets/index-125363db.js"></script>
-    <link rel="stylesheet" href="/admin/assets/index-be768d34.css">
-    <link rel="stylesheet" href="/admin/mobile-fix.css">
   </head>
+
+  <!-- if development -->
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:4001/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
+  <script type="module" src="http://localhost:4001/@vite/client"></script>
+  <script>
+  function handleLoadError() {
+    // Assets have failed to load
+    document.getElementById('root').innerHTML = '<style type="text/css"> #no-assets-placeholder body { font-family: sans-serif; font-size: 16px; line-height: 1.4; color: #333; background-color: #f5f5f5; } #no-assets-placeholder { max-width: 600px; margin: 0 auto; padding: 40px; text-align: center; background-color: #fff; box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); } #no-assets-placeholder h1 { font-size: 24px; margin-bottom: 20px; } #no-assets-placeholder p { margin-bottom: 10px; } #no-assets-placeholder a { color: #0077cc; text-decoration: none; } #no-assets-placeholder a:hover { text-decoration: underline; } </style> <div id="no-assets-placeholder"> <h1>Failed loading TinaCMS assets</h1> <p> Your TinaCMS configuration may be misconfigured, and we could not load the assets for this page. </p> <p> Please visit <a href="https://tina.io/docs/tina-cloud/faq/#how-do-i-resolve-failed-loading-tinacms-assets-error">this doc</a> for help. </p> </div> </div>';
+  }
+  </script>
+  <script
+    type="module"
+    src="http://localhost:4001/src/main.tsx"
+    onerror="handleLoadError()"
+  ></script>
   <body class="tina-tailwind">
     <div id="root"></div>
-    <script>
-      function handleLoadError() {
-        console.error('Failed to load assets')
-        // Assets have failed to load
-        document.getElementById('root').innerHTML =
-          '<style type="text/css">\
-        #no-assets-placeholder body {\
-          font-family: sans-serif;\
-          font-size: 16px;\
-          line-height: 1.4;\
-          color: #333;\
-          background-color: #f5f5f5;\
-        }\
-        #no-assets-placeholder {\
-          max-width: 600px;\
-          margin: 0 auto;\
-          padding: 40px;\
-          text-align: center;\
-          background-color: #fff;\
-          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);\
-        }\
-        #no-assets-placeholder h1 {\
-          font-size: 24px;\
-          margin-bottom: 20px;\
-        }\
-        #no-assets-placeholder p {\
-          margin-bottom: 10px;\
-        }\
-        #no-assets-placeholder a {\
-          color: #0077cc;\
-          text-decoration: none;\
-        }\
-        #no-assets-placeholder a:hover {\
-          text-decoration: underline;\
-        }\
-        </style>\
-        <div id=\'no-assets-placeholder\'>\
-          <h1>Failed loading TinaCMS assets</h1>\
-          <p>\
-            Your TinaCMS configuration may be misconfigured, and we could not load\
-            the assets for this page.\
-          </p>\
-          <p>\
-            Please visit <a href="https://tina.io/docs/tina-cloud/faq/#how-do-i-resolve-failed-loading-tinacms-assets-error">this doc</a> for help.\
-          </p>\
-        </div>'
-      }
-
-      // Check if #root has childen after 2 seconds
-      // If not, we assume that the assets have failed to load
-      setTimeout(() => {
-        if (!document.getElementById('root').children.length) {
-          handleLoadError()
-        }
-      }, 2000)
-    </script>
-    
-    <!-- Simplified Mobile Menu Handler -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        let menuOpen = false;
-        
-        function setupMobileMenu() {
-          if (window.innerWidth > 768) return;
-          
-          // Toggle menu when clicking the CSS-generated menu button
-          document.addEventListener('click', function(e) {
-            const rect = document.body.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Check if click is on menu button area (top-left corner)
-            if (x >= 10 && x <= 100 && y >= 10 && y <= 50) {
-              menuOpen = !menuOpen;
-              document.body.classList.toggle('sidebar-open', menuOpen);
-              e.preventDefault();
-              e.stopPropagation();
-            }
-            
-            // Check if click is on close button area (top-right corner when menu is open)
-            if (menuOpen && x >= window.innerWidth - 150 && y >= 10 && y <= 50) {
-              menuOpen = false;
-              document.body.classList.remove('sidebar-open');
-              e.preventDefault();
-              e.stopPropagation();
-            }
-            
-            // Close menu when clicking on sidebar links
-            if (menuOpen && e.target.tagName === 'A' && e.target.closest('[class*="sidebar"], aside, nav')) {
-              setTimeout(() => {
-                menuOpen = false;
-                document.body.classList.remove('sidebar-open');
-              }, 200);
-            }
-          });
-          
-          // Close menu when clicking outside
-          document.addEventListener('click', function(e) {
-            if (menuOpen && !e.target.closest('[class*="sidebar"], aside, nav')) {
-              const rect = document.body.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-              
-              // Don't close if clicking on menu button
-              if (!(x >= 10 && x <= 100 && y >= 10 && y <= 50)) {
-                menuOpen = false;
-                document.body.classList.remove('sidebar-open');
-              }
-            }
-          });
-          
-          // Close with Escape key
-          document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && menuOpen) {
-              menuOpen = false;
-              document.body.classList.remove('sidebar-open');
-            }
-          });
-        }
-        
-        setupMobileMenu();
-        window.addEventListener('resize', setupMobileMenu);
-        
-        // Re-setup when TinaCMS loads
-        setTimeout(setupMobileMenu, 1000);
-        setTimeout(setupMobileMenu, 3000);
-      });
-    </script>
-    
   </body>
 </html>
