@@ -37,7 +37,7 @@ class KeluaUXEnhancements {
       
       // Add dynamic color based on scroll position
       const hue = Math.min(scrolled * 1.2, 120);
-      fill.style.background = `linear-gradient(90deg, #d4af37, hsl(${hue}, 70%, 50%))`;
+      fill.style.background = `linear-gradient(90deg, #ddbb76, hsl(${hue}, 70%, 50%))`;
       
       ticking = false;
     };
@@ -374,7 +374,7 @@ uxStyles.textContent = `
   .scroll-progress-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #d4af37, #f1c40f);
+    background: linear-gradient(90deg, #ddbb76, #f1c40f);
     transition: width 0.1s ease;
     position: relative;
   }
@@ -503,7 +503,7 @@ uxStyles.textContent = `
   .input-enhanced input:focus,
   .input-enhanced textarea:focus {
     outline: none;
-    border-color: #d4af37;
+    border-color: #ddbb76;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
   }
@@ -525,7 +525,7 @@ uxStyles.textContent = `
     top: -8px;
     left: 8px;
     font-size: 12px;
-    color: #d4af37;
+    color: #ddbb76;
     background: rgba(0, 0, 0, 0.8);
   }
 
@@ -577,7 +577,7 @@ uxStyles.textContent = `
   .custom-cursor.hover {
     transform: scale(1.5);
     background: rgba(212, 175, 55, 0.3);
-    border-color: #d4af37;
+    border-color: #ddbb76;
   }
 
   .cursor-dot {
@@ -586,7 +586,7 @@ uxStyles.textContent = `
     left: 50%;
     width: 4px;
     height: 4px;
-    background: #d4af37;
+    background: #ddbb76;
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }
@@ -596,7 +596,7 @@ uxStyles.textContent = `
     position: absolute;
     top: -40px;
     left: 6px;
-    background: #d4af37;
+    background: #ddbb76;
     color: #1a1a1a;
     padding: 8px;
     z-index: 10004;
@@ -627,7 +627,7 @@ uxStyles.textContent = `
   }
 
   .breadcrumb-item:hover {
-    color: #d4af37;
+    color: #ddbb76;
   }
 
   .breadcrumb-separator {
@@ -636,7 +636,7 @@ uxStyles.textContent = `
   }
 
   .breadcrumb-current {
-    color: #d4af37;
+    color: #ddbb76;
     font-weight: 500;
   }
 
@@ -659,7 +659,7 @@ uxStyles.textContent = `
 
   .smart-back-btn:hover {
     background: rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
+    border-color: #ddbb76;
   } */
 
   /* Ripple Effect */

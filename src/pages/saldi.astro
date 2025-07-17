@@ -35,7 +35,7 @@ try {
 // Dati delle impostazioni con conversione sicura dei booleani
 const saldiAttivi = saldiSettings?.data?.saldiAttivi === true || saldiSettings?.data?.saldiAttivi === 'true';
 const messaggioGlobale = saldiSettings?.data?.messaggioGlobale || "";
-const coloreTema = saldiSettings?.data?.coloreTema ?? "#d4af37";
+const coloreTema = saldiSettings?.data?.coloreTema ?? "#ddbb76";
 const emailOrdini = saldiSettings?.data?.emailOrdini ?? "keluafashion@hotmail.it";
 const telefonoOrdini = saldiSettings?.data?.telefonoOrdini ?? "0882302070";
 
@@ -71,7 +71,7 @@ const scontoMassimoCalcolato = prodottiSaldi.length > 0
   : 70;
 
 // Applica il colore tema personalizzato
-const temaColore = coloreTema || "#d4af37";
+const temaColore = coloreTema || "#ddbb76";
 
 // Filtro e ordinamento Post Saldi
 const dataOggi = new Date();
@@ -371,7 +371,7 @@ function formatDateRange(dataInizio, dataFine) {
     font-size: 3rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #d4af37;
+    color: #ddbb76;
   }
 
   .message-content p {
@@ -385,7 +385,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .btn-home {
     display: inline-block;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     color: #1a1a1a;
     padding: 15px 30px;
     border-radius: 25px;
@@ -399,7 +399,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
   /* Messaggio Globale */
   .messaggio-globale {
-    background: linear-gradient(135deg, #d4af37, #b8941f);
+    background: linear-gradient(135deg, #ddbb76, #b8941f);
     color: #1a1a1a;
     padding: 20px 0;
     text-align: center;
@@ -537,7 +537,7 @@ function formatDateRange(dataInizio, dataFine) {
     font-family: 'Glida Display Regular', 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 300;
-    color: #d4af37;
+    color: #ddbb76;
     margin-bottom: 8px;
     letter-spacing: 2px;
   }
@@ -578,7 +578,7 @@ function formatDateRange(dataInizio, dataFine) {
     text-align: center;
     margin-bottom: 40px;
     color: white;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -634,8 +634,8 @@ function formatDateRange(dataInizio, dataFine) {
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
   }
   .filtro-btn.active {
-    background: linear-gradient(135deg, var(--tema-colore, #d4af37), #b8941f);
-    border-color: var(--tema-colore, #d4af37);
+    background: linear-gradient(135deg, var(--tema-colore, #ddbb76), #b8941f);
+    border-color: var(--tema-colore, #ddbb76);
     color: #1a1a1a;
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
   }
@@ -679,7 +679,7 @@ function formatDateRange(dataInizio, dataFine) {
     font-weight: 600;
     text-align: center;
     margin-bottom: 60px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -742,7 +742,7 @@ function formatDateRange(dataInizio, dataFine) {
     position: absolute;
     top: 20px;
     left: 20px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     color: #1a1a1a;
     padding: 8px 16px;
     border-radius: 20px;
@@ -819,7 +819,7 @@ function formatDateRange(dataInizio, dataFine) {
     backdrop-filter: blur(20px);
     border: 2px solid rgba(212, 175, 55, 0.3);
     border-radius: 15px;
-    color: #d4af37;
+    color: #ddbb76;
     padding: 12px 20px;
     font-size: 1rem;
     font-weight: 600;
@@ -864,7 +864,7 @@ function formatDateRange(dataInizio, dataFine) {
     font-weight: 600;
     color: #1a1a1a;
     margin: 0;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -883,7 +883,7 @@ function formatDateRange(dataInizio, dataFine) {
     font-weight: 600;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -933,7 +933,7 @@ function formatDateRange(dataInizio, dataFine) {
     left: 0 !important;
     right: 0 !important;
     height: 4px !important;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37) !important;
+    background: linear-gradient(90deg, #ddbb76, #f1c40f, #ddbb76) !important;
     transform: scaleX(0) !important;
     transition: transform 0.3s ease !important;
   }
@@ -956,7 +956,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .genere-card.selected {
-    border-color: #d4af37 !important;
+    border-color: #ddbb76 !important;
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(241, 196, 15, 0.1) 100%) !important;
     transform: translateY(-8px) scale(1.02) !important;
     box-shadow: 
@@ -991,7 +991,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .genere-count {
-    background: linear-gradient(45deg, #d4af37, #f1c40f) !important;
+    background: linear-gradient(45deg, #ddbb76, #f1c40f) !important;
     color: #1a1a1a !important;
     padding: 10px 20px !important;
     border-radius: 25px !important;
@@ -1033,7 +1033,7 @@ function formatDateRange(dataInizio, dataFine) {
   .step-container h2 {
     font-size: 2.2rem;
     font-weight: 700;
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1075,7 +1075,7 @@ function formatDateRange(dataInizio, dataFine) {
     border: 1px solid rgba(212, 175, 55, 0.2);
     white-space: nowrap;
     font-size: 0.8rem;
-    color: #d4af37;
+    color: #ddbb76;
     font-weight: 600;
     position: absolute;
     right: 0;
@@ -1354,7 +1354,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .breadcrumb-item.active {
-    color: #d4af37;
+    color: #ddbb76;
     font-weight: 600;
   }
 
@@ -1609,7 +1609,7 @@ function formatDateRange(dataInizio, dataFine) {
     left: 0 !important;
     right: 0 !important;
     height: 4px !important;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37) !important;
+    background: linear-gradient(90deg, #ddbb76, #f1c40f, #ddbb76) !important;
     transform: scaleX(0) !important;
     transition: transform 0.3s ease !important;
   }
@@ -1629,7 +1629,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .categoria-card-step.selected {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%) !important;
-    border-color: #d4af37 !important;
+    border-color: #ddbb76 !important;
     box-shadow: 
       0 15px 40px rgba(212, 175, 55, 0.2),
       0 5px 15px rgba(212, 175, 55, 0.1) !important;
@@ -1689,7 +1689,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .sconto-badge {
-    background: linear-gradient(45deg, #d4af37, #f1c40f) !important;
+    background: linear-gradient(45deg, #ddbb76, #f1c40f) !important;
     color: #1a1a1a !important;
     padding: 6px 14px !important;
     border-radius: 20px !important;
@@ -1740,7 +1740,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .categoria-card-step.tutti-articoli:hover {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(241, 196, 15, 0.06) 100%) !important;
-    border-color: #d4af37 !important;
+    border-color: #ddbb76 !important;
     transform: translateY(-10px) scale(1.03) !important;
     box-shadow: 
       0 25px 60px rgba(212, 175, 55, 0.2),
@@ -1748,7 +1748,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .categoria-card-step.tutti-articoli .categoria-icon {
-    background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%) !important;
+    background: linear-gradient(135deg, #ddbb76 0%, #f1c40f 100%) !important;
     color: white !important;
     font-size: 2.8rem !important;
     box-shadow: 
@@ -1813,7 +1813,7 @@ function formatDateRange(dataInizio, dataFine) {
     left: 0 !important;
     right: 0 !important;
     height: 4px !important;
-    background: linear-gradient(90deg, #d4af37, #f1c40f, #d4af37) !important;
+    background: linear-gradient(90deg, #ddbb76, #f1c40f, #ddbb76) !important;
     transform: scaleX(0) !important;
     transition: transform 0.3s ease !important;
     z-index: 2 !important;
@@ -1891,7 +1891,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .badge.sconto {
-    background: linear-gradient(45deg, #d4af37, #f1c40f) !important;
+    background: linear-gradient(45deg, #ddbb76, #f1c40f) !important;
     color: #1a1a1a !important;
     font-weight: 800 !important;
   }
@@ -1920,7 +1920,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .categoria-tag {
     background: linear-gradient(45deg, rgba(212, 175, 55, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%) !important;
-    color: #d4af37 !important;
+    color: #ddbb76 !important;
     padding: 6px 12px !important;
     border-radius: 15px !important;
     font-size: 0.8rem !important;
@@ -1956,7 +1956,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .prezzo-scontato {
-    color: #d4af37 !important;
+    color: #ddbb76 !important;
     font-size: 1.5rem !important;
     font-weight: 800 !important;
   }
@@ -2000,7 +2000,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .taglia:hover {
-    background: linear-gradient(135deg, #d4af37 0%, #f1c40f 100%) !important;
+    background: linear-gradient(135deg, #ddbb76 0%, #f1c40f 100%) !important;
     color: white !important;
     transform: scale(1.05) !important;
   }
@@ -2041,7 +2041,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .btn-call {
-    background: linear-gradient(45deg, #d4af37, #f1c40f) !important;
+    background: linear-gradient(45deg, #ddbb76, #f1c40f) !important;
     color: #1a1a1a !important;
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3) !important;
   }
@@ -2049,13 +2049,13 @@ function formatDateRange(dataInizio, dataFine) {
   .btn-call:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4) !important;
-    background: linear-gradient(45deg, #f1c40f, #d4af37) !important;
+    background: linear-gradient(45deg, #f1c40f, #ddbb76) !important;
   }
 
   /* CTA Saldi */
   .cta-saldi {
     padding: 80px 0;
-    background: linear-gradient(135deg, #d4af37, #f1c40f);
+    background: linear-gradient(135deg, #ddbb76, #f1c40f);
   }
 
   .cta-content {
@@ -2180,7 +2180,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .filtro-btn.active {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.8) 0%, rgba(212, 175, 55, 0.6) 100%);
-    border-color: #d4af37;
+    border-color: #ddbb76;
     color: #000;
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
@@ -2199,7 +2199,7 @@ function formatDateRange(dataInizio, dataFine) {
 
   .filtro-count {
     background: rgba(212, 175, 55, 0.2);
-    color: #d4af37;
+    color: #ddbb76;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -2402,7 +2402,7 @@ function formatDateRange(dataInizio, dataFine) {
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #d4af37, transparent);
+    background: linear-gradient(180deg, transparent, #ddbb76, transparent);
     transform: scaleY(0);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -2508,7 +2508,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .breadcrumb-item.active {
-    color: #d4af37;
+    color: #ddbb76;
     font-weight: 600;
   }
 
@@ -2537,7 +2537,7 @@ function formatDateRange(dataInizio, dataFine) {
     display: block;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #d4af37;
+    color: #ddbb76;
     line-height: 1;
   }
 
@@ -2575,7 +2575,7 @@ function formatDateRange(dataInizio, dataFine) {
   }
 
   .btn-torna-categorie {
-    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    background: linear-gradient(45deg, #ddbb76, #f1c40f);
     color: #1a1a1a;
     border: none;
     padding: 12px 24px;
@@ -2676,11 +2676,11 @@ function formatDateRange(dataInizio, dataFine) {
     color: #ccc !important;
   }
   .prodotto-card-final .categoria-tag {
-    color: #d4af37 !important;
+    color: #ddbb76 !important;
     background: rgba(212, 175, 55, 0.15) !important;
   }
   .prodotto-card-final .prezzo-scontato {
-    color: #d4af37 !important;
+    color: #ddbb76 !important;
   }
   .prodotto-card-final .prezzo-originale {
     color: #888 !important;
@@ -3141,7 +3141,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Test click immediato per debug
       card.style.cursor = 'pointer';
-      card.style.border = '2px solid #d4af37';
+      card.style.border = '2px solid #ddbb76';
       
       card.addEventListener('click', function(event) {
         console.log('🎯 CLICK RILEVATO su card genere!', this.getAttribute('data-genere'));

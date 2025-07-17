@@ -324,7 +324,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #ddbb76;
+    color: #ffd700;
     text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
   }
 
@@ -350,11 +350,11 @@
 
   .store-header svg {
     flex-shrink: 0;
-    color: #ddbb76;
+    color: #ffd700;
   }
 
   .store-label {
-    color: #ddbb76;
+    color: #ffd700;
     font-weight: 600;
     font-size: 0.85rem;
     text-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
@@ -377,7 +377,7 @@
     border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 6px;
     padding: 4px 10px;
-    color: #ddbb76;
+    color: #ffd700;
     font-size: 0.7rem;
     font-weight: 600;
     cursor: pointer;
@@ -409,7 +409,7 @@
 
   .contact-item svg {
     flex-shrink: 0;
-    color: #ddbb76;
+    color: #ffd700;
   }
 
   .contact-item a {
@@ -419,7 +419,7 @@
   }
 
   .contact-item a:hover {
-    color: #ddbb76;
+    color: #ffd700;
     text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);
   }
 
@@ -491,7 +491,7 @@
   }
 
   .footer-links a:hover {
-    color: #ddbb76;
+    color: #ffd700;
     transform: translateX(4px);
     text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);
   }
@@ -528,7 +528,7 @@
   }
 
   .dambystudio-link:hover {
-    color: #ddbb76;
+    color: #ffd700;
     background: rgba(255, 215, 0, 0.1);
     transform: translateY(-1px);
     text-shadow: 0 0 4px rgba(255, 215, 0, 0.4);

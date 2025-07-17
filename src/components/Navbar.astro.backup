@@ -430,7 +430,7 @@ const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
 .mobile-menu-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #ddbb76;
+  color: #ffd700;
   letter-spacing: 1px;
 }
 
@@ -440,7 +440,7 @@ const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
   background: rgba(255, 215, 0, 0.1);
   border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 8px;
-  color: #ddbb76;
+  color: #ffd700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -496,7 +496,7 @@ const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
 .mobile-nav-item:hover {
   background: rgba(255, 215, 0, 0.1);
   border-color: rgba(255, 215, 0, 0.3);
-  color: #ddbb76;
+  color: #ffd700;
   transform: translateX(10px);
 }
 
@@ -587,7 +587,7 @@ const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
 .mobile-contact-btn:hover {
   background: rgba(255, 215, 0, 0.1);
   border-color: rgba(255, 215, 0, 0.3);
-  color: #ddbb76;
+  color: #ffd700;
   transform: translateY(-2px);
 }
 

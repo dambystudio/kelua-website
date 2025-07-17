@@ -123,7 +123,7 @@ document.querySelectorAll('.contact-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateX(15px) scale(1.03)';
         this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.5)';
-        this.style.borderColor = '#d4af37';
+        this.style.borderColor = '#ddbb76';
     });
     
     card.addEventListener('mouseleave', function() {
@@ -138,7 +138,7 @@ document.querySelectorAll('.service-item').forEach(item => {
     item.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-20px) scale(1.05)';
         this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.4)';
-        this.style.borderColor = '#d4af37';
+        this.style.borderColor = '#ddbb76';
     });
     
     item.addEventListener('mouseleave', function() {
@@ -153,7 +153,7 @@ document.querySelectorAll('.fashion-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-20px) rotate(3deg) scale(1.05)';
         this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.4)';
-        this.style.borderColor = '#d4af37';
+        this.style.borderColor = '#ddbb76';
     });
     
     card.addEventListener('mouseleave', function() {
@@ -335,7 +335,7 @@ function initLoadingSequence() {
             width: 80px;
             height: 80px;
             border: 3px solid rgba(212, 175, 55, 0.3);
-            border-top: 3px solid #d4af37;
+            border-top: 3px solid #ddbb76;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
@@ -343,7 +343,7 @@ function initLoadingSequence() {
         <div style="
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: #d4af37;
+            color: #ddbb76;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             animation: pulse 2s ease-in-out infinite;
         ">Kelua</div>
@@ -403,7 +403,7 @@ function initScrollIndicator() {
         left: 0;
         width: 0%;
         height: 3px;
-        background: linear-gradient(90deg, #d4af37 0%, #b8960a 100%);
+        background: linear-gradient(90deg, #ddbb76 0%, #b8960a 100%);
         z-index: 10001;
         transition: width 0.1s ease;
         box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
