@@ -32,57 +32,21 @@
 				
 				<div class="about-card scroll-animate" data-delay="0.6">
 					<div class="year-badge">Oggi</div>
-					<h3>La Nostra Missione</h3>
+					<h3>Espansione Internazionale</h3>
 					<p>
-						Oggi Kelua continua a essere sinonimo di eleganza e qualità. Due generazioni 
-						di esperienza, quasi 50 anni di storia e un futuro sempre orientato all'eccellenza 
-						nell'abbigliamento. Ogni capo racconta una storia, proprio come la nostra.
+						Oggi Kelua non è più solo un punto di riferimento a San Giovanni Rotondo, ma ha 
+						varcato i confini nazionali. Il brand è arrivato in Spagna, con una presenza 
+						significativa a Madrid, portando l'eleganza italiana nel cuore dell'Europa. 
+						Due generazioni di esperienza, quasi 50 anni di storia e un futuro sempre orientato 
+						all'eccellenza nell'abbigliamento, ora anche oltre confine. La nostra missione 
+						rimane immutata: creare capi che raccontano una storia di qualità, tradizione e 
+						innovazione, raggiungendo sempre più persone che apprezzano lo stile italiano autentico.
 					</p>
 				</div>
 			</div>
 			
-			<!-- Sezione Storia Fotografica -->
-			<div class="storia-fotografica scroll-animate" data-delay="0.8">
-				<h3 class="storia-title">Un Viaggio nel Tempo</h3>
-				<p class="storia-subtitle">Dalle origini ai giorni nostri: l'evoluzione di Kelua attraverso le immagini</p>
-				
-				<div class="foto-storia-grid">
-					<div class="foto-storia-item">
-						<div class="foto-container">
-							<img src="/fotoEsterno1980.png" alt="Negozio Kelua nel 1980" class="foto-storica">
-							<div class="foto-overlay">
-								<div class="foto-info">
-									<span class="foto-anno">1980</span>
-									<span class="foto-descrizione">I primi anni</span>
-								</div>
-							</div>
-						</div>
-						<div class="foto-caption">
-							<h4>Le Origini</h4>
-							<p>Il negozio nei primi anni di attività, quando tutto iniziò con la passione di una famiglia per l'abbigliamento di qualità.</p>
-						</div>
-					</div>
-					
-					<div class="foto-storia-item">
-						<div class="foto-container">
-							<img src="/fotoEsternoAttuale.jpg" alt="Negozio Kelua oggi" class="foto-storica">
-							<div class="foto-overlay">
-								<div class="foto-info">
-									<span class="foto-anno">Oggi</span>
-									<span class="foto-descrizione">La modernità</span>
-								</div>
-							</div>
-						</div>
-						<div class="foto-caption">
-							<h4>Il Presente</h4>
-							<p>Kelua oggi: un punto di riferimento per l'eleganza a San Giovanni Rotondo, con uno stile rinnovato ma fedele alla tradizione.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			
 			<!-- Sezione Servizi -->
-			<div class="servizi-section scroll-animate" data-delay="1.0">
+			<div class="servizi-section scroll-animate" data-delay="0.8">
 				<h3 class="servizi-title">I Nostri Servizi</h3>
 				<p class="servizi-subtitle">Esperienza, qualità e attenzione al dettaglio per ogni tua esigenza</p>
 			</div>
@@ -396,31 +360,6 @@
 		font-size: 1.1rem;
 	}
 
-	/* Storia Fotografica */
-	.storia-fotografica {
-		margin: 4rem 0;
-		text-align: center;
-	}
-
-	.storia-title {
-		font-family: 'Playfair Display', serif;
-		color: var(--accent-light);
-		font-size: 2.5rem;
-		margin-bottom: 1rem;
-		font-weight: 600;
-		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-	}
-
-	.storia-subtitle {
-		color: rgba(255, 255, 255, 0.7);
-		font-size: 1.2rem;
-		margin-bottom: 3rem;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		line-height: 1.6;
-	}
-
 	/* Sezione Servizi */
 	.servizi-section {
 		margin: 4rem 0 3rem 0;
@@ -444,118 +383,6 @@
 		margin-left: auto;
 		margin-right: auto;
 		line-height: 1.6;
-	}
-
-	.foto-storia-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-		gap: 3rem;
-		margin-top: 3rem;
-	}
-
-	.foto-storia-item {
-		background: rgba(0, 0, 0, 0.4);
-		border-radius: 20px;
-		overflow: hidden;
-		transition: all 0.4s ease;
-		border: 1px solid rgba(212, 175, 55, 0.2);
-		backdrop-filter: blur(15px);
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-	}
-
-	.foto-storia-item:hover {
-		transform: translateY(-10px);
-		border-color: var(--accent-color);
-		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-	}
-
-	.foto-container {
-		position: relative;
-		height: 300px;
-		overflow: hidden;
-	}
-
-	.foto-storica {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.5s ease;
-		filter: sepia(20%) contrast(1.1);
-	}
-
-	.foto-storia-item:hover .foto-storica {
-		transform: scale(1.1);
-		filter: sepia(0%) contrast(1.2);
-	}
-
-	.foto-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(
-			45deg, 
-			rgba(0, 0, 0, 0.7) 0%, 
-			rgba(212, 175, 55, 0.2) 50%, 
-			rgba(0, 0, 0, 0.7) 100%
-		);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		opacity: 0;
-		transition: all 0.4s ease;
-	}
-
-	.foto-storia-item:hover .foto-overlay {
-		opacity: 1;
-	}
-
-	.foto-info {
-		text-align: center;
-		transform: translateY(20px);
-		transition: transform 0.4s ease;
-	}
-
-	.foto-storia-item:hover .foto-info {
-		transform: translateY(0);
-	}
-
-	.foto-anno {
-		display: block;
-		font-size: 3rem;
-		font-weight: 700;
-		color: var(--accent-light);
-		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-		margin-bottom: 0.5rem;
-	}
-
-	.foto-descrizione {
-		display: block;
-		font-size: 1.1rem;
-		color: rgba(255, 255, 255, 0.9);
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-	}
-
-	.foto-caption {
-		padding: 2rem;
-		text-align: center;
-	}
-
-	.foto-caption h4 {
-		font-family: 'Playfair Display', serif;
-		color: var(--accent-light);
-		font-size: 1.5rem;
-		margin-bottom: 1rem;
-		font-weight: 600;
-	}
-
-	.foto-caption p {
-		color: rgba(255, 255, 255, 0.8);
-		line-height: 1.6;
-		font-size: 1rem;
 	}
 
 	.services-grid {
@@ -934,20 +761,6 @@
 			padding: 5px 10px;
 		}
 
-		/* Storia Fotografica - Mobile */
-		.storia-fotografica {
-			margin: 3rem 0;
-		}
-
-		.storia-title {
-			font-size: 2rem;
-		}
-
-		.storia-subtitle {
-			font-size: 1.1rem;
-			margin-bottom: 2rem;
-		}
-
 		/* Sezione Servizi - Mobile */
 		.servizi-section {
 			margin: 3rem 0 2rem 0;
@@ -959,19 +772,6 @@
 
 		.servizi-subtitle {
 			font-size: 1.1rem;
-		}
-
-		.foto-storia-grid {
-			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.foto-container {
-			height: 250px;
-		}
-
-		.foto-caption {
-			padding: 1.5rem;
 		}
 
 		.foto-anno {
@@ -1027,35 +827,6 @@
 
 		.servizi-subtitle {
 			font-size: 1rem;
-		}
-
-		.foto-storia-grid {
-			gap: 1.5rem;
-		}
-
-		.foto-container {
-			height: 220px;
-		}
-
-		.foto-caption {
-			padding: 1rem;
-		}
-
-		.foto-caption h4 {
-			font-size: 1.3rem;
-		}
-
-		.foto-caption p {
-			font-size: 0.9rem;
-		}
-
-		.foto-anno {
-			font-size: 2rem;
-		}
-
-		.foto-descrizione {
-			font-size: 0.9rem;
-			letter-spacing: 1px;
 		}
 	}
 	

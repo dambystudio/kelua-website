@@ -62,7 +62,6 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     
     <Hero />
     <Saldi />
-    <About />
     
     <!-- Sezione Galleria -->
     <section class="galleria-section">
@@ -194,6 +193,8 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
         </div>
       </div>
     </section>
+    
+    <About />
     
     <Contact />
   </main>
@@ -803,7 +804,8 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
   .image-card {
     position: relative;
     width: 100%;
-    height: 450px;
+    height: 550px !important;
+    min-height: 550px !important;
     overflow: hidden;
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
     border-radius: 20px;
@@ -824,11 +826,14 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
   }
 
   .image-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
     transition: transform 0.4s ease;
     filter: brightness(0.85) contrast(1.1) saturate(1.1);
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    box-sizing: border-box;
   }
 
   .image-card:hover img {
@@ -1006,7 +1011,13 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     }
 
     .image-card {
-      height: 350px;
+      height: 450px !important;
+      min-height: 450px !important;
+    }
+
+    .image-card img {
+      object-fit: contain !important;
+      background: rgba(0, 0, 0, 0.1);
     }
 
     .carousel-btn {
@@ -1053,7 +1064,13 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     }
 
     .image-card {
-      height: 300px;
+      height: 400px !important;
+      min-height: 400px !important;
+    }
+
+    .image-card img {
+      object-fit: contain !important;
+      background: rgba(0, 0, 0, 0.1);
     }
 
     .carousel-btn {
