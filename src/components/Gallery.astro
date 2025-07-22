@@ -482,12 +482,10 @@ document.addEventListener('keydown', (e) => {
 	.gallery-photo {
 		width: 100% !important;
 		height: 100% !important;
-		object-fit: contain !important;
+		object-fit: cover !important;
 		transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 		opacity: 0;
-		background: rgba(0, 0, 0, 0.1);
-		padding: 10px;
-		box-sizing: border-box;
+		display: block !important;
 	}
 
 	.image-loading-skeleton {
@@ -831,8 +829,7 @@ document.addEventListener('keydown', (e) => {
 		}
 
 		.gallery-item {
-			height: 400px !important;
-			min-height: 400px !important;
+			height: 400px;
 		}
 
 		.gallery-overlay {
@@ -888,8 +885,7 @@ document.addEventListener('keydown', (e) => {
 		}
 
 		.gallery-item {
-			height: 350px !important;
-			min-height: 350px !important;
+			height: 350px;
 		}
 
 		.gallery-overlay {
