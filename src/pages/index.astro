@@ -7,11 +7,24 @@ import Saldi from '../components/Saldi.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 // Carica le impostazioni della homepage
 const homepageSettings = await getEntry('homepage-settings', 'homepage-settings');
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+
+// Carica i dati della galleria
+const galleriaSporstwear = await getCollection('galleria-sportswear');
+const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
+
+// Filtra solo gli elementi attivi
+const sportswearAttive = galleriaSporstwear
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
+
+const abitiAttivi = galleriaAbiti
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 // Dati per le impostazioni
 const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
@@ -26,6 +39,8 @@ console.log('- showBanner:', showBanner);
 console.log('- saldiAttivi (raw):', saldiSettings?.data?.saldiAttivi);
 console.log('- saldiAttivi (processed):', saldiAttivi);
 console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
+console.log('- Abiti cerimonia trovati:', abitiAttivi.length);
+console.log('- Sportswear trovati:', sportswearAttive.length);
 ---
 
 <Layout title="Kelua - Abbigliamento di Qualità a San Giovanni Rotondo">
@@ -78,25 +93,46 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
           <div class="carousel-container">
             <div class="carousel-wrapper">
               <div class="carousel-track" id="carousel-abiti">
-                <!-- Le slide saranno generate dinamicamente da TinaCMS -->
+                {abitiAttivi.map((item, index) => (
+                  <div class="carousel-slide" data-index={index}>
+                    <div class="image-card">
+                      <img 
+                        src={item.data.immagine || '/background.png'} 
+                        alt={item.data.titolo}
+                        loading="lazy"
+                      />
+                      <div class="image-overlay">
+                        <h4>{item.data.titolo}</h4>
+                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
+                        <span class="image-category">{item.data.categoria}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             
             <!-- Controlli Carousel -->
             <button class="carousel-btn carousel-prev" data-carousel="carousel-abiti">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
             </button>
             <button class="carousel-btn carousel-next" data-carousel="carousel-abiti">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </button>
             
             <!-- Indicatori -->
-            <div class="carousel-indicators" id="indicators-abiti">
-              <!-- Gli indicatori saranno generati dinamicamente -->
+            <div class="carousel-indicators">
+              {abitiAttivi.map((_, index) => (
+                <button 
+                  class={`indicator ${index === 0 ? 'active' : ''}`}
+                  data-carousel="carousel-abiti"
+                  data-slide={index}
+                ></button>
+              ))}
             </div>
           </div>
         </div>
@@ -114,25 +150,47 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
           <div class="carousel-container">
             <div class="carousel-wrapper">
               <div class="carousel-track" id="carousel-sportswear">
-                <!-- Le slide saranno generate dinamicamente da TinaCMS -->
+                {sportswearAttive.map((item, index) => (
+                  <div class="carousel-slide" data-index={index}>
+                    <div class="image-card">
+                      <img 
+                        src={item.data.immagine || '/background.png'} 
+                        alt={item.data.titolo}
+                        loading="lazy"
+                      />
+                      <div class="image-overlay">
+                        <h4>{item.data.titolo}</h4>
+                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
+                        <span class="image-category">{item.data.categoria}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             
             <!-- Controlli Carousel -->
             <button class="carousel-btn carousel-prev" data-carousel="carousel-sportswear">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
             </button>
             <button class="carousel-btn carousel-next" data-carousel="carousel-sportswear">
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </button>
             
             <!-- Indicatori -->
-            <div class="carousel-indicators" id="indicators-sportswear">
-              <!-- Gli indicatori saranno generati dinamicamente -->
+            <div class="carousel-indicators">
+              {sportswearAttive.map((_, index) => (
+                <button 
+                  class={`indicator ${index === 0 ? 'active' : ''}`}
+                  data-carousel="carousel-sportswear"
+                  data-slide={index}
+                ></button>
+              ))}
+            </div>
             </div>
           </div>
         </div>
@@ -385,11 +443,20 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
     }
   }
 
+  /* Container base */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center; /* Centra tutto il contenuto */
+  }
+
   /* Galleria Styles */
   .galleria-section {
     padding: 120px 0;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     position: relative;
+    text-align: center; /* Assicura il centraggio */
     overflow: hidden;
   }
 
@@ -846,16 +913,16 @@ console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
 
   // Inizializza caroselli
   document.addEventListener('DOMContentLoaded', () => {
-    const ceremoniaCarousel = document.querySelector('.cerimonia-carousel');
-    const sportswearCarousel = document.querySelector('.sportswear-carousel');
+    // Trova tutti i contenitori carousel
+    const carouselContainers = document.querySelectorAll('.carousel-container');
     
-    if (ceremoniaCarousel) {
-      new GalleryCarousel(ceremoniaCarousel, 'cerimonia');
-    }
-    
-    if (sportswearCarousel) {
-      new GalleryCarousel(sportswearCarousel, 'sportswear');
-    }
+    carouselContainers.forEach((container, index) => {
+      const track = container.querySelector('.carousel-track');
+      if (track) {
+        const carouselId = track.id;
+        new GalleryCarousel(container, carouselId);
+      }
+    });
   });
 
   // Ferma auto-play quando l'utente interagisce
