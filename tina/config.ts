@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public",
-    basePath: "", // Ensure no base path issues
+    basePath: "",
   },
   
   media: {
