@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { getCollection, getEntry } from 'astro:content';
 
 // Leggi le impostazioni dei saldi
@@ -148,7 +149,15 @@ function formatDateRange(dataInizio, dataFine) {
         <!-- Hero Section Saldi -->
     <section class="saldi-hero">
       <div class="hero-background">
-        <img src={saldiHeroData.immagineBackground || "/background.png"} alt="Saldi Kelua" class="hero-bg-image">
+        <OptimizedImage
+          src={saldiHeroData.immagineBackground || "/background.png"}
+          alt="Saldi Kelua"
+          width={1920}
+          height={1080}
+          loading="eager"
+          class="hero-bg-image"
+          sizes="100vw"
+        />
         <div class="hero-overlay"></div>
       </div>
       

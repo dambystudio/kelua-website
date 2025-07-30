@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  quality = 80,
+  class: className = '',
+  loading = 'lazy',
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw'
+} = Astro.props;
+
+// Determina il percorso dell'immagine ottimizzata
+const getOptimizedImagePath = (originalSrc: string, format: string) => {
+  if (!originalSrc) return '';
+  
+  // Se l'immagine è già in uploads/, usa il percorso ottimizzato
+  if (originalSrc.includes('/uploads/')) {
+    // Estrai solo il nome del file dall'URL
+    const urlParts = originalSrc.split('/');
+    const filename = urlParts[urlParts.length - 1];
+    
+    if (filename) {
+      const nameWithoutExt = filename.split('.')[0];
+      return `/uploads/optimized/${nameWithoutExt}.${format}`;
+    }
+  }
+  
+  return originalSrc;
+};
+
+const webpSrc = getOptimizedImagePath(src, 'webp');
+const avifSrc = getOptimizedImagePath(src, 'avif');
+const fallbackSrc = getOptimizedImagePath(src, 'jpg');
+
+// Debug: mostra i percorsi generati (solo in sviluppo)
+if (import.meta.env.DEV) {
+  console.log('🖼️ OptimizedImage Debug:');
+  console.log('  Original:', src);
+  console.log('  WebP:', webpSrc);
+  console.log('  AVIF:', avifSrc);
+  console.log('  Fallback:', fallbackSrc);
+}
+
+---
+
+<picture class={className}>
+  <!-- Formato AVIF (più moderno e compresso) -->
+  {avifSrc && avifSrc !== src && (
+    <source 
+      srcset={avifSrc} 
+      type="image/avif" 
+      sizes={sizes}
+    />
+  )}
+  
+  <!-- Formato WebP (supporto ampio e buona compressione) -->
+  {webpSrc && webpSrc !== src && (
+    <source 
+      srcset={webpSrc} 
+      type="image/webp" 
+      sizes={sizes}
+    />
+  )}
+  
+  <!-- Fallback: immagine ottimizzata in JPEG o originale -->
+  <img
+    src={fallbackSrc || src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+    class="optimized-image"
+  />
+</picture>
+
+<style>
+  picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  .optimized-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+  
+  .optimized-image[loading="lazy"] {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+</style>

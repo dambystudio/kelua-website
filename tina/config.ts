@@ -404,7 +404,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria",
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -474,13 +474,363 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria",
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Elegante, Matrimonio, Cocktail)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Jeans
+      {
+        name: "galleria_jeans",
+        label: "Galleria Jeans",
+        path: "src/content/galleria-jeans",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome del jeans che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Slim, Regular, Skinny, Boyfriend)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Maglie
+      {
+        name: "galleria_maglie",
+        label: "Galleria Maglie",
+        path: "src/content/galleria-maglie",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome della maglia che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. T-shirt, Polo, Maglia a maniche lunghe)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Camicie
+      {
+        name: "galleria_camicie",
+        label: "Galleria Camicie",
+        path: "src/content/galleria-camicie",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome della camicia che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Elegante, Casual, Business)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Pantaloni
+      {
+        name: "galleria_pantaloni",
+        label: "Galleria Pantaloni",
+        path: "src/content/galleria-pantaloni",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome del pantalone che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Elegante, Casual, Chino)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Felpe
+      {
+        name: "galleria_felpe",
+        label: "Galleria Felpe",
+        path: "src/content/galleria-felpe",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome della felpa che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Hoodie, Girocollo, Zip)",
           },
           {
             type: "string",
