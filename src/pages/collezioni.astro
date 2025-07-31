@@ -12,9 +12,8 @@ const galleriaMaglie = await getCollection('galleria-maglie');
 const galleriaCamicie = await getCollection('galleria-camicie');
 const galleriaPantaloni = await getCollection('galleria-pantaloni');
 const galleriaFelpe = await getCollection('galleria-felpe');
-// Temporaneamente commentato per fix schema TinaCMS
-// const galleriaGiubbotti = await getCollection('galleria_giubbotti');
-// const galleriaAccessori = await getCollection('galleria_accessori');
+const galleriaGiubbotti = await getCollection('galleria_giubbotti');
+const galleriaAccessori = await getCollection('galleria_accessori');
 
 // Conta solo gli elementi attivi
 const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;
@@ -31,26 +30,6 @@ const collezioni = [
     link: '/collezioni/abiti-cerimonia'
   },
   {
-    id: 'sportswear',
-    nome: 'Sportswear',
-    descrizione: 'Comfort e performance per il tempo libero',
-    categoria: 'Sport',
-    immagine: '/sportswear-casual.png',
-    articoli: contaAttivi(galleriaSporstwear),
-    link: '/collezioni/sportswear'
-  },
-  /*
-  {
-    id: 'giubbotti',
-    nome: 'Giubbotti',
-    descrizione: 'Protezione e stile per ogni stagione',
-    categoria: 'Outerwear',
-    immagine: '/background.png',
-    articoli: contaAttivi(galleriaGiubbotti),
-    link: '/collezioni/giubbotti'
-  },
-  */
-  {
     id: 'camicie',
     nome: 'Camicie',
     descrizione: 'Classiche e moderne per ogni occasione',
@@ -58,6 +37,15 @@ const collezioni = [
     immagine: '/background.png',
     articoli: contaAttivi(galleriaCamicie),
     link: '/collezioni/camicie'
+  },
+  {
+    id: 'sportswear',
+    nome: 'Sportswear',
+    descrizione: 'Comfort e performance per il tempo libero',
+    categoria: 'Casual',
+    immagine: '/sportswear-casual.png',
+    articoli: contaAttivi(galleriaSporstwear),
+    link: '/collezioni/sportswear'
   },
   {
     id: 'felpe',
@@ -81,7 +69,7 @@ const collezioni = [
     id: 'jeans',
     nome: 'Jeans',
     descrizione: 'Denim di qualità per ogni stile',
-    categoria: 'Denim',
+    categoria: 'Pantaloni & Jeans',
     immagine: '/background.png',
     articoli: contaAttivi(galleriaJeans),
     link: '/collezioni/jeans'
@@ -90,12 +78,20 @@ const collezioni = [
     id: 'pantaloni',
     nome: 'Pantaloni',
     descrizione: 'Eleganza e comfort per ogni momento',
-    categoria: 'Formale',
+    categoria: 'Pantaloni & Jeans',
     immagine: '/background.png',
     articoli: contaAttivi(galleriaPantaloni),
     link: '/collezioni/pantaloni'
-  }
-  /*,
+  },
+  {
+    id: 'giubbotti',
+    nome: 'Giubbotti',
+    descrizione: 'Protezione e stile per ogni stagione',
+    categoria: 'Outerwear',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaGiubbotti),
+    link: '/collezioni/giubbotti'
+  },
   {
     id: 'accessori',
     nome: 'Accessori',
@@ -105,7 +101,6 @@ const collezioni = [
     articoli: contaAttivi(galleriaAccessori),
     link: '/collezioni/accessori'
   }
-  */
 ];
 
 // Raggruppa per categoria

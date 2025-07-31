@@ -1,5 +1,5 @@
 ---
-nome: "Jeans Slim Fit"
+nome: "Jeans Slim Fit Blu"
 descrizione: "Jeans slim fit in denim stretch di alta qualità"
 prezzo: "€89.90"
 immagine: "/background.png"

@@ -1,0 +1,540 @@
+---
+// Pagina Felpe
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
+import { getCollection } from 'astro:content';
+
+// Carica i dati della collezione felpe
+const galleriaFelpe = await getCollection('galleria-felpe');
+
+// Filtra solo gli elementi attivi
+const felpeAttive = galleriaFelpe
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
+
+const collezioneInfo = {
+  nome: 'Felpe',
+  descrizione: 'Comfort urbano e stile casual per ogni stagione',
+  icona: '🧥',
+  colore: '#e74c3c',
+  totalArticoli: felpeAttive.length
+};
+---
+
+<Layout title="Felpe - Kelua Collezioni">
+  <Navbar />
+  
+  <!-- Hero Section Collezione -->
+  <section class="collezione-hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="breadcrumb">
+          <a href="/collezioni" class="breadcrumb-link">Collezioni</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">{collezioneInfo.nome}</span>
+        </div>
+        
+        <h1 class="hero-title">
+          <span class="hero-icon">{collezioneInfo.icona}</span>
+          {collezioneInfo.nome}
+        </h1>
+        <p class="hero-subtitle">{collezioneInfo.descrizione}</p>
+        <div class="hero-stats">
+          <span class="stats-highlight">{collezioneInfo.totalArticoli}</span> articoli disponibili
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galleria Collezione -->
+  <main class="collezione-main">
+    <div class="container">
+      {felpeAttive.length > 0 ? (
+        <div class="galleria-grid">
+          {felpeAttive.map((item, index) => (
+            <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
+              <div class="image-container">
+                <OptimizedImage
+                  src={item.data.immagine}
+                  alt={item.data.nome || item.data.titolo}
+                  class="gallery-image"
+                  width={400}
+                  height={500}
+                  loading="lazy"
+                />
+                <div class="image-overlay">
+                  <div class="item-info">
+                    <h3 class="item-nome">{item.data.nome || item.data.titolo}</h3>
+                    {item.data.descrizione && (
+                      <p class="item-descrizione">{item.data.descrizione}</p>
+                    )}
+                    {item.data.prezzo && (
+                      <div class="item-prezzo">{item.data.prezzo}</div>
+                    )}
+                    {item.data.categoria && (
+                      <span class="item-categoria">{item.data.categoria}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <div class="empty-content">
+            <span class="empty-icon">🧥</span>
+            <h3 class="empty-title">Collezione in Preparazione</h3>
+            <p class="empty-description">
+              Stiamo preparando questa comoda collezione di felpe per te. 
+              Torna presto per scoprire i nostri capi più confortevoli!
+            </p>
+            <a href="/collezioni" class="empty-cta">Esplora Altre Collezioni</a>
+          </div>
+        </div>
+      )}
+
+      <!-- Call to Action -->
+      <div class="collezione-cta-section">
+        <div class="cta-content">
+          <h3 class="cta-title">Comfort e stile urbano</h3>
+          <p class="cta-description">
+            Scopri la nostra selezione di felpe e capi comodi, perfetti per il tempo libero e il relax.
+          </p>
+          <div class="cta-actions">
+            <a href="/#contatti" class="cta-btn primary">Contattaci</a>
+            <a href="tel:0882302070" class="cta-btn secondary">Chiama Ora</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+/* Hero Section */
+.collezione-hero {
+  background: linear-gradient(135deg, 
+    rgba(231, 76, 60, 0.9) 0%, 
+    rgba(192, 57, 43, 0.8) 50%, 
+    rgba(231, 76, 60, 0.9) 100%
+  ),
+  url('/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 120px 0 80px;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.collezione-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.breadcrumb-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #e74c3c;
+}
+
+.breadcrumb-separator {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.breadcrumb-current {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.hero-title {
+  font-family: 'Glida Display Regular', 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #e74c3c;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hero-icon {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 4px 8px rgba(231, 76, 60, 0.3));
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.stats-highlight {
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 1.3em;
+  text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+/* Main Content */
+.collezione-main {
+  padding: 80px 0;
+  background: #000;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Galleria Grid */
+.galleria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(231, 76, 60, 0.5);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(231, 76, 60, 0.2);
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-image {
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  padding: 40px 25px 25px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover .image-overlay {
+  transform: translateY(0);
+}
+
+.item-info {
+  text-align: center;
+}
+
+.item-nome {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #e74c3c;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+.item-descrizione {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.item-prezzo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff6b47;
+  background: rgba(255, 107, 71, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  border: 1px solid rgba(255, 107, 71, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.item-categoria {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 15px;
+  display: inline-block;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.empty-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 8px rgba(231, 76, 60, 0.3));
+}
+
+.empty-title {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+}
+
+.empty-description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.empty-cta {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.empty-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5);
+}
+
+/* CTA Section */
+.collezione-cta-section {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(231, 76, 60, 0.05));
+  border: 2px solid rgba(231, 76, 60, 0.3);
+  border-radius: 25px;
+  padding: 50px 40px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
+}
+
+.cta-description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5);
+}
+
+.cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .collezione-hero {
+    padding: 100px 0 60px;
+    background-attachment: scroll;
+  }
+  
+  .hero-title {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .collezione-main {
+    padding: 60px 0;
+  }
+  
+  .galleria-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  
+  .collezione-cta-section {
+    padding: 40px 25px;
+  }
+  
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-btn {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleria-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .gallery-item {
+    aspect-ratio: 3/4;
+  }
+  
+  .image-overlay {
+    transform: translateY(0);
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 0, 0, 0.8) 60%,
+      rgba(0, 0, 0, 0.95) 100%
+    );
+  }
+}
+</style>
+
+<script>
+// Animazioni e interazioni per la pagina collezione
+document.addEventListener('DOMContentLoaded', () => {
+  // Intersection Observer per animazioni
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  // Osserva tutti gli elementi della galleria
+  document.querySelectorAll('.gallery-item').forEach((item) => {
+    observer.observe(item);
+  });
+});
+</script>

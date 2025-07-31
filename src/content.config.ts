@@ -111,6 +111,54 @@ const galleriaAbitiCerimonia = defineCollection({
   }),
 });
 
+// Schema per le collezioni di abbigliamento
+const galleriaSchema = z.object({
+  nome: z.string(),
+  descrizione: z.string().optional(),
+  prezzo: z.string().optional(),
+  immagine: z.string(),
+  categoria: z.string().optional(),
+  genere: z.enum(['uomo', 'donna', 'unisex']).optional(),
+  attivo: z.boolean(),
+  ordine: z.number().optional(),
+});
+
+// Collezioni di abbigliamento
+const galleriaJeans = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaMaglie = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaCamicie = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaFelpe = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaPantaloni = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaGiubbotti = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaAccessori = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
 // Esporta le collezioni
 export const collections = {
   'saldi-settings': saldiSettingsCollection,
@@ -121,4 +169,11 @@ export const collections = {
   'saldi-hero': saldiHeroCollection,
   'galleria-sportswear': galleriaSporstwearCollection,
   'galleria-abiti-cerimonia': galleriaAbitiCerimonia,
+  'galleria-jeans': galleriaJeans,
+  'galleria-maglie': galleriaMaglie,
+  'galleria-camicie': galleriaCamicie,
+  'galleria-felpe': galleriaFelpe,
+  'galleria-pantaloni': galleriaPantaloni,
+  'galleria_giubbotti': galleriaGiubbotti,
+  'galleria_accessori': galleriaAccessori,
 };
