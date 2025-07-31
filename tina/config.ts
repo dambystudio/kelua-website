@@ -866,6 +866,7 @@ export default defineConfig({
         ],
       },
 
+      /* TEMPORANEAMENTE COMMENTATO - SCHEMA SYNC ISSUE
       // Galleria Giubbotti
       {
         name: "galleria_giubbotti",
@@ -1053,6 +1054,7 @@ export default defineConfig({
           },
         ],
       },
+      */
     ],
   },
 });

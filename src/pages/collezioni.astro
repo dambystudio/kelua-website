@@ -12,8 +12,9 @@ const galleriaMaglie = await getCollection('galleria-maglie');
 const galleriaCamicie = await getCollection('galleria-camicie');
 const galleriaPantaloni = await getCollection('galleria-pantaloni');
 const galleriaFelpe = await getCollection('galleria-felpe');
-const galleriaGiubbotti = await getCollection('galleria_giubbotti');
-const galleriaAccessori = await getCollection('galleria_accessori');
+// Temporaneamente commentato per fix schema TinaCMS
+// const galleriaGiubbotti = await getCollection('galleria_giubbotti');
+// const galleriaAccessori = await getCollection('galleria_accessori');
 
 // Conta solo gli elementi attivi
 const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;
@@ -38,6 +39,7 @@ const collezioni = [
     articoli: contaAttivi(galleriaSporstwear),
     link: '/collezioni/sportswear'
   },
+  /*
   {
     id: 'giubbotti',
     nome: 'Giubbotti',
@@ -47,6 +49,7 @@ const collezioni = [
     articoli: contaAttivi(galleriaGiubbotti),
     link: '/collezioni/giubbotti'
   },
+  */
   {
     id: 'camicie',
     nome: 'Camicie',
@@ -91,7 +94,8 @@ const collezioni = [
     immagine: '/background.png',
     articoli: contaAttivi(galleriaPantaloni),
     link: '/collezioni/pantaloni'
-  },
+  }
+  /*,
   {
     id: 'accessori',
     nome: 'Accessori',
@@ -101,6 +105,7 @@ const collezioni = [
     articoli: contaAttivi(galleriaAccessori),
     link: '/collezioni/accessori'
   }
+  */
 ];
 
 // Raggruppa per categoria
