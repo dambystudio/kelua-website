@@ -271,10 +271,11 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
 </Layout>
 
 <script>
-  // Gestione chiusura banner saldi
+  // Gestione sincronizzazione banner saldi con navbar
   document.addEventListener('DOMContentLoaded', () => {
     const banner = document.getElementById('saldi-banner');
     const closeBtn = banner?.querySelector('.banner-close');
+    const navbar = document.querySelector('.kelua-hero-tabs-container');
     
     if (closeBtn && banner) {
       closeBtn.addEventListener('click', () => {
@@ -290,31 +291,42 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
       });
     }
 
-    // Gestione dinamica altezza navbar per banner saldi
-    if (banner) {
-      const navbar = document.querySelector('.kelua-hero-tabs');
-      const root = document.documentElement;
-      
-      // Funzione per aggiornare l'altezza della navbar
-      const updateNavbarHeight = () => {
-        if (navbar) {
-          const navbarHeight = navbar.offsetHeight;
-          root.style.setProperty('--navbar-height', `${navbarHeight}px`);
+    // Sincronizzazione banner con navbar durante lo scroll
+    if (banner && navbar) {
+      const updateBannerPosition = () => {
+        const heroSection = document.querySelector('.kelua-hero-tabs');
+        const tabContainer = document.querySelector('.kelua-hero-tabs-container');
+        
+        if (!heroSection || !tabContainer) return;
+        
+        // Calcola quando la navbar diventa sticky
+        const heroHeight = heroSection.offsetHeight;
+        const tabHeight = 40;
+        const stickyPoint = heroHeight - tabHeight;
+        const scrollTop = window.pageYOffset;
+        
+        if (scrollTop >= stickyPoint) {
+          // Navbar è sticky in alto, banner deve essere sotto la navbar sticky
+          banner.style.top = `${tabHeight}px`;
+        } else {
+          // Navbar è ancora nel hero, banner rimane sotto l'hero
+          const remainingHeroHeight = heroHeight - scrollTop;
+          banner.style.top = `${remainingHeroHeight}px`;
         }
       };
 
-      // Aggiorna subito
-      updateNavbarHeight();
-
-      // Aggiorna durante lo scroll per gestire la navbar scrolled
+      // Aggiorna posizione banner durante lo scroll
       let scrollTimeout;
       window.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateNavbarHeight, 50);
+        scrollTimeout = setTimeout(updateBannerPosition, 10);
       });
 
       // Aggiorna al resize della finestra
-      window.addEventListener('resize', updateNavbarHeight);
+      window.addEventListener('resize', updateBannerPosition);
+      
+      // Inizializzazione immediata
+      updateBannerPosition();
     }
   });
 </script>
@@ -346,7 +358,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
   /* Banner Saldi Dinamico */
   .saldi-banner {
     position: fixed;
-    top: var(--navbar-height, 130px); /* Aggiornato al valore attuale della navbar */
+    top: 0; /* Gestito da JavaScript */
     left: 0;
     right: 0;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
@@ -359,7 +371,9 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: top 0.3s ease; /* Transizione fluida per il movimento */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione fluida ottimizzata */
+    transform: translateZ(0); /* Forza layer di compositing per performance */
+    will-change: top; /* Ottimizza animazioni position */
   }
 
   @keyframes slideDown {

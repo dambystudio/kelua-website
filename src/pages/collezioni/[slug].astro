@@ -1,0 +1,509 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
+
+export async function getStaticPaths() {
+  const collections = [
+    {
+      slug: 'abiti-cerimonia',
+      title: 'Abiti da Cerimonia',
+      description: 'Eleganza e raffinatezza per le tue occasioni speciali. Scopri la nostra selezione di abiti da cerimonia per uomo e donna.',
+      longDescription: 'La nostra collezione di abiti da cerimonia rappresenta il perfetto equilibrio tra tradizione e modernità. Ogni capo è selezionato con cura per garantire eleganza, comfort e qualità superiore per i tuoi momenti più importanti.',
+      image: '/abiti-cerimonia-eleganti.png',
+      gallery: [
+        '/abiti-cerimonia-1.png',
+        '/abiti-cerimonia-2.png',
+        '/abiti-cerimonia-eleganti.png',
+        '/fotoAbitoManica.png'
+      ],
+      features: [
+        'Tessuti pregiati e di alta qualità',
+        'Taglie dalla XS alla XXXL',
+        'Servizio sartoriale personalizzato',
+        'Consulenza stilistica gratuita'
+      ]
+    },
+    {
+      slug: 'sportswear',
+      title: 'Sportswear',
+      description: 'Comfort e stile per il tempo libero e lo sport. Abbigliamento casual e sportivo per ogni momento della giornata.',
+      longDescription: 'La linea sportswear Kelua unisce funzionalità e design per offrirti capi versatili perfetti per lo sport, il tempo libero e la vita quotidiana. Materiali tecnici e design contemporaneo per il massimo comfort.',
+      image: '/abbigliamento-sportivo.png',
+      gallery: [
+        '/abbigliamento-sportivo.png',
+        '/sportswear-casual.png',
+        '/fotoSportswear.jpg',
+        '/fotoBancone&Sportswear.jpg'
+      ],
+      features: [
+        'Materiali tecnici traspiranti',
+        'Design moderno e funzionale',
+        'Perfetti per sport e tempo libero',
+        'Resistenti e duraturi'
+      ]
+    },
+    {
+      slug: 'jeans',
+      title: 'Jeans',
+      description: 'La comodità del denim in tutte le sue forme. Jeans classici, slim, straight e boyfriend per ogni stile.',
+      longDescription: 'I nostri jeans rappresentano l\'icona del casual wear. Dalle linee classiche ai fit più moderni, ogni jeans è realizzato con denim di qualità superiore per garantire comfort e durabilità.',
+      image: '/sportswear-casual.png',
+      gallery: [
+        '/sportswear-casual.png',
+        '/fotoSportswear&Cerimonia.jpg'
+      ],
+      features: [
+        'Denim di alta qualità',
+        'Diversi fit e lavaggi',
+        'Comfort e durabilità',
+        'Stile senza tempo'
+      ]
+    },
+    {
+      slug: 'maglie',
+      title: 'Maglie',
+      description: 'Maglie e t-shirt per ogni stagione. Comfort quotidiano con stile e qualità.',
+      longDescription: 'La nostra selezione di maglie spazia dalle t-shirt basic alle proposte più ricercate. Tessuti morbidi e design curati per garantire comfort e stile in ogni occasione.',
+      image: '/fotoSportswear.jpg',
+      gallery: [
+        '/fotoSportswear.jpg',
+        '/fotoSportswear&Cerimonia2.jpg'
+      ],
+      features: [
+        'Tessuti morbidi e confortevoli',
+        'Design versatili',
+        'Colori sempre aggiornati',
+        'Qualità garantita'
+      ]
+    },
+    {
+      slug: 'camicie',
+      title: 'Camicie',
+      description: 'Camicie eleganti e casual per ogni occasione. Dal business al tempo libero.',
+      longDescription: 'Le nostre camicie combinano eleganza classica e comfort moderno. Perfette per l\'ufficio o per il tempo libero, ogni camicia è realizzata con tessuti di qualità e attenzione ai dettagli.',
+      image: '/fotoAbitoManica.png',
+      gallery: [
+        '/fotoAbitoManica.png',
+        '/abiti-cerimonia-1.png'
+      ],
+      features: [
+        'Tessuti di alta qualità',
+        'Vestibilità perfetta',
+        'Stile elegante e moderno',
+        'Facili da stirare'
+      ]
+    },
+    {
+      slug: 'pantaloni',
+      title: 'Pantaloni',
+      description: 'Pantaloni eleganti e casual per uomo e donna. Comfort e stile per ogni momento.',
+      longDescription: 'La nostra collezione di pantaloni offre soluzioni per ogni esigenza: dall\'eleganza formale al comfort casual. Tessuti selezionati e taglie perfette per ogni corporatura.',
+      image: '/fotoBancone&Sportswear.jpg',
+      gallery: [
+        '/fotoBancone&Sportswear.jpg',
+        '/fotoSportswear&Cerimonia.jpg'
+      ],
+      features: [
+        'Vestibilità ottimale',
+        'Tessuti di qualità',
+        'Stili diversificati',
+        'Comfort garantito'
+      ]
+    },
+    {
+      slug: 'felpe',
+      title: 'Felpe',
+      description: 'Felpe e maglioni per il comfort quotidiano. Calore e stile per le stagioni fredde.',
+      longDescription: 'Le nostre felpe e maglioni sono perfetti per affrontare le stagioni più fredde senza rinunciare allo stile. Materiali caldi e design contemporanei per il massimo comfort.',
+      image: '/fotoSportswear&Cerimonia.jpg',
+      gallery: [
+        '/fotoSportswear&Cerimonia.jpg',
+        '/fotoSportswear&Cerimonia2.jpg'
+      ],
+      features: [
+        'Materiali caldi e morbidi',
+        'Design moderni',
+        'Perfette per l\'inverno',
+        'Qualità superiore'
+      ]
+    },
+    {
+      slug: 'giubbotti',
+      title: 'Giubbotti',
+      description: 'Giubbotti e capospalla per ogni stagione. Protezione e stile in ogni condizione.',
+      longDescription: 'I nostri giubbotti e capospalla ti proteggono dalle intemperie senza compromettere lo stile. Dalla mezza stagione all\'inverno, soluzioni per ogni clima.',
+      image: '/fotoSportswear&Cerimonia2.jpg',
+      gallery: [
+        '/fotoSportswear&Cerimonia2.jpg',
+        '/fotoBancone&Sportswear.jpg'
+      ],
+      features: [
+        'Protezione dalle intemperie',
+        'Design funzionali',
+        'Materiali resistenti',
+        'Stile urbano'
+      ]
+    },
+    {
+      slug: 'accessori',
+      title: 'Accessori',
+      description: 'Accessori e dettagli per completare il tuo look. Il tocco finale che fa la differenza.',
+      longDescription: 'Gli accessori giusti possono trasformare completamente un outfit. La nostra selezione include cinture, borse, cappelli e molto altro per completare il tuo stile personale.',
+      image: '/servizio-sartoriale.jpeg',
+      gallery: [
+        '/servizio-sartoriale.jpeg',
+        '/fotoNegozio_conLogo.png'
+      ],
+      features: [
+        'Accessori di qualità',
+        'Design ricercati',
+        'Complementi perfetti',
+        'Stile personalizzato'
+      ]
+    }
+  ];
+
+  return collections.map(collection => ({
+    params: { slug: collection.slug },
+    props: { collection }
+  }));
+}
+
+const { collection } = Astro.props;
+const { slug, title, description, longDescription, image, gallery, features } = collection;
+
+const seoData = {
+  title: `${title} - Kelua Moda`,
+  description: description,
+  image: image,
+  url: `https://keluamoda.it/collezioni/${slug}`
+};
+---
+
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  image={seoData.image}
+  url={seoData.url}
+>
+  <Hero />
+  
+  <main class="collection-main">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <div class="container">
+        <a href="/">Home</a>
+        <span>›</span>
+        <a href="/collezioni">Collezioni</a>
+        <span>›</span>
+        <span>{title}</span>
+      </div>
+    </nav>
+
+    <!-- Hero della Collezione -->
+    <section class="collection-hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>{title}</h1>
+            <p class="hero-description">{longDescription}</p>
+            <div class="features-list">
+              {features.map(feature => (
+                <div class="feature-item">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="hero-image">
+            <OptimizedImage
+              src={image}
+              alt={title}
+              width={600}
+              height={700}
+              loading="eager"
+              class="main-image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galleria -->
+    <section class="collection-gallery">
+      <div class="container">
+        <h2>Scopri la Collezione</h2>
+        <div class="gallery-grid">
+          {gallery.map((img, index) => (
+            <div class="gallery-item">
+              <OptimizedImage
+                src={img}
+                alt={`${title} - Immagine ${index + 1}`}
+                width={400}
+                height={500}
+                loading="lazy"
+                class="gallery-image"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="collection-cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Vieni a Trovarci in Negozio</h2>
+          <p>Scopri dal vivo la qualità della collezione {title}. Il nostro staff ti aiuterà a trovare il capo perfetto per te.</p>
+          <div class="cta-buttons">
+            <a href="/#contatti" class="cta-button primary">Contattaci</a>
+            <a href="/collezioni" class="cta-button secondary">Altre Collezioni</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .collection-main {
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    background: #f8f9fa;
+    padding: 20px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .breadcrumb .container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .breadcrumb a {
+    color: #c0392b;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb span:last-child {
+    color: #666;
+    font-weight: 500;
+  }
+
+  /* Hero */
+  .collection-hero {
+    padding: 80px 0;
+    background: white;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .feature-item svg {
+    color: #c0392b;
+    flex-shrink: 0;
+  }
+
+  .hero-image {
+    position: relative;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  }
+
+  /* Galleria */
+  .collection-gallery {
+    padding: 80px 0;
+    background: #f8f9fa;
+  }
+
+  .collection-gallery h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #1a1a1a;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-10px);
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+  }
+
+  /* CTA */
+  .collection-cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  }
+
+  .cta-button.primary {
+    background: #c0392b;
+    color: white;
+  }
+
+  .cta-button.secondary {
+    background: white;
+    color: #1a1a1a;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .collection-gallery h2,
+    .cta-content h2 {
+      font-size: 2rem;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .collection-hero,
+    .collection-gallery,
+    .collection-cta {
+      padding: 60px 0;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-button {
+      width: 250px;
+    }
+  }
+</style>

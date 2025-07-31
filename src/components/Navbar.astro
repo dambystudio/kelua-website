@@ -308,12 +308,21 @@ const collections = [
   transition: all 0.3s ease;
   z-index: 1000;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  /* Aggiungi un leggero delay per evitare chiusure accidentali */
+  transition-delay: 0.1s;
 }
 
 .dropdown-container:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(5px);
+  transition-delay: 0s; /* Rimuovi delay all'apertura */
+}
+
+/* Mantieni il menu aperto quando si hover sui dropdown items */
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown-item {
@@ -325,6 +334,8 @@ const collections = [
   font-weight: 400;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer; /* Assicura che sia cliccabile */
+  white-space: nowrap; /* Evita che il testo vada a capo */
 }
 
 .dropdown-item:last-child {
@@ -335,6 +346,10 @@ const collections = [
   background: rgba(212, 175, 55, 0.1);
   color: #d4af37;
   padding-left: 25px;
+}
+
+.dropdown-item:active {
+  background: rgba(212, 175, 55, 0.2);
 }
 
 /* Mobile Menu Toggle */
@@ -588,9 +603,20 @@ class KeluaStickyNavigation {
   }
   
   bindEvents() {
-    // Navigation clicks
-    document.querySelectorAll('.kelua-hero-tab').forEach(tab => {
+    // Navigation clicks - solo per i tab principali, non per i dropdown
+    document.querySelectorAll('.kelua-hero-tab:not(.dropdown-container)').forEach(tab => {
       tab.addEventListener('click', (e) => this.onTabClick(e, tab));
+    });
+    
+    // Gestione dropdown clicks
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        // Lascia che il browser gestisca la navigazione normalmente
+        const href = item.getAttribute('href');
+        if (href) {
+          window.location.href = href;
+        }
+      });
     });
     
     // Scroll events
