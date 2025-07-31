@@ -5,96 +5,47 @@ import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 // Carica i dati delle gallerie per contare gli articoli
-const galleriaSporstwear = await getCollection('galleria-sportswear');
-const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
-const galleriaJeans = await getCollection('galleria-jeans');
-const galleriaMaglie = await getCollection('galleria-maglie');
-const galleriaCamicie = await getCollection('galleria-camicie');
-const galleriaPantaloni = await getCollection('galleria-pantaloni');
-const galleriaFelpe = await getCollection('galleria-felpe');
+const galleriaSporstwear = await getCollection('galleria_sportswear');
+const galleriaAbiti = await getCollection('galleria_abiti_cerimonia');
+const galleriaJeans = await getCollection('galleria_jeans');
+const galleriaMaglie = await getCollection('galleria_maglie');
+const galleriaCamicie = await getCollection('galleria_camicie');
+const galleriaPantaloni = await getCollection('galleria_pantaloni');
+const galleriaFelpe = await getCollection('galleria_felpe');
 const galleriaGiubbotti = await getCollection('galleria_giubbotti');
 const galleriaAccessori = await getCollection('galleria_accessori');
 
 // Conta solo gli elementi attivi
 const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;
 
-// SEO data per collezioni
-const seoData = {
-  title: "Collezioni Kelua - Abbigliamento Uomo e Donna a San Giovanni Rotondo",
-  description: "Scopri tutte le collezioni Kelua: abiti da cerimonia, sportswear, jeans, camicie e molto altro. Oltre 500 articoli di qualità per uomo e donna a San Giovanni Rotondo.",
-  keywords: [
-    "collezioni abbigliamento San Giovanni Rotondo",
-    "abiti cerimonia Kelua",
-    "sportswear uomo donna",
-    "jeans di qualità",
-    "camicie eleganti",
-    "pantaloni moda",
-    "felpe casual",
-    "giubbotti invernali",
-    "accessori moda",
-    "collezioni complete Kelua"
-  ],
-  ogImage: "/uploads/optimized/IMG_2357.webp",
-  jsonLD: {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://kelua.it/collezioni/#webpage",
-    "name": "Collezioni Abbigliamento Kelua",
-    "description": "Esplora tutte le collezioni di abbigliamento Kelua: eleganza, qualità e stile per ogni occasione.",
-    "url": "https://kelua.it/collezioni",
-    "mainEntity": {
-      "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Abiti da Cerimonia",
-          "url": "https://kelua.it/collezioni/abiti-cerimonia"
-        },
-        {
-          "@type": "ListItem", 
-          "position": 2,
-          "name": "Sportswear",
-          "url": "https://kelua.it/collezioni/sportswear"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Jeans",
-          "url": "https://kelua.it/collezioni/jeans"
-        }
-      ]
-    },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://kelua.it"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Collezioni",
-          "item": "https://kelua.it/collezioni"
-        }
-      ]
-    }
-  }
-};
-
 // Definizione delle collezioni
 const collezioni = [
   {
     id: 'abiti-cerimonia',
     nome: 'Abiti da Cerimonia',
-    descrizione: 'Eleganza e stile per i tuoi momenti speciali',
+    descrizione: 'Eleganza e stil per i tuoi momenti speciali',
     categoria: 'Formale',
-    immagine: '/uploads/optimized/IMG_2357.webp',
+    immagine: '/abiti-cerimonia-1.png',
     articoli: contaAttivi(galleriaAbiti),
     link: '/collezioni/abiti-cerimonia'
+  },
+  {
+    id: 'sportswear',
+    nome: 'Sportswear',
+    descrizione: 'Comfort e performance per il tempo libero',
+    categoria: 'Sport',
+    immagine: '/sportswear-casual.png',
+    articoli: contaAttivi(galleriaSporstwear),
+    link: '/collezioni/sportswear'
+  },
+  {
+    id: 'giubbotti',
+    nome: 'Giubbotti',
+    descrizione: 'Protezione e stile per ogni stagione',
+    categoria: 'Outerwear',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaGiubbotti),
+    link: '/collezioni/giubbotti'
   },
   {
     id: 'camicie',
@@ -104,15 +55,6 @@ const collezioni = [
     immagine: '/background.png',
     articoli: contaAttivi(galleriaCamicie),
     link: '/collezioni/camicie'
-  },
-  {
-    id: 'sportswear',
-    nome: 'Sportswear',
-    descrizione: 'Comfort e performance per il tempo libero',
-    categoria: 'Casual',
-    immagine: '/uploads/optimized/IMG_2303.webp',
-    articoli: contaAttivi(galleriaSporstwear),
-    link: '/collezioni/sportswear'
   },
   {
     id: 'felpe',
@@ -128,7 +70,7 @@ const collezioni = [
     nome: 'Maglie',
     descrizione: 'Versatilità e comfort quotidiano',
     categoria: 'Casual',
-    immagine: '/uploads/optimized/IMG_2348.webp',
+    immagine: '/background.png',
     articoli: contaAttivi(galleriaMaglie),
     link: '/collezioni/maglie'
   },
@@ -136,8 +78,8 @@ const collezioni = [
     id: 'jeans',
     nome: 'Jeans',
     descrizione: 'Denim di qualità per ogni stile',
-    categoria: 'Pantaloni & Jeans',
-    immagine: '/uploads/optimized/IMG_2496.webp',
+    categoria: 'Denim',
+    immagine: '/background.png',
     articoli: contaAttivi(galleriaJeans),
     link: '/collezioni/jeans'
   },
@@ -145,19 +87,10 @@ const collezioni = [
     id: 'pantaloni',
     nome: 'Pantaloni',
     descrizione: 'Eleganza e comfort per ogni momento',
-    categoria: 'Pantaloni & Jeans',
+    categoria: 'Formale',
     immagine: '/background.png',
     articoli: contaAttivi(galleriaPantaloni),
     link: '/collezioni/pantaloni'
-  },
-  {
-    id: 'giubbotti',
-    nome: 'Giubbotti',
-    descrizione: 'Protezione e stile per ogni stagione',
-    categoria: 'Outerwear',
-    immagine: '/background.png',
-    articoli: contaAttivi(galleriaGiubbotti),
-    link: '/collezioni/giubbotti'
   },
   {
     id: 'accessori',
@@ -182,14 +115,7 @@ const categorieMap = collezioni.reduce((acc, collezione) => {
 const categorie = Object.keys(categorieMap);
 ---
 
-<Layout 
-  title={seoData.title}
-  description={seoData.description}
-  keywords={seoData.keywords}
-  ogImage={seoData.ogImage}
-  canonicalURL="https://kelua.it/collezioni"
-  jsonLD={seoData.jsonLD}
->
+<Layout title="Collezioni - Kelua Fashion Store">
   <Navbar />
   
   <main class="collezioni-page">

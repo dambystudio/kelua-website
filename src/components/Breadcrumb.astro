@@ -1,0 +1,106 @@
+---
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  currentPage?: string;
+}
+
+const { items, currentPage } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Percorso di navigazione">
+  <ol class="breadcrumb-list">
+    {items.map((item, index) => (
+      <li class="breadcrumb-item">
+        <a href={item.url} class="breadcrumb-link">
+          {item.name}
+        </a>
+        {index < items.length - 1 && (
+          <span class="breadcrumb-separator" aria-hidden="true">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </span>
+        )}
+      </li>
+    ))}
+    {currentPage && (
+      <li class="breadcrumb-item breadcrumb-current" aria-current="page">
+        <span class="breadcrumb-separator" aria-hidden="true">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </span>
+        <span class="breadcrumb-text">{currentPage}</span>
+      </li>
+    )}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb {
+    margin: 20px 0;
+    padding: 0 20px;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumb-link {
+    color: #ddbb76;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .breadcrumb-link:hover {
+    background: rgba(221, 187, 118, 0.1);
+    color: #e6c88a;
+  }
+
+  .breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-current .breadcrumb-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumb {
+      padding: 0 15px;
+      margin: 15px 0;
+    }
+
+    .breadcrumb-list {
+      font-size: 0.85rem;
+      gap: 6px;
+    }
+
+    .breadcrumb-link {
+      padding: 3px 6px;
+    }
+  }
+</style>

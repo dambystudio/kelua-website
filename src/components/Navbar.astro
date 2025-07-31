@@ -1,7 +1,61 @@
 ---
-import { getCollection } from 'astro:content';
-
-const collections = await getCollection('collezioni');
+// Definiamo manualmente le collezioni basate sulle gallerie esistenti
+const collections = [
+  {
+    slug: 'abiti-cerimonia',
+    data: {
+      title: 'Abiti da Cerimonia'
+    }
+  },
+  {
+    slug: 'sportswear',
+    data: {
+      title: 'Sportswear'
+    }
+  },
+  {
+    slug: 'jeans',
+    data: {
+      title: 'Jeans'
+    }
+  },
+  {
+    slug: 'maglie',
+    data: {
+      title: 'Maglie'
+    }
+  },
+  {
+    slug: 'camicie',
+    data: {
+      title: 'Camicie'
+    }
+  },
+  {
+    slug: 'pantaloni',
+    data: {
+      title: 'Pantaloni'
+    }
+  },
+  {
+    slug: 'felpe',
+    data: {
+      title: 'Felpe'
+    }
+  },
+  {
+    slug: 'giubbotti',
+    data: {
+      title: 'Giubbotti'
+    }
+  },
+  {
+    slug: 'accessori',
+    data: {
+      title: 'Accessori'
+    }
+  }
+];
 ---
 
 <!-- Kelua Hero Section with Sticky Slider Nav -->
@@ -15,7 +69,25 @@ const collections = await getCollection('collezioni');
   <!-- Sticky Navigation Container -->
   <div class="kelua-hero-tabs-container">
     <a class="kelua-hero-tab" href="/">Home</a>
-    <a class="kelua-hero-tab" href="/collezioni">Collezioni</a>
+    
+    <!-- Collezioni con Dropdown -->
+    <div class="kelua-hero-tab dropdown-container">
+      <a href="/collezioni" class="dropdown-trigger">
+        Collezioni
+        <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="dropdown-arrow">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+      <div class="dropdown-menu">
+        <a href="/collezioni" class="dropdown-item">Tutte le Collezioni</a>
+        {collections.map(collection => (
+          <a href={`/collezioni/${collection.slug}`} class="dropdown-item">
+            {collection.data.title}
+          </a>
+        ))}
+      </div>
+    </div>
+    
     <a class="kelua-hero-tab" href="/saldi">Saldi</a>
     <a class="kelua-hero-tab" href="/#contatti">Contatti</a>
     <a class="kelua-hero-tab" href="https://kelua.netlify.app/admin/" target="_blank">Area Personale</a>
@@ -35,16 +107,29 @@ const collections = await getCollection('collezioni');
   <div class="mobile-menu">
     <div class="mobile-menu-header">
       <span class="mobile-menu-title">Menu</span>
-      <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+      <button class="mobile-menu-close" id="mobileMenuClose" data-unique="kelua-close-btn">×</button>
     </div>
     <div class="mobile-menu-content">
       <a href="/" class="mobile-nav-item">Home</a>
-      <a href="/collezioni" class="mobile-nav-item">Collezioni</a>
-      {collections.map(collection => (
-        <a href={`/collezioni/${collection.slug}`} class="mobile-nav-item mobile-nav-subcategory">
-          {collection.data.title}
-        </a>
-      ))}
+      
+      <!-- Collezioni con sottomenu mobile -->
+      <div class="mobile-dropdown">
+        <button class="mobile-nav-item mobile-dropdown-trigger">
+          Collezioni
+          <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="mobile-dropdown-arrow">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="mobile-dropdown-content">
+          <a href="/collezioni" class="mobile-nav-item mobile-nav-subcategory">Tutte le Collezioni</a>
+          {collections.map(collection => (
+            <a href={`/collezioni/${collection.slug}`} class="mobile-nav-item mobile-nav-subcategory">
+              {collection.data.title}
+            </a>
+          ))}
+        </div>
+      </div>
+      
       <a href="/saldi" class="mobile-nav-item">Saldi</a>
       <a href="/#contatti" class="mobile-nav-item">Contatti</a>
       <a href="https://kelua.netlify.app/admin/" class="mobile-nav-item" target="_blank">Area Personale</a>
@@ -57,13 +142,13 @@ const collections = await getCollection('collezioni');
 .kelua-hero-tabs {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Cambiato per controllare meglio il layout */
   align-items: center;
-  height: 100px;
+  height: 130px; /* Ridotta da 160px per un container più compatto */
   position: relative;
   background: #000000;
   text-align: center;
-  padding: 5px 2em;
+  padding: 0; /* Rimosso tutto il padding */
   margin: 0;
 }
 
@@ -71,29 +156,35 @@ const collections = await getCollection('collezioni');
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
   justify-content: center;
   margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  height: 90px; /* Ridotta da 120px: 130px (container) - 40px (barra nav) = 90px */
 }
 
 .logo-link {
   display: inline-block;
   text-decoration: none;
   margin: 0;
+  padding: 0;
 }
 
-.hero-logo {
-  height: 98px !important;
+.kelua-hero-tabs .hero-logo {
+  height: 150px !important; /* Aumentata da 140px */
   width: auto;
-  max-width: 400px;
+  max-width: 650px; /* Aumentata da 600px */
   object-fit: contain;
   filter: brightness(1.2) sepia(1) hue-rotate(35deg) saturate(1.5);
   transition: transform 0.3s ease;
   margin: 0;
+  padding: 0;
+  display: block;
 }
 
-.hero-logo:hover,
-.logo-link:hover .hero-logo {
+.kelua-hero-tabs .hero-logo:hover,
+.kelua-hero-tabs .logo-link:hover .hero-logo {
   transform: scale(1.05);
 }
 
@@ -156,6 +247,73 @@ const collections = await getCollection('collezioni');
   background: linear-gradient(90deg, #d4af37, #f4d03f);
   transition: all 0.4s ease;
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+/* Dropdown Menu Styles */
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-container:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-container:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: #d4af37;
+  padding-left: 25px;
 }
 
 /* Mobile Menu Toggle */
@@ -255,6 +413,8 @@ const collections = await getCollection('collezioni');
   border-radius: 4px;
   transition: all 0.3s ease;
   line-height: 1;
+  /* Assicura che sia l'unico elemento visible */
+  display: block !important;
 }
 
 .mobile-menu-close:hover {
@@ -292,15 +452,58 @@ const collections = await getCollection('collezioni');
   font-weight: 300;
 }
 
+/* Mobile Dropdown Styles */
+.mobile-dropdown {
+  position: relative;
+}
+
+.mobile-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.mobile-dropdown.active .mobile-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.mobile-dropdown.active .mobile-dropdown-content {
+  max-height: 500px;
+}
+
+.mobile-dropdown-content .mobile-nav-subcategory {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .kelua-hero-tabs {
-    height: 70px;
-    padding: 3px 1em;
+    height: 85px; /* Ridotta da 100px per mobile */
+    padding: 0;
   }
   
-  .hero-logo {
-    height: 40px;
+  .logo-section {
+    height: 85px; /* Tutta l'altezza disponibile su mobile (nav tabs nascosti) */
+  }
+  
+  .kelua-hero-tabs .hero-logo {
+    height: 75px; /* Aumentata leggermente da 70px per mobile */
   }
   
   .kelua-hero-tabs-container {
@@ -328,11 +531,15 @@ const collections = await getCollection('collezioni');
   }
   
   .kelua-hero-tabs {
-    height: 120px;
+    height: 150px; /* Ridotta da 180px per schermi grandi */
   }
   
-  .hero-logo {
-    height: 70px;
+  .logo-section {
+    height: 110px; /* 150px - 40px = 110px spazio disponibile */
+  }
+  
+  .kelua-hero-tabs .hero-logo {
+    height: 160px; /* Aumentata da 150px per schermi grandi */
   }
 }
 </style>
@@ -341,6 +548,12 @@ const collections = await getCollection('collezioni');
 // Kelua Sticky Slider Navigation
 class KeluaStickyNavigation {
   constructor() {
+    // Prevent multiple initializations
+    if (document.body.hasAttribute('data-navbar-initialized')) {
+      return;
+    }
+    document.body.setAttribute('data-navbar-initialized', 'true');
+    
     this.currentId = null;
     this.currentTab = null;
     this.tabContainerHeight = 40;
@@ -375,6 +588,15 @@ class KeluaStickyNavigation {
         if (e.target === mobileOverlay) this.closeMobileMenu();
       });
     }
+
+    // Mobile dropdown events
+    document.querySelectorAll('.mobile-dropdown-trigger').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdown = trigger.closest('.mobile-dropdown');
+        dropdown.classList.toggle('active');
+      });
+    });
   }
   
   onTabClick(event, element) {
@@ -504,8 +726,10 @@ class KeluaStickyNavigation {
   }
 }
 
-// Initialize when DOM is ready
+// Initialize when DOM is ready (prevent multiple instances)
 document.addEventListener('DOMContentLoaded', () => {
-  new KeluaStickyNavigation();
+  if (!window.keluaNavInstance) {
+    window.keluaNavInstance = new KeluaStickyNavigation();
+  }
 });
 </script>

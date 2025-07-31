@@ -21,9 +21,81 @@ const collezioneInfo = {
   colore: '#ddbb76',
   totalArticoli: abitiAttivi.length
 };
+
+// SEO data per abiti da cerimonia
+const seoData = {
+  title: "Abiti da Cerimonia Kelua - Eleganza per Uomo e Donna a San Giovanni Rotondo",
+  description: `Scopri la collezione di abiti da cerimonia Kelua: ${abitiAttivi.length}+ capi eleganti per matrimoni, eventi speciali e cerimonie. Qualità e stile a San Giovanni Rotondo.`,
+  keywords: [
+    "abiti da cerimonia San Giovanni Rotondo",
+    "vestiti eleganti matrimonio",
+    "abiti cerimonia uomo donna",
+    "vestiti formali Kelua",
+    "abiti eleganti Puglia",
+    "cerimonie matrimoni San Giovanni Rotondo",
+    "abbigliamento formale qualità",
+    "vestiti da sera eleganti",
+    "abiti da sposo sposa",
+    "eleganza cerimonie"
+  ],
+  ogImage: "/uploads/optimized/IMG_2357.webp",
+  jsonLD: {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://kelua.it/collezioni/abiti-cerimonia/#webpage",
+    "name": "Abiti da Cerimonia Kelua",
+    "description": "Collezione completa di abiti da cerimonia eleganti per uomo e donna. Qualità e stile per i tuoi momenti speciali.",
+    "url": "https://kelua.it/collezioni/abiti-cerimonia",
+    "mainEntity": {
+      "@type": "Product",
+      "name": "Collezione Abiti da Cerimonia",
+      "category": "Abbigliamento Formale",
+      "brand": {
+        "@type": "Brand",
+        "name": "Kelua"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://kelua.it"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Collezioni",
+          "item": "https://kelua.it/collezioni"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Abiti da Cerimonia",
+          "item": "https://kelua.it/collezioni/abiti-cerimonia"
+        }
+      ]
+    }
+  }
+};
 ---
 
-<Layout title="Abiti da Cerimonia - Kelua Collezioni">
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  canonicalURL="https://kelua.it/collezioni/abiti-cerimonia"
+  jsonLD={seoData.jsonLD}
+>
   <Navbar />
   
   <!-- Hero Section Collezione -->

@@ -1,0 +1,15 @@
+# Netlify Redirects File
+
+# Redirect per SEO - redirects old URLs to new ones
+/collezione/* /collezioni/:splat 301
+/categoria/* /collezioni/:splat 301
+/prodotti/* /collezioni/:splat 301
+
+# Redirect per pagine di errore
+/404 /404.html 200
+
+# Redirect per sitemap
+/sitemap /sitemap.xml 301
+
+# Rewrite per SPA (Single Page Application) - Astro routing
+/* /index.html 200

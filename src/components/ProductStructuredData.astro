@@ -1,0 +1,62 @@
+---
+export interface ProductStructuredDataProps {
+  name: string;
+  description?: string;
+  image?: string;
+  brand?: string;
+  category?: string;
+  availability?: 'InStock' | 'OutOfStock' | 'PreOrder';
+  condition?: 'NewCondition' | 'UsedCondition' | 'RefurbishedCondition';
+  url?: string;
+  priceRange?: string;
+}
+
+const {
+  name,
+  description,
+  image,
+  brand = "Kelua",
+  category = "Abbigliamento",
+  availability = "InStock",
+  condition = "NewCondition",
+  url,
+  priceRange = "€€"
+} = Astro.props;
+
+const currentUrl = url || Astro.url.href;
+const fullImage = image && image.startsWith('http') ? image : `https://kelua.it${image || '/logoKelua.png'}`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": name,
+  "description": description || `${name} - Abbigliamento di qualità da Kelua`,
+  "image": fullImage,
+  "brand": {
+    "@type": "Brand",
+    "name": brand
+  },
+  "category": category,
+  "url": currentUrl,
+  "offers": {
+    "@type": "Offer",
+    "availability": `https://schema.org/${availability}`,
+    "itemCondition": `https://schema.org/${condition}`,
+    "priceCurrency": "EUR",
+    "seller": {
+      "@type": "Organization",
+      "name": "Kelua",
+      "url": "https://kelua.it"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

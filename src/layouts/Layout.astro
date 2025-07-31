@@ -1,18 +1,44 @@
 ---
+import SEO from '../components/SEO.astro';
+
 export interface Props {
 	title: string;
 	description?: string;
+	keywords?: string[];
+	ogImage?: string;
+	canonicalURL?: string;
+	jsonLD?: object;
+	noindex?: boolean;
 }
 
-const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giovanni Rotondo. Due negozi specializzati uomo e donna. Abiti da cerimonia e sportswear." } = Astro.props;
+const { 
+	title, 
+	description = "Kelua - Abbigliamento elegante dal 1975 a San Giovanni Rotondo. Due negozi specializzati uomo e donna. Abiti da cerimonia e sportswear di qualità.",
+	keywords = ["abbigliamento", "San Giovanni Rotondo", "abiti cerimonia", "sportswear", "moda uomo", "moda donna", "negozio abbigliamento", "Kelua", "eleganza", "qualità"],
+	ogImage,
+	canonicalURL,
+	jsonLD,
+	noindex = false
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="it">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<!-- SEO Component -->
+		<SEO 
+			title={title}
+			description={description}
+			keywords={keywords}
+			ogImage={ogImage}
+			canonicalURL={canonicalURL}
+			jsonLD={jsonLD}
+			noindex={noindex}
+		/>
+		
 		<!-- Favicon - Logo Kelua -->
 		<link rel="icon" type="image/png" sizes="32x32" href="/logoKelua_32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/logoKelua_16x16.png" />
@@ -22,29 +48,36 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 		<meta name="theme-color" content="#ddbb76" />
 		<meta name="generator" content={Astro.generator} />
 		
-		<!-- SEO Meta Tags -->
-		<meta name="keywords" content="abbigliamento, San Giovanni Rotondo, abiti cerimonia, sportswear, moda uomo, moda donna, negozio abbigliamento, Kelua" />
+		<!-- Additional Meta Tags -->
 		<meta name="author" content="Kelua" />
-		<meta name="robots" content="index, follow" />
+		<meta name="language" content="Italian" />
+		<meta name="geo.region" content="IT-PU" />
+		<meta name="geo.placename" content="San Giovanni Rotondo" />
+		<meta name="geo.position" content="41.7059;15.7276" />
+		<meta name="ICBM" content="41.7059, 15.7276" />
 		
-		<!-- Open Graph -->
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://kelua.it" />
-		<meta property="og:image" content="/logoKelua.png" />
-		<meta property="og:image:width" content="1244" />
-		<meta property="og:image:height" content="1245" />
-		<meta property="og:image:type" content="image/png" />
+		<!-- Preconnect for Performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 		
-		<!-- Local Business Schema -->
+		<!-- Enhanced Business Schema -->
 		<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "ClothingStore",
+			"@id": "https://kelua.it/#business",
 			"name": "Kelua",
-			"description": "Negozio di abbigliamento elegante dal 1975. Due punti vendita: abbigliamento uomo e donna.",
+			"legalName": "Kelua Abbigliamento",
+			"description": "Negozio di abbigliamento elegante dal 1975. Specializzato in abiti da cerimonia, sportswear e moda uomo-donna di qualità.",
 			"foundingDate": "1975",
+			"url": "https://kelua.it",
+			"logo": "https://kelua.it/logoKelua.png",
+			"image": [
+				"https://kelua.it/logoKelua.png",
+				"https://kelua.it/fotoNegozio_conLogo.png",
+				"https://kelua.it/fotoEsternoAttuale.jpg"
+			],
 			"address": {
 				"@type": "PostalAddress",
 				"streetAddress": "Corso Regina Margherita 108-110",
@@ -53,14 +86,19 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 				"postalCode": "71013",
 				"addressCountry": "IT"
 			},
+			"geo": {
+				"@type": "GeoCoordinates",
+				"latitude": 41.7059,
+				"longitude": 15.7276
+			},
 			"telephone": "+390882302070",
-			"url": "https://kelua.it",
-			"image": "/logoKelua.png",
+			"email": "info@kelua.it",
 			"sameAs": [
 				"https://www.facebook.com/kelua.uomo/?locale=it_IT",
 				"https://www.instagram.com/kelua_moda/",
 				"https://www.tiktok.com/@pasqualemartino80"
-			],			"openingHours": [
+			],
+			"openingHours": [
 				"Mo 09:30-13:00,17:00-20:30",
 				"Tu 09:30-13:00,17:00-20:30", 
 				"We 09:30-13:00,17:00-20:30",
@@ -69,8 +107,35 @@ const { title, description = "Kelua - Abbigliamento elegante dal 1975 a San Giov
 				"Sa 09:30-13:00,17:00-20:30"
 			],
 			"priceRange": "€€",
-			"paymentAccepted": ["Cash", "Credit Card"],
-			"currenciesAccepted": "EUR"
+			"paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+			"currenciesAccepted": "EUR",
+			"areaServed": {
+				"@type": "GeoCircle",
+				"geoMidpoint": {
+					"@type": "GeoCoordinates",
+					"latitude": 41.7059,
+					"longitude": 15.7276
+				},
+				"geoRadius": "50000"
+			},
+			"makesOffer": [
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Product",
+						"name": "Abiti da Cerimonia",
+						"category": "Abbigliamento Formale"
+					}
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Product",
+						"name": "Sportswear",
+						"category": "Abbigliamento Casual"
+					}
+				}
+			]
 		}
 		</script>
 		

@@ -1,0 +1,32 @@
+# Netlify Headers File
+
+# Cache headers for performance
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000
+
+/*.jpg
+  Cache-Control: public, max-age=31536000
+
+/*.png
+  Cache-Control: public, max-age=31536000
+
+/*.svg
+  Cache-Control: public, max-age=31536000
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# HTML files - shorter cache for dynamic content
+/*.html
+  Cache-Control: public, max-age=3600

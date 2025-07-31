@@ -1,12 +1,14 @@
 {
-  "name": "Kelua - Abbigliamento di Qualità",
+  "name": "Kelua - Abbigliamento di Qualità a San Giovanni Rotondo",
   "short_name": "Kelua",
-  "description": "Negozio di abbigliamento elegante dal 1975 a San Giovanni Rotondo",
+  "description": "Abbigliamento elegante dal 1975. Abiti da cerimonia, sportswear e moda uomo-donna di qualità a San Giovanni Rotondo.",
+  "lang": "it-IT",
   "icons": [
     {
       "src": "/logoKelua_192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/logoKelua_180x180.png", 
@@ -17,11 +19,20 @@
       "src": "/logoKelua_32x32.png",
       "sizes": "32x32", 
       "type": "image/png"
+    },
+    {
+      "src": "/logoKelua_16x16.png",
+      "sizes": "16x16", 
+      "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "/?utm_source=pwa",
   "display": "standalone",
-  "theme_color": "#d4af37",
+  "theme_color": "#ddbb76",
   "background_color": "#1a1a1a",
-  "orientation": "portrait-primary"
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["shopping", "fashion", "lifestyle"],
+  "related_applications": [],
+  "prefer_related_applications": false
 } 

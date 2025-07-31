@@ -126,9 +126,65 @@ function formatDateRange(dataInizio, dataFine) {
   
   return null;
 }
+
+// SEO data per saldi
+const seoData = {
+  title: "Saldi Kelua - Offerte Speciali su Abbigliamento di Qualità",
+  description: `Scopri i saldi Kelua a San Giovanni Rotondo! Offerte speciali su abbigliamento uomo e donna, abiti da cerimonia e sportswear. ${prodottiSaldi.length}+ articoli in promozione.`,
+  keywords: [
+    "saldi abbigliamento San Giovanni Rotondo",
+    "offerte Kelua",
+    "sconti abbigliamento uomo donna",
+    "promozioni abiti cerimonia",
+    "saldi sportswear",
+    "offerte speciali Kelua",
+    "sconti moda San Giovanni Rotondo",
+    "saldi abbigliamento Puglia",
+    "promozioni vestiti",
+    "outlet abbigliamento"
+  ],
+  ogImage: "/uploads/optimized/IMG_2357.webp",
+  jsonLD: {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": "https://kelua.it/saldi/#catalog",
+    "name": "Saldi Kelua - Offerte Speciali",
+    "description": "Collezione di offerte speciali e saldi su abbigliamento di qualità per uomo e donna.",
+    "url": "https://kelua.it/saldi",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "@id": "https://kelua.it/#business",
+      "name": "Kelua"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://kelua.it"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Saldi",
+          "item": "https://kelua.it/saldi"
+        }
+      ]
+    }
+  }
+};
 ---
 
-<Layout title="Saldi - Kelua | Offerte Speciali su Abbigliamento di Qualità">
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  canonicalURL="https://kelua.it/saldi"
+  jsonLD={seoData.jsonLD}
+>
   <main>
     <Navbar />
     
@@ -1133,6 +1189,7 @@ function formatDateRange(dataInizio, dataFine) {
     width: 320px;
     max-width: 320px;
     min-width: 320px;
+    min-height: 440px;
     margin: 0 auto;
   }
 
@@ -1144,15 +1201,20 @@ function formatDateRange(dataInizio, dataFine) {
 
   .prodotto-image-compact {
     position: relative;
-    height: 180px;
+    height: 200px; /* Aumentata da 180px per dare più spazio */
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(13, 13, 13, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
+    display: flex; /* Aggiunto per centrare l'immagine */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra orizzontalmente */
   }
 
   .prodotto-image-compact img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: auto; /* Cambiato da 100% */
+    height: auto; /* Cambiato da 100% */
+    max-width: 100%; /* Aggiunto per rispettare la larghezza del container */
+    max-height: 100%; /* Aggiunto per rispettare l'altezza del container */
+    object-fit: contain; /* Cambiato da cover a contain per mostrare l'immagine completa */
     transition: transform 0.3s ease;
   }
 
@@ -1844,15 +1906,20 @@ function formatDateRange(dataInizio, dataFine) {
 
   .prodotto-image {
     position: relative !important;
-    height: 280px !important;
+    height: 300px !important; /* Aumentata da 280px */
     overflow: hidden !important;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%) !important;
+    display: flex !important; /* Aggiunto per centrare l'immagine */
+    align-items: center !important; /* Centra verticalmente */
+    justify-content: center !important; /* Centra orizzontalmente */
   }
 
   .prodotto-image img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    width: auto !important; /* Cambiato da 100% */
+    height: auto !important; /* Cambiato da 100% */
+    max-width: 100% !important; /* Aggiunto per rispettare la larghezza del container */
+    max-height: 100% !important; /* Aggiunto per rispettare l'altezza del container */
+    object-fit: contain !important; /* Cambiato da cover a contain */
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   }
 
@@ -3342,9 +3409,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const taglieHTML = prodotto.taglie ? prodotto.taglie.map(t => `<span class="taglia" style="background: rgba(212,175,55,0.2); color: #ffffff; padding: 6px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(212,175,55,0.4); transition: all 0.3s ease; min-width: 32px; text-align: center; box-shadow: 0 1px 4px rgba(212,175,55,0.2);">${t}</span>`).join('') : '';
         
         const cardHTML = `
-          <div class="prodotto-card-compact" data-delay="${index * 0.1}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; backdrop-filter: blur(20px); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; min-height: 420px; width: 320px; max-width: 320px; min-width: 320px; margin: 0 auto;">
-            <div class="prodotto-image-compact" style="position: relative; height: 180px; overflow: hidden; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-              <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" />
+          <div class="prodotto-card-compact" data-delay="${index * 0.1}" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); color: #e0e0e0; backdrop-filter: blur(20px); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(212, 175, 55, 0.1); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; min-height: 440px; width: 320px; max-width: 320px; min-width: 320px; margin: 0 auto;">
+            <div class="prodotto-image-compact" style="position: relative; height: 200px; overflow: hidden; background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%); display: flex; align-items: center; justify-content: center;">
+              <img src="${prodotto.immagine || '/background.png'}" alt="${prodotto.nome}" style="width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s ease;" />
               <div class="badges-compact" style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 3;">
                 ${prodotto.nuovo ? '<span class="badge nuovo" style="padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.7rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(45deg, #27ae60, #2ecc71); color: white;">Nuovo</span>' : ''}
                 ${prodotto.limitedTime ? '<span class="badge limited" style="padding: 4px 8px; border-radius: 12px; font-weight: 600; font-size: 0.7rem; text-align: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); background: linear-gradient(45deg, #e67e22, #f39c12); color: white;">Limitato</span>' : ''}
@@ -3352,7 +3419,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
             </div>
             
-            <div class="prodotto-content-compact" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: calc(100% - 180px);">
+            <div class="prodotto-content-compact" style="padding: 20px; display: flex; flex-direction: column; gap: 12px; height: calc(100% - 200px);">
               <div class="prodotto-header-compact" style="margin-bottom: 12px; text-align: center;">
                 <h3 style="font-size: 1.2rem; font-weight: 700; color: #ffffff; margin: 0 0 8px 0; line-height: 1.3; letter-spacing: 0.3px;">${prodotto.nome}</h3>
                 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">

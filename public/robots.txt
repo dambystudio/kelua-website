@@ -10,14 +10,27 @@ Disallow: /src/
 Disallow: /.env
 Disallow: /node_modules/
 Disallow: /backup/
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /tina/
 
-# Permetti l'accesso alle immagini
+# Permetti l'accesso alle immagini e risorse pubbliche
 Allow: /public/
 Allow: /*.jpg
 Allow: /*.jpeg
 Allow: /*.png
 Allow: /*.webp
 Allow: /*.svg
+Allow: /*.css
+Allow: /*.js
+
+# Blocca parametri di query non necessari
+Disallow: /*?*
+Allow: /*?utm_*
+Allow: /*?ref=*
+
+# Crawl delay (opzionale, per essere gentili con i server)
+Crawl-delay: 1
 
 # Crawl-delay per essere rispettosi
 Crawl-delay: 1

@@ -97,12 +97,63 @@ console.log('🔧 Debug Homepage:');
 console.log('- showBanner:', showBanner);
 console.log('- saldiAttivi (raw):', saldiSettings?.data?.saldiAttivi);
 console.log('- saldiAttivi (processed):', saldiAttivi);
+// SEO data per homepage
+const seoData = {
+  title: "Kelua - Abbigliamento di Qualità a San Giovanni Rotondo dal 1975",
+  description: "Kelua, negozio di abbigliamento a San Giovanni Rotondo dal 1975. Abiti da cerimonia, sportswear e moda uomo-donna di qualità. Due punti vendita specializzati. Eleganza e stile per ogni occasione.",
+  keywords: [
+    "abbigliamento San Giovanni Rotondo",
+    "negozio abbigliamento Kelua", 
+    "abiti cerimonia uomo donna",
+    "sportswear qualità",
+    "moda elegante San Giovanni Rotondo",
+    "abbigliamento dal 1975",
+    "vestiti cerimonia Puglia",
+    "negozio moda San Giovanni Rotondo",
+    "abiti eleganti",
+    "sportswear casual"
+  ],
+  ogImage: "/logoKelua.png",
+  jsonLD: {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://kelua.it/#webpage",
+    "name": "Kelua - Abbigliamento di Qualità",
+    "description": "Scopri Kelua: abbigliamento elegante e sportswear di qualità a San Giovanni Rotondo dal 1975. Due negozi specializzati per uomo e donna.",
+    "url": "https://kelua.it",
+    "mainEntity": {
+      "@type": "ClothingStore", 
+      "@id": "https://kelua.it/#business"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://kelua.it"
+        }
+      ]
+    }
+  }
+};
+
+console.log('Homepage SEO configurata');
+console.log('- Saldi attivi:', saldiAttivi);
 console.log('- Banner sarà mostrato:', showBanner && saldiAttivi);
 console.log('- Abiti cerimonia trovati:', abitiAttivi.length);
 console.log('- Sportswear trovati:', sportswearAttive.length);
 ---
 
-<Layout title="Kelua - Abbigliamento di Qualità a San Giovanni Rotondo">
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  canonicalURL="https://kelua.it"
+  jsonLD={seoData.jsonLD}
+>
   <main class={showBanner && saldiAttivi ? 'has-saldi-banner' : ''}>
     <Navbar />
     
@@ -240,7 +291,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
 
     // Gestione dinamica altezza navbar per banner saldi
     if (banner) {
-      const navbar = document.querySelector('.modern-navbar');
+      const navbar = document.querySelector('.kelua-hero-tabs');
       const root = document.documentElement;
       
       // Funzione per aggiornare l'altezza della navbar
@@ -294,7 +345,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
   /* Banner Saldi Dinamico */
   .saldi-banner {
     position: fixed;
-    top: var(--navbar-height, 80px); /* Usa variabile CSS dinamica */
+    top: var(--navbar-height, 130px); /* Aggiornato al valore attuale della navbar */
     left: 0;
     right: 0;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
