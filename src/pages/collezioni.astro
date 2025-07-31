@@ -12,8 +12,8 @@ const galleriaMaglie = await getCollection('galleria-maglie');
 const galleriaCamicie = await getCollection('galleria-camicie');
 const galleriaPantaloni = await getCollection('galleria-pantaloni');
 const galleriaFelpe = await getCollection('galleria-felpe');
-const galleriaGiubbotti = await getCollection('galleria-giubbotti');
-const galleriaAccessori = await getCollection('galleria-accessori');
+const galleriaGiubbotti = await getCollection('galleria_giubbotti');
+const galleriaAccessori = await getCollection('galleria_accessori');
 
 // Conta solo gli elementi attivi
 const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;

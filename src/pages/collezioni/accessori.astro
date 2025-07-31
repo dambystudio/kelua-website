@@ -2,11 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
-import GalleriaComponent from '../../components/GalleriaComponent.astro';
 import { getCollection } from 'astro:content';
 
 // Carica i prodotti dalla collezione accessori
-const accessori = await getCollection('galleria-accessori');
+const accessori = await getCollection('galleria_accessori');
 const accessoriAttivi = accessori.filter(item => item.data.attivo);
 ---
 
@@ -37,11 +36,27 @@ const accessoriAttivi = accessori.filter(item => item.data.attivo);
     <section class="collezione-content">
       <div class="container">
         {accessoriAttivi.length > 0 ? (
-          <GalleriaComponent 
-            items={accessoriAttivi} 
-            tipoGalleria="accessori"
-            showFilters={true}
-          />
+          <div class="collezione-grid">
+            {accessoriAttivi.map(item => (
+              <div class="product-card">
+                <div class="product-image">
+                  <img src={item.data.immagine} alt={item.data.nome} loading="lazy" />
+                  {item.data.prezzo && (
+                    <div class="product-price">{item.data.prezzo}</div>
+                  )}
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name">{item.data.nome}</h3>
+                  {item.data.descrizione && (
+                    <p class="product-description">{item.data.descrizione}</p>
+                  )}
+                  {item.data.categoria && (
+                    <span class="product-category">{item.data.categoria}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <div class="empty-state">
             <div class="empty-content">
@@ -141,6 +156,83 @@ const accessoriAttivi = accessori.filter(item => item.data.attivo);
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+  }
+
+  .collezione-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-price {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #ddbb76;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .product-info {
+    padding: 20px;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+
+  .product-description {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .product-category {
+    display: inline-block;
+    background: #f8f9fa;
+    color: #666;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 
   .empty-state {

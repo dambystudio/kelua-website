@@ -868,9 +868,9 @@ export default defineConfig({
 
       // Galleria Giubbotti
       {
-        name: "galleria-giubbotti",
+        name: "galleria_giubbotti",
         label: "Galleria Giubbotti",
-        path: "src/content/galleria-giubbotti",
+        path: "src/content/galleria_giubbotti",
         format: "md",
         fields: [
           {
@@ -958,9 +958,9 @@ export default defineConfig({
 
       // Galleria Accessori
       {
-        name: "galleria-accessori",
+        name: "galleria_accessori",
         label: "Galleria Accessori",
-        path: "src/content/galleria-accessori",
+        path: "src/content/galleria_accessori",
         format: "md",
         fields: [
           {
