@@ -10,6 +10,7 @@ interface Props {
   class?: string;
   loading?: 'lazy' | 'eager';
   sizes?: string;
+  responsive?: boolean;
 }
 
 const {
@@ -20,7 +21,8 @@ const {
   quality = 80,
   class: className = '',
   loading = 'lazy',
-  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw'
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
+  responsive = true
 } = Astro.props;
 
 // Determina il percorso dell'immagine ottimizzata
@@ -45,6 +47,17 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
 const webpSrc = getOptimizedImagePath(src, 'webp');
 const avifSrc = getOptimizedImagePath(src, 'avif');
 
+// Genera srcset responsive per diverse risoluzioni
+const generateSrcSet = (baseSrc: string, format: string) => {
+  if (!responsive) return '';
+  
+  const sizes = [400, 600, 800, 1200];
+  return sizes.map(size => {
+    const optimizedPath = getOptimizedImagePath(baseSrc, format);
+    return `${optimizedPath} ${size}w`;
+  }).join(', ');
+};
+
 // Debug: mostra i percorsi generati (solo in sviluppo)
 if (import.meta.env.DEV) {
   console.log('🖼️ OptimizedImage Debug:');
@@ -59,7 +72,7 @@ if (import.meta.env.DEV) {
   <!-- Formato AVIF (più moderno e compresso) -->
   {avifSrc && avifSrc !== src && (
     <source 
-      srcset={avifSrc} 
+      srcset={responsive ? generateSrcSet(src, 'avif') : avifSrc}
       type="image/avif" 
       sizes={sizes}
     />
@@ -68,7 +81,7 @@ if (import.meta.env.DEV) {
   <!-- Formato WebP (supporto ampio e buona compressione) -->
   {webpSrc && webpSrc !== src && (
     <source 
-      srcset={webpSrc} 
+      srcset={responsive ? generateSrcSet(src, 'webp') : webpSrc}
       type="image/webp" 
       sizes={sizes}
     />
@@ -83,6 +96,7 @@ if (import.meta.env.DEV) {
     loading={loading}
     decoding="async"
     class="optimized-image"
+    sizes={sizes}
   />
 </picture>
 

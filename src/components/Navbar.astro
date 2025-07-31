@@ -62,7 +62,14 @@ const collections = [
 <section class="kelua-hero-tabs">
   <div class="logo-section">
     <a href="/" class="logo-link">
-      <img src="/logoKeluaNoBG.png" alt="Kelua" class="hero-logo">
+      <img 
+        src="/logoKeluaNoBG.png" 
+        alt="Kelua" 
+        class="hero-logo"
+        width="150"
+        height="150"
+        loading="eager"
+      >
     </a>
   </div>
   
@@ -96,10 +103,11 @@ const collections = [
 </section>
 
 <!-- Mobile Menu Button (visible only on mobile) -->
-<button class="mobile-menu-toggle" id="mobileMenuToggle">
-  <span></span>
-  <span></span>
-  <span></span>
+<button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobileMenuOverlay">
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+  <span class="sr-only">Menu</span>
 </button>
 
 <!-- Mobile Menu Overlay -->
@@ -269,6 +277,19 @@ const collections = [
 
 .dropdown-container:hover .dropdown-arrow {
   transform: rotate(180deg);
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .dropdown-menu {

@@ -130,8 +130,8 @@
 ## 📈 Prossimi Passi
 
 ### Google Search Console
-1. Aggiungi la proprietà `https://kelua.it`
-2. Invia la sitemap: `https://kelua.it/sitemap.xml`
+1. Aggiungi la proprietà `https://keluamoda.it`
+2. Invia la sitemap: `https://keluamoda.it/sitemap.xml`
 3. Monitora le performance
 4. Verifica l'indicizzazione delle pagine
 
@@ -149,9 +149,9 @@
 
 ## 🔗 Link Utili
 
-- **Sitemap**: https://kelua.it/sitemap.xml
-- **Robots.txt**: https://kelua.it/robots.txt
-- **Manifest**: https://kelua.it/site.webmanifest
+- **Sitemap**: https://keluamoda.it/sitemap.xml
+- **Robots.txt**: https://keluamoda.it/robots.txt
+- **Manifest**: https://keluamoda.it/site.webmanifest
 - **Google Search Console**: https://search.google.com/search-console
 - **Google Business**: https://business.google.com
 
@@ -167,11 +167,12 @@
 - [x] Mobile responsive
 - [x] Local SEO configurato
 - [x] Social media meta tags
-- [ ] Google Search Console configurato
+- [ ] Google Search Console configurato per keluamoda.it
 - [ ] Google Business Profile aggiornato
 - [ ] Analytics configurato
 - [ ] Monitoraggio keyword attivato
 
 ---
 
-*Documento creato il 31 Luglio 2025 - Kelua Website SEO Optimization*
+*Documento aggiornato il 31 Luglio 2025 - Kelua Website SEO Optimization*
+*Dominio corretto: keluamoda.it*

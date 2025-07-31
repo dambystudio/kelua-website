@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://kelua.it/sitemap.xml
+Sitemap: https://keluamoda.it/sitemap.xml
 
 # Ottimizzazione per i motori di ricerca
 # Blocca l'accesso a file sensibili

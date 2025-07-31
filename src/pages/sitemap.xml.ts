@@ -29,7 +29,7 @@ export async function GET() {
 
     // Aggiungi le pagine statiche
     staticPages.forEach(page => {
-      const url = page === '' ? 'https://kelua.it/' : `https://kelua.it/${page}`;
+      const url = page === '' ? 'https://keluamoda.it/' : `https://keluamoda.it/${page}`;
       const priority = page === '' ? '1.0' : 
                       page === 'collezioni' ? '0.9' :
                       page === 'saldi' ? '0.8' :
@@ -65,7 +65,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
     staticPages.forEach(page => {
-      const url = page === '' ? 'https://kelua.it/' : `https://kelua.it/${page}`;
+      const url = page === '' ? 'https://keluamoda.it/' : `https://keluamoda.it/${page}`;
       const priority = page === '' ? '1.0' : 
                       page === 'collezioni' ? '0.9' :
                       page === 'saldi' ? '0.8' :

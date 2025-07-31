@@ -117,13 +117,13 @@ const seoData = {
   jsonLD: {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://kelua.it/#webpage",
+    "@id": "https://keluamoda.it/#webpage",
     "name": "Kelua - Abbigliamento di Qualità",
     "description": "Scopri Kelua: abbigliamento elegante e sportswear di qualità a San Giovanni Rotondo dal 1975. Due negozi specializzati per uomo e donna.",
-    "url": "https://kelua.it",
+    "url": "https://keluamoda.it",
     "mainEntity": {
       "@type": "ClothingStore", 
-      "@id": "https://kelua.it/#business"
+      "@id": "https://keluamoda.it/#business"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -132,7 +132,7 @@ const seoData = {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://kelua.it"
+          "item": "https://keluamoda.it"
         }
       ]
     }
@@ -151,7 +151,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
   description={seoData.description}
   keywords={seoData.keywords}
   ogImage={seoData.ogImage}
-  canonicalURL="https://kelua.it"
+  canonicalURL="https://keluamoda.it"
   jsonLD={seoData.jsonLD}
 >
   <main class={showBanner && saldiAttivi ? 'has-saldi-banner' : ''}>
@@ -216,11 +216,12 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
                     <OptimizedImage
                       src={item.data.immagine || '/background.png'}
                       alt={item.data.nome || item.data.titolo}
-                      width={250}
-                      height={300}
+                      width={200}
+                      height={250}
                       loading="lazy"
                       class="gallery-image"
                       sizes="(min-width: 1024px) 200px, (min-width: 768px) 150px, 120px"
+                      responsive={true}
                     />
                     <div class="gallery-overlay">
                       <span class="item-name">{item.data.nome || item.data.titolo}</span>

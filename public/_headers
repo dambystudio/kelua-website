@@ -1,15 +1,20 @@
 # Netlify Headers File
 
-# Cache headers for performance
+# Critical resources - immediate cache
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JS with longer cache
 /*.css
   Cache-Control: public, max-age=31536000, immutable
 
 /*.js
   Cache-Control: public, max-age=31536000, immutable
 
-/*.webp
-  Cache-Control: public, max-age=31536000
-
+# Other images
 /*.jpg
   Cache-Control: public, max-age=31536000
 
@@ -19,6 +24,13 @@
 /*.svg
   Cache-Control: public, max-age=31536000
 
+# Fonts
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+  
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
 # Security headers
 /*
   X-Frame-Options: DENY
@@ -26,7 +38,13 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https:;
 
 # HTML files - shorter cache for dynamic content
 /*.html
   Cache-Control: public, max-age=3600
+  
+# Special handling for critical LCP image
+/CautieriCerimonia1.webp
+  Cache-Control: public, max-age=31536000, immutable
+  Priority: u=0, i
