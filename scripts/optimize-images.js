@@ -48,18 +48,6 @@ async function optimizeImage(inputPath, outputDir, filename) {
       })
       .toFile(path.join(outputDir, `${baseName}.avif`));
 
-    // Crea anche una versione JPEG ottimizzata come fallback
-    await sharp(inputPath)
-      .resize(1920, 1080, { 
-        fit: 'inside', 
-        withoutEnlargement: true 
-      })
-      .jpeg({ 
-        quality: 80, 
-        progressive: true 
-      })
-      .toFile(path.join(outputDir, `${baseName}.jpg`));
-
     console.log(`✅ Ottimizzata: ${filename}`);
     
     // Ottieni le dimensioni dei file per il confronto

@@ -6,5 +6,6 @@ prezzoOriginale: 129
 prezzoScontato: 75
 descrizione: 'Il jeans perfetto per tutti gli outfit '
 immagine: /uploads/IMG_2496.jpeg
+disponibile: true
 ---
 

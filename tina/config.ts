@@ -865,6 +865,194 @@ export default defineConfig({
           },
         ],
       },
+
+      // Galleria Giubbotti
+      {
+        name: "galleria-giubbotti",
+        label: "Galleria Giubbotti",
+        path: "src/content/galleria-giubbotti",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "nome",
+            label: "Nome Giubbotto",
+            required: true,
+            description: "Nome del giubbotto che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Breve descrizione del giubbotto",
+          },
+          {
+            type: "string",
+            name: "prezzo",
+            label: "Prezzo",
+            description: "Prezzo del giubbotto (es: €89.90)",
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine principale del giubbotto",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            options: [
+              {
+                value: "invernale",
+                label: "Invernale",
+              },
+              {
+                value: "primaverile",
+                label: "Primaverile",
+              },
+              {
+                value: "bomber",
+                label: "Bomber",
+              },
+              {
+                value: "blazer",
+                label: "Blazer",
+              },
+            ],
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "uomo",
+                label: "Uomo",
+              },
+              {
+                value: "donna",
+                label: "Donna",
+              },
+              {
+                value: "unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+
+      // Galleria Accessori
+      {
+        name: "galleria-accessori",
+        label: "Galleria Accessori",
+        path: "src/content/galleria-accessori",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "nome",
+            label: "Nome Accessorio",
+            required: true,
+            description: "Nome dell'accessorio che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Breve descrizione dell'accessorio",
+          },
+          {
+            type: "string",
+            name: "prezzo",
+            label: "Prezzo",
+            description: "Prezzo dell'accessorio (es: €24.90)",
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine principale dell'accessorio",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            options: [
+              {
+                value: "cinture",
+                label: "Cinture",
+              },
+              {
+                value: "borse",
+                label: "Borse",
+              },
+              {
+                value: "cappelli",
+                label: "Cappelli",
+              },
+              {
+                value: "sciarpe",
+                label: "Sciarpe",
+              },
+              {
+                value: "gioielli",
+                label: "Gioielli",
+              },
+              {
+                value: "occhiali",
+                label: "Occhiali",
+              },
+            ],
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "uomo",
+                label: "Uomo",
+              },
+              {
+                value: "donna",
+                label: "Donna",
+              },
+              {
+                value: "unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
     ],
   },
 });

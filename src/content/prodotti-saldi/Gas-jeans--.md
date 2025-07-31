@@ -6,5 +6,6 @@ prezzoOriginale: 119
 prezzoScontato: 70
 descrizione: "Top quality jeans \U0001F456 "
 immagine: /uploads/IMG_2495.jpeg
+disponibile: true
 ---
 

@@ -1,0 +1,599 @@
+---
+import { getCollection } from 'astro:content';
+
+const collections = await getCollection('collezioni');
+---
+
+<!-- Dante5-inspired Navbar -->
+<nav class="dante-navbar" id="navbar">
+  <!-- Hamburger Menu (Mobile) -->
+  <div class="hamburger">
+    <button class="hamburger__button" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+      <span class="hamburger__icon"></span>
+      <span class="hamburger__icon"></span>
+      <span class="hamburger__icon"></span>
+    </button>
+  </div>
+
+  <!-- Utility Bar (Top Right) -->
+  <div class="utility">
+    <a href="/admin" class="utility__link">Admin</a>
+  </div>
+
+  <!-- User Menu Icons -->
+  <div class="usermenu">
+    <div class="usermenu__icons">
+      <a href="/search" class="usermenu__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </a>
+      <a href="/account" class="usermenu__icon" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="/wishlist" class="usermenu__icon" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </a>
+      <a href="/cart" class="usermenu__icon" aria-label="Shopping Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Logo Central -->
+  <div class="navbar-brand">
+    <a href="/" class="logo">
+      <img src="/logoKeluaNoBG.png" alt="Kelua" class="logo__image">
+    </a>
+  </div>
+
+  <!-- Desktop Menu -->
+  <nav class="desktop-menu">
+    <ul class="menu__container">
+      <li class="menu__wrapper">
+        <a href="/" class="menu__link">Home</a>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/collezioni" class="menu__link menu__link-bold">Collezioni</a>
+        <div class="submenu">
+          <div class="submenu__lists">
+            {collections.map(collection => (
+              <div class="submenu__wrapper">
+                <a href={`/collezioni/${collection.slug}`} class="submenu__item">
+                  {collection.data.title}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/uomo" class="menu__link">Uomo</a>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/donna" class="menu__link">Donna</a>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/bambini" class="menu__link">Bambini</a>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/saldi" class="menu__link menu__link-special">Saldi</a>
+      </li>
+      
+      <li class="menu__wrapper">
+        <a href="/contatti" class="menu__link">Contatti</a>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">Menu</span>
+      <button class="mobile-menu-close" id="mobileMenuClose">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="mobile-menu-content">
+      <a href="/" class="mobile-nav-item">Home</a>
+      <a href="/collezioni" class="mobile-nav-item">Collezioni</a>
+      {collections.map(collection => (
+        <a href={`/collezioni/${collection.slug}`} class="mobile-nav-item mobile-nav-subcategory">
+          {collection.data.title}
+        </a>
+      ))}
+      <a href="/uomo" class="mobile-nav-item">Uomo</a>
+      <a href="/donna" class="mobile-nav-item">Donna</a>
+      <a href="/bambini" class="mobile-nav-item">Bambini</a>
+      <a href="/saldi" class="mobile-nav-item mobile-nav-special">Saldi</a>
+      <a href="/contatti" class="mobile-nav-item">Contatti</a>
+      <a href="/admin" class="mobile-nav-item">Admin</a>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Dante5-inspired Navbar Styles */
+.dante-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+.hamburger__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger__icon {
+  width: 24px;
+  height: 2px;
+  background: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger__button:hover .hamburger__icon {
+  background: #ddbb76;
+}
+
+/* Utility Bar */
+.utility {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.utility__link {
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.utility__link:hover {
+  color: #ddbb76;
+}
+
+/* Logo Central */
+.navbar-brand {
+  text-align: center;
+  padding: 20px 0 15px;
+}
+
+.logo {
+  display: inline-block;
+}
+
+.logo__image {
+  height: 80px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logo__image {
+  transform: scale(1.05);
+}
+
+/* Desktop Menu */
+.desktop-menu {
+  border-top: 1px solid #e5e5e5;
+  background: #f9f9f9;
+  padding: 0;
+}
+
+.menu__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu__wrapper {
+  position: relative;
+  margin: 0;
+}
+
+.menu__link {
+  display: block;
+  padding: 15px 25px;
+  color: #333;
+  text-decoration: none;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.menu__link:hover {
+  color: #ddbb76;
+  border-bottom-color: #ddbb76;
+}
+
+.menu__link-bold {
+  font-weight: 700;
+}
+
+.menu__link-special {
+  background: linear-gradient(45deg, #ff6b47, #ff8e53);
+  color: white !important;
+  border-radius: 15px;
+  margin: 8px;
+  border-bottom: none !important;
+}
+
+.menu__link-special:hover {
+  background: linear-gradient(45deg, #ff8e53, #ff6b47);
+  transform: translateY(-2px);
+}
+
+/* Submenu */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  min-width: 250px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.menu__wrapper:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.submenu__lists {
+  padding: 20px;
+}
+
+.submenu__wrapper {
+  margin-bottom: 15px;
+}
+
+.submenu__item {
+  display: block;
+  padding: 8px 12px;
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.submenu__item:hover {
+  background: rgba(221, 187, 118, 0.1);
+  color: #ddbb76;
+  padding-left: 18px;
+}
+
+/* User Menu Icons */
+.usermenu {
+  position: absolute;
+  top: 20px;
+  right: 200px;
+}
+
+.usermenu__icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.usermenu__icon {
+  width: 20px;
+  height: 20px;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.usermenu__icon:hover {
+  color: #ddbb76;
+  transform: scale(1.1);
+}
+
+.usermenu__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile Menu */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-menu-overlay.active .mobile-menu {
+  transform: translateX(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #f9f9f9;
+}
+
+.mobile-menu-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+}
+
+.mobile-menu-close:hover {
+  color: #ddbb76;
+}
+
+.mobile-menu-content {
+  padding: 20px 0;
+}
+
+.mobile-nav-item {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item:hover {
+  background: rgba(221, 187, 118, 0.1);
+  color: #ddbb76;
+  padding-left: 30px;
+}
+
+.mobile-nav-subcategory {
+  padding-left: 40px;
+  font-size: 12px;
+  color: #666;
+}
+
+.mobile-nav-special {
+  background: linear-gradient(45deg, #ff6b47, #ff8e53);
+  color: white !important;
+  margin: 10px 20px;
+  border-radius: 25px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.mobile-nav-special:hover {
+  background: linear-gradient(45deg, #ff8e53, #ff6b47);
+  color: white !important;
+  padding-left: 20px;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+  
+  .desktop-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  
+  .utility {
+    display: none;
+  }
+  
+  .usermenu {
+    right: 60px;
+    top: 15px;
+  }
+  
+  .usermenu__icons {
+    gap: 10px;
+  }
+  
+  .usermenu__icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .navbar-brand {
+    padding: 15px 0 10px;
+  }
+  
+  .logo__image {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    padding: 10px 0;
+  }
+  
+  .logo__image {
+    height: 50px;
+  }
+  
+  .usermenu {
+    right: 50px;
+  }
+}
+
+/* Scroll Effects */
+.dante-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.dante-navbar.scrolled .navbar-brand {
+  padding: 10px 0 8px;
+}
+
+.dante-navbar.scrolled .logo__image {
+  height: 60px;
+}
+
+.dante-navbar.scrolled .menu__link {
+  padding: 12px 25px;
+}
+</style>
+
+<script>
+// Dante5-inspired Navbar JavaScript
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  const navbar = document.getElementById('navbar');
+
+  // Mobile menu toggle
+  if (mobileMenuBtn && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuOverlay.classList.toggle('active');
+      mobileMenuBtn.classList.toggle('active');
+    });
+  }
+
+  // Close mobile menu
+  if (mobileMenuClose && mobileMenuOverlay) {
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenuOverlay.classList.remove('active');
+      mobileMenuBtn.classList.remove('active');
+    });
+  }
+
+  // Close mobile menu when clicking overlay
+  if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+      }
+    });
+  }
+
+  // Scroll effects
+  let lastScrollTop = 0;
+  let ticking = false;
+
+  function updateNavbarOnScroll() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 100) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    
+    lastScrollTop = scrollTop;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNavbarOnScroll);
+      ticking = true;
+    }
+  });
+});
+</script>

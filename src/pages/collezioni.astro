@@ -1,0 +1,510 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+// Carica i dati delle gallerie per contare gli articoli
+const galleriaSporstwear = await getCollection('galleria-sportswear');
+const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
+const galleriaJeans = await getCollection('galleria-jeans');
+const galleriaMaglie = await getCollection('galleria-maglie');
+const galleriaCamicie = await getCollection('galleria-camicie');
+const galleriaPantaloni = await getCollection('galleria-pantaloni');
+const galleriaFelpe = await getCollection('galleria-felpe');
+const galleriaGiubbotti = await getCollection('galleria-giubbotti');
+const galleriaAccessori = await getCollection('galleria-accessori');
+
+// Conta solo gli elementi attivi
+const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;
+
+// Definizione delle collezioni
+const collezioni = [
+  {
+    id: 'abiti-cerimonia',
+    nome: 'Abiti da Cerimonia',
+    descrizione: 'Eleganza e stile per i tuoi momenti speciali',
+    categoria: 'Formale',
+    immagine: '/abiti-cerimonia-1.png',
+    articoli: contaAttivi(galleriaAbiti),
+    link: '/collezioni/abiti-cerimonia'
+  },
+  {
+    id: 'sportswear',
+    nome: 'Sportswear',
+    descrizione: 'Comfort e performance per il tempo libero',
+    categoria: 'Sport',
+    immagine: '/sportswear-casual.png',
+    articoli: contaAttivi(galleriaSporstwear),
+    link: '/collezioni/sportswear'
+  },
+  {
+    id: 'giubbotti',
+    nome: 'Giubbotti',
+    descrizione: 'Protezione e stile per ogni stagione',
+    categoria: 'Outerwear',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaGiubbotti),
+    link: '/collezioni/giubbotti'
+  },
+  {
+    id: 'camicie',
+    nome: 'Camicie',
+    descrizione: 'Classiche e moderne per ogni occasione',
+    categoria: 'Formale',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaCamicie),
+    link: '/collezioni/camicie'
+  },
+  {
+    id: 'felpe',
+    nome: 'Felpe',
+    descrizione: 'Comfort urbano e stile casual',
+    categoria: 'Casual',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaFelpe),
+    link: '/collezioni/felpe'
+  },
+  {
+    id: 'maglie',
+    nome: 'Maglie',
+    descrizione: 'Versatilità e comfort quotidiano',
+    categoria: 'Casual',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaMaglie),
+    link: '/collezioni/maglie'
+  },
+  {
+    id: 'jeans',
+    nome: 'Jeans',
+    descrizione: 'Denim di qualità per ogni stile',
+    categoria: 'Denim',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaJeans),
+    link: '/collezioni/jeans'
+  },
+  {
+    id: 'pantaloni',
+    nome: 'Pantaloni',
+    descrizione: 'Eleganza e comfort per ogni momento',
+    categoria: 'Formale',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaPantaloni),
+    link: '/collezioni/pantaloni'
+  },
+  {
+    id: 'accessori',
+    nome: 'Accessori',
+    descrizione: 'Dettagli che fanno la differenza',
+    categoria: 'Accessori',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaAccessori),
+    link: '/collezioni/accessori'
+  }
+];
+
+// Raggruppa per categoria
+const categorieMap = collezioni.reduce((acc, collezione) => {
+  if (!acc[collezione.categoria]) {
+    acc[collezione.categoria] = [];
+  }
+  acc[collezione.categoria].push(collezione);
+  return acc;
+}, {});
+
+const categorie = Object.keys(categorieMap);
+---
+
+<Layout title="Collezioni - Kelua Fashion Store">
+  <Navbar />
+  
+  <main class="collezioni-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Le Nostre Collezioni</h1>
+        <p class="hero-subtitle">Scopri l'eccellenza della moda italiana in ogni categoria</p>
+      </div>
+    </section>
+
+    <!-- Filtri Categorie -->
+    <section class="filters-section">
+      <div class="container">
+        <div class="category-filters">
+          <button class="filter-btn active" data-category="all">Tutte</button>
+          {categorie.map(categoria => (
+            <button class="filter-btn" data-category={categoria}>{categoria}</button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Griglia Collezioni -->
+    <section class="collezioni-grid-section">
+      <div class="container">
+        <div class="collezioni-grid">
+          {collezioni.map(collezione => (
+            <div class="collezione-card" data-category={collezione.categoria}>
+              <div class="card-image">
+                <img src={collezione.immagine} alt={collezione.nome} loading="lazy" />
+                <div class="card-overlay">
+                  <span class="articles-count">{collezione.articoli} articoli</span>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">{collezione.nome}</h3>
+                <p class="card-description">{collezione.descrizione}</p>
+                <div class="card-footer">
+                  <span class="card-category">{collezione.categoria}</span>
+                  <a href={collezione.link} class="card-link">
+                    Scopri
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Non hai trovato quello che cerchi?</h2>
+          <p class="cta-description">Contattaci per una consulenza personalizzata</p>
+          <a href="/contatti" class="cta-button">Contattaci</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Variables */
+  :root {
+    --primary-color: #ddbb76;
+    --primary-dark: #c9a96e;
+    --text-dark: #1a1a1a;
+    --text-light: #666;
+    --background-light: #f8f9fa;
+    --border-color: #e9ecef;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --transition: all 0.3s ease;
+  }
+
+  /* Reset and Base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .collezioni-page {
+    min-height: 100vh;
+    background: #fff;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    padding: 120px 20px 80px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+
+  /* Filters Section */
+  .filters-section {
+    background: var(--background-light);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 12px 24px;
+    border: 2px solid var(--border-color);
+    background: white;
+    color: var(--text-light);
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+  }
+
+  /* Collezioni Grid */
+  .collezioni-grid-section {
+    padding: 80px 0;
+  }
+
+  .collezioni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+  }
+
+  .collezione-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+  }
+
+  .collezione-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .collezione-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .card-content {
+    padding: 24px;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .card-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-category {
+    background: var(--background-light);
+    color: var(--text-light);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .card-link:hover {
+    color: var(--primary-dark);
+    transform: translateX(4px);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--background-light);
+    padding: 80px 0;
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+
+  .cta-description {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .cta-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .collezioni-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .category-filters {
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+    }
+
+    .cta-title {
+      font-size: 1.8rem;
+    }
+
+    .collezioni-grid-section,
+    .cta-section {
+      padding: 60px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-section {
+      padding: 100px 20px 60px;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+  }
+</style>
+
+<script>
+  // JavaScript per i filtri
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.collezione-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const category = this.dataset.category;
+        
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter cards
+        cards.forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  });
+</script>

@@ -3,11 +3,11 @@
 /* Advanced CSS Variables */
 :root {
   /* Colors - Enhanced Gold Palette */
-  --primary-gold: #d4af37;
+  --primary-gold: #ddbb76;
   --primary-gold-light: #e6c547;
   --primary-gold-dark: #b8960a;
-  --primary-gold-bright: #ffd700;
-  --primary-gold-muted: #c9aa3a;
+  --primary-gold-bright: #ddbb76;
+  --primary-gold-muted: #ddbb76;
   --secondary-black: #1a1a1a;
   --secondary-black-light: #2a2a2a;
   --accent-red: #e74c3c;

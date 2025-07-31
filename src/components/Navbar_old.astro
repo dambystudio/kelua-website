@@ -1,0 +1,936 @@
+---
+// Modern Navbar Component - Stile Dante5
+import { getEntry } from 'astro:content';
+
+const currentPath = Astro.url.pathname;
+const isHomepage = currentPath === '/' || currentPath === '';
+const homePrefix = isHomepage ? '' : '/';
+
+// Carica le impostazioni dei saldi
+const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
+const saldiAttivi = saldiSettings?.data?.saldiAttivi === true;
+---
+
+<nav class="dante-navbar">
+  <!-- Mobile Menu Button -->
+  <div class="hamburger">
+    <button class="hamburger__button js-toggle-app" id="mobileMenuBtn">
+      <span class="hamburger__icon"></span>
+    </button>
+  </div>
+
+  <!-- Utility Bar - Top Right -->
+  <div class="utility">
+    <a class="utility__link" href="javascript:;">Italia / Italiano / €</a>
+  </div>
+
+  <!-- Logo Central -->
+  <div class="navbar-brand">
+    <a href="/" class="logo">
+      <img src="/logoKeluaNoBG.png" alt="Kelua" class="logo__image">
+    </a>
+  </div>
+
+  <!-- Desktop Menu - Categories under logo -->
+  <div class="desktop-menu">
+    <ul class="menu__container">
+      <li class="menu__wrapper">
+        <a class="menu__link menu__link-bold" href="/collezioni">Collezioni</a>
+        <div class="submenu">
+          <div class="submenu__lists">
+            <div class="submenu__wrapper">
+              <a href="/collezioni" class="submenu__item">Tutte le collezioni</a>
+              <a href="/collezioni/abiti-cerimonia" class="submenu__item">Abiti da Cerimonia</a>
+              <a href="/collezioni/jeans" class="submenu__item">Jeans</a>
+              <a href="/collezioni/camicie" class="submenu__item">Camicie</a>
+              <a href="/collezioni/felpe" class="submenu__item">Felpe</a>
+              <a href="/collezioni/maglie" class="submenu__item">Maglie</a>
+              <a href="/collezioni/pantaloni" class="submenu__item">Pantaloni</a>
+              <a href="/collezioni/giubbini" class="submenu__item">Giubbini</a>
+              <a href="/collezioni/accessori" class="submenu__item">Accessori</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="menu__wrapper">
+        <a class="menu__link" href={homePrefix + "#chi-siamo"}>Chi Siamo</a>
+      </li>
+      <li class="menu__wrapper">
+        <a class="menu__link" href={homePrefix + "#contatti"}>Contatti</a>
+      </li>
+      {saldiAttivi && (
+        <li class="menu__wrapper">
+          <a class="menu__link menu__link-special" href="/saldi">Saldi</a>
+        </li>
+      )}
+    </ul>
+  </div>
+
+  <!-- User Menu - Icons Right -->
+  <div class="usermenu">
+    <div class="usermenu__icons">
+      <a class="usermenu__icon" href="tel:0882302070">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+        </svg>
+      </a>
+      <a class="usermenu__icon" href="https://wa.me/393272271295" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+      </a>
+      <a class="usermenu__icon" href="https://kelua.netlify.app/admin/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Menu</span>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="mobile-menu-content">
+        <a href={homePrefix + "#home"} class="mobile-nav-item">Home</a>
+        <a href="/collezioni" class="mobile-nav-item">Tutte le Collezioni</a>
+        <a href="/collezioni/abiti-cerimonia" class="mobile-nav-item mobile-nav-subcategory">Abiti da Cerimonia</a>
+        <a href="/collezioni/jeans" class="mobile-nav-item mobile-nav-subcategory">Jeans</a>
+        <a href="/collezioni/camicie" class="mobile-nav-item mobile-nav-subcategory">Camicie</a>
+        <a href="/collezioni/felpe" class="mobile-nav-item mobile-nav-subcategory">Felpe</a>
+        <a href="/collezioni/maglie" class="mobile-nav-item mobile-nav-subcategory">Maglie</a>
+        <a href="/collezioni/pantaloni" class="mobile-nav-item mobile-nav-subcategory">Pantaloni</a>
+        <a href="/collezioni/giubbini" class="mobile-nav-item mobile-nav-subcategory">Giubbini</a>
+        <a href="/collezioni/accessori" class="mobile-nav-item mobile-nav-subcategory">Accessori</a>
+        <a href={homePrefix + "#chi-siamo"} class="mobile-nav-item">Chi Siamo</a>
+        <a href={homePrefix + "#contatti"} class="mobile-nav-item">Contatti</a>
+        {saldiAttivi && (
+          <a href="/saldi" class="mobile-nav-item mobile-nav-special">Saldi</a>
+        )}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+/* Dante5-inspired Navbar Styles */
+.dante-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+  background: white;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dante-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+}
+
+.hamburger__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hamburger__icon {
+  width: 24px;
+  height: 2px;
+  background: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger__button:hover .hamburger__icon {
+  background: #ddbb76;
+}
+
+/* Utility Bar */
+.utility {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.utility__link {
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.utility__link:hover {
+  color: #ddbb76;
+}
+
+/* Logo Central */
+.navbar-brand {
+  text-align: center;
+  padding: 20px 0 15px;
+}
+
+.logo {
+  display: inline-block;
+}
+
+.logo__image {
+  height: 80px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Desktop Menu */
+.desktop-menu {
+  border-top: 1px solid #e5e5e5;
+  background: #f9f9f9;
+  padding: 0;
+}
+
+.menu__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu__wrapper {
+  position: relative;
+  margin: 0;
+}
+
+.menu__link {
+  display: block;
+  padding: 15px 25px;
+  color: #333;
+  text-decoration: none;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.menu__link:hover {
+  color: #ddbb76;
+  border-bottom-color: #ddbb76;
+}
+
+.menu__link-bold {
+  font-weight: 700;
+}
+
+.menu__link-special {
+  background: linear-gradient(45deg, #ff6b47, #ff8e53);
+  color: white !important;
+  border-radius: 15px;
+  margin: 8px;
+  border-bottom: none !important;
+}
+
+.menu__link-special:hover {
+  background: linear-gradient(45deg, #ff8e53, #ff6b47);
+  transform: translateY(-2px);
+}
+
+.brand-link:hover .brand-glow {
+  opacity: 1;
+}
+
+/* Submenu */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  min-width: 250px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.menu__wrapper:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(5px);
+}
+
+.submenu__lists {
+  padding: 20px;
+}
+
+.submenu__wrapper {
+  margin-bottom: 15px;
+}
+
+.submenu__item {
+  display: block;
+  padding: 8px 12px;
+  color: #666;
+  text-decoration: none;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.submenu__item:hover {
+  background: rgba(221, 187, 118, 0.1);
+  color: #ddbb76;
+  padding-left: 18px;
+}
+
+/* Dropdown Styles */
+/* User Menu Icons */
+.usermenu {
+  position: absolute;
+  top: 20px;
+  right: 200px;
+}
+
+.usermenu__icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.usermenu__icon {
+  width: 20px;
+  height: 20px;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.usermenu__icon:hover {
+  color: #ddbb76;
+  transform: scale(1.1);
+}
+
+.usermenu__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(80, 80, 80, 1);
+  border: 1px solid rgba(221, 187, 118, 0.3);
+  border-radius: 12px;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: rgba(221, 187, 118, 0.2);
+  color: #ddbb76;
+  padding-left: 25px;
+}
+
+.nav-item {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background: transparent;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+  border-radius: 25px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-item:hover::before {
+  opacity: 1;
+}
+
+.nav-item:hover {
+  color: #ddbb76;
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+.nav-item-special {
+  background: linear-gradient(45deg, #ff6b47, #ff8e53);
+  color: white !important;
+  border-color: #ff6b47;
+  animation: pulse-special 2s infinite;
+}
+
+.nav-item-special:hover {
+  background: linear-gradient(45deg, #ff8e53, #ff6b47);
+  border-color: #ff8e53;
+  color: white !important;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 107, 71, 0.4);
+}
+
+@keyframes pulse-special {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 71, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 107, 71, 0); }
+}
+
+.nav-item-admin {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item-admin:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu Button - Sempre visibile */
+.mobile-menu-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(221, 187, 118, 0.1);
+  border: 2px solid rgba(221, 187, 118, 0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: none;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(221, 187, 118, 0.2);
+  border-color: rgba(221, 187, 118, 0.5);
+}
+
+.menu-line {
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(45deg, #ddbb76, #c6ae6a);
+  margin: 2px 0;
+  border-radius: 2px;
+  transition: none;
+}
+
+.mobile-menu-btn.active .menu-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active .menu-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .menu-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(80, 80, 80, 1);
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: none;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(80, 80, 80, 1);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  z-index: 99999;
+}
+
+.mobile-menu-overlay.active .mobile-menu {
+  transform: translateY(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.mobile-menu-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ddbb76;
+  letter-spacing: 1px;
+}
+
+.mobile-menu-close {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 8px;
+  color: #ddbb76;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-close:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.5);
+  transform: rotate(90deg);
+}
+
+.mobile-menu-content {
+  flex: 1;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  transform: translateX(50px);
+  opacity: 0;
+  animation: slideInMobile 0.5s ease-out forwards;
+}
+
+.mobile-nav-item:nth-child(1) { animation-delay: 0.1s; }
+.mobile-nav-item:nth-child(2) { animation-delay: 0.2s; }
+.mobile-nav-item:nth-child(3) { animation-delay: 0.3s; }
+.mobile-nav-item:nth-child(4) { animation-delay: 0.4s; }
+.mobile-nav-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInMobile {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.mobile-nav-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  color: #ddbb76;
+  transform: translateX(10px);
+}
+
+.mobile-nav-text {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-nav-subcategory {
+  margin-left: 20px;
+  background: rgba(221, 187, 118, 0.1);
+  border-left: 3px solid #ddbb76;
+  font-size: 0.95rem;
+}
+
+.mobile-nav-subcategory:hover {
+  background: rgba(221, 187, 118, 0.2);
+  transform: translateX(15px);
+}
+
+.mobile-nav-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.mobile-nav-special {
+  background: linear-gradient(45deg, rgba(255, 107, 71, 0.2), rgba(255, 142, 83, 0.2));
+  border-color: rgba(255, 107, 71, 0.4);
+  color: #ff6b47 !important;
+}
+
+.mobile-nav-special:hover {
+  background: linear-gradient(45deg, rgba(255, 107, 71, 0.3), rgba(255, 142, 83, 0.3));
+  border-color: rgba(255, 107, 71, 0.6);
+  color: #ff8e53 !important;
+}
+
+.mobile-nav-admin {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.mobile-nav-admin:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.mobile-nav-badge {
+  background: linear-gradient(45deg, #ff6b47, #ff8e53);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+  60% { transform: translateY(-3px); }
+}
+
+.mobile-menu-footer {
+  padding: 25px;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.mobile-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.mobile-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.mobile-contact-btn:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  color: #ddbb76;
+  transform: translateY(-2px);
+}
+
+.mobile-contact-btn.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: rgba(37, 211, 102, 0.4);
+  color: #25d366;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex;
+  }
+  
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .navbar-container {
+    height: 70px;
+  }
+  
+  .brand-text {
+    font-size: 1.3rem;
+  }
+  
+  .logo-container {
+    width: 100px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 15px;
+    height: 65px;
+  }
+  
+  .brand-text {
+    font-size: 1.1rem;
+  }
+  
+  .logo-container {
+    width: 80px;
+    height: 65px;
+  }
+  
+  .mobile-menu {
+    width: 100%;
+  }
+  
+  .mobile-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scroll Effects */
+.modern-navbar.scrolled {
+  background: rgba(0, 0, 0, 0.95);
+  border-bottom-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modern-navbar.scrolled .navbar-container {
+  height: 65px;
+}
+
+.modern-navbar.scrolled .brand-logo {
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+}
+</style>
+
+<script>
+// Modern Navbar JavaScript
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  const navbar = document.querySelector('.modern-navbar');
+
+  // Desktop dropdown functionality
+  const collezioniDropdown = document.getElementById('collezioniDropdown');
+  const collezioniMenu = document.getElementById('collezioniMenu');
+  
+  if (collezioniDropdown && collezioniMenu) {
+    collezioniDropdown.addEventListener('click', (e) => {
+      e.preventDefault();
+      collezioniMenu.style.display = collezioniMenu.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!collezioniDropdown.contains(e.target) && !collezioniMenu.contains(e.target)) {
+        collezioniMenu.style.display = 'none';
+      }
+    });
+  }
+
+  // Mobile menu toggle
+  if (mobileMenuBtn && mobileMenuOverlay) {
+    // Open mobile menu
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenuOverlay.classList.add('active');
+      mobileMenuBtn.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close mobile menu
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close menu when clicking overlay
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close menu when clicking nav items
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Scroll effects
+  if (navbar) {
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+  }
+
+  // Smart navigation for anchor links
+  document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      
+      if (href && href.includes('#')) {
+        const currentPage = window.location.pathname;
+        
+        if (currentPage === '/' || currentPage === '') {
+          e.preventDefault();
+          const targetId = href.split('#')[1];
+          const target = document.getElementById(targetId);
+          
+          if (target) {
+            const offsetTop = target.offsetTop - 100;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+    });
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenuOverlay?.classList.contains('active')) {
+      mobileMenuOverlay.classList.remove('active');
+      mobileMenuBtn?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+</script>

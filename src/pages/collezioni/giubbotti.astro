@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import GalleriaComponent from '../../components/GalleriaComponent.astro';
+import { getCollection } from 'astro:content';
+
+// Carica i prodotti dalla collezione giubbotti
+const giubbotti = await getCollection('galleria-giubbotti');
+const giubbottiAttivi = giubbotti.filter(item => item.data.attivo);
+---
+
+<Layout title="Giubbotti - Kelua Fashion Store">
+  <Navbar />
+  
+  <main class="collezione-page">
+    <!-- Hero Section -->
+    <section class="collezione-hero">
+      <div class="hero-content">
+        <div class="breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/collezioni">Collezioni</a>
+          <span>/</span>
+          <span>Giubbotti</span>
+        </div>
+        <h1 class="hero-title">Giubbotti</h1>
+        <p class="hero-subtitle">Protezione e stile per ogni stagione</p>
+        <div class="hero-stats">
+          <span class="stats-number">{giubbottiAttivi.length}</span>
+          <span class="stats-label">articoli disponibili</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collezione Content -->
+    <section class="collezione-content">
+      <div class="container">
+        {giubbottiAttivi.length > 0 ? (
+          <GalleriaComponent 
+            items={giubbottiAttivi} 
+            tipoGalleria="giubbotti"
+            showFilters={true}
+          />
+        ) : (
+          <div class="empty-state">
+            <div class="empty-content">
+              <h3>Collezione in arrivo</h3>
+              <p>Stiamo preparando una fantastica selezione di giubbotti. Torna presto per scoprire le novità!</p>
+              <a href="/contatti" class="contact-btn">Contattaci per info</a>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .collezione-page {
+    min-height: 100vh;
+  }
+
+  .collezione-hero {
+    background: linear-gradient(135deg, #ddbb76, #c9a96e);
+    padding: 120px 20px 80px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .breadcrumb a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .breadcrumb a:hover {
+    opacity: 0.7;
+  }
+
+  .breadcrumb span {
+    margin: 0 0.5rem;
+    opacity: 0.7;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+  }
+
+  .stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stats-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .collezione-content {
+    padding: 80px 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .empty-content {
+    text-align: center;
+    max-width: 500px;
+  }
+
+  .empty-content h3 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .empty-content p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: #ddbb76;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .contact-btn:hover {
+    background: #c9a96e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .collezione-content {
+      padding: 60px 0;
+    }
+
+    .empty-content h3 {
+      font-size: 1.6rem;
+    }
+  }
+</style>

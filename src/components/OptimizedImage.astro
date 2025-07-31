@@ -44,7 +44,6 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
 
 const webpSrc = getOptimizedImagePath(src, 'webp');
 const avifSrc = getOptimizedImagePath(src, 'avif');
-const fallbackSrc = getOptimizedImagePath(src, 'jpg');
 
 // Debug: mostra i percorsi generati (solo in sviluppo)
 if (import.meta.env.DEV) {
@@ -52,7 +51,6 @@ if (import.meta.env.DEV) {
   console.log('  Original:', src);
   console.log('  WebP:', webpSrc);
   console.log('  AVIF:', avifSrc);
-  console.log('  Fallback:', fallbackSrc);
 }
 
 ---
@@ -76,9 +74,9 @@ if (import.meta.env.DEV) {
     />
   )}
   
-  <!-- Fallback: immagine ottimizzata in JPEG o originale -->
+  <!-- Fallback: WebP se disponibile, altrimenti originale -->
   <img
-    src={fallbackSrc || src}
+    src={webpSrc && webpSrc !== src ? webpSrc : src}
     alt={alt}
     width={width}
     height={height}

@@ -52,6 +52,57 @@ const felpeAttive = galleriaFelpe
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
+// Organizza le collezioni per la homepage (solo anteprima)
+const collezioniAnteprima = [
+  {
+    id: 'abiti-cerimonia',
+    nome: 'Abiti da Cerimonia',
+    descrizione: 'Eleganza e raffinatezza per ogni occasione speciale',
+    items: abitiAttivi.slice(0, 4), // Solo i primi 4
+    colore: '#ddbb76',
+    icona: '👔',
+    categoria: 'Formale'
+  },
+  {
+    id: 'sportswear',
+    nome: 'Sportswear & Casual',
+    descrizione: 'Comfort e stile per il tempo libero',
+    items: sportswearAttive.slice(0, 4),
+    colore: '#3498db',
+    icona: '👕',
+    categoria: 'Casual'
+  },
+  {
+    id: 'jeans',
+    nome: 'Collezione Jeans',
+    descrizione: 'Denim di qualità italiana per ogni stile',
+    items: jeansAttivi.slice(0, 4),
+    colore: '#2c3e50',
+    icona: '👖',
+    categoria: 'Denim'
+  },
+  {
+    id: 'maglie',
+    nome: 'Maglie & Pullover',
+    descrizione: 'Calore e comfort con stile italiano',
+    items: maglieAttive.slice(0, 4),
+    colore: '#e74c3c',
+    icona: '🧥',
+    categoria: 'Maglieria'
+  }
+].filter(collezione => collezione.items.length > 0);
+
+// Conta totale articoli per tutte le collezioni
+const totalArticoli = [
+  ...abitiAttivi,
+  ...sportswearAttive,
+  ...jeansAttivi,
+  ...maglieAttive,
+  ...camicieAttive,
+  ...pantaloniAttivi,
+  ...felpeAttive
+].length;
+
 // Dati per le impostazioni
 const showBanner = homepageSettings?.data?.mostraBannerSaldi ?? false;
 const bannerText = homepageSettings?.data?.testoBanner ?? '';
@@ -87,371 +138,93 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
         </button>
       </div>
     )}
-    
+
     <Hero />
+  
     <Saldi />
     
-    <!-- Galleria con Caroselli TinaCMS -->
-    <section id="galleria" class="galleria-section">
+    <!-- Sezione Collezioni Anteprima -->
+    <section id="collezioni" class="collezioni-preview-section">
       <div class="container">
-        <!-- Intestazione Galleria -->
-        <div class="galleria-header">
-          <h2 class="galleria-title">
+        <!-- Intestazione Collezioni -->
+        <div class="collezioni-header">
+          <h2 class="collezioni-title">
             <span class="category-icon">✨</span>
-            Galleria
+            Le Nostre Collezioni
           </h2>
-          <p class="galleria-description">
-            Scopri la nostra selezione di abbigliamento di qualità, dal casual all'elegante.
+          <p class="collezioni-description">
+            Scopri un'anteprima delle nostre collezioni di abbigliamento di qualità. 
+            Oltre {totalArticoli} articoli ti aspettano nella collezione completa.
           </p>
+          <a href="/collezioni" class="collezioni-cta">
+            Esplora Tutte le Collezioni
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="cta-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
         </div>
 
-        <!-- Sezione Abiti da Cerimonia -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">🤵👰</span>
-            I nostri Abiti da Cerimonia
-          </h3>
-          <p class="category-description">
-            Eleganza e stile per i tuoi momenti speciali. Scopri la nostra selezione di abiti da cerimonia.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-abiti">
-                {abitiAttivi.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
+        <!-- Grid Collezioni -->
+        <div class="collezioni-grid">
+          {collezioniAnteprima.map((collezione) => (
+            <div class="collezione-card" data-categoria={collezione.categoria}>
+              <div class="collezione-header">
+                <div class="collezione-badge" style={`background-color: ${collezione.colore}`}>
+                  <span class="collezione-icon">{collezione.icona}</span>
+                  <span class="collezione-categoria">{collezione.categoria}</span>
+                </div>
+                <h3 class="collezione-title">{collezione.nome}</h3>
+                <p class="collezione-description">{collezione.descrizione}</p>
+              </div>
+              
+              <div class="collezione-gallery">
+                {collezione.items.map((item, index) => (
+                  <div class="gallery-item" data-index={index}>
+                    <OptimizedImage
+                      src={item.data.immagine || '/background.png'}
+                      alt={item.data.nome || item.data.titolo}
+                      width={250}
+                      height={300}
+                      loading="lazy"
+                      class="gallery-image"
+                      sizes="(min-width: 1024px) 200px, (min-width: 768px) 150px, 120px"
+                    />
+                    <div class="gallery-overlay">
+                      <span class="item-name">{item.data.nome || item.data.titolo}</span>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-abiti">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-abiti">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sezione Sportswear -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">🏃‍♂️🏃‍♀️</span>
-            Fashion e Sportswear
-          </h3>
-          <p class="category-description">
-            Lo stile incontra il fashion. Scopri la nostra collezione.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-sportswear">
-                {sportswearAttive.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              
+              <div class="collezione-footer">
+                <div class="collezione-stats">
+                  <span class="stat-number">{collezione.items.length}+</span>
+                  <span class="stat-label">Articoli disponibili</span>
+                </div>
+                <a href={`/collezioni/${collezione.id}`} class="collezione-btn">
+                  Esplora Collezione
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
               </div>
             </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-sportswear">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-sportswear">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
+          ))}
         </div>
 
-        <!-- Sezione Jeans -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">👖</span>
-            Jeans
-          </h3>
-          <p class="category-description">
-            Qualità e comfort per tutti i giorni. Scopri la nostra collezione di jeans.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-jeans">
-                {jeansAttivi.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-jeans">
+        <!-- Call to Action Finale -->
+        <div class="collezioni-final-cta">
+          <div class="final-cta-content">
+            <h3 class="final-cta-title">Vuoi vedere di più?</h3>
+            <p class="final-cta-description">
+              Esplora tutte le nostre collezioni complete con centinaia di articoli selezionati per te.
+            </p>
+            <a href="/collezioni" class="final-cta-button">
+              Vai alle Collezioni Complete
               <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-jeans">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sezione Maglie -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">👕</span>
-            Maglie
-          </h3>
-          <p class="category-description">
-            Comfort e stile per ogni occasione. Scopri la nostra selezione di maglie.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-maglie">
-                {maglieAttive.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-maglie">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-maglie">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sezione Camicie -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">👔</span>
-            Camicie
-          </h3>
-          <p class="category-description">
-            Eleganza classica per ogni situazione. Scopri la nostra collezione di camicie.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-camicie">
-                {camicieAttive.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-camicie">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-camicie">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sezione Pantaloni -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">👖</span>
-            Pantaloni
-          </h3>
-          <p class="category-description">
-            Versatilità e stile per ogni momento. Scopri la nostra collezione di pantaloni.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-pantaloni">
-                {pantaloniAttivi.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-pantaloni">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-pantaloni">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sezione Felpe -->
-        <div class="galleria-category">
-          <h3 class="category-title">
-            <span class="category-icon">🧥</span>
-            Felpe
-          </h3>
-          <p class="category-description">
-            Comfort e calore per i momenti di relax. Scopri la nostra collezione di felpe.
-          </p>
-          
-          <div class="carousel-container">
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="carousel-felpe">
-                {felpeAttive.map((item, index) => (
-                  <div class="carousel-slide" data-index={index}>
-                    <div class="image-card">
-                      <OptimizedImage
-                        src={item.data.immagine || '/background.png'}
-                        alt={item.data.titolo}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                        class="gallery-carousel-image"
-                        sizes="(min-width: 1024px) 400px, (min-width: 768px) 300px, 280px"
-                      />
-                      <div class="image-overlay">
-                        <h4>{item.data.titolo}</h4>
-                        {item.data.descrizione && <p>{item.data.descrizione}</p>}
-                        <span class="image-category">{item.data.categoria}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <!-- Controlli Carousel -->
-            <button class="carousel-btn carousel-prev" data-carousel="carousel-felpe">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </button>
-            <button class="carousel-btn carousel-next" data-carousel="carousel-felpe">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -711,15 +484,15 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
     text-align: center; /* Centra tutto il contenuto */
   }
 
-  /* Galleria Section - Dark Theme */
-  .galleria-section {
-    padding: 120px 0;
+  /* Collezioni Preview Section */
+  .collezioni-preview-section {
+    padding: 60px 0;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     position: relative;
     overflow: hidden;
   }
 
-  .galleria-section::before {
+  .collezioni-preview-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -740,7 +513,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
   .main-title {
     font-size: 4rem;
     font-weight: 300;
-    background: linear-gradient(135deg, #ddbb76, #c5a572);
+    background: linear-gradient(135deg, #ddbb76, #b8a866);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1323,9 +1096,439 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
   }, observerOptions);
 
   document.addEventListener('DOMContentLoaded', () => {
-    const galleryCategories = document.querySelectorAll('.galleria-category');
-    galleryCategories.forEach(category => {
-      galleryObserver.observe(category);
+    // Intersection Observer per animazioni
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Osserva tutti gli elementi delle collezioni
+    document.querySelectorAll('.collezione-card, .preview-item').forEach((item) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(item);
     });
   });
 </script>
+
+<style>
+  /* Collezioni Header */
+  .collezioni-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .collezioni-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300;
+    background: linear-gradient(135deg, #ddbb76, #b8a866);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .collezioni-title .category-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 4px 8px rgba(221, 187, 118, 0.3));
+  }
+
+  .collezioni-description {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  .collezioni-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #ddbb76, #b8a866);
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(221, 187, 118, 0.3);
+  }
+
+  .collezioni-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(221, 187, 118, 0.5);
+    background: linear-gradient(135deg, #b8a866, #ddbb76);
+  }
+
+  .cta-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .collezioni-cta:hover .cta-icon {
+    transform: translateX(5px);
+  }
+
+  /* Grid Collezioni - Design Professionale */
+  .collezioni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .collezione-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(221, 187, 118, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+    position: relative;
+  }
+
+  .collezione-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(221, 187, 118, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Header della collezione */
+  .collezione-header {
+    padding: 24px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .collezione-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .collezione-icon {
+    font-size: 1.2rem;
+  }
+
+  .collezione-categoria {
+    font-size: 0.8rem;
+  }
+
+  .collezione-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 12px 0;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .collezione-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Galleria prodotti */
+  .collezione-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    aspect-ratio: 1;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-image {
+    transform: scale(1.05);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 12px 8px 8px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+  }
+
+  .item-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+  }
+
+  /* Footer della collezione */
+  .collezione-footer {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .collezione-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ddbb76;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .collezione-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ddbb76, #c9a96e);
+    color: #000;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .collezione-btn:hover {
+    background: linear-gradient(135deg, #e6c88a, #ddbb76);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(221, 187, 118, 0.4);
+  }
+
+  .collezione-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .collezione-btn:hover svg {
+    transform: translateX(2px);
+  }
+
+  /* Collezione link (deprecato - rimosso) */
+    margin: 0;
+  }
+
+  /* CTA Finale */
+  .collezioni-final-cta {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(221, 187, 118, 0.3);
+    border-radius: 25px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .final-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .final-cta-title {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #ddbb76;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(221, 187, 118, 0.3);
+  }
+
+  .final-cta-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .final-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #ddbb76, #b8a866);
+    color: #1a1a1a;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(221, 187, 118, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .final-cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(221, 187, 118, 0.6);
+    background: linear-gradient(135deg, #b8a866, #ddbb76);
+  }
+
+  /* Responsive Design - Collezioni */
+  @media (max-width: 768px) {
+    .collezioni-preview-section {
+      padding: 80px 0;
+    }
+
+    .collezioni-header {
+      margin-bottom: 50px;
+    }
+
+    .collezioni-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .collezione-header {
+      padding: 20px;
+    }
+
+    .collezione-title {
+      font-size: 1.3rem;
+    }
+
+    .collezione-gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .collezione-footer {
+      padding: 16px 20px;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .collezione-stats {
+      align-items: center;
+    }
+
+    .collezione-btn {
+      padding: 12px 24px;
+    }
+
+    .collezione-preview-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .final-cta-title {
+      font-size: 1.8rem;
+    }
+
+    .collezioni-final-cta {
+      padding: 40px 25px;
+    }
+  }
+
+  /* Tablet Design */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .collezioni-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .collezione-card {
+      padding: 20px;
+    }
+
+    .collezione-title {
+      font-size: 1.4rem;
+    }
+
+    .collezioni-final-cta {
+      padding: 50px 30px;
+    }
+  }
+
+  /* Small Desktop */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .collezioni-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .collezioni-grid {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .collezione-card {
+      padding: 20px;
+    }
+
+    .collezione-preview-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .preview-item {
+      aspect-ratio: 3/4;
+    }
+
+    .final-cta-button {
+      padding: 15px 30px;
+      font-size: 1rem;
+    }
+  }
+</style>
