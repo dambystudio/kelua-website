@@ -1,16 +1,16 @@
 [build]
-  command = "npm run build:local"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
   SECRETS_SCAN_OMIT_PATHS = "dist/admin/assets/**,public/admin/assets/**,tina/__generated__/**"
 
-# Headers per il CMS admin
-[[headers]]
-  for = "/admin/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+# Headers disabilitati per admin non funzionante
+# [[headers]]
+#   for = "/admin/*"
+#   [headers.values]
+#     X-Frame-Options = "SAMEORIGIN"
 
 # Cache control per file di contenuto
 [[headers]]
