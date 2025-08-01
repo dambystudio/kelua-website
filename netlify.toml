@@ -1,9 +1,10 @@
 [build]
-  command = "npm run build:tina"
+  command = "npm run build:local"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  TINA_PUBLIC_IS_LOCAL = "true"
   SECRETS_SCAN_OMIT_PATHS = "dist/admin/assets/**,public/admin/assets/**,tina/__generated__/**"
 
 # Headers per il CMS admin
