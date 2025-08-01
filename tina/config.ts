@@ -3,6 +3,8 @@ import { defineConfig } from "tinacms";
 // Check if we're in local mode
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
+console.log('TinaCMS Mode:', { isLocal, env: process.env.TINA_PUBLIC_IS_LOCAL });
+
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||

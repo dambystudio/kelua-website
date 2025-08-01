@@ -11,7 +11,7 @@
     "proxy": "node proxy-server.js",
     "dev:mobile-full": "start /B npm run proxy && npm run dev:mobile",
     "build": "astro build",
-    "build:tina": "tinacms build --local --skip-cloud-checks && astro build",
+    "build:tina": "tinacms build && astro build",
     "build:local": "tinacms build --local --skip-cloud-checks && astro build",
     "preview": "astro preview",
     "astro": "astro",
