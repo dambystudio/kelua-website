@@ -1,8 +1,8 @@
 import { defineConfig } from "tinacms";
 
-// Force local mode when explicitly set
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true' || 
-                (!process.env.PUBLIC_TINA_CLIENT_ID || !process.env.TINA_TOKEN);
+// Detect if we're in cloud mode based on environment variables
+const isLocal = process.env.NODE_ENV === 'development' || 
+                (!process.env.PUBLIC_TINA_CLIENT_ID && !process.env.TINA_TOKEN);
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -12,17 +12,25 @@ const branch =
   process.env.HEAD ||
   "master";
 
+console.log('TinaCMS Config:', {
+  isLocal,
+  branch,
+  hasClientId: !!process.env.PUBLIC_TINA_CLIENT_ID,
+  hasToken: !!process.env.TINA_TOKEN,
+  nodeEnv: process.env.NODE_ENV
+});
+
 export default defineConfig({
   branch,
 
-  // Get this from tina.io - For local development, these can be undefined
-  clientId: isLocal ? undefined : (process.env.PUBLIC_TINA_CLIENT_ID || undefined),
-  // Get this from tina.io - For local development, these can be undefined  
-  token: isLocal ? undefined : (process.env.TINA_TOKEN || undefined),
+  // Get this from tina.io - For cloud mode these are required
+  clientId: process.env.PUBLIC_TINA_CLIENT_ID,
+  // Get this from tina.io - For cloud mode these are required  
+  token: process.env.TINA_TOKEN,
 
   search: {
     tina: {
-      indexerToken: isLocal ? undefined : (process.env.TINA_SEARCH_TOKEN || undefined),
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
       stopwordLanguages: ['ita']
     }
   },
