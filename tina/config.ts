@@ -1,7 +1,7 @@
 import { defineConfig } from "tinacms";
 
-// Check if we're in local mode - forziamo locale per ora
-const isLocal = true; // process.env.TINA_PUBLIC_IS_LOCAL === 'true';
+// Check if we're in local mode
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -15,13 +15,13 @@ export default defineConfig({
   branch,
 
   // Get this from tina.io - For local development, these can be undefined
-  clientId: isLocal ? undefined : process.env.PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io - For local development, these can be undefined
-  token: isLocal ? undefined : process.env.TINA_TOKEN,
+  clientId: isLocal ? undefined : (process.env.PUBLIC_TINA_CLIENT_ID || undefined),
+  // Get this from tina.io - For local development, these can be undefined  
+  token: isLocal ? undefined : (process.env.TINA_TOKEN || undefined),
 
   search: {
     tina: {
-      indexerToken: isLocal ? undefined : process.env.TINA_SEARCH_TOKEN,
+      indexerToken: isLocal ? undefined : (process.env.TINA_SEARCH_TOKEN || undefined),
       stopwordLanguages: ['ita']
     }
   },
