@@ -1,11 +1,6 @@
 import { defineConfig } from "tinacms";
 
-// Check if we're in local mode
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
-
-console.log('TinaCMS Mode:', { isLocal, env: process.env.TINA_PUBLIC_IS_LOCAL });
-
-// Your hosting provider likely exposes this as an environment variable
+// Forza sempre la modalità cloud
 const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -15,17 +10,17 @@ const branch =
 
 export default defineConfig({
   branch,
-
-  // Get this from tina.io - For local development, these can be undefined
-  clientId: isLocal ? undefined : process.env.PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io - For local development, these can be undefined
-  token: isLocal ? undefined : process.env.TINA_TOKEN,
-
+  clientId: process.env.PUBLIC_TINA_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
   search: {
     tina: {
-      indexerToken: isLocal ? undefined : process.env.TINA_SEARCH_TOKEN,
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
       stopwordLanguages: ['ita']
     }
+  },
+  auth: {
+    customAuth: false,
+    useLocalAuth: false,
   },
 
   build: {
@@ -1057,6 +1052,57 @@ export default defineConfig({
         ],
       },
       */
+    ],
+  },
+  build: {
+    outputFolder: "admin",
+    publicFolder: "public",
+    basePath: "",
+  },
+
+  media: {
+    tina: {
+      mediaRoot: "uploads",
+      publicFolder: "public",
+    },
+  },
+
+  schema: {
+    collections: [
+      // Impostazioni Homepage
+      {
+        name: "homepageSettings",
+        label: "🏠 Impostazioni Homepage",
+        path: "src/content/homepage-settings",
+        format: "md",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
+        fields: [
+          {
+            type: "boolean",
+            name: "mostraBannerSaldi",
+            label: "Mostra Banner Saldi",
+            description: "Attiva/disattiva il banner saldi in homepage",
+          },
+          {
+            type: "string",
+            name: "testoBanner",
+            label: "Testo Banner",
+            description: "Testo da mostrare nel banner",
+          },
+          {
+            type: "string",
+            name: "linkBanner",
+            label: "Link Banner",
+            description: "URL di destinazione del banner",
+          },
+        ],
+      },
+      // Additional collections...
     ],
   },
 });
