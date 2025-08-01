@@ -1,4 +1,5 @@
 import { defineConfig } from "tinacms";
+// Forza reindicizzazione schema Tina Cloud - safe dummy change
 
 // Forza sempre la modalità cloud
 const branch =
@@ -71,7 +72,7 @@ export default defineConfig({
           },
         ],
       },
-
+      
       // Impostazioni Saldi
       {
         name: "saldiSettings",
@@ -1052,57 +1053,6 @@ export default defineConfig({
         ],
       },
       */
-    ],
-  },
-  build: {
-    outputFolder: "admin",
-    publicFolder: "public",
-    basePath: "",
-  },
-
-  media: {
-    tina: {
-      mediaRoot: "uploads",
-      publicFolder: "public",
-    },
-  },
-
-  schema: {
-    collections: [
-      // Impostazioni Homepage
-      {
-        name: "homepageSettings",
-        label: "🏠 Impostazioni Homepage",
-        path: "src/content/homepage-settings",
-        format: "md",
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-        },
-        fields: [
-          {
-            type: "boolean",
-            name: "mostraBannerSaldi",
-            label: "Mostra Banner Saldi",
-            description: "Attiva/disattiva il banner saldi in homepage",
-          },
-          {
-            type: "string",
-            name: "testoBanner",
-            label: "Testo Banner",
-            description: "Testo da mostrare nel banner",
-          },
-          {
-            type: "string",
-            name: "linkBanner",
-            label: "Link Banner",
-            description: "URL di destinazione del banner",
-          },
-        ],
-      },
-      // Additional collections...
     ],
   },
 });
