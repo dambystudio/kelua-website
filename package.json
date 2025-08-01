@@ -13,7 +13,7 @@
     "build": "astro build",
     "build:tina": "tinacms build && astro build",
     "build:local": "tinacms build --local && astro build",
-    "build:prod": "astro build",
+    "build:prod": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "tina:build": "tinacms build",

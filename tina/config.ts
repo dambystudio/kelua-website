@@ -1,6 +1,6 @@
 import { defineConfig } from "tinacms";
 
-// Check if we're in local mode - forziamo sempre locale in produzione se non ci sono credenziali
+// Check if we're in local mode - forziamo locale se non ci sono credenziali cloud
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true' || 
                  (!process.env.PUBLIC_TINA_CLIENT_ID || !process.env.TINA_TOKEN);
 
