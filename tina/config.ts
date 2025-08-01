@@ -1,7 +1,8 @@
 import { defineConfig } from "tinacms";
 
-// Check if we're in local mode
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
+// Check if we're in local mode - forziamo sempre locale in produzione se non ci sono credenziali
+const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true' || 
+                 (!process.env.PUBLIC_TINA_CLIENT_ID || !process.env.TINA_TOKEN);
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
