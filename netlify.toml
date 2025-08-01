@@ -20,6 +20,13 @@
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
+# Redirect per l'admin di TinaCMS (DEVE ESSERE PRIMA DELLA REGOLA GENERICA)
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# Redirect generico per il sito (gestisce tutte le altre pagine)
 [[redirects]]
   from = "/*"
   to = "/index.html"
