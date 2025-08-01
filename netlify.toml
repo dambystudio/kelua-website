@@ -5,13 +5,6 @@
 [build.environment]
   NODE_VERSION = "18"
   SECRETS_SCAN_OMIT_PATHS = "dist/admin/assets/**,public/admin/assets/**,tina/__generated__/**"
-  command = "npm run build:tina"
-  publish = "dist"
-
-[build.environment]
-  NODE_VERSION = "18"
-  TINA_PUBLIC_IS_LOCAL = "true"
-  SECRETS_SCAN_OMIT_PATHS = "dist/admin/assets/**,public/admin/assets/**,tina/__generated__/**"
 
 # Headers per il CMS admin
 [[headers]]
@@ -23,6 +16,12 @@
 [[headers]]
   for = "/src/content/*"
   [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
     Cache-Control = "no-cache, no-store, must-revalidate"
 
 [[redirects]]
