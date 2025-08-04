@@ -13,7 +13,7 @@
   for = "/admin/*"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
-    Content-Security-Policy = "connect-src 'self' https://cognito-idp.us-east-1.amazonaws.com https://content.tinajs.io;"
+    Content-Security-Policy = "connect-src 'self' https://cognito-idp.us-east-1.amazonaws.com https://content.tinajs.io https://identity.tinajs.io;"
 
 # Cache control per file di contenuto
 [[headers]]
