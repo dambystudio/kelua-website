@@ -13,7 +13,10 @@
   for = "/admin/*"
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
-    Content-Security-Policy = "connect-src 'self' https://cognito-idp.us-east-1.amazonaws.com https://content.tinajs.io https://identity.tinajs.io https://assets.tinajs.io;"
+    Content-Security-Policy = "connect-src 'self' https://cognito-idp.us-east-1.amazonaws.com https://content.tinajs.io https://identity.tinajs.io https://assets.tinajs.io https://api.tina.io https://*.amazonaws.com https://*.s3.amazonaws.com; img-src 'self' data: https: blob:; form-action 'self' https://content.tinajs.io;"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
 
 # Cache control per file di contenuto
 [[headers]]
