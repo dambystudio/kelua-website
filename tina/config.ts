@@ -1,7 +1,7 @@
-import { defineConfig } from "tinacms";
+﻿import { defineConfig } from "tinacms";
 // Forza reindicizzazione schema Tina Cloud - cache refresh Sep 24 2025
 
-// Forza sempre la modalità cloud
+// Forza sempre la modalitÃ  cloud
 const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -19,11 +19,6 @@ export default defineConfig({
       stopwordLanguages: ['ita']
     }
   },
-  auth: {
-    customAuth: false,
-    useLocalAuth: false,
-  },
-
   build: {
     outputFolder: "admin",
     publicFolder: "public",
@@ -42,7 +37,7 @@ export default defineConfig({
       // Impostazioni Homepage
       {
         name: "homepageSettings",
-        label: "🏠 Impostazioni Homepage",
+        label: "ðŸ  Impostazioni Homepage",
         path: "src/content/homepage-settings",
         format: "md",
         ui: {
@@ -76,7 +71,7 @@ export default defineConfig({
       // Impostazioni Saldi
       {
         name: "saldiSettings",
-        label: "🏷️ Impostazioni Saldi",
+        label: "ðŸ·ï¸ Impostazioni Saldi",
         path: "src/content/saldi-settings",
         format: "md",
         ui: {
@@ -122,7 +117,7 @@ export default defineConfig({
       // Hero Saldi
       {
         name: "saldiHero",
-        label: "🎯 Hero Saldi",
+        label: "ðŸŽ¯ Hero Saldi",
         path: "src/content/saldi-hero",
         format: "md",
         fields: [
@@ -164,7 +159,7 @@ export default defineConfig({
       // Categorie Saldi
       {
         name: "categorieSaldi",
-        label: "📂 Categorie Saldi",
+        label: "ðŸ“‚ Categorie Saldi",
         path: "src/content/categorie-saldi",
         format: "md",
         fields: [
@@ -227,7 +222,7 @@ export default defineConfig({
       // Prodotti Saldi
       {
         name: "prodottiSaldi",
-        label: "🛍️ Prodotti Saldi",
+        label: "ðŸ›ï¸ Prodotti Saldi",
         path: "src/content/prodotti-saldi",
         format: "md",
         fields: [
@@ -257,13 +252,13 @@ export default defineConfig({
           {
             type: "number",
             name: "prezzoOriginale",
-            label: "Prezzo Originale (€)",
+            label: "Prezzo Originale (â‚¬)",
             required: true,
           },
           {
             type: "number",
             name: "prezzoScontato",
-            label: "Prezzo Scontato (€)",
+            label: "Prezzo Scontato (â‚¬)",
             required: true,
           },
           {
@@ -290,7 +285,7 @@ export default defineConfig({
             type: "boolean",
             name: "disponibile",
             label: "Disponibile",
-            description: "Il prodotto è disponibile per l'acquisto",
+            description: "Il prodotto Ã¨ disponibile per l'acquisto",
           },
           {
             type: "boolean",
@@ -316,7 +311,7 @@ export default defineConfig({
       // Post Saldi (contenuti editoriali)
       {
         name: "saldiPosts",
-        label: "📝 Post Saldi",
+        label: "ðŸ“ Post Saldi",
         path: "src/content/saldi-posts",
         format: "md",
         fields: [
@@ -350,13 +345,13 @@ export default defineConfig({
             type: "datetime",
             name: "dataInizio",
             label: "Data Inizio",
-            description: "Data di inizio validità del post",
+            description: "Data di inizio validitÃ  del post",
           },
           {
             type: "datetime",
             name: "dataFine",
             label: "Data Fine",
-            description: "Data di fine validità del post",
+            description: "Data di fine validitÃ  del post",
           },
 
           {
@@ -376,7 +371,7 @@ export default defineConfig({
       
       // Galleria Sportswear
       {
-        name: "galleria-sportswear",
+        name: "galleria_sportswear",
         label: "Galleria Sportswear",
         path: "src/content/galleria-sportswear",
         format: "md",
@@ -386,13 +381,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome dell'immagine che apparirà nella galleria",
+            description: "Nome dell'immagine che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -402,7 +397,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -446,7 +441,7 @@ export default defineConfig({
       
       // Galleria Abiti da Cerimonia
       {
-        name: "galleria-abiti-cerimonia",
+        name: "galleria_abiti_cerimonia",
         label: "Galleria Abiti da Cerimonia",
         path: "src/content/galleria-abiti-cerimonia",
         format: "md",
@@ -456,13 +451,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome dell'abito che apparirà nella galleria",
+            description: "Nome dell'abito che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -472,7 +467,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -516,7 +511,7 @@ export default defineConfig({
 
       // Galleria Jeans
       {
-        name: "galleria-jeans",
+        name: "galleria_jeans",
         label: "Galleria Jeans",
         path: "src/content/galleria-jeans",
         format: "md",
@@ -526,13 +521,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome del jeans che apparirà nella galleria",
+            description: "Nome del jeans che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -542,7 +537,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -586,7 +581,7 @@ export default defineConfig({
 
       // Galleria Maglie
       {
-        name: "galleria-maglie",
+        name: "galleria_maglie",
         label: "Galleria Maglie",
         path: "src/content/galleria-maglie",
         format: "md",
@@ -596,13 +591,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome della maglia che apparirà nella galleria",
+            description: "Nome della maglia che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -612,7 +607,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -656,7 +651,7 @@ export default defineConfig({
 
       // Galleria Camicie
       {
-        name: "galleria-camicie",
+        name: "galleria_camicie",
         label: "Galleria Camicie",
         path: "src/content/galleria-camicie",
         format: "md",
@@ -666,13 +661,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome della camicia che apparirà nella galleria",
+            description: "Nome della camicia che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -682,7 +677,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -726,7 +721,7 @@ export default defineConfig({
 
       // Galleria Pantaloni
       {
-        name: "galleria-pantaloni",
+        name: "galleria_pantaloni",
         label: "Galleria Pantaloni",
         path: "src/content/galleria-pantaloni",
         format: "md",
@@ -736,13 +731,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome del pantalone che apparirà nella galleria",
+            description: "Nome del pantalone che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -752,7 +747,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -796,7 +791,7 @@ export default defineConfig({
 
       // Galleria Felpe
       {
-        name: "galleria-felpe",
+        name: "galleria_felpe",
         label: "Galleria Felpe",
         path: "src/content/galleria-felpe",
         format: "md",
@@ -806,13 +801,13 @@ export default defineConfig({
             name: "titolo",
             label: "Titolo",
             required: true,
-            description: "Nome della felpa che apparirà nella galleria",
+            description: "Nome della felpa che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -822,7 +817,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrà automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -877,7 +872,7 @@ export default defineConfig({
             name: "nome",
             label: "Nome Giubbotto",
             required: true,
-            description: "Nome del giubbotto che apparirà nella galleria",
+            description: "Nome del giubbotto che apparirÃ  nella galleria",
           },
           {
             type: "string",
@@ -889,7 +884,7 @@ export default defineConfig({
             type: "string",
             name: "prezzo",
             label: "Prezzo",
-            description: "Prezzo del giubbotto (es: €89.90)",
+            description: "Prezzo del giubbotto (es: â‚¬89.90)",
           },
           {
             type: "image",
@@ -967,7 +962,7 @@ export default defineConfig({
             name: "nome",
             label: "Nome Accessorio",
             required: true,
-            description: "Nome dell'accessorio che apparirà nella galleria",
+            description: "Nome dell'accessorio che apparirÃ  nella galleria",
           },
           {
             type: "string",
@@ -979,7 +974,7 @@ export default defineConfig({
             type: "string",
             name: "prezzo",
             label: "Prezzo",
-            description: "Prezzo dell'accessorio (es: €24.90)",
+            description: "Prezzo dell'accessorio (es: â‚¬24.90)",
           },
           {
             type: "image",
@@ -1056,6 +1051,3 @@ export default defineConfig({
     ],
   },
 });
-#   F o r z a   d e p l o y m e n t   -   c a c h e   r e f r e s h   0 9 / 2 4 / 2 0 2 5   2 3 : 3 1 : 5 2 
- 
- 
