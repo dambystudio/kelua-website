@@ -1,4 +1,4 @@
----
+﻿---
 // Pagina Maglie
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
@@ -6,24 +6,96 @@ import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 
-// Carica i dati della collezione maglie
+// Carica i dati della collezione Maglie
 const galleriaMaglie = await getCollection('galleria-maglie');
 
 // Filtra solo gli elementi attivi
-const maglieAttive = galleriaMaglie
+const maglieAttivi = galleriaMaglie
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 const collezioneInfo = {
   nome: 'Maglie',
-  descrizione: 'Versatilità e comfort quotidiano per ogni occasione',
-  icona: '👕',
-  colore: '#27ae60',
-  totalArticoli: maglieAttive.length
+  descrizione: 'Versatilita e comfort per ogni momento della giornata',
+  icona: '',
+  colore: '#ddbb76',
+  totalArticoli: maglieAttivi.length
+};
+
+// SEO data per Maglie
+const seoData = {
+  title: "Maglie Kelua - Versatilita e comfort per ogni momento della giornata a San Giovanni Rotondo",
+  description: `Scopri la collezione di Maglie Kelua: ${maglieAttivi.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
+  keywords: [
+    "Maglie San Giovanni Rotondo",
+    "vestiti eleganti matrimonio",
+    "abiti cerimonia uomo donna",
+    "vestiti formali Kelua",
+    "abiti eleganti Puglia",
+    "cerimonie matrimoni San Giovanni Rotondo",
+    "abbigliamento formale qualitÃ ",
+    "vestiti da sera eleganti",
+    "abiti da sposo sposa",
+    "eleganza cerimonie"
+  ],
+  ogImage: "/uploads/optimized/IMG_2357.webp",
+  jsonLD: {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://keluamoda.it/collezioni/maglie/#webpage",
+    "name": "Maglie Kelua",
+    "description": "Collezione completa di Maglie eleganti per uomo e donna. Stile e comfort per i tuoi momenti speciali.",
+    "url": "https://keluamoda.it/collezioni/maglie",
+    "mainEntity": {
+      "@type": "Product",
+      "name": "Collezione Maglie",
+      "category": "Abbigliamento Formale",
+      "brand": {
+        "@type": "Brand",
+        "name": "Kelua"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://keluamoda.it"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Collezioni",
+          "item": "https://keluamoda.it/collezioni"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Maglie",
+          "item": "https://keluamoda.it/collezioni/maglie"
+        }
+      ]
+    }
+  }
 };
 ---
 
-<Layout title="Maglie - Kelua Collezioni">
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  canonicalURL="https://keluamoda.it/collezioni/maglie"
+  jsonLD={seoData.jsonLD}
+>
   <Navbar />
   
   <!-- Hero Section Collezione -->
@@ -37,7 +109,7 @@ const collezioneInfo = {
         </div>
         
         <h1 class="hero-title">
-          <span class="hero-icon">{collezioneInfo.icona}</span>
+          
           {collezioneInfo.nome}
         </h1>
         <p class="hero-subtitle">{collezioneInfo.descrizione}</p>
@@ -51,9 +123,9 @@ const collezioneInfo = {
   <!-- Galleria Collezione -->
   <main class="collezione-main">
     <div class="container">
-      {maglieAttive.length > 0 ? (
+      {maglieAttivi.length > 0 ? (
         <div class="galleria-grid">
-          {maglieAttive.map((item, index) => (
+          {maglieAttivi.map((item, index) => (
             <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
               <div class="image-container">
                 <OptimizedImage
@@ -85,11 +157,11 @@ const collezioneInfo = {
       ) : (
         <div class="empty-state">
           <div class="empty-content">
-            <span class="empty-icon">👕</span>
+            <span class="empty-icon"></span>
             <h3 class="empty-title">Collezione in Preparazione</h3>
             <p class="empty-description">
-              Stiamo preparando questa versatile collezione di maglie per te. 
-              Torna presto per scoprire i nostri capi più comodi e pratici!
+              Stiamo preparando questa magnifica collezione per te. 
+              Torna presto per scoprire i nostri Maglie!
             </p>
             <a href="/collezioni" class="empty-cta">Esplora Altre Collezioni</a>
           </div>
@@ -99,9 +171,9 @@ const collezioneInfo = {
       <!-- Call to Action -->
       <div class="collezione-cta-section">
         <div class="cta-content">
-          <h3 class="cta-title">Comfort e versatilità</h3>
+          <h3 class="cta-title">Hai bisogno di consulenza?</h3>
           <p class="cta-description">
-            Scopri la nostra selezione di maglie, perfette per il quotidiano e per ogni stagione.
+            I nostri esperti sono pronti ad aiutarti a scegliere l'abito perfetto per la tua occasione speciale.
           </p>
           <div class="cta-actions">
             <a href="/#contatti" class="cta-btn primary">Contattaci</a>
@@ -119,9 +191,9 @@ const collezioneInfo = {
 /* Hero Section */
 .collezione-hero {
   background: linear-gradient(135deg, 
-    rgba(39, 174, 96, 0.9) 0%, 
-    rgba(46, 204, 113, 0.8) 50%, 
-    rgba(39, 174, 96, 0.9) 100%
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(26, 26, 26, 0.8) 50%, 
+    rgba(0, 0, 0, 0.9) 100%
   ),
   url('/background.png');
   background-size: cover;
@@ -162,7 +234,7 @@ const collezioneInfo = {
 }
 
 .breadcrumb-link:hover {
-  color: #27ae60;
+  color: #ddbb76;
 }
 
 .breadcrumb-separator {
@@ -171,7 +243,7 @@ const collezioneInfo = {
 }
 
 .breadcrumb-current {
-  color: #27ae60;
+  color: #ddbb76;
   font-weight: 600;
 }
 
@@ -179,9 +251,9 @@ const collezioneInfo = {
   font-family: 'Glida Display Regular', 'Playfair Display', serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
-  color: #27ae60;
+  color: #ddbb76;
   margin-bottom: 1.5rem;
-  text-shadow: 0 0 20px rgba(39, 174, 96, 0.5);
+  text-shadow: 0 0 20px rgba(221, 187, 118, 0.5);
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -191,7 +263,7 @@ const collezioneInfo = {
 
 .hero-icon {
   font-size: 3.5rem;
-  filter: drop-shadow(0 4px 8px rgba(39, 174, 96, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
 }
 
 .hero-subtitle {
@@ -208,10 +280,10 @@ const collezioneInfo = {
 }
 
 .stats-highlight {
-  color: #27ae60;
+  color: #ddbb76;
   font-weight: 700;
   font-size: 1.3em;
-  text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+  text-shadow: 0 0 10px rgba(221, 187, 118, 0.5);
 }
 
 /* Main Content */
@@ -249,10 +321,10 @@ const collezioneInfo = {
 
 .gallery-item:hover {
   transform: translateY(-10px) scale(1.02);
-  border-color: rgba(39, 174, 96, 0.5);
+  border-color: rgba(255, 215, 0, 0.5);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(39, 174, 96, 0.2);
+    0 0 30px rgba(255, 215, 0, 0.2);
 }
 
 .image-container {
@@ -298,9 +370,9 @@ const collezioneInfo = {
 .item-nome {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #27ae60;
+  color: #ddbb76;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+  text-shadow: 0 0 10px rgba(221, 187, 118, 0.5);
 }
 
 .item-descrizione {
@@ -346,15 +418,15 @@ const collezioneInfo = {
   font-size: 4rem;
   display: block;
   margin-bottom: 1.5rem;
-  filter: drop-shadow(0 4px 8px rgba(39, 174, 96, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
 }
 
 .empty-title {
   font-size: 2rem;
   font-weight: 300;
-  color: #27ae60;
+  color: #ddbb76;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+  text-shadow: 0 0 15px rgba(221, 187, 118, 0.3);
 }
 
 .empty-description {
@@ -367,8 +439,8 @@ const collezioneInfo = {
 .empty-cta {
   display: inline-block;
   padding: 15px 30px;
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-  color: white;
+  background: linear-gradient(135deg, #ddbb76, #c6ae6a);
+  color: #1a1a1a;
   text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
@@ -377,13 +449,13 @@ const collezioneInfo = {
 
 .empty-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(39, 174, 96, 0.5);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
 }
 
 /* CTA Section */
 .collezione-cta-section {
-  background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
-  border: 2px solid rgba(39, 174, 96, 0.3);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+  border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 25px;
   padding: 50px 40px;
   text-align: center;
@@ -398,9 +470,9 @@ const collezioneInfo = {
 .cta-title {
   font-size: 2.2rem;
   font-weight: 300;
-  color: #27ae60;
+  color: #ddbb76;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
 .cta-description {
@@ -427,14 +499,14 @@ const collezioneInfo = {
 }
 
 .cta-btn.primary {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-  color: white;
-  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+  background: linear-gradient(135deg, #ddbb76, #c6ae6a);
+  color: #1a1a1a;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
 }
 
 .cta-btn.primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(39, 174, 96, 0.5);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
 }
 
 .cta-btn.secondary {
@@ -538,3 +610,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
+
+

@@ -1,4 +1,4 @@
----
+﻿---
 // Pagina Jeans
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
@@ -6,7 +6,7 @@ import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 
-// Carica i dati della collezione jeans
+// Carica i dati della collezione Jeans
 const galleriaJeans = await getCollection('galleria-jeans');
 
 // Filtra solo gli elementi attivi
@@ -15,15 +15,87 @@ const jeansAttivi = galleriaJeans
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 const collezioneInfo = {
-  nome: 'Collezione Jeans',
-  descrizione: 'Denim di qualità per uno stile senza tempo',
-  icona: '👖',
-  colore: '#3b82f6',
+  nome: 'Jeans',
+  descrizione: 'Denim di qualita per uno stile sempre alla moda',
+  icona: '',
+  colore: '#ddbb76',
   totalArticoli: jeansAttivi.length
+};
+
+// SEO data per Jeans
+const seoData = {
+  title: "Jeans Kelua - Denim di qualita per uno stile sempre alla moda a San Giovanni Rotondo",
+  description: `Scopri la collezione di Jeans Kelua: ${jeansAttivi.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
+  keywords: [
+    "Jeans San Giovanni Rotondo",
+    "vestiti eleganti matrimonio",
+    "abiti cerimonia uomo donna",
+    "vestiti formali Kelua",
+    "abiti eleganti Puglia",
+    "cerimonie matrimoni San Giovanni Rotondo",
+    "abbigliamento formale qualitÃ ",
+    "vestiti da sera eleganti",
+    "abiti da sposo sposa",
+    "eleganza cerimonie"
+  ],
+  ogImage: "/uploads/optimized/IMG_2357.webp",
+  jsonLD: {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://keluamoda.it/collezioni/jeans/#webpage",
+    "name": "Jeans Kelua",
+    "description": "Collezione completa di Jeans eleganti per uomo e donna. Stile e comfort per i tuoi momenti speciali.",
+    "url": "https://keluamoda.it/collezioni/jeans",
+    "mainEntity": {
+      "@type": "Product",
+      "name": "Collezione Jeans",
+      "category": "Abbigliamento Formale",
+      "brand": {
+        "@type": "Brand",
+        "name": "Kelua"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition"
+      }
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://keluamoda.it"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Collezioni",
+          "item": "https://keluamoda.it/collezioni"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Jeans",
+          "item": "https://keluamoda.it/collezioni/jeans"
+        }
+      ]
+    }
+  }
 };
 ---
 
-<Layout title="Collezione Jeans - Kelua">
+<Layout 
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  ogImage={seoData.ogImage}
+  canonicalURL="https://keluamoda.it/collezioni/jeans"
+  jsonLD={seoData.jsonLD}
+>
   <Navbar />
   
   <!-- Hero Section Collezione -->
@@ -37,7 +109,7 @@ const collezioneInfo = {
         </div>
         
         <h1 class="hero-title">
-          <span class="hero-icon">{collezioneInfo.icona}</span>
+          
           {collezioneInfo.nome}
         </h1>
         <p class="hero-subtitle">{collezioneInfo.descrizione}</p>
@@ -48,7 +120,7 @@ const collezioneInfo = {
     </div>
   </section>
 
-  <!-- Include il resto uguale alla pagina abiti-cerimonia ma con i dati jeans -->
+  <!-- Galleria Collezione -->
   <main class="collezione-main">
     <div class="container">
       {jeansAttivi.length > 0 ? (
@@ -85,22 +157,23 @@ const collezioneInfo = {
       ) : (
         <div class="empty-state">
           <div class="empty-content">
-            <span class="empty-icon">👖</span>
+            <span class="empty-icon"></span>
             <h3 class="empty-title">Collezione in Preparazione</h3>
             <p class="empty-description">
-              Stiamo preparando questa fantastica collezione di jeans per te. 
-              Torna presto per scoprire i nostri denim di qualità!
+              Stiamo preparando questa magnifica collezione per te. 
+              Torna presto per scoprire i nostri Jeans!
             </p>
             <a href="/collezioni" class="empty-cta">Esplora Altre Collezioni</a>
           </div>
         </div>
       )}
 
+      <!-- Call to Action -->
       <div class="collezione-cta-section">
         <div class="cta-content">
-          <h3 class="cta-title">Trova il jeans perfetto per te</h3>
+          <h3 class="cta-title">Hai bisogno di consulenza?</h3>
           <p class="cta-description">
-            Abbiamo jeans per ogni stile e occasione. Contattaci per consigli personalizzati.
+            I nostri esperti sono pronti ad aiutarti a scegliere l'abito perfetto per la tua occasione speciale.
           </p>
           <div class="cta-actions">
             <a href="/#contatti" class="cta-btn primary">Contattaci</a>
@@ -114,15 +187,8 @@ const collezioneInfo = {
   <Footer />
 </Layout>
 
-<!-- Include gli stessi stili della pagina abiti-cerimonia -->
 <style>
-  /* Copio tutti gli stili dalla pagina abiti-cerimonia ma cambio il colore principale */
-  :root {
-    --accent-color: #3b82f6;
-  }
-  
-  /* [Stessi stili di abiti-cerimonia.astro] */
-  /* Hero Section */
+/* Hero Section */
 .collezione-hero {
   background: linear-gradient(135deg, 
     rgba(0, 0, 0, 0.9) 0%, 
@@ -168,7 +234,7 @@ const collezioneInfo = {
 }
 
 .breadcrumb-link:hover {
-  color: var(--accent-color);
+  color: #ddbb76;
 }
 
 .breadcrumb-separator {
@@ -177,7 +243,7 @@ const collezioneInfo = {
 }
 
 .breadcrumb-current {
-  color: var(--accent-color);
+  color: #ddbb76;
   font-weight: 600;
 }
 
@@ -185,9 +251,9 @@ const collezioneInfo = {
   font-family: 'Glida Display Regular', 'Playfair Display', serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
-  color: var(--accent-color);
+  color: #ddbb76;
   margin-bottom: 1.5rem;
-  text-shadow: 0 0 20px var(--accent-color);
+  text-shadow: 0 0 20px rgba(221, 187, 118, 0.5);
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -197,7 +263,7 @@ const collezioneInfo = {
 
 .hero-icon {
   font-size: 3.5rem;
-  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
 }
 
 .hero-subtitle {
@@ -214,10 +280,10 @@ const collezioneInfo = {
 }
 
 .stats-highlight {
-  color: var(--accent-color);
+  color: #ddbb76;
   font-weight: 700;
   font-size: 1.3em;
-  text-shadow: 0 0 10px var(--accent-color);
+  text-shadow: 0 0 10px rgba(221, 187, 118, 0.5);
 }
 
 /* Main Content */
@@ -255,10 +321,10 @@ const collezioneInfo = {
 
 .gallery-item:hover {
   transform: translateY(-10px) scale(1.02);
-  border-color: var(--accent-color);
+  border-color: rgba(255, 215, 0, 0.5);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px var(--accent-color);
+    0 0 30px rgba(255, 215, 0, 0.2);
 }
 
 .image-container {
@@ -304,9 +370,9 @@ const collezioneInfo = {
 .item-nome {
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--accent-color);
+  color: #ddbb76;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px var(--accent-color);
+  text-shadow: 0 0 10px rgba(221, 187, 118, 0.5);
 }
 
 .item-descrizione {
@@ -352,15 +418,15 @@ const collezioneInfo = {
   font-size: 4rem;
   display: block;
   margin-bottom: 1.5rem;
-  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3));
 }
 
 .empty-title {
   font-size: 2rem;
   font-weight: 300;
-  color: var(--accent-color);
+  color: #ddbb76;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px var(--accent-color);
+  text-shadow: 0 0 15px rgba(221, 187, 118, 0.3);
 }
 
 .empty-description {
@@ -373,8 +439,8 @@ const collezioneInfo = {
 .empty-cta {
   display: inline-block;
   padding: 15px 30px;
-  background: linear-gradient(135deg, var(--accent-color), #2563eb);
-  color: white;
+  background: linear-gradient(135deg, #ddbb76, #c6ae6a);
+  color: #1a1a1a;
   text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
@@ -383,13 +449,13 @@ const collezioneInfo = {
 
 .empty-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
 }
 
 /* CTA Section */
 .collezione-cta-section {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-  border: 2px solid rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+  border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 25px;
   padding: 50px 40px;
   text-align: center;
@@ -404,9 +470,9 @@ const collezioneInfo = {
 .cta-title {
   font-size: 2.2rem;
   font-weight: 300;
-  color: var(--accent-color);
+  color: #ddbb76;
   margin-bottom: 1rem;
-  text-shadow: 0 0 15px var(--accent-color);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
 .cta-description {
@@ -433,14 +499,14 @@ const collezioneInfo = {
 }
 
 .cta-btn.primary {
-  background: linear-gradient(135deg, var(--accent-color), #2563eb);
-  color: white;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #ddbb76, #c6ae6a);
+  color: #1a1a1a;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
 }
 
 .cta-btn.primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
 }
 
 .cta-btn.secondary {
@@ -523,8 +589,9 @@ const collezioneInfo = {
 </style>
 
 <script>
-// Stessi script della pagina abiti-cerimonia
+// Animazioni e interazioni per la pagina collezione
 document.addEventListener('DOMContentLoaded', () => {
+  // Intersection Observer per animazioni
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -537,8 +604,12 @@ document.addEventListener('DOMContentLoaded', () => {
     rootMargin: '0px 0px -50px 0px'
   });
 
+  // Osserva tutti gli elementi della galleria
   document.querySelectorAll('.gallery-item').forEach((item) => {
     observer.observe(item);
   });
 });
 </script>
+
+
+

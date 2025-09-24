@@ -21,7 +21,7 @@ export default defineConfig({
   },
   auth: {
     customAuth: false,
-    useLocalAuth: false,
+    useLocalAuth: true,
   },
 
   build: {

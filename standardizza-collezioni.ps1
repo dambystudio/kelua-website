@@ -1,55 +1,78 @@
-﻿---
-// Pagina Felpe
+# Script per standardizzare tutte le collezioni con il colore #ddbb76
+# Rimuove emoji e applica il nuovo template standardizzato
+
+# Lista delle collezioni da standardizzare
+$collezioni = @(
+    @{Nome='sportswear'; Descrizione='Comfort e performance per il tempo libero e lo sport'; Collezione='galleria-sportswear'; DisplayName='Sportswear'},
+    @{Nome='felpe'; Descrizione='Comfort urbano e stile casual per ogni stagione'; Collezione='galleria-felpe'; DisplayName='Felpe'},
+    @{Nome='maglie'; Descrizione='Versatilità e comfort quotidiano'; Collezione='galleria-maglie'; DisplayName='Maglie'},
+    @{Nome='camicie'; Descrizione='Classiche e moderne per ogni occasione'; Collezione='galleria-camicie'; DisplayName='Camicie'},
+    @{Nome='pantaloni'; Descrizione='Eleganza e comfort per ogni momento'; Collezione='galleria-pantaloni'; DisplayName='Pantaloni'},
+    @{Nome='giubbotti'; Descrizione='Protezione e stile per ogni stagione'; Collezione='galleria_giubbotti'; DisplayName='Giubbotti'},
+    @{Nome='accessori'; Descrizione='Dettagli che fanno la differenza'; Collezione='galleria_accessori'; DisplayName='Accessori'},
+    @{Nome='jeans'; Descrizione='Denim di qualità per ogni stile'; Collezione='galleria-jeans'; DisplayName='Jeans'}
+)
+
+Write-Host "🔧 Iniziando standardizzazione collezioni..." -ForegroundColor Cyan
+
+foreach ($collezione in $collezioni) {
+    $filePath = "src/pages/collezioni/$($collezione.Nome).astro"
+    
+    Write-Host "📝 Standardizzando: $($collezione.DisplayName)..." -ForegroundColor Yellow
+    
+    # Contenuto del file standardizzato
+    $contenutoFile = @"
+---
+// Pagina $($collezione.DisplayName)
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 
-// Carica i dati della collezione Felpe
-const galleriaFelpe = await getCollection('galleria-felpe');
+// Carica i dati della collezione $($collezione.Nome)
+const galleria$($collezione.DisplayName) = await getCollection('$($collezione.Collezione)');
 
 // Filtra solo gli elementi attivi
-const felpeAttivi = galleriaFelpe
+const $($collezione.Nome)Attivi = galleria$($collezione.DisplayName)
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 const collezioneInfo = {
-  nome: 'Felpe',
-  descrizione: 'Comfort e stile per le giornate piu fresche',
-  icona: '',
+  nome: '$($collezione.DisplayName)',
+  descrizione: '$($collezione.Descrizione)',
   colore: '#ddbb76',
-  totalArticoli: felpeAttivi.length
+  totalArticoli: $($collezione.Nome)Attivi.length
 };
 
-// SEO data per Felpe
+// SEO data per $($collezione.Nome)
 const seoData = {
-  title: "Felpe Kelua - Comfort e stile per le giornate piu fresche a San Giovanni Rotondo",
-  description: `Scopri la collezione di Felpe Kelua: ${felpeAttivi.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
+  title: "$($collezione.DisplayName) Kelua - Qualità e Stile a San Giovanni Rotondo",
+  description: `Scopri la collezione di $($collezione.Nome) Kelua: capi di qualità per il tuo stile. Eleganza e comfort a San Giovanni Rotondo.`,
   keywords: [
-    "Felpe San Giovanni Rotondo",
-    "vestiti eleganti matrimonio",
-    "abiti cerimonia uomo donna",
-    "vestiti formali Kelua",
-    "abiti eleganti Puglia",
-    "cerimonie matrimoni San Giovanni Rotondo",
-    "abbigliamento formale qualitÃ ",
-    "vestiti da sera eleganti",
-    "abiti da sposo sposa",
-    "eleganza cerimonie"
+    "$($collezione.Nome) San Giovanni Rotondo",
+    "abbigliamento qualità Kelua",
+    "$($collezione.Nome) di stile Puglia",
+    "moda $($collezione.Nome) elegante",
+    "$($collezione.Nome) uomo donna",
+    "qualità comfort stile",
+    "abbigliamento moderno",
+    "$($collezione.Nome) alla moda",
+    "eleganza quotidiana",
+    "stile contemporaneo"
   ],
   ogImage: "/uploads/optimized/IMG_2357.webp",
   jsonLD: {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://keluamoda.it/collezioni/felpe/#webpage",
-    "name": "Felpe Kelua",
-    "description": "Collezione completa di Felpe eleganti per uomo e donna. Stile e comfort per i tuoi momenti speciali.",
-    "url": "https://keluamoda.it/collezioni/felpe",
+    "@id": "https://keluamoda.it/collezioni/$($collezione.Nome)/#webpage",
+    "name": "$($collezione.DisplayName) Kelua",
+    "description": "Collezione completa di $($collezione.Nome) per stile e qualità quotidiana.",
+    "url": "https://keluamoda.it/collezioni/$($collezione.Nome)",
     "mainEntity": {
       "@type": "Product",
-      "name": "Collezione Felpe",
-      "category": "Abbigliamento Formale",
+      "name": "Collezione $($collezione.DisplayName)",
+      "category": "Abbigliamento",
       "brand": {
         "@type": "Brand",
         "name": "Kelua"
@@ -79,8 +102,8 @@ const seoData = {
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Felpe",
-          "item": "https://keluamoda.it/collezioni/felpe"
+          "name": "$($collezione.DisplayName)",
+          "item": "https://keluamoda.it/collezioni/$($collezione.Nome)"
         }
       ]
     }
@@ -93,7 +116,7 @@ const seoData = {
   description={seoData.description}
   keywords={seoData.keywords}
   ogImage={seoData.ogImage}
-  canonicalURL="https://keluamoda.it/collezioni/felpe"
+  canonicalURL="https://keluamoda.it/collezioni/$($collezione.Nome)"
   jsonLD={seoData.jsonLD}
 >
   <Navbar />
@@ -109,7 +132,6 @@ const seoData = {
         </div>
         
         <h1 class="hero-title">
-          
           {collezioneInfo.nome}
         </h1>
         <p class="hero-subtitle">{collezioneInfo.descrizione}</p>
@@ -123,10 +145,10 @@ const seoData = {
   <!-- Galleria Collezione -->
   <main class="collezione-main">
     <div class="container">
-      {felpeAttivi.length > 0 ? (
+      {$($collezione.Nome)Attivi.length > 0 ? (
         <div class="galleria-grid">
-          {felpeAttivi.map((item, index) => (
-            <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
+          {$($collezione.Nome)Attivi.map((item, index) => (
+            <div class="gallery-item" style={`animation-delay: `+`{index * 0.1}`+`s`}>
               <div class="image-container">
                 <OptimizedImage
                   src={item.data.immagine}
@@ -157,11 +179,11 @@ const seoData = {
       ) : (
         <div class="empty-state">
           <div class="empty-content">
-            <span class="empty-icon"></span>
+            <span class="empty-icon">👗</span>
             <h3 class="empty-title">Collezione in Preparazione</h3>
             <p class="empty-description">
-              Stiamo preparando questa magnifica collezione per te. 
-              Torna presto per scoprire i nostri Felpe!
+              Stiamo preparando questa fantastica collezione per te.
+              Torna presto per scoprire i nostri capi di qualità!
             </p>
             <a href="/collezioni" class="empty-cta">Esplora Altre Collezioni</a>
           </div>
@@ -173,7 +195,7 @@ const seoData = {
         <div class="cta-content">
           <h3 class="cta-title">Hai bisogno di consulenza?</h3>
           <p class="cta-description">
-            I nostri esperti sono pronti ad aiutarti a scegliere l'abito perfetto per la tua occasione speciale.
+            I nostri esperti sono pronti ad aiutarti a scegliere il capo perfetto per il tuo stile.
           </p>
           <div class="cta-actions">
             <a href="/#contatti" class="cta-btn primary">Contattaci</a>
@@ -610,6 +632,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+"@
 
+    # Scrivi il file
+    Set-Content -Path $filePath -Value $contenutoFile -Encoding UTF8
+    
+    Write-Host "✅ Completato: $($collezione.DisplayName)" -ForegroundColor Green
+}
 
-
+Write-Host "`n🎉 Standardizzazione completata!" -ForegroundColor Green
+Write-Host "Tutte le collezioni ora utilizzano:" -ForegroundColor White
+Write-Host "  • Colore: #ddbb76" -ForegroundColor Yellow
+Write-Host "  • Titoli senza emoji" -ForegroundColor Yellow
+Write-Host "  • Stile uniforme come 'Abiti da Cerimonia'" -ForegroundColor Yellow
