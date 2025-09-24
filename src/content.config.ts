@@ -113,12 +113,13 @@ const galleriaAbitiCerimonia = defineCollection({
 
 // Schema per le collezioni di abbigliamento
 const galleriaSchema = z.object({
-  nome: z.string(),
+  titolo: z.string(),
+  nome: z.string().optional(),
   descrizione: z.string().optional(),
   prezzo: z.string().optional(),
-  immagine: z.string(),
+  immagine: z.string().optional(),
   categoria: z.string().optional(),
-  genere: z.enum(['uomo', 'donna', 'unisex']).optional(),
+  genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
   attivo: z.boolean(),
   ordine: z.number().optional(),
 });
