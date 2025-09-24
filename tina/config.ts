@@ -1,5 +1,5 @@
 import { defineConfig } from "tinacms";
-// Forza reindicizzazione schema Tina Cloud - safe dummy change
+// Forza reindicizzazione schema Tina Cloud - cache refresh Sep 24 2025
 
 // Forza sempre la modalità cloud
 const branch =
@@ -376,7 +376,7 @@ export default defineConfig({
       
       // Galleria Sportswear
       {
-        name: "galleria_sportswear",
+        name: "galleria-sportswear",
         label: "Galleria Sportswear",
         path: "src/content/galleria-sportswear",
         format: "md",
@@ -446,7 +446,7 @@ export default defineConfig({
       
       // Galleria Abiti da Cerimonia
       {
-        name: "galleria_abiti_cerimonia",
+        name: "galleria-abiti-cerimonia",
         label: "Galleria Abiti da Cerimonia",
         path: "src/content/galleria-abiti-cerimonia",
         format: "md",
@@ -516,7 +516,7 @@ export default defineConfig({
 
       // Galleria Jeans
       {
-        name: "galleria_jeans",
+        name: "galleria-jeans",
         label: "Galleria Jeans",
         path: "src/content/galleria-jeans",
         format: "md",
@@ -586,7 +586,7 @@ export default defineConfig({
 
       // Galleria Maglie
       {
-        name: "galleria_maglie",
+        name: "galleria-maglie",
         label: "Galleria Maglie",
         path: "src/content/galleria-maglie",
         format: "md",
@@ -656,7 +656,7 @@ export default defineConfig({
 
       // Galleria Camicie
       {
-        name: "galleria_camicie",
+        name: "galleria-camicie",
         label: "Galleria Camicie",
         path: "src/content/galleria-camicie",
         format: "md",
@@ -726,7 +726,7 @@ export default defineConfig({
 
       // Galleria Pantaloni
       {
-        name: "galleria_pantaloni",
+        name: "galleria-pantaloni",
         label: "Galleria Pantaloni",
         path: "src/content/galleria-pantaloni",
         format: "md",
@@ -796,7 +796,7 @@ export default defineConfig({
 
       // Galleria Felpe
       {
-        name: "galleria_felpe",
+        name: "galleria-felpe",
         label: "Galleria Felpe",
         path: "src/content/galleria-felpe",
         format: "md",
@@ -1056,5 +1056,6 @@ export default defineConfig({
     ],
   },
 });
-#   F o r z a   d e p l o y m e n t   -   c a c h e   r e f r e s h   0 9 / 2 4 / 2 0 2 5   2 3 : 3 1 : 5 2  
+#   F o r z a   d e p l o y m e n t   -   c a c h e   r e f r e s h   0 9 / 2 4 / 2 0 2 5   2 3 : 3 1 : 5 2 
+ 
  
