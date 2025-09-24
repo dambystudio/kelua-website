@@ -1,10 +1,11 @@
 ---
+titolo: "Borsa a Tracolla Donna"
 nome: "Borsa a Tracolla Donna"
 descrizione: "Borsa elegante in ecopelle con tracolla regolabile"
 prezzo: "€89.90"
 immagine: "/background.png"
 categoria: "borse"
-genere: "donna"
+genere: "Donna"
 attivo: true
 ordine: 2
 ---

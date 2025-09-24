@@ -175,6 +175,7 @@ export const collections = {
   'galleria-camicie': galleriaCamicie,
   'galleria-felpe': galleriaFelpe,
   'galleria-pantaloni': galleriaPantaloni,
+  'galleria-giubbotti': galleriaGiubbotti,
   'galleria_giubbotti': galleriaGiubbotti,
   'galleria_accessori': galleriaAccessori,
 };

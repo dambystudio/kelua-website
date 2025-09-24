@@ -1,10 +1,11 @@
 ---
+titolo: "Cintura in Pelle Nera"
 nome: "Cintura in Pelle Nera"
 descrizione: "Cintura classica in pelle genuina con fibbia elegante"
 prezzo: "€45.90"
 immagine: "/background.png"
 categoria: "cinture"
-genere: "unisex"
+genere: "Unisex"
 attivo: true
 ordine: 1
 ---
