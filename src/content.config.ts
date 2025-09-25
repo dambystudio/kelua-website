@@ -108,6 +108,7 @@ const galleriaAbitiCerimonia = defineCollection({
     genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
     attivo: z.boolean(),
     ordine: z.number().optional(),
+    prezzo: z.number().optional(),
   }),
 });
 
@@ -116,7 +117,7 @@ const galleriaSchema = z.object({
   titolo: z.string(),
   nome: z.string().optional(),
   descrizione: z.string().optional(),
-  prezzo: z.string().optional(),
+  prezzo: z.number().optional(),
   immagine: z.string().optional(),
   categoria: z.string().optional(),
   genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
@@ -160,6 +161,16 @@ const galleriaAccessori = defineCollection({
   schema: galleriaSchema,
 });
 
+const galleriaGiacche = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaMaglieria = defineCollection({
+  type: 'content',
+  schema: galleriaSchema,
+});
+
 // Esporta le collezioni
 export const collections = {
   'saldi-settings': saldiSettingsCollection,
@@ -178,4 +189,7 @@ export const collections = {
   'galleria-giubbotti': galleriaGiubbotti,
   'galleria_giubbotti': galleriaGiubbotti,
   'galleria_accessori': galleriaAccessori,
+  'galleria-accessori': galleriaAccessori,
+  'galleria-giacche': galleriaGiacche,
+  'galleria-maglieria': galleriaMaglieria,
 };
