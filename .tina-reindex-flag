@@ -1,0 +1,8 @@
+# Tina Cloud Force Reindex
+# This file forces Tina Cloud to reindex all content
+# Created: 2025-09-25 19:44
+# Collections reset: All empty except Abiti da Cerimonia
+
+FORCE_TINA_REINDEX=true
+TIMESTAMP=2025-09-25T19:44:00Z
+COLLECTIONS_STATE=reset
