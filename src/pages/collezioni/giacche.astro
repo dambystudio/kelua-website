@@ -1,31 +1,31 @@
 ﻿---
-// Pagina Sportswear
+// Pagina Giacche
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 
-// Carica i dati della collezione Sportswear
-const galleriaSportswear = await getCollection('galleria-sportswear');
+// Carica i dati della collezione Giacche
+const galleriaGiacche = await getCollection('galleria-giacche');
 
 // Filtra solo gli elementi attivi
-const sportswearAttivi = galleriaSportswear
+const giaccheAttive = galleriaGiacche
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 const collezioneInfo = {
-  nome: 'Sportswear',
-  descrizione: 'Stile casual e comfort per il tempo libero e lo sport',
+  nome: 'Giacche',
+  descrizione: 'Eleganza e stile per ogni occasione',
   icona: '',
   colore: '#ddbb76',
-  totalArticoli: sportswearAttivi.length
+  totalArticoli: giaccheAttive.length
 };
 
-// SEO data per Sportswear
+// SEO data per Giacche
 const seoData = {
-  title: "Sportswear Kelua - Stile casual e comfort per il tempo libero e lo sport a San Giovanni Rotondo",
-  description: `Scopri la collezione di Sportswear Kelua: ${sportswearAttivi.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
+  title: "Giacche Kelua - Eleganza e stile per ogni occasione a San Giovanni Rotondo",
+  description: `Scopri la collezione di Giacche Kelua: ${giaccheAttive.length}+ capi di qualita. Eleganza e stile a San Giovanni Rotondo.`,
   keywords: [
     "Sportswear San Giovanni Rotondo",
     "vestiti eleganti matrimonio",
@@ -123,9 +123,9 @@ const seoData = {
   <!-- Galleria Collezione -->
   <main class="collezione-main">
     <div class="container">
-      {sportswearAttivi.length > 0 ? (
+      {giaccheAttive.length > 0 ? (
         <div class="galleria-grid">
-          {sportswearAttivi.map((item, index) => (
+          {giaccheAttive.map((item, index) => (
             <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
               <div class="image-container">
                 <OptimizedImage

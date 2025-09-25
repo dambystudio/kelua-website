@@ -1,22 +1,22 @@
 ﻿---
-// Pagina Maglie
+// Pagina Maglieria
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 import { getCollection } from 'astro:content';
 
-// Carica i dati della collezione Maglie
-const galleriaMaglie = await getCollection('galleria-maglie');
+// Carica i dati della collezione Maglieria
+const galleriaMaglieria = await getCollection('galleria-maglieria');
 
 // Filtra solo gli elementi attivi
-const maglieAttivi = galleriaMaglie
+const maglieriaAttiva = galleriaMaglieria
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
 const collezioneInfo = {
-  nome: 'Maglie',
-  descrizione: 'Versatilita e comfort per ogni momento della giornata',
+  nome: 'Maglieria',
+  descrizione: 'Comfort e qualità per tutti i tuoi momenti',
   icona: '',
   colore: '#ddbb76',
   totalArticoli: maglieAttivi.length

@@ -369,11 +369,11 @@ export default defineConfig({
         ],
       },
       
-      // Galleria Sportswear
+      // Galleria Giacche
       {
-        name: "galleria_sportswear",
-        label: "Galleria Sportswear",
-        path: "src/content/galleria-sportswear",
+        name: "galleria_giacche",
+        label: "Galleria Giacche",
+        path: "src/content/galleria-giacche",
         format: "md",
         fields: [
           {
@@ -403,7 +403,7 @@ export default defineConfig({
             type: "string",
             name: "categoria",
             label: "Categoria",
-            description: "Categoria specifica (es. Fitness, Running, Casual)",
+            description: "Categoria specifica (es. Elegante, Casual, Blazer, Pelle)",
           },
           {
             type: "string",
@@ -579,11 +579,11 @@ export default defineConfig({
         ],
       },
 
-      // Galleria Maglie
+      // Galleria Maglieria
       {
-        name: "galleria_maglie",
-        label: "Galleria Maglie",
-        path: "src/content/galleria-maglie",
+        name: "galleria_maglieria",
+        label: "Galleria Maglieria",
+        path: "src/content/galleria-maglieria",
         format: "md",
         fields: [
           {

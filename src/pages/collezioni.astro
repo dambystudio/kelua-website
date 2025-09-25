@@ -5,15 +5,15 @@ import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
 // Carica i dati delle gallerie per contare gli articoli
-const galleriaSporstwear = await getCollection('galleria-sportswear');
+const galleriaGiacche = await getCollection('galleria-giacche');
 const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
 const galleriaJeans = await getCollection('galleria-jeans');
-const galleriaMaglie = await getCollection('galleria-maglie');
+const galleriaMaglieria = await getCollection('galleria-maglieria');
 const galleriaCamicie = await getCollection('galleria-camicie');
 const galleriaPantaloni = await getCollection('galleria-pantaloni');
 const galleriaFelpe = await getCollection('galleria-felpe');
-const galleriaGiubbotti = await getCollection('galleria_giubbotti');
-const galleriaAccessori = await getCollection('galleria_accessori');
+const galleriaGiubbotti = await getCollection('galleria-giubbotti');
+const galleriaAccessori = await getCollection('galleria-accessori');
 
 // Conta solo gli elementi attivi
 const contaAttivi = (collezione) => collezione.filter(item => item.data.attivo).length;
@@ -97,6 +97,24 @@ const collezioni = [
     link: '/collezioni/abiti-cerimonia'
   },
   {
+    id: 'giacche',
+    nome: 'Giacche',
+    descrizione: 'Eleganza e stile per ogni occasione',
+    categoria: 'Formale',
+    immagine: '/uploads/optimized/IMG_2303.webp',
+    articoli: contaAttivi(galleriaGiacche),
+    link: '/collezioni/giacche'
+  },
+  {
+    id: 'pantaloni',
+    nome: 'Pantaloni',
+    descrizione: 'Comfort e stile per ogni giorno',
+    categoria: 'Casual',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaPantaloni),
+    link: '/collezioni/pantaloni'
+  },
+  {
     id: 'camicie',
     nome: 'Camicie',
     descrizione: 'Classiche e moderne per ogni occasione',
@@ -106,13 +124,31 @@ const collezioni = [
     link: '/collezioni/camicie'
   },
   {
-    id: 'sportswear',
-    nome: 'Sportswear',
-    descrizione: 'Comfort e performance per il tempo libero',
+    id: 'giubbotti',
+    nome: 'Giubbotti',
+    descrizione: 'Protezione e stile per ogni stagione',
+    categoria: 'Outerwear',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaGiubbotti),
+    link: '/collezioni/giubbotti'
+  },
+  {
+    id: 'jeans',
+    nome: 'Jeans',
+    descrizione: 'Versatilità e comfort quotidiano',
     categoria: 'Casual',
-    immagine: '/uploads/optimized/IMG_2303.webp',
-    articoli: contaAttivi(galleriaSporstwear),
-    link: '/collezioni/sportswear'
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaJeans),
+    link: '/collezioni/jeans'
+  },
+  {
+    id: 'maglieria',
+    nome: 'Maglieria',
+    descrizione: 'Comfort e qualità per tutti i tuoi momenti',
+    categoria: 'Casual',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaMaglieria),
+    link: '/collezioni/maglieria'
   },
   {
     id: 'felpe',
@@ -122,6 +158,15 @@ const collezioni = [
     immagine: '/background.png',
     articoli: contaAttivi(galleriaFelpe),
     link: '/collezioni/felpe'
+  },
+  {
+    id: 'accessori',
+    nome: 'Accessori',
+    descrizione: 'Il tocco finale per completare il tuo look',
+    categoria: 'Accessori',
+    immagine: '/background.png',
+    articoli: contaAttivi(galleriaAccessori),
+    link: '/collezioni/accessori'
   },
   {
     id: 'maglie',
