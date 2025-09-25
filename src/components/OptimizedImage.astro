@@ -31,13 +31,24 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
   
   // Se l'immagine è già in uploads/, usa il percorso ottimizzato
   if (originalSrc.includes('/uploads/')) {
-    // Estrai solo il nome del file dall'URL
+    // Estrai il percorso completo dall'URL
     const urlParts = originalSrc.split('/');
     const filename = urlParts[urlParts.length - 1];
     
     if (filename) {
       const nameWithoutExt = filename.split('.')[0];
-      return `/uploads/optimized/${nameWithoutExt}.${format}`;
+      
+      // Controlla se l'immagine è in una sottocartella
+      const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
+      if (uploadsIndex !== -1 && uploadsIndex < urlParts.length - 2) {
+        // L'immagine è in una sottocartella (es: /uploads/Foto_maglie/IMG_001.jpeg)
+        const subfolderPath = urlParts.slice(uploadsIndex + 1, -1).join('/'); // "Foto_maglie"
+        const optimizedSubfolder = `${subfolderPath}_ottimizzate`; // "Foto_maglie_ottimizzate"
+        return `/uploads/optimized/${optimizedSubfolder}/${nameWithoutExt}.${format}`;
+      } else {
+        // L'immagine è direttamente in uploads/ (comportamento esistente)
+        return `/uploads/optimized/${nameWithoutExt}.${format}`;
+      }
     }
   }
   
@@ -52,9 +63,12 @@ const generateSrcSet = (baseSrc: string, format: string) => {
   if (!responsive) return '';
   
   const sizes = [400, 600, 800, 1200];
+  const optimizedBasePath = getOptimizedImagePath(baseSrc, format);
+  
   return sizes.map(size => {
-    const optimizedPath = getOptimizedImagePath(baseSrc, format);
-    return `${optimizedPath} ${size}w`;
+    // Per il responsive, usiamo lo stesso percorso ottimizzato per tutte le dimensioni
+    // In futuro si potrebbe aggiungere supporto per diverse risoluzioni per file
+    return `${optimizedBasePath} ${size}w`;
   }).join(', ');
 };
 
@@ -64,6 +78,14 @@ if (import.meta.env.DEV) {
   console.log('  Original:', src);
   console.log('  WebP:', webpSrc);
   console.log('  AVIF:', avifSrc);
+  
+  // Mostra se è una sottocartella
+  if (src.includes('/uploads/') && src.split('/').length > 3) {
+    const pathParts = src.split('/');
+    const subfolderPath = pathParts.slice(pathParts.findIndex(p => p === 'uploads') + 1, -1).join('/');
+    console.log('  📁 Subfolder detected:', subfolderPath);
+    console.log('  📁 Optimized folder:', `${subfolderPath}_ottimizzate`);
+  }
 }
 
 ---
