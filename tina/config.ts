@@ -214,6 +214,8 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le categorie (1, 2, 3...)",
           },
         ],
@@ -303,6 +305,8 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare i prodotti (1, 2, 3...)",
           },
         ],
@@ -375,19 +379,32 @@ export default defineConfig({
         label: "Galleria Giacche",
         path: "src/content/galleria-giacche",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome dell'immagine che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
-            label: "Descrizione",
-            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            label: "Descrizione (opzionale)",
+            required: false,
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine (puoi lasciare vuoto)",
             ui: {
               component: "textarea",
             },
@@ -434,12 +451,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -452,19 +471,32 @@ export default defineConfig({
         label: "Galleria Abiti da Cerimonia",
         path: "src/content/galleria-abiti-cerimonia",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome dell'abito che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
-            label: "Descrizione",
-            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            label: "Descrizione (opzionale)",
+            required: false,
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine (puoi lasciare vuoto)",
             ui: {
               component: "textarea",
             },
@@ -511,12 +543,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -529,18 +563,32 @@ export default defineConfig({
         label: "Galleria Jeans",
         path: "src/content/galleria-jeans",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome del jeans che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
+            label: "Descrizione (opzionale)",
+            required: false,
             description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
@@ -588,12 +636,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -606,18 +656,32 @@ export default defineConfig({
         label: "Galleria Maglieria",
         path: "src/content/galleria-maglieria",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome della maglia che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
+            label: "Descrizione (opzionale)",
+            required: false,
             description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
@@ -665,12 +729,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -683,18 +749,32 @@ export default defineConfig({
         label: "Galleria Camicie",
         path: "src/content/galleria-camicie",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome della camicia che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
+            label: "Descrizione (opzionale)",
+            required: false,
             description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
@@ -742,12 +822,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -760,18 +842,32 @@ export default defineConfig({
         label: "Galleria Pantaloni",
         path: "src/content/galleria-pantaloni",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome del pantalone che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
+            label: "Descrizione (opzionale)",
+            required: false,
             description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
@@ -819,12 +915,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -837,18 +935,32 @@ export default defineConfig({
         label: "Galleria Felpe",
         path: "src/content/galleria-felpe",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome della felpa che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
+            label: "Descrizione (opzionale)",
+            required: false,
             description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
@@ -896,12 +1008,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -914,19 +1028,33 @@ export default defineConfig({
         label: "Galleria Giubbotti",
         path: "src/content/galleria-giubbotti",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome del giubbotto che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            label: "Descrizione (opzionale)",
+            required: false,
+            description: "Descrizione che apparirï¿½  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -936,7 +1064,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrï¿½  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -973,12 +1101,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -991,19 +1121,33 @@ export default defineConfig({
         label: "Galleria Accessori",
         path: "src/content/galleria-accessori",
         format: "md",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (values) => {
+              return values?.titolo
+                ?.toLowerCase()
+                ?.replace(/ /g, "-")
+                ?.replace(/[^\w-]+/g, "");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
             name: "titolo",
             label: "Titolo",
             required: true,
+            isTitle: true,
             description: "Nome dell'accessorio che apparirÃ  nella galleria",
           },
           {
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            label: "Descrizione (opzionale)",
+            required: false,
+            description: "Descrizione che apparirï¿½  nell'overlay dell'immagine",
             ui: {
               component: "textarea",
             },
@@ -1013,7 +1157,7 @@ export default defineConfig({
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
+            description: "Immagine da mostrare nella galleria (verrï¿½  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
@@ -1050,12 +1194,14 @@ export default defineConfig({
             type: "number",
             name: "ordine",
             label: "Ordine",
+            label: "Ordine (opzionale)",
+            required: false,
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
           {
             type: "number",
             name: "prezzo",
-            label: "Prezzo (€)",
+            label: "Prezzo (ï¿½)",
             description: "Prezzo del prodotto in euro (opzionale)",
             required: false,
           },
@@ -1064,3 +1210,5 @@ export default defineConfig({
     ],
   },
 });
+
+
