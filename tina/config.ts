@@ -436,6 +436,13 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
       
@@ -505,6 +512,13 @@ export default defineConfig({
             name: "ordine",
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
           },
         ],
       },
@@ -576,6 +590,13 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
 
@@ -645,6 +666,13 @@ export default defineConfig({
             name: "ordine",
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
           },
         ],
       },
@@ -716,6 +744,13 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
 
@@ -785,6 +820,13 @@ export default defineConfig({
             name: "ordine",
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
           },
         ],
       },
@@ -856,10 +898,16 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
 
-      /* TEMPORANEAMENTE COMMENTATO - SCHEMA SYNC ISSUE
       // Galleria Giubbotti
       {
         name: "galleria_giubbotti",
@@ -926,6 +974,13 @@ export default defineConfig({
             name: "ordine",
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
           },
         ],
       },
@@ -997,9 +1052,15 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
-      */
     ],
   },
 });

@@ -142,7 +142,7 @@ const seoData = {
                       <p class="item-descrizione">{item.data.descrizione}</p>
                     )}
                     {item.data.prezzo && (
-                      <div class="item-prezzo">{item.data.prezzo}</div>
+                      <div class="item-prezzo">€ {item.data.prezzo.toFixed(2)}</div>
                     )}
                     {item.data.categoria && (
                       <span class="item-categoria">{item.data.categoria}</span>

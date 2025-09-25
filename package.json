@@ -19,9 +19,8 @@
     "tina:build": "tinacms build",
     "tina:dev": "tinacms dev",
     "optimize:images": "node scripts/optimize-images.js",
-    "watch:images": "node scripts/image-watcher.js",
-    "check:images": "node scripts/check-optimization.js",
-    "dev:with-optimizer": "start /B npm run watch:images && npm run dev:tina"
+    "watch:images": "node scripts/watch-images.js",
+    "dev:auto": "start /B npm run watch:images && npm run dev:tina"
   },
   "dependencies": {
     "@tinacms/auth": "^1.0.12",
