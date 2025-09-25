@@ -1,6 +1,17 @@
 ﻿---
 // Pagina Maglieria
-import Layout from '../../layouts/Layout.astro';
+im  keywords: [
+    "Maglieria San Giovanni Rotondo",
+    "maglie di qualità",
+    "abbigliamento maglia Kelua",
+    "maglieria elegante Puglia",
+    "pullover maglioni San Giovanni Rotondo",
+    "maglieria donna uomo",
+    "abbigliamento maglia qualità",
+    "maglieria moderna elegante",
+    "maglie casual formali",
+    "comfort stile maglieria"
+  ],from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import OptimizedImage from '../../components/OptimizedImage.astro';
@@ -22,10 +33,10 @@ const collezioneInfo = {
   totalArticoli: maglieriaAttiva.length
 };
 
-// SEO data per Maglie
+// SEO data per Maglieria
 const seoData = {
-  title: "Maglie Kelua - Versatilita e comfort per ogni momento della giornata a San Giovanni Rotondo",
-  description: `Scopri la collezione di Maglie Kelua: ${maglieAttivi.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
+  title: "Maglieria Kelua - Versatilita e comfort per ogni momento della giornata a San Giovanni Rotondo",
+  description: `Scopri la collezione di Maglieria Kelua: ${maglieriaAttiva.length}+ capi di qualita. Stile e comfort a San Giovanni Rotondo.`,
   keywords: [
     "Maglie San Giovanni Rotondo",
     "vestiti eleganti matrimonio",
@@ -43,13 +54,13 @@ const seoData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": "https://keluamoda.it/collezioni/maglie/#webpage",
-    "name": "Maglie Kelua",
-    "description": "Collezione completa di Maglie eleganti per uomo e donna. Stile e comfort per i tuoi momenti speciali.",
-    "url": "https://keluamoda.it/collezioni/maglie",
+    "name": "Maglieria Kelua",
+    "description": "Collezione completa di Maglieria elegante per uomo e donna. Stile e comfort per i tuoi momenti speciali.",
+    "url": "https://keluamoda.it/collezioni/maglieria",
     "mainEntity": {
       "@type": "Product",
-      "name": "Collezione Maglie",
-      "category": "Abbigliamento Formale",
+      "name": "Collezione Maglieria",
+      "category": "Abbigliamento Maglia",
       "brand": {
         "@type": "Brand",
         "name": "Kelua"
@@ -79,8 +90,8 @@ const seoData = {
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Maglie",
-          "item": "https://keluamoda.it/collezioni/maglie"
+          "name": "Maglieria",
+          "item": "https://keluamoda.it/collezioni/maglieria"
         }
       ]
     }
@@ -93,7 +104,7 @@ const seoData = {
   description={seoData.description}
   keywords={seoData.keywords}
   ogImage={seoData.ogImage}
-  canonicalURL="https://keluamoda.it/collezioni/maglie"
+  canonicalURL="https://keluamoda.it/collezioni/maglieria"
   jsonLD={seoData.jsonLD}
 >
   <Navbar />
@@ -161,7 +172,7 @@ const seoData = {
             <h3 class="empty-title">Collezione in Preparazione</h3>
             <p class="empty-description">
               Stiamo preparando questa magnifica collezione per te. 
-              Torna presto per scoprire i nostri Maglie!
+              Torna presto per scoprire la nostra Maglieria!
             </p>
             <a href="/collezioni" class="empty-cta">Esplora Altre Collezioni</a>
           </div>
