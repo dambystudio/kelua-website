@@ -1,7 +1,7 @@
 ---
-titolo: Felpa DS2 Nera Rossa
+titolo: Maglione DS2 Nera Rossa
 immagine: /uploads/Foto_Felpe/FelpaDS2NeroRossa.jpg
-categoria: Felpa senza cappuccio
+categoria: Maglione
 genere: Uomo
 attivo: true
 prezzo: 70
