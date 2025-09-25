@@ -19,7 +19,7 @@ const collezioneInfo = {
   descrizione: 'Comfort e qualità per tutti i tuoi momenti',
   icona: '',
   colore: '#ddbb76',
-  totalArticoli: maglieAttivi.length
+  totalArticoli: maglieriaAttiva.length
 };
 
 // SEO data per Maglie
@@ -123,9 +123,9 @@ const seoData = {
   <!-- Galleria Collezione -->
   <main class="collezione-main">
     <div class="container">
-      {maglieAttivi.length > 0 ? (
+      {maglieriaAttiva.length > 0 ? (
         <div class="galleria-grid">
-          {maglieAttivi.map((item, index) => (
+          {maglieriaAttiva.map((item, index) => (
             <div class="gallery-item" style={`animation-delay: ${index * 0.1}s`}>
               <div class="image-container">
                 <OptimizedImage
