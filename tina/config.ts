@@ -864,13 +864,13 @@ export default defineConfig({
       {
         name: "galleria_giubbotti",
         label: "Galleria Giubbotti",
-        path: "src/content/galleria_giubbotti",
+        path: "src/content/galleria-giubbotti",
         format: "md",
         fields: [
           {
             type: "string",
-            name: "nome",
-            label: "Nome Giubbotto",
+            name: "titolo",
+            label: "Titolo",
             required: true,
             description: "Nome del giubbotto che apparirÃ  nella galleria",
           },
@@ -878,43 +878,23 @@ export default defineConfig({
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Breve descrizione del giubbotto",
-          },
-          {
-            type: "string",
-            name: "prezzo",
-            label: "Prezzo",
-            description: "Prezzo del giubbotto (es: â‚¬89.90)",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
           },
           {
             type: "image",
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine principale del giubbotto",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
             name: "categoria",
             label: "Categoria",
-            options: [
-              {
-                value: "invernale",
-                label: "Invernale",
-              },
-              {
-                value: "primaverile",
-                label: "Primaverile",
-              },
-              {
-                value: "bomber",
-                label: "Bomber",
-              },
-              {
-                value: "blazer",
-                label: "Blazer",
-              },
-            ],
+            description: "Categoria specifica (es. Invernale, Primaverile, Bomber, Blazer)",
           },
           {
             type: "string",
@@ -954,13 +934,13 @@ export default defineConfig({
       {
         name: "galleria_accessori",
         label: "Galleria Accessori",
-        path: "src/content/galleria_accessori",
+        path: "src/content/galleria-accessori",
         format: "md",
         fields: [
           {
             type: "string",
-            name: "nome",
-            label: "Nome Accessorio",
+            name: "titolo",
+            label: "Titolo",
             required: true,
             description: "Nome dell'accessorio che apparirÃ  nella galleria",
           },
@@ -968,51 +948,23 @@ export default defineConfig({
             type: "string",
             name: "descrizione",
             label: "Descrizione",
-            description: "Breve descrizione dell'accessorio",
-          },
-          {
-            type: "string",
-            name: "prezzo",
-            label: "Prezzo",
-            description: "Prezzo dell'accessorio (es: â‚¬24.90)",
+            description: "Descrizione che apparirÃ  nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
           },
           {
             type: "image",
             name: "immagine",
             label: "Immagine",
             required: true,
-            description: "Immagine principale dell'accessorio",
+            description: "Immagine da mostrare nella galleria (verrÃ  automaticamente ottimizzata in WebP e AVIF per migliorare le prestazioni)",
           },
           {
             type: "string",
             name: "categoria",
             label: "Categoria",
-            options: [
-              {
-                value: "cinture",
-                label: "Cinture",
-              },
-              {
-                value: "borse",
-                label: "Borse",
-              },
-              {
-                value: "cappelli",
-                label: "Cappelli",
-              },
-              {
-                value: "sciarpe",
-                label: "Sciarpe",
-              },
-              {
-                value: "gioielli",
-                label: "Gioielli",
-              },
-              {
-                value: "occhiali",
-                label: "Occhiali",
-              },
-            ],
+            description: "Categoria specifica (es. Cinture, Borse, Cappelli, Sciarpe, Gioielli, Occhiali)",
           },
           {
             type: "string",
