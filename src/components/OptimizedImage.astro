@@ -25,6 +25,23 @@ const {
   responsive = true
 } = Astro.props;
 
+// Sanitizza il nome del file per essere compatibile con il sistema di ottimizzazione
+const sanitizeFilename = (filename: string) => {
+  return filename
+    .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
+    .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
+    .replace(/[èéêë]/g, 'e')
+    .replace(/[ìíîï]/g, 'i')
+    .replace(/[òóôöõø]/g, 'o')
+    .replace(/[ùúûü]/g, 'u')
+    .replace(/[ýÿ]/g, 'y')
+    .replace(/[ñ]/g, 'n')
+    .replace(/[ç]/g, 'c')
+    .replace(/[^\w\-_.]/g, '')      // Rimuove tutti i caratteri non alfanumerici eccetto - _ .
+    .replace(/[-_]+/g, '-')         // Sostituisce multipli - o _ con un singolo -
+    .replace(/^-+|-+$/g, '');       // Rimuove - all'inizio e alla fine
+};
+
 // Determina il percorso dell'immagine ottimizzata
 const getOptimizedImagePath = (originalSrc: string, format: string) => {
   if (!originalSrc) return '';
@@ -36,7 +53,9 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
     const filename = urlParts[urlParts.length - 1];
     
     if (filename) {
-      const nameWithoutExt = filename.split('.')[0];
+      // Sanitizza il nome del file per trovare la versione ottimizzata
+      const sanitizedFilename = sanitizeFilename(filename);
+      const nameWithoutExt = sanitizedFilename.split('.')[0];
       
       // Controlla se l'immagine è in una sottocartella
       const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
