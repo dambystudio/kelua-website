@@ -1,6 +1,7 @@
 ---
 titolo: 'Maglia in lana Guess logo '
 immagine: /uploads/Foto_Felpe/IMG_3622.jpeg
+categoria: 'Maglia manica lunga '
 attivo: true
 prezzo: 89
 ---
