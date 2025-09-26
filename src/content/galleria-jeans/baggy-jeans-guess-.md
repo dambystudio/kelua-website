@@ -1,5 +1,6 @@
 ---
-titolo: 'Baggy jeans Guess '
+titolo: Jeans Guess Baggy
+descrizione: Celeste
 immagine: /uploads/IMG_3620.jpeg
 categoria: 'Baggy '
 genere: Uomo
