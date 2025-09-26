@@ -27,7 +27,12 @@ const {
 
 // Sanitizza il nome del file per essere compatibile con il sistema di ottimizzazione
 const sanitizeFilename = (filename: string) => {
-  return filename
+  // Estrai nome e estensione separatamente (come nello script)
+  const lastDot = filename.lastIndexOf('.');
+  const name = lastDot !== -1 ? filename.substring(0, lastDot) : filename;
+  const ext = lastDot !== -1 ? filename.substring(lastDot).toLowerCase() : '';
+  
+  const sanitizedName = name
     .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
     .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
     .replace(/[èéêë]/g, 'e')
@@ -40,6 +45,8 @@ const sanitizeFilename = (filename: string) => {
     .replace(/[^\w\-_.]/g, '')      // Rimuove tutti i caratteri non alfanumerici eccetto - _ .
     .replace(/[-_]+/g, '-')         // Sostituisce multipli - o _ con un singolo -
     .replace(/^-+|-+$/g, '');       // Rimuove - all'inizio e alla fine
+  
+  return sanitizedName + ext;
 };
 
 // Determina il percorso dell'immagine ottimizzata
@@ -55,7 +62,9 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
     if (filename) {
       // Sanitizza il nome del file per trovare la versione ottimizzata
       const sanitizedFilename = sanitizeFilename(filename);
-      const nameWithoutExt = sanitizedFilename.split('.')[0];
+      // Estrai il nome senza estensione (tutto tranne l'ultima estensione)
+      const lastDot = sanitizedFilename.lastIndexOf('.');
+      const nameWithoutExt = lastDot !== -1 ? sanitizedFilename.substring(0, lastDot) : sanitizedFilename;
       
       // Controlla se l'immagine è in una sottocartella
       const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
