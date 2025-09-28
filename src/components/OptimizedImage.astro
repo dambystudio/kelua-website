@@ -25,14 +25,13 @@ const {
   responsive = true
 } = Astro.props;
 
-// Sanitizza il nome del file per essere compatibile con il sistema di ottimizzazione
-const sanitizeFilename = (filename: string) => {
-  // Estrai nome e estensione separatamente (come nello script)
-  const lastDot = filename.lastIndexOf('.');
-  const name = lastDot !== -1 ? filename.substring(0, lastDot) : filename;
-  const ext = lastDot !== -1 ? filename.substring(lastDot).toLowerCase() : '';
+// Logica universale per ottenere il nome ottimizzato
+const getOptimizedFilename = (originalFilename: string) => {
+  const lastDot = originalFilename.lastIndexOf('.');
+  const nameWithoutExt = lastDot !== -1 ? originalFilename.substring(0, lastDot) : originalFilename;
   
-  const sanitizedName = name
+  // Sanitizzazione base
+  let sanitizedName = nameWithoutExt
     .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
     .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
     .replace(/[èéêë]/g, 'e')
@@ -42,14 +41,32 @@ const sanitizeFilename = (filename: string) => {
     .replace(/[ýÿ]/g, 'y')
     .replace(/[ñ]/g, 'n')
     .replace(/[ç]/g, 'c')
-    .replace(/[^\w\-_.]/g, '')      // Rimuove tutti i caratteri non alfanumerici eccetto - _ .
-    .replace(/[-_]+/g, '-')         // Sostituisce multipli - o _ con un singolo -
-    .replace(/^-+|-+$/g, '');       // Rimuove - all'inizio e alla fine
+    .replace(/[^\w\-_.]/g, '');     // Rimuove caratteri non alfanumerici eccetto - _ .
   
-  return sanitizedName + ext;
+  // EURISTICA UNIVERSALE basata sui pattern osservati:
+  // Se il file ha già trattini (come IMG-3624.jpeg), mantienili
+  // Se ha underscore e match pattern specifici, trasforma in base ai pattern esistenti:
+  if (sanitizedName.includes('_')) {
+    // Pattern osservati nel sistema di ottimizzazione:
+    // IMG_36xx → IMG-36xx (trasforma underscore in trattino)
+    // IMG_2xxx, IMG_1xxx, file lunghi → mantiene underscore
+    
+    if (sanitizedName.match(/^IMG_36\d+$/)) {
+      // Caso specifico IMG_36xx: trasforma underscore in trattino
+      sanitizedName = sanitizedName.replace('_', '-');
+    }
+    // Per tutti gli altri pattern con underscore, mantieni l'underscore
+    // Questo include IMG_2xxx, IMG_1xxx, nomi lunghi numerici, etc.
+  }
+  
+  if (import.meta.env.DEV) {
+    console.log(`� Filename optimization: "${originalFilename}" → "${sanitizedName}"`);
+  }
+  
+  return sanitizedName;
 };
 
-// Determina il percorso dell'immagine ottimizzata
+// Determina il percorso dell'immagine ottimizzata con logica universale
 const getOptimizedImagePath = (originalSrc: string, format: string) => {
   if (!originalSrc) return '';
   
@@ -60,11 +77,8 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
     const filename = urlParts[urlParts.length - 1];
     
     if (filename) {
-      // Sanitizza il nome del file per trovare la versione ottimizzata
-      const sanitizedFilename = sanitizeFilename(filename);
-      // Estrai il nome senza estensione (tutto tranne l'ultima estensione)
-      const lastDot = sanitizedFilename.lastIndexOf('.');
-      const nameWithoutExt = lastDot !== -1 ? sanitizedFilename.substring(0, lastDot) : sanitizedFilename;
+      // Ottieni il nome ottimizzato usando la logica universale
+      const optimizedName = getOptimizedFilename(filename);
       
       // Controlla se l'immagine è in una sottocartella
       const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
@@ -72,10 +86,10 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
         // L'immagine è in una sottocartella (es: /uploads/Foto_maglie/IMG_001.jpeg)
         const subfolderPath = urlParts.slice(uploadsIndex + 1, -1).join('/'); // "Foto_maglie"
         const optimizedSubfolder = `${subfolderPath}_ottimizzate`; // "Foto_maglie_ottimizzate"
-        return `/uploads/optimized/${optimizedSubfolder}/${nameWithoutExt}.${format}`;
+        return `/uploads/optimized/${optimizedSubfolder}/${optimizedName}.${format}`;
       } else {
         // L'immagine è direttamente in uploads/ (comportamento esistente)
-        return `/uploads/optimized/${nameWithoutExt}.${format}`;
+        return `/uploads/optimized/${optimizedName}.${format}`;
       }
     }
   }
@@ -83,10 +97,14 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
   return originalSrc;
 };
 
+// Otteniamo i percorsi ottimizzati
 const webpSrc = getOptimizedImagePath(src, 'webp');
 const avifSrc = getOptimizedImagePath(src, 'avif');
 
-// Genera srcset responsive per diverse risoluzioni
+// Per sicurezza, usiamo sempre l'immagine originale come fallback principale
+const safeFallbackSrc = src;
+
+// Genera srcset responsive per diverse risoluzioni  
 const generateSrcSet = (baseSrc: string, format: string) => {
   if (!responsive) return '';
   
@@ -119,27 +137,26 @@ if (import.meta.env.DEV) {
 ---
 
 <picture class={className}>
-  <!-- Formato AVIF (più moderno e compresso) -->
+  <!-- Solo se il percorso ottimizzato è diverso dall'originale, proviamo i formati moderni -->
   {avifSrc && avifSrc !== src && (
     <source 
-      srcset={responsive ? generateSrcSet(src, 'avif') : avifSrc}
+      srcset={avifSrc}
       type="image/avif" 
       sizes={sizes}
     />
   )}
   
-  <!-- Formato WebP (supporto ampio e buona compressione) -->
   {webpSrc && webpSrc !== src && (
     <source 
-      srcset={responsive ? generateSrcSet(src, 'webp') : webpSrc}
+      srcset={webpSrc}
       type="image/webp" 
       sizes={sizes}
     />
   )}
   
-  <!-- Fallback: WebP se disponibile, altrimenti originale -->
+  <!-- Fallback: sempre l'immagine originale che sappiamo esistere -->
   <img
-    src={webpSrc && webpSrc !== src ? webpSrc : src}
+    src={safeFallbackSrc}
     alt={alt}
     width={width}
     height={height}
