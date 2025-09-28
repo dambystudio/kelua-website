@@ -82,49 +82,27 @@ const saldiHeroCollection = defineCollection({
   }),
 });
 
+// Schema unificato per le collezioni di abbigliamento
+const galleriaSchema = z.object({
+  titolo: z.string(),
+  descrizione: z.string().optional(),
+  immagine: z.string(),
+  categoria: z.string().optional(),
+  genere: z.enum(['Donna', 'Uomo', 'Unisex']).optional(),
+  attivo: z.boolean(),
+  ordine: z.number().optional(),
+});
+
 // Schema per le immagini della galleria sportswear
 const galleriaSporstwearCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    titolo: z.string(),
-    nome: z.string(),
-    descrizione: z.string().optional(),
-    immagine: z.string(),
-    categoria: z.string().optional(),
-    genere: z.enum(['uomo', 'donna', 'unisex']).optional(),
-    prezzo: z.string().optional(),
-    attivo: z.boolean(),
-    ordine: z.number().optional(),
-  }),
+  schema: galleriaSchema,
 });
 
 // Schema per le immagini della galleria abiti da cerimonia
 const galleriaAbitiCerimonia = defineCollection({
   type: 'content',
-  schema: z.object({
-    titolo: z.string(),
-    nome: z.string(),
-    descrizione: z.string().optional(),
-    immagine: z.string(),
-    categoria: z.string().optional(),
-    genere: z.enum(['uomo', 'donna', 'unisex']).optional(),
-    prezzo: z.string().optional(),
-    attivo: z.boolean(),
-    ordine: z.number().optional(),
-  }),
-});
-
-// Schema unificato per le collezioni di abbigliamento
-const galleriaSchema = z.object({
-  titolo: z.string(),
-  nome: z.string(),
-  descrizione: z.string().optional(),
-  prezzo: z.string().optional(),
-  immagine: z.string(),
-  categoria: z.string().optional(),
-  genere: z.enum(['uomo', 'donna', 'unisex']).optional(),
-  attivo: z.boolean(),
-  ordine: z.number().optional(),
+  schema: galleriaSchema,
 });
 
 // Collezioni di abbigliamento
@@ -171,13 +149,13 @@ export const collections = {
   'prodotti-saldi': prodottiSaldiCollection,
   'saldi-posts': saldiPostsCollection,
   'saldi-hero': saldiHeroCollection,
-  'galleria-sportswear': galleriaSporstwearCollection,
-  'galleria-abiti-cerimonia': galleriaAbitiCerimonia,
-  'galleria-jeans': galleriaJeans,
-  'galleria-maglie': galleriaMaglie,
-  'galleria-camicie': galleriaCamicie,
-  'galleria-felpe': galleriaFelpe,
-  'galleria-pantaloni': galleriaPantaloni,
+  'galleria_sportswear': galleriaSporstwearCollection,
+  'galleria_abiti_cerimonia': galleriaAbitiCerimonia,
+  'galleria_jeans': galleriaJeans,
+  'galleria_maglie': galleriaMaglie,
+  'galleria_camicie': galleriaCamicie,
+  'galleria_felpe': galleriaFelpe,
+  'galleria_pantaloni': galleriaPantaloni,
   'galleria_giubbotti': galleriaGiubbotti,
   'galleria_accessori': galleriaAccessori,
 };

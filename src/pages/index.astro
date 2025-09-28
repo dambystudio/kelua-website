@@ -15,13 +15,13 @@ const homepageSettings = await getEntry('homepage-settings', 'homepage-settings'
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 
 // Carica i dati della galleria
-const galleriaSporstwear = await getCollection('galleria-sportswear');
-const galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
-const galleriaJeans = await getCollection('galleria-jeans');
-const galleriaMaglie = await getCollection('galleria-maglie');
-const galleriaCamicie = await getCollection('galleria-camicie');
-const galleriaPantaloni = await getCollection('galleria-pantaloni');
-const galleriaFelpe = await getCollection('galleria-felpe');
+const galleriaSporstwear = await getCollection('galleria_sportswear');
+const galleriaAbiti = await getCollection('galleria_abiti_cerimonia');
+const galleriaJeans = await getCollection('galleria_jeans');
+const galleriaMaglie = await getCollection('galleria_maglie');
+const galleriaCamicie = await getCollection('galleria_camicie');
+const galleriaPantaloni = await getCollection('galleria_pantaloni');
+const galleriaFelpe = await getCollection('galleria_felpe');
 
 // Filtra solo gli elementi attivi
 const sportswearAttive = galleriaSporstwear
@@ -215,7 +215,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
                   <div class="gallery-item" data-index={index}>
                     <OptimizedImage
                       src={item.data.immagine || '/background.png'}
-                      alt={item.data.nome || item.data.titolo}
+                      alt={item.data.titolo}
                       width={200}
                       height={250}
                       loading="lazy"
@@ -224,7 +224,7 @@ console.log('- Sportswear trovati:', sportswearAttive.length);
                       responsive={true}
                     />
                     <div class="gallery-overlay">
-                      <span class="item-name">{item.data.nome || item.data.titolo}</span>
+                      <span class="item-name">{item.data.titolo}</span>
                     </div>
                   </div>
                 ))}
