@@ -378,7 +378,7 @@ export default defineConfig({
       
       // Galleria Jeans
       {
-        name: "galleria-jeans",
+        name: "galleria_jeans",
         label: "Galleria Jeans",
         path: "src/content/galleria-jeans",
         format: "md",
@@ -448,7 +448,7 @@ export default defineConfig({
       
       // Galleria Maglieria
       {
-        name: "galleria-maglieria",
+        name: "galleria_maglieria",
         label: "Galleria Maglieria",
         path: "src/content/galleria-maglieria",
         format: "md",
@@ -518,7 +518,7 @@ export default defineConfig({
       
       // Galleria Camicie
       {
-        name: "galleria-camicie",
+        name: "galleria_camicie",
         label: "Galleria Camicie",
         path: "src/content/galleria-camicie",
         format: "md",
@@ -588,7 +588,7 @@ export default defineConfig({
       
       // Galleria Pantaloni
       {
-        name: "galleria-pantaloni",
+        name: "galleria_pantaloni",
         label: "Galleria Pantaloni",
         path: "src/content/galleria-pantaloni",
         format: "md",
@@ -658,7 +658,7 @@ export default defineConfig({
       
       // Galleria Felpe
       {
-        name: "galleria-felpe",
+        name: "galleria_felpe",
         label: "Galleria Felpe",
         path: "src/content/galleria-felpe",
         format: "md",
@@ -728,7 +728,7 @@ export default defineConfig({
       
       // Galleria Giacche (Sportswear)
       {
-        name: "galleria-giacche", 
+        name: "galleria_giacche", 
         label: "Galleria Giacche",
         path: "src/content/galleria-giacche",
         format: "md",
@@ -798,7 +798,7 @@ export default defineConfig({
       
       // Galleria Giubbotti
       {
-        name: "galleria-giubbotti",
+        name: "galleria_giubbotti",
         label: "Galleria Giubbotti",
         path: "src/content/galleria-giubbotti",
         format: "md",
@@ -868,7 +868,7 @@ export default defineConfig({
       
       // Galleria Abiti da Cerimonia
       {
-        name: "galleria-abiti-cerimonia",
+        name: "galleria_abiti_cerimonia",
         label: "Galleria Abiti da Cerimonia",
         path: "src/content/galleria-abiti-cerimonia",
         format: "md",

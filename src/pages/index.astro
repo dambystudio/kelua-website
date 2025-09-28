@@ -25,51 +25,51 @@ let galleriaFelpe = [];
 let galleriaGiubbotti = [];
 
 try {
-  galleriaGiacche = await getCollection('galleria-giacche');
+  galleriaGiacche = await getCollection('galleria_giacche');
 } catch (e) {
-  console.warn('Collezione galleria-giacche non trovata o vuota');
+  console.warn('Collezione galleria_giacche non trovata o vuota');
 }
 
 try {
-  galleriaAbiti = await getCollection('galleria-abiti-cerimonia');
+  galleriaAbiti = await getCollection('galleria_abiti_cerimonia');
 } catch (e) {
-  console.warn('Collezione galleria-abiti-cerimonia non trovata o vuota');
+  console.warn('Collezione galleria_abiti_cerimonia non trovata o vuota');
 }
 
 try {
-  galleriaJeans = await getCollection('galleria-jeans');
+  galleriaJeans = await getCollection('galleria_jeans');
 } catch (e) {
-  console.warn('Collezione galleria-jeans non trovata o vuota');
+  console.warn('Collezione galleria_jeans non trovata o vuota');
 }
 
 try {
-  galleriaMaglieria = await getCollection('galleria-maglieria');
+  galleriaMaglieria = await getCollection('galleria_maglieria');
 } catch (e) {
-  console.warn('Collezione galleria-maglieria non trovata o vuota');
+  console.warn('Collezione galleria_maglieria non trovata o vuota');
 }
 
 try {
-  galleriaCamicie = await getCollection('galleria-camicie');
+  galleriaCamicie = await getCollection('galleria_camicie');
 } catch (e) {
-  console.warn('Collezione galleria-camicie non trovata o vuota');
+  console.warn('Collezione galleria_camicie non trovata o vuota');
 }
 
 try {
-  galleriaPantaloni = await getCollection('galleria-pantaloni');
+  galleriaPantaloni = await getCollection('galleria_pantaloni');
 } catch (e) {
-  console.warn('Collezione galleria-pantaloni non trovata o vuota');
+  console.warn('Collezione galleria_pantaloni non trovata o vuota');
 }
 
 try {
-  galleriaFelpe = await getCollection('galleria-felpe');
+  galleriaFelpe = await getCollection('galleria_felpe');
 } catch (e) {
-  console.warn('Collezione galleria-felpe non trovata o vuota');
+  console.warn('Collezione galleria_felpe non trovata o vuota');
 }
 
 try {
-  galleriaGiubbotti = await getCollection('galleria-giubbotti');
+  galleriaGiubbotti = await getCollection('galleria_giubbotti');
 } catch (e) {
-  console.warn('Collezione galleria-giubbotti non trovata o vuota');
+  console.warn('Collezione galleria_giubbotti non trovata o vuota');
 }
 
 // Filtra solo gli elementi attivi (con gestione array vuoti)
@@ -1465,10 +1465,6 @@ console.log('- Giubbotti trovati:', giubbottiAttivi.length);
 
   .collezione-btn:hover svg {
     transform: translateX(2px);
-  }
-
-  /* Collezione link (deprecato - rimosso) */
-    margin: 0;
   }
 
   /* CTA Finale */
