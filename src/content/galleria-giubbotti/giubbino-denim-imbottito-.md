@@ -1,6 +1,8 @@
 ---
-titolo: 'Giubbino denim imbottito '
+titolo: 'Giubbino denim imbottito'
 immagine: /uploads/IMG_3624.jpeg
-categoria: 'Invernale '
+categoria: 'Invernale'
+attivo: true
+ordine: 1
 ---
 

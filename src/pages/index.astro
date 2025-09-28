@@ -14,41 +14,94 @@ import { getEntry, getCollection } from 'astro:content';
 const homepageSettings = await getEntry('homepage-settings', 'homepage-settings');
 const saldiSettings = await getEntry('saldi-settings', 'saldi-settings');
 
-// Carica i dati della galleria
-const galleriaSporstwear = await getCollection('galleria_sportswear');
-const galleriaAbiti = await getCollection('galleria_abiti_cerimonia');
-const galleriaJeans = await getCollection('galleria_jeans');
-const galleriaMaglie = await getCollection('galleria_maglie');
-const galleriaCamicie = await getCollection('galleria_camicie');
-const galleriaPantaloni = await getCollection('galleria_pantaloni');
-const galleriaFelpe = await getCollection('galleria_felpe');
+// Carica i dati della galleria (con gestione errori per collezioni vuote)
+let galleriaGiacche = [];
+let galleriaAbiti = [];
+let galleriaJeans = [];
+let galleriaMaglieria = [];
+let galleriaCamicie = [];
+let galleriaPantaloni = [];
+let galleriaFelpe = [];
+let galleriaGiubbotti = [];
 
-// Filtra solo gli elementi attivi
-const sportswearAttive = galleriaSporstwear
+try {
+  galleriaGiacche = await getCollection('galleria_giacche');
+} catch (e) {
+  console.warn('Collezione galleria_giacche non trovata o vuota');
+}
+
+try {
+  galleriaAbiti = await getCollection('galleria_abiti_cerimonia');
+} catch (e) {
+  console.warn('Collezione galleria_abiti_cerimonia non trovata o vuota');
+}
+
+try {
+  galleriaJeans = await getCollection('galleria_jeans');
+} catch (e) {
+  console.warn('Collezione galleria_jeans non trovata o vuota');
+}
+
+try {
+  galleriaMaglieria = await getCollection('galleria_maglieria');
+} catch (e) {
+  console.warn('Collezione galleria_maglieria non trovata o vuota');
+}
+
+try {
+  galleriaCamicie = await getCollection('galleria_camicie');
+} catch (e) {
+  console.warn('Collezione galleria_camicie non trovata o vuota');
+}
+
+try {
+  galleriaPantaloni = await getCollection('galleria_pantaloni');
+} catch (e) {
+  console.warn('Collezione galleria_pantaloni non trovata o vuota');
+}
+
+try {
+  galleriaFelpe = await getCollection('galleria_felpe');
+} catch (e) {
+  console.warn('Collezione galleria_felpe non trovata o vuota');
+}
+
+try {
+  galleriaGiubbotti = await getCollection('galleria_giubbotti');
+} catch (e) {
+  console.warn('Collezione galleria_giubbotti non trovata o vuota');
+}
+
+// Filtra solo gli elementi attivi (con gestione array vuoti)
+const giaccheAttive = (galleriaGiacche || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const abitiAttivi = galleriaAbiti
+const abitiAttivi = (galleriaAbiti || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const jeansAttivi = galleriaJeans
+const jeansAttivi = (galleriaJeans || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const maglieAttive = galleriaMaglie
+const maglieriaAttiva = (galleriaMaglieria || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const camicieAttive = galleriaCamicie
+const giubbottiAttivi = (galleriaGiubbotti || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const pantaloniAttivi = galleriaPantaloni
+const camicieAttive = (galleriaCamicie || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
-const felpeAttive = galleriaFelpe
+const pantaloniAttivi = (galleriaPantaloni || [])
+  .filter(item => item.data.attivo)
+  .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
+
+const felpeAttive = (galleriaFelpe || [])
   .filter(item => item.data.attivo)
   .sort((a, b) => (a.data.ordine || 0) - (b.data.ordine || 0));
 
@@ -67,7 +120,7 @@ const collezioniAnteprima = [
     id: 'sportswear',
     nome: 'Sportswear & Casual',
     descrizione: 'Comfort e stile per il tempo libero',
-    items: sportswearAttive.slice(0, 4),
+    items: [...giaccheAttive, ...giubbottiAttivi, ...felpeAttive].slice(0, 4),
     colore: '#3498db',
     icona: '👕',
     categoria: 'Casual'
@@ -77,12 +130,13 @@ const collezioniAnteprima = [
 // Conta totale articoli per tutte le collezioni
 const totalArticoli = [
   ...abitiAttivi,
-  ...sportswearAttive,
+  ...giaccheAttive,
   ...jeansAttivi,
-  ...maglieAttive,
+  ...maglieriaAttiva,
   ...camicieAttive,
   ...pantaloniAttivi,
-  ...felpeAttive
+  ...felpeAttive,
+  ...giubbottiAttivi
 ].length;
 
 // Dati per le impostazioni

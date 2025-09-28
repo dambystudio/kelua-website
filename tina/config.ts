@@ -446,10 +446,10 @@ export default defineConfig({
         ],
       },
       
-      // Galleria Maglie
+      // Galleria Maglieria
       {
-        name: "galleria_maglie",
-        label: "Galleria Maglie",
+        name: "galleria_maglieria",
+        label: "Galleria Maglieria",
         path: "src/content/galleria-maglieria",
         format: "md",
         fields: [
@@ -726,11 +726,11 @@ export default defineConfig({
         ],
       },
       
-      // Galleria Sportswear
+      // Galleria Giacche (Sportswear)
       {
-        name: "galleria_sportswear",
-        label: "Galleria Sportswear",
-        path: "src/content/galleria-sportswear",
+        name: "galleria_giacche", 
+        label: "Galleria Giacche",
+        path: "src/content/galleria-giacche",
         format: "md",
         fields: [
           {
@@ -761,6 +761,76 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Fitness, Running, Casual)",
+          },
+          {
+            type: "string",
+            name: "genere",
+            label: "Genere",
+            options: [
+              {
+                value: "Donna",
+                label: "Donna",
+              },
+              {
+                value: "Uomo",
+                label: "Uomo",
+              },
+              {
+                value: "Unisex",
+                label: "Unisex",
+              },
+            ],
+          },
+          {
+            type: "boolean",
+            name: "attivo",
+            label: "Attivo",
+            description: "Mostra questa immagine nella galleria",
+          },
+          {
+            type: "number",
+            name: "ordine",
+            label: "Ordine",
+            description: "Numero per ordinare le immagini (1, 2, 3...)",
+          },
+        ],
+      },
+      
+      // Galleria Giubbotti
+      {
+        name: "galleria_giubbotti",
+        label: "Galleria Giubbotti",
+        path: "src/content/galleria-giubbotti",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "titolo",
+            label: "Titolo",
+            required: true,
+            description: "Nome del prodotto che apparirà nella galleria",
+          },
+          {
+            type: "string",
+            name: "descrizione",
+            label: "Descrizione",
+            description: "Descrizione che apparirà nell'overlay dell'immagine",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "immagine",
+            label: "Immagine",
+            required: true,
+            description: "Immagine da mostrare nella galleria",
+          },
+          {
+            type: "string",
+            name: "categoria",
+            label: "Categoria",
+            description: "Categoria specifica (es. Invernale, Estivo, Impermeabile)",
           },
           {
             type: "string",

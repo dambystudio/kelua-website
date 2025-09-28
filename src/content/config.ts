@@ -111,8 +111,13 @@ const galleriaJeans = defineCollection({
   schema: galleriaSchema,
 });
 
-const galleriaMaglie = defineCollection({
+const galleriaMaglieria = defineCollection({
   type: 'content',
+  schema: galleriaSchema,
+});
+
+const galleriaGiacche = defineCollection({
+  type: 'content', 
   schema: galleriaSchema,
 });
 
@@ -149,10 +154,10 @@ export const collections = {
   'prodotti-saldi': prodottiSaldiCollection,
   'saldi-posts': saldiPostsCollection,
   'saldi-hero': saldiHeroCollection,
-  'galleria_sportswear': galleriaSporstwearCollection,
   'galleria_abiti_cerimonia': galleriaAbitiCerimonia,
+  'galleria_giacche': galleriaGiacche,
+  'galleria_maglieria': galleriaMaglieria,
   'galleria_jeans': galleriaJeans,
-  'galleria_maglie': galleriaMaglie,
   'galleria_camicie': galleriaCamicie,
   'galleria_felpe': galleriaFelpe,
   'galleria_pantaloni': galleriaPantaloni,
