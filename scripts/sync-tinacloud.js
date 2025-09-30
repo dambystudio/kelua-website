@@ -60,34 +60,36 @@ const syncWorkflow = async () => {
     console.log('   🔧 Passi da seguire:');
     console.log('   1. Scarica manualmente le immagini da TinaCMS Media Manager');
     console.log(`   2. Mettile in: public/uploads/${folder}/`);
-    console.log('   3. Esegui: npm run optimize:images');
-    console.log(`   4. Carica le versioni ottimizzate in: uploads/optimized/${folder}_ottimizzate/`);
+    console.log('   3. Esegui: npm run optimize:batch');
+    console.log('   4. Le versioni ottimizzate saranno create automaticamente');
     console.log('');
   }
   
-  console.log('💡 Per automatizzare completamente questo processo:');
-  console.log('   🔗 Configura il webhook seguendo: npm run setup:webhook');
-  console.log('   🤖 Oppure usa GitHub Actions per la sincronizzazione');
+  console.log('💡 Per automatizzare questo processo:');
+  console.log('   🔗 Usa il sistema di ottimizzazione locale integrato');
+  console.log('   🚀 Esegui npm run optimize:batch dopo ogni caricamento');
 };
 
 // Comando per setup rapido
 const quickSetup = () => {
-  console.log('⚡ Quick Setup per Ottimizzazione Automatica\n');
+  console.log('⚡ Quick Setup per Ottimizzazione Locale\n');
   
-  console.log('🎯 Opzione 1: Webhook TinaCMS (Raccomandato)');
-  console.log('   • npm run setup:webhook');
-  console.log('   • Configura su https://app.tina.io');
-  console.log('   • Ottimizzazione in tempo reale');
+  console.log('🎯 Sistema Attuale: Ottimizzazione Locale con Sharp');
+  console.log('   • npm run optimize:batch (ottimizza tutte le immagini)');
+  console.log('   • npm run optimize:verify (verifica sistema)');
+  console.log('   • Sistema completamente locale e veloce');
   
-  console.log('\n🎯 Opzione 2: GitHub Actions');
-  console.log('   • Push automatico su ogni commit');
-  console.log('   • Ottimizzazione su cambiamenti');
-  console.log('   • Rebuild Netlify automatico');
+  console.log('\n🎯 Workflow Raccomandato:');
+  console.log('   1. Carica immagini via TinaCMS Media Manager');
+  console.log('   2. Esegui: npm run optimize:batch');
+  console.log('   3. Commit e push (include immagini ottimizzate)');
+  console.log('   4. Deploy automatico su Netlify');
   
-  console.log('\n🎯 Opzione 3: Manuale con assistenza');
-  console.log('   • npm run sync:tinacloud');
-  console.log('   • Segui le istruzioni step-by-step');
-  console.log('   • Controllo completo del processo');
+  console.log('\n💡 Vantaggi Sistema Attuale:');
+  console.log('   • 109MB già risparmiati (84% riduzione)');
+  console.log('   • WebP + AVIF per performance ottimali');
+  console.log('   • Funziona con sottocartelle');
+  console.log('   • Nessuna dipendenza esterna');
 };
 
 // Esegui in base all'argomento

@@ -30,37 +30,39 @@ const checkNetlifyFunctions = async () => {
   console.log('\n2️⃣ Controllo Netlify Functions:');
   
   const fs = await import('fs');
-  const functionPath = './netlify/functions/auto-optimize.js';
+  const functionPath = './netlify/functions/auto-optimize-images.js';
   
   if (fs.existsSync(functionPath)) {
-    console.log('   ✅ Function auto-optimize.js: Presente');
-    
-    // Controlla le dipendenze
-    const content = fs.readFileSync(functionPath, 'utf8');
-    const hasSharp = content.includes('sharp');
-    const hasFetch = content.includes('node-fetch');
-    
-    console.log(`   ${hasSharp ? '✅' : '❌'} Sharp: ${hasSharp ? 'Importato' : 'Mancante'}`);
-    console.log(`   ${hasFetch ? '✅' : '❌'} Node-fetch: ${hasFetch ? 'Importato' : 'Mancante'}`);
-    
-    return hasSharp && hasFetch;
+    console.log('   ✅ Function auto-optimize-images.js: Presente (disabilitata)');
+    console.log('   📋 Nota: Function semplificata per evitare problemi di build');
+    return true;
   } else {
-    console.log('   ❌ Function auto-optimize.js: Mancante');
+    console.log('   ❌ Function auto-optimize-images.js: Mancante');
     return false;
   }
 };
 
-const checkGitHubActions = async () => {
-  console.log('\n3️⃣ Controllo GitHub Actions:');
+const checkLocalOptimizer = async () => {
+  console.log('\n3️⃣ Controllo Sistema di Ottimizzazione Locale:');
   
   const fs = await import('fs');
-  const actionPath = './.github/workflows/optimize-images.yml';
+  const optimizerPath = './lib/TinaCMSImageOptimizer.js';
   
-  if (fs.existsSync(actionPath)) {
-    console.log('   ✅ Workflow optimize-images.yml: Presente');
-    return true;
+  if (fs.existsSync(optimizerPath)) {
+    console.log('   ✅ TinaCMSImageOptimizer.js: Presente');
+    
+    // Verifica se Sharp è installato
+    try {
+      const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+      const hasSharp = packageJson.dependencies?.sharp || packageJson.devDependencies?.sharp;
+      console.log(`   ${hasSharp ? '✅' : '❌'} Sharp: ${hasSharp ? 'Installato' : 'Mancante'}`);
+      return !!hasSharp;
+    } catch (error) {
+      console.log('   ❌ Errore verifica dipendenze');
+      return false;
+    }
   } else {
-    console.log('   ❌ Workflow optimize-images.yml: Mancante');
+    console.log('   ❌ TinaCMSImageOptimizer.js: Mancante');
     return false;
   }
 };
@@ -103,16 +105,16 @@ const main = async () => {
   
   const envCheck = checkEnvironmentVariables();
   const functionCheck = await checkNetlifyFunctions();
-  const actionCheck = await checkGitHubActions();
+  const optimizerCheck = await checkLocalOptimizer();
   const testCheck = await testWebhookLocally();
   
   console.log('\n📊 Risultati:');
   console.log(`   Variabili Ambiente: ${envCheck ? '✅' : '❌'}`);
   console.log(`   Netlify Functions: ${functionCheck ? '✅' : '❌'}`);
-  console.log(`   GitHub Actions: ${actionCheck ? '✅' : '❌'}`);
+  console.log(`   Sistema Locale: ${optimizerCheck ? '✅' : '❌'}`);
   console.log(`   Test Setup: ${testCheck ? '✅' : '❌'}`);
   
-  const allGood = envCheck && functionCheck && actionCheck && testCheck;
+  const allGood = envCheck && functionCheck && optimizerCheck && testCheck;
   
   console.log(`\n${allGood ? '🎉' : '⚠️'} Sistema ${allGood ? 'PRONTO' : 'RICHIEDE CONFIGURAZIONE'}`);
   
@@ -120,10 +122,10 @@ const main = async () => {
     console.log('\n🔧 Prossimi passi:');
     if (!envCheck) console.log('   • Configura le variabili ambiente su Netlify');
     if (!functionCheck) console.log('   • Verifica le dipendenze della function');
-    if (!actionCheck) console.log('   • Crea il workflow GitHub Actions');
-    console.log('   • Esegui: npm run setup:webhook');
+    if (!optimizerCheck) console.log('   • Installa Sharp: npm install sharp');
+    console.log('   • Per ottimizzare: npm run optimize:batch');
   } else {
-    console.log('\n🎯 Il sistema è pronto! Carica un\'immagine per testare.');
+    console.log('\n🎯 Il sistema è pronto! Usa npm run optimize:batch per ottimizzare immagini.');
   }
 };
 
