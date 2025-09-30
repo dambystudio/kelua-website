@@ -101,6 +101,59 @@ const getOptimizedImagePath = (originalSrc: string, format: string) => {
 const webpSrc = getOptimizedImagePath(src, 'webp');
 const avifSrc = getOptimizedImagePath(src, 'avif');
 
+// Verifica se i file ottimizzati esistono davvero
+const checkFileExists = async (filePath: string) => {
+  if (!filePath || filePath === src) return false;
+  
+  try {
+    // In ambiente di build, assumiamo che esistano se sono stati generati
+    if (import.meta.env.PROD) {
+      // Controlla se il percorso sembra valido
+      return filePath.includes('/optimized/') && filePath !== src;
+    }
+    
+    // In sviluppo, controlla fisicamente se esistono
+    const fs = await import('fs');
+    const path = await import('path');
+    const publicPath = path.join(process.cwd(), 'public', filePath);
+    return fs.existsSync(publicPath);
+  } catch {
+    return false;
+  }
+};
+
+// Verifica esistenza file ottimizzati
+// In produzione, controlla se la cartella ottimizzata è nella lista di quelle esistenti
+const hasOptimizedFolder = (imagePath: string) => {
+  if (!imagePath.includes('/optimized/')) return false;
+  
+  // Lista delle cartelle ottimizzate che sappiamo esistere su TinaCloud
+  const existingOptimizedFolders = [
+    'Foto_Jeans_ottimizzate',
+    'Foto_Negozio_ottimizzate', 
+    'Foto_Felpe_ottimizzate',
+    'Foto_Maglieria_ottimizzate', // ✅ Ora esiste su TinaCloud!
+    'Foto_Giubbotti_ottimizzate', // Aggiungi quando carichi su TinaCloud
+    'Foto_Accessori_ottimizzate', // Aggiungi quando carichi su TinaCloud
+    'Foto_Camicie_ottimizzate',   // Aggiungi quando carichi su TinaCloud
+    'Foto_Pantaloni_ottimizzate', // Aggiungi quando carichi su TinaCloud
+  ];
+  
+  return existingOptimizedFolders.some(folder => imagePath.includes(folder));
+};
+
+const webpExists = import.meta.env.DEV 
+  ? await checkFileExists(webpSrc) 
+  : hasOptimizedFolder(webpSrc);
+  
+const avifExists = import.meta.env.DEV 
+  ? await checkFileExists(avifSrc) 
+  : hasOptimizedFolder(avifSrc);
+
+// Usa solo i percorsi che esistono davvero
+const finalWebpSrc = webpExists ? webpSrc : null;
+const finalAvifSrc = avifExists ? avifSrc : null;
+
 // Per sicurezza, usiamo sempre l'immagine originale come fallback principale
 const safeFallbackSrc = src;
 
@@ -137,18 +190,18 @@ if (import.meta.env.DEV) {
 ---
 
 <picture class={className}>
-  <!-- Solo se il percorso ottimizzato è diverso dall'originale, proviamo i formati moderni -->
-  {avifSrc && avifSrc !== src && (
+  <!-- Solo se il percorso ottimizzato esiste davvero, proviamo i formati moderni -->
+  {finalAvifSrc && (
     <source 
-      srcset={avifSrc}
+      srcset={finalAvifSrc}
       type="image/avif" 
       sizes={sizes}
     />
   )}
   
-  {webpSrc && webpSrc !== src && (
+  {finalWebpSrc && (
     <source 
-      srcset={webpSrc}
+      srcset={finalWebpSrc}
       type="image/webp" 
       sizes={sizes}
     />

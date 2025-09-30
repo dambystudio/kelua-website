@@ -1,0 +1,76 @@
+name: 🖼️ Auto-Optimize Images
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+  schedule:
+    # Esegui ogni 6 ore per sincronizzare eventuali nuove immagini
+    - cron: '0 */6 * * *'
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    name: Ottimizzazione Automatica Immagini
+    
+    steps:
+    - name: 📥 Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: � Install Sharp
+      run: npm install sharp
+        
+    - name: �🖼️ Optimize new images
+      run: |
+        echo "🔍 Controllo nuove immagini..."
+        npm run optimize:images
+        
+    - name: 📊 Check optimization results
+      run: |
+        echo "📈 Statistiche ottimizzazione:"
+        find public/uploads/optimized -name "*.webp" | wc -l | xargs echo "WebP files:"
+        find public/uploads/optimized -name "*.avif" | wc -l | xargs echo "AVIF files:"
+        
+    - name: 📊 Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "✅ Immagini ottimizzate trovate"
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+          echo "⏭️ Nessuna nuova ottimizzazione"
+        fi
+        
+    - name: 📤 Commit optimized images
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add public/uploads/optimized/
+        git commit -m "🖼️ Auto-optimize images [skip ci]" || exit 0
+        git push
+        
+    - name: 🔄 Trigger Netlify rebuild
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        echo "🚀 Triggering Netlify rebuild..."
+        curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
+        
+    - name: ✅ Summary
+      run: |
+        echo "🎯 Processo completato!"
+        echo "- Immagini ottimizzate e committate"
+        echo "- Netlify rebuild triggerato"
+        echo "- Sito aggiornato automaticamente"

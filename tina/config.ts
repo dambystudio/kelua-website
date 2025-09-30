@@ -382,6 +382,13 @@ export default defineConfig({
         label: "Galleria Jeans",
         path: "src/content/galleria-jeans",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return `${values?.titolo?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -411,6 +418,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Casual, Eleganti, Slim Fit)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",
@@ -452,6 +465,13 @@ export default defineConfig({
         label: "Galleria Maglieria",
         path: "src/content/galleria-maglieria",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return `${values?.titolo?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -481,6 +501,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Pullover, Cardigan, T-Shirt)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",
@@ -522,6 +548,13 @@ export default defineConfig({
         label: "Galleria Camicie",
         path: "src/content/galleria-camicie",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return `${values?.titolo?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -551,6 +584,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Business, Casual, Eleganti)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",
@@ -592,6 +631,13 @@ export default defineConfig({
         label: "Galleria Pantaloni",
         path: "src/content/galleria-pantaloni",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return `${values?.titolo?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -621,6 +667,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Eleganti, Casual, Sportivi)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",
@@ -662,6 +714,13 @@ export default defineConfig({
         label: "Galleria Felpe",
         path: "src/content/galleria-felpe",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return `${values?.titolo?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -691,6 +750,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Hoodie, Zip, Casual)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",
@@ -732,6 +797,19 @@ export default defineConfig({
         label: "Galleria Giacche",
         path: "src/content/galleria-giacche",
         format: "md",
+        ui: {
+          filename: {
+            readonly: true,
+            slugify: (values) => {
+              const title = values?.titolo || '';
+              return title
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .trim();
+            }
+          }
+        },
         fields: [
           {
             type: "string",
@@ -793,6 +871,13 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
       
@@ -802,6 +887,19 @@ export default defineConfig({
         label: "Galleria Giubbotti",
         path: "src/content/galleria-giubbotti",
         format: "md",
+        ui: {
+          filename: {
+            readonly: true,
+            slugify: (values) => {
+              const title = values?.titolo || '';
+              return title
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .trim();
+            }
+          }
+        },
         fields: [
           {
             type: "string",
@@ -863,6 +961,13 @@ export default defineConfig({
             label: "Ordine",
             description: "Numero per ordinare le immagini (1, 2, 3...)",
           },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro (opzionale)",
+            required: false,
+          },
         ],
       },
       
@@ -872,6 +977,19 @@ export default defineConfig({
         label: "Galleria Abiti da Cerimonia",
         path: "src/content/galleria-abiti-cerimonia",
         format: "md",
+        ui: {
+          filename: {
+            readonly: true,
+            slugify: (values) => {
+              const title = values?.titolo || '';
+              return title
+                .toLowerCase()
+                .replace(/[^a-z0-9\s]/g, '')
+                .replace(/\s+/g, '-')
+                .trim();
+            }
+          }
+        },
         fields: [
           {
             type: "string",
@@ -901,6 +1019,12 @@ export default defineConfig({
             name: "categoria",
             label: "Categoria",
             description: "Categoria specifica (es. Elegante, Matrimonio, Cocktail)",
+          },
+          {
+            type: "number",
+            name: "prezzo",
+            label: "Prezzo (€)",
+            description: "Prezzo del prodotto in euro",
           },
           {
             type: "string",

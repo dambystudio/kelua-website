@@ -19,7 +19,13 @@
     "tina:build": "tinacms build",
     "tina:dev": "tinacms dev",
     "optimize:images": "node scripts/optimize-images.js",
-    "watch:images": "node scripts/watch-images.js",
+    "watch:images": "node scripts/watch-images.js", 
+    "check:optimized": "node scripts/check-optimized-folders.js",
+    "sync:tinacloud": "node scripts/sync-tinacloud.js",
+    "setup:webhook": "node scripts/setup-webhook.js",
+    "setup:auto": "npm run setup:webhook",
+    "verify:system": "node scripts/verify-system.js",
+    "test:webhook": "curl -X POST $NETLIFY_SITE_URL/.netlify/functions/auto-optimize -H 'Content-Type: application/json' -d '{\"test\": true}'",
     "dev:auto": "start /B npm run watch:images && npm run dev:tina"
   },
   "dependencies": {
