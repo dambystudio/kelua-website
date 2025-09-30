@@ -18,34 +18,37 @@
     "astro": "astro",
     "tina:build": "tinacms build",
     "tina:dev": "tinacms dev",
-    "optimize:images": "node scripts/optimize-images.js",
-    "watch:images": "node scripts/watch-images.js", 
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:batch": "node scripts/optimize-images.mjs",
+    "watch:images": "node scripts/watch-images.js",
     "check:optimized": "node scripts/check-optimized-folders.js",
     "sync:tinacloud": "node scripts/sync-tinacloud.js",
-    "setup:webhook": "node scripts/setup-webhook.js",
+    "setup:webhook": "node scripts/setup-webhook.mjs",
     "setup:auto": "npm run setup:webhook",
-    "verify:system": "node scripts/verify-system.js",
-    "test:webhook": "curl -X POST $NETLIFY_SITE_URL/.netlify/functions/auto-optimize -H 'Content-Type: application/json' -d '{\"test\": true}'",
+    "verify:system": "node scripts/verify-system.mjs",
+    "test:webhook": "curl -X POST https://kelua.netlify.app/.netlify/functions/auto-optimize-images -H 'Content-Type: application/json' -d '{\"test\": true}'",
     "dev:auto": "start /B npm run watch:images && npm run dev:tina"
   },
   "dependencies": {
     "@tinacms/auth": "^1.0.12",
     "@tinacms/cli": "^1.9.9",
+    "@types/uuid": "^10.0.0",
     "astro": "^5.10.0",
     "chokidar": "^4.0.3",
     "form-data": "^4.0.0",
     "http-proxy": "^1.18.1",
     "node-fetch": "^2.7.0",
-    "sharp": "^0.34.3",
-    "tinacms": "^2.7.9"
+    "sharp": "^0.34.4",
+    "tinacms": "^2.7.9",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.8"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.0.0",
-    "@rollup/rollup-win32-x64-msvc": "^4.0.0",
+    "@rollup/rollup-darwin-arm64": "^4.0.0",
     "@rollup/rollup-darwin-x64": "^4.0.0",
-    "@rollup/rollup-darwin-arm64": "^4.0.0"
+    "@rollup/rollup-linux-x64-gnu": "^4.0.0",
+    "@rollup/rollup-win32-x64-msvc": "^4.0.0"
   }
 }

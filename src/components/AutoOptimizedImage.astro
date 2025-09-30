@@ -21,20 +21,14 @@ const {
   sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw'
 } = Astro.props;
 
-// Funzione per ottenere le versioni ottimizzate automaticamente generate
+// Funzione per ottenere le versioni ottimizzate
 const getOptimizedVersions = (originalSrc: string) => {
   if (!originalSrc || !originalSrc.startsWith('/uploads/')) {
     return { webp: null, avif: null, original: originalSrc };
   }
 
-  // Fix per inconsistenza nomi file IMG_xxxx → IMG-xxxx
-  let correctedSrc = originalSrc;
-  if (correctedSrc.includes('IMG_')) {
-    correctedSrc = correctedSrc.replace(/IMG_(\d+)/g, 'IMG-$1');
-  }
-
   // Estrai path e nome file
-  const pathParts = correctedSrc.split('/');
+  const pathParts = originalSrc.split('/');
   const filename = pathParts[pathParts.length - 1];
   const directory = pathParts.slice(0, -1).join('/');
   
@@ -47,7 +41,7 @@ const getOptimizedVersions = (originalSrc: string) => {
   return {
     webp: webpSrc,
     avif: avifSrc,
-    original: correctedSrc
+    original: originalSrc
   };
 };
 
@@ -59,14 +53,13 @@ if (import.meta.env.DEV) {
     original: src, 
     webp, 
     avif,
-    hasOptimized: !!(webp && avif),
-    corrected: original !== src ? `${src} → ${original}` : 'no correction needed'
+    hasOptimized: !!(webp && avif)
   });
 }
 ---
 
 <picture class={className}>
-  {/* AVIF - formato più efficiente (se disponibile) */}
+  {/* AVIF - formato più efficiente */}
   {avif && (
     <source 
       srcset={avif} 
@@ -75,7 +68,7 @@ if (import.meta.env.DEV) {
     />
   )}
   
-  {/* WebP - ottimo supporto browser (se disponibile) */}
+  {/* WebP - ottimo supporto browser */}
   {webp && (
     <source 
       srcset={webp} 

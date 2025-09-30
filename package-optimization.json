@@ -1,0 +1,14 @@
+{
+  "name": "tina-image-optimization-setup",
+  "scripts": {
+    "setup-optimization": "npm install sharp uuid @types/uuid",
+    "tina-dev": "tinacms dev",
+    "tina-build": "tinacms build"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0",
+    "uuid": "^9.0.1",
+    "@types/uuid": "^9.0.7",
+    "@tinacms/cli": "^1.5.0"
+  }
+}
