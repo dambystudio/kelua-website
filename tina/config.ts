@@ -4,36 +4,6 @@
 // Updated schema with prezzo field - force sync
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
-// Funzione universale per pulire i nomi dei file
-// Rimuove spazi, caratteri speciali e normalizza per web safety
-const cleanFileName = (filename: string): string => {
-  // Estrai nome ed estensione
-  const lastDotIndex = filename.lastIndexOf('.')
-  const name = lastDotIndex !== -1 ? filename.substring(0, lastDotIndex) : filename
-  const extension = lastDotIndex !== -1 ? filename.substring(lastDotIndex) : ''
-  
-  // Pulisci il nome del file:
-  let cleanName = name
-    // Rimuovi spazi e sostituisci con trattini
-    .replace(/\s+/g, '-')
-    // Rimuovi caratteri speciali pericolosi per web e filesystem
-    .replace(/[^a-zA-Z0-9\-_]/g, '')
-    // Rimuovi trattini multipli
-    .replace(/-+/g, '-')
-    // Rimuovi trattini all'inizio e alla fine
-    .replace(/^-+|-+$/g, '')
-    // Converti a lowercase per consistenza
-    .toLowerCase()
-  
-  // Se il nome è vuoto dopo la pulizia, usa un fallback
-  if (!cleanName) {
-    cleanName = 'file-' + Date.now()
-  }
-  
-  // Ritorna nome pulito + estensione originale (lowercase)
-  return cleanName + extension.toLowerCase()
-};
-
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
