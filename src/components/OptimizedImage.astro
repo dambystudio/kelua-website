@@ -25,7 +25,8 @@ const {
 
 // Sistema on-the-fly con images.weserv.nl
 const isDev = import.meta.env.DEV;
-const baseUrl = isDev ? 'http://localhost:4322' : (import.meta.env.SITE || 'https://kelua.netlify.app');
+// Forza l'uso di kelua.netlify.app per le immagini (dove sono effettivamente deployate)
+const baseUrl = isDev ? 'http://localhost:4322' : 'https://kelua.netlify.app';
 const imageUrl = src.startsWith('/') ? `${baseUrl}${src}` : src;
 
 const getOptimizedUrl = (format: string, w?: number, q?: number) => {
