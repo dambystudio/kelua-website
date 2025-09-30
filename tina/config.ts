@@ -1,6 +1,7 @@
 ﻿import { defineConfig } from "tinacms";
 
 // Check if we're in local mode
+// Updated schema with prezzo field - force sync
 const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
 
 // Your hosting provider likely exposes this as an environment variable
