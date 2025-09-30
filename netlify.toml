@@ -1,6 +1,6 @@
 
 [build]
-  command = "npm run build:production"
+  command = "rm -f package-lock.json && npm install && npm run build:production"
   publish = "dist"
 
 [build.environment]
