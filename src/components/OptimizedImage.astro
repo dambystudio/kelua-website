@@ -51,16 +51,13 @@ const getOptimizedVersions = (originalSrc: string) => {
     correctedSrc = pathParts.join('/');
   }
 
-  // Estrai path e nome file
-  const pathParts = correctedSrc.split('/');
-  const filename = pathParts[pathParts.length - 1];
+  // Estrai path e directory dal percorso corretto
   const directory = pathParts.slice(0, -1).join('/');
+  const finalFilename = pathParts[pathParts.length - 1];
+  const finalNameWithoutExt = finalFilename.replace(/\.[^/.]+$/, '');
   
-  // Rimuovi estensione e genera nomi ottimizzati
-  const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
-  
-  const webpSrc = `${directory}/optimized/${nameWithoutExt}.webp`;
-  const avifSrc = `${directory}/optimized/${nameWithoutExt}.avif`;
+  const webpSrc = `${directory}/optimized/${finalNameWithoutExt}.webp`;
+  const avifSrc = `${directory}/optimized/${finalNameWithoutExt}.avif`;
   
   return {
     webp: webpSrc,
