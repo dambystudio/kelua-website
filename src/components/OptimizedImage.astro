@@ -36,8 +36,14 @@ const getOptimizedUrl = (format: string, w?: number, q?: number) => {
   }
   
   // Per URL esterni (anche in development) o in production, usa weserv.nl
+  // Fix per inconsistenza nomi file: prova prima con underscore → trattino
+  let finalImageUrl = imageUrl;
+  if (finalImageUrl.includes('IMG_')) {
+    finalImageUrl = finalImageUrl.replace(/IMG_(\d+)/g, 'IMG-$1');
+  }
+  
   const params = new URLSearchParams();
-  params.set('url', imageUrl);
+  params.set('url', finalImageUrl);
   params.set('output', format);
   if (w) params.set('w', w.toString());
   if (q) params.set('q', q.toString());
