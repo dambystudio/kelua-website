@@ -3,7 +3,7 @@ titolo: "Accessorio Esempio"
 descrizione: "Esempio di accessorio"
 immagine: "/uploads/optimized/background.webp"
 categoria: "Cinture"
-genere: "unisex"
+genere: "Unisex"
 attivo: true
 ordine: 1
 prezzo: 25
