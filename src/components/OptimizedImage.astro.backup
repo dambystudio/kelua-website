@@ -1,0 +1,261 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  responsive?: boolean;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  quality = 80,
+  class: className = '',
+  loading = 'lazy',
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
+  responsive = true
+} = Astro.props;
+
+// Costruiamo l'URL per il servizio di conversione on-the-fly
+const baseUrl = import.meta.env.SITE || 'https://kelua.netlify.app';
+const imageUrl = src.startsWith('/') ? `${baseUrl}${src}` : src;
+
+// Funzione per generare URL ottimizzati usando images.weserv.nl
+const getOptimizedUrl = (format: string, w?: number, q?: number) => {
+  const params = new URLSearchParams();
+  params.set('url', imageUrl);
+  params.set('output', format);
+  if (w) params.set('w', w.toString());
+  if (q) params.set('q', q.toString());
+  params.set('fit', 'cover');
+  return `https://images.weserv.nl/?${params.toString()}`;
+};
+
+// Logica universale per ottenere il nome ottimizzato
+const getOptimizedFilename = (originalFilename: string) => {
+  const lastDot = originalFilename.lastIndexOf('.');
+  const nameWithoutExt = lastDot !== -1 ? originalFilename.substring(0, lastDot) : originalFilename;
+  
+  // Sanitizzazione base
+  let sanitizedName = nameWithoutExt
+    .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
+    .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
+    .replace(/[èéêë]/g, 'e')
+    .replace(/[ìíîï]/g, 'i')
+    .replace(/[òóôöõø]/g, 'o')
+    .replace(/[ùúûü]/g, 'u')
+    .replace(/[ýÿ]/g, 'y')
+    .replace(/[ñ]/g, 'n')
+    .replace(/[ç]/g, 'c')
+    .replace(/[^\w\-_.]/g, '');     // Rimuove caratteri non alfanumerici eccetto - _ .
+  
+  // EURISTICA UNIVERSALE basata sui pattern osservati:
+  // Se il file ha già trattini (come IMG-3624.jpeg), mantienili
+  // Se ha underscore e match pattern specifici, trasforma in base ai pattern esistenti:
+  if (sanitizedName.includes('_')) {
+    // Pattern osservati nel sistema di ottimizzazione:
+    // IMG_36xx → IMG-36xx (trasforma underscore in trattino)
+    // IMG_2xxx, IMG_1xxx, file lunghi → mantiene underscore
+    
+    if (sanitizedName.match(/^IMG_36\d+$/)) {
+      // Caso specifico IMG_36xx: trasforma underscore in trattino
+      sanitizedName = sanitizedName.replace('_', '-');
+    }
+    // Per tutti gli altri pattern con underscore, mantieni l'underscore
+    // Questo include IMG_2xxx, IMG_1xxx, nomi lunghi numerici, etc.
+  }
+  
+  if (import.meta.env.DEV) {
+    console.log(`� Filename optimization: "${originalFilename}" → "${sanitizedName}"`);
+  }
+  
+  return sanitizedName;
+};
+
+// Determina il percorso dell'immagine ottimizzata con logica universale
+const getOptimizedImagePath = (originalSrc: string, format: string) => {
+  if (!originalSrc) return '';
+  
+  // Se l'immagine è già in uploads/, usa il percorso ottimizzato
+  if (originalSrc.includes('/uploads/')) {
+    // Estrai il percorso completo dall'URL
+    const urlParts = originalSrc.split('/');
+    const filename = urlParts[urlParts.length - 1];
+    
+    if (filename) {
+      // Ottieni il nome ottimizzato usando la logica universale
+      const optimizedName = getOptimizedFilename(filename);
+      
+      // Controlla se l'immagine è in una sottocartella
+      const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
+      if (uploadsIndex !== -1 && uploadsIndex < urlParts.length - 2) {
+        // L'immagine è in una sottocartella (es: /uploads/Foto_maglie/IMG_001.jpeg)
+        const subfolderPath = urlParts.slice(uploadsIndex + 1, -1).join('/'); // "Foto_maglie"
+        const optimizedSubfolder = `${subfolderPath}_ottimizzate`; // "Foto_maglie_ottimizzate"
+        return `/uploads/optimized/${optimizedSubfolder}/${optimizedName}.${format}`;
+      } else {
+        // L'immagine è direttamente in uploads/ (comportamento esistente)
+        return `/uploads/optimized/${optimizedName}.${format}`;
+      }
+    }
+  }
+  
+  return originalSrc;
+};
+
+// Otteniamo i percorsi ottimizzati
+const webpSrc = getOptimizedImagePath(src, 'webp');
+const avifSrc = getOptimizedImagePath(src, 'avif');
+
+// Verifica se i file ottimizzati esistono davvero
+const checkFileExists = async (filePath: string) => {
+  if (!filePath || filePath === src) return false;
+  
+  try {
+    // In ambiente di build, assumiamo che esistano se sono stati generati
+    if (import.meta.env.PROD) {
+      // Controlla se il percorso sembra valido
+      return filePath.includes('/optimized/') && filePath !== src;
+    }
+    
+    // In sviluppo, controlla fisicamente se esistono
+    const fs = await import('fs');
+    const path = await import('path');
+    const publicPath = path.join(process.cwd(), 'public', filePath);
+    return fs.existsSync(publicPath);
+  } catch {
+    return false;
+  }
+};
+
+// Verifica esistenza file ottimizzati
+// In produzione, controlla se la cartella ottimizzata è nella lista di quelle esistenti
+const hasOptimizedFolder = (imagePath: string) => {
+  if (!imagePath.includes('/optimized/')) return false;
+  
+  // Lista delle cartelle ottimizzate che sappiamo esistere su TinaCloud
+  const existingOptimizedFolders = [
+    'Foto_Jeans_ottimizzate',
+    'Foto_Negozio_ottimizzate', 
+    'Foto_Felpe_ottimizzate',
+    'Foto_Maglieria_ottimizzate', // ✅ Ora esiste su TinaCloud!
+    'Foto_Giubbotti_ottimizzate', // Aggiungi quando carichi su TinaCloud
+    'Foto_Accessori_ottimizzate', // Aggiungi quando carichi su TinaCloud
+    'Foto_Camicie_ottimizzate',   // Aggiungi quando carichi su TinaCloud
+    'Foto_Pantaloni_ottimizzate', // Aggiungi quando carichi su TinaCloud
+  ];
+  
+  return existingOptimizedFolders.some(folder => imagePath.includes(folder));
+};
+
+const webpExists = import.meta.env.DEV 
+  ? await checkFileExists(webpSrc) 
+  : hasOptimizedFolder(webpSrc);
+  
+const avifExists = import.meta.env.DEV 
+  ? await checkFileExists(avifSrc) 
+  : hasOptimizedFolder(avifSrc);
+
+// Usa solo i percorsi che esistono davvero
+const finalWebpSrc = webpExists ? webpSrc : null;
+const finalAvifSrc = avifExists ? avifSrc : null;
+
+// Per sicurezza, usiamo sempre l'immagine originale come fallback principale
+const safeFallbackSrc = src;
+
+// Genera srcset responsive per diverse risoluzioni  
+const generateSrcSet = (baseSrc: string, format: string) => {
+  if (!responsive) return '';
+  
+  const sizes = [400, 600, 800, 1200];
+  const optimizedBasePath = getOptimizedImagePath(baseSrc, format);
+  
+  return sizes.map(size => {
+    // Per il responsive, usiamo lo stesso percorso ottimizzato per tutte le dimensioni
+    // In futuro si potrebbe aggiungere supporto per diverse risoluzioni per file
+    return `${optimizedBasePath} ${size}w`;
+  }).join(', ');
+};
+
+// Debug: mostra i percorsi generati (solo in sviluppo)
+if (import.meta.env.DEV) {
+  console.log('🖼️ OptimizedImage Debug:');
+  console.log('  Original:', src);
+  console.log('  WebP:', webpSrc);
+  console.log('  AVIF:', avifSrc);
+  
+  // Mostra se è una sottocartella
+  if (src.includes('/uploads/') && src.split('/').length > 3) {
+    const pathParts = src.split('/');
+    const subfolderPath = pathParts.slice(pathParts.findIndex(p => p === 'uploads') + 1, -1).join('/');
+    console.log('  📁 Subfolder detected:', subfolderPath);
+    console.log('  📁 Optimized folder:', `${subfolderPath}_ottimizzate`);
+  }
+}
+
+---
+
+<picture class={className}>
+  <!-- Solo se il percorso ottimizzato esiste davvero, proviamo i formati moderni -->
+  {finalAvifSrc && (
+    <source 
+      srcset={finalAvifSrc}
+      type="image/avif" 
+      sizes={sizes}
+    />
+  )}
+  
+  {finalWebpSrc && (
+    <source 
+      srcset={finalWebpSrc}
+      type="image/webp" 
+      sizes={sizes}
+    />
+  )}
+  
+  <!-- Fallback: sempre l'immagine originale che sappiamo esistere -->
+  <img
+    src={safeFallbackSrc}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+    class="optimized-image"
+    sizes={sizes}
+  />
+</picture>
+
+<style>
+  picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  .optimized-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+  
+  .optimized-image[loading="lazy"] {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+</style>

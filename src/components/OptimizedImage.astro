@@ -1,101 +1,224 @@
----
-import { Image } from 'astro:assets';
+------
 
-interface Props {
-  src: string;
-  alt: string;
-  width?: number;
-  height?: number;
-  quality?: number;
-  class?: string;
-  loading?: 'lazy' | 'eager';
-  sizes?: string;
-  responsive?: boolean;
-}
+interface Props {interface Props {
 
-const {
-  src,
-  alt,
-  width = 800,
-  height = 600,
-  quality = 80,
-  class: className = '',
-  loading = 'lazy',
-  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
-  responsive = true
-} = Astro.props;
+  src: string;  src: string;
 
-// Logica universale per ottenere il nome ottimizzato
-const getOptimizedFilename = (originalFilename: string) => {
-  const lastDot = originalFilename.lastIndexOf('.');
+  alt: string;  alt: string;
+
+  width?: number;  width?: number;
+
+  height?: number;  height?: number;
+
+  quality?: number;  quality?: number;
+
+  class?: string;  class?: string;
+
+  loading?: 'lazy' | 'eager';  loading?: 'lazy' | 'eager';
+
+  sizes?: string;  sizes?: string;
+
+  responsive?: boolean;  responsive?: boolean;
+
+}}
+
+
+
+const {const {
+
+  src,  src,
+
+  alt,  alt,
+
+  width = 800,  width = 800,
+
+  height = 600,  height = 600,
+
+  quality = 80,  quality = 80,
+
+  class: className = '',  class: className = '',
+
+  loading = 'lazy',  loading = 'lazy',
+
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
+
+  responsive = true  responsive = true
+
+} = Astro.props;} = Astro.props;
+
+
+
+// Costruiamo l'URL per il servizio di conversione on-the-fly// Costruiamo l'URL per il servizio di conversione on-the-fly
+
+const baseUrl = import.meta.env.SITE || 'https://kelua.netlify.app';const baseUrl = import.meta.env.SITE || 'https://kelua.netlify.app';
+
+const imageUrl = src.startsWith('/') ? `${baseUrl}${src}` : src;const imageUrl = src.startsWith('/') ? `${baseUrl}${src}` : src;
+
+
+
+// Funzione per generare URL ottimizzati usando images.weserv.nl// Funzione per generare URL ottimizzati usando images.weserv.nl
+
+const getOptimizedUrl = (format: string, w?: number, q?: number) => {const getOptimizedUrl = (format: string, w?: number, q?: number) => {
+
+  const params = new URLSearchParams();  const params = new URLSearchParams();
+
+  params.set('url', imageUrl);  params.set('url', imageUrl);
+
+  params.set('output', format);  params.set('output', format);
+
+  if (w) params.set('w', w.toString());  if (w) params.set('w', w.toString());
+
+  if (q) params.set('q', q.toString());  if (q) params.set('q', q.toString());
+
+  params.set('fit', 'cover');  params.set('fit', 'cover');
+
+  return `https://images.weserv.nl/?${params.toString()}`;  return `https://images.weserv.nl/?${params.toString()}`;
+
+};};
+
+
+
+// Generiamo i diversi formati usando il servizio di conversione// Logica universale per ottenere il nome ottimizzato
+
+const webpSrc = getOptimizedUrl('webp', width, quality);const getOptimizedFilename = (originalFilename: string) => {
+
+const avifSrc = getOptimizedUrl('avif', width, quality);  const lastDot = originalFilename.lastIndexOf('.');
+
   const nameWithoutExt = lastDot !== -1 ? originalFilename.substring(0, lastDot) : originalFilename;
-  
-  // Sanitizzazione base
-  let sanitizedName = nameWithoutExt
-    .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
-    .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
-    .replace(/[èéêë]/g, 'e')
-    .replace(/[ìíîï]/g, 'i')
-    .replace(/[òóôöõø]/g, 'o')
-    .replace(/[ùúûü]/g, 'u')
-    .replace(/[ýÿ]/g, 'y')
-    .replace(/[ñ]/g, 'n')
-    .replace(/[ç]/g, 'c')
-    .replace(/[^\w\-_.]/g, '');     // Rimuove caratteri non alfanumerici eccetto - _ .
-  
-  // EURISTICA UNIVERSALE basata sui pattern osservati:
-  // Se il file ha già trattini (come IMG-3624.jpeg), mantienili
-  // Se ha underscore e match pattern specifici, trasforma in base ai pattern esistenti:
-  if (sanitizedName.includes('_')) {
-    // Pattern osservati nel sistema di ottimizzazione:
-    // IMG_36xx → IMG-36xx (trasforma underscore in trattino)
-    // IMG_2xxx, IMG_1xxx, file lunghi → mantiene underscore
-    
-    if (sanitizedName.match(/^IMG_36\d+$/)) {
-      // Caso specifico IMG_36xx: trasforma underscore in trattino
-      sanitizedName = sanitizedName.replace('_', '-');
-    }
-    // Per tutti gli altri pattern con underscore, mantieni l'underscore
-    // Questo include IMG_2xxx, IMG_1xxx, nomi lunghi numerici, etc.
-  }
-  
-  if (import.meta.env.DEV) {
-    console.log(`� Filename optimization: "${originalFilename}" → "${sanitizedName}"`);
-  }
-  
-  return sanitizedName;
-};
 
-// Determina il percorso dell'immagine ottimizzata con logica universale
-const getOptimizedImagePath = (originalSrc: string, format: string) => {
-  if (!originalSrc) return '';
+// Fallback sicuro: sempre l'immagine originale  
+
+const fallbackSrc = src.startsWith('/') ? src : `/${src}`;  // Sanitizzazione base
+
+  let sanitizedName = nameWithoutExt
+
+if (import.meta.env.DEV) {    .replace(/\s+/g, '-')           // Sostituisce spazi con trattini
+
+  console.log('🖼️ OptimizedImage on-the-fly:', {    .replace(/[àáâäãå]/g, 'a')      // Sostituisce caratteri accentati
+
+    original: src,    .replace(/[èéêë]/g, 'e')
+
+    webp: webpSrc,    .replace(/[ìíîï]/g, 'i')
+
+    avif: avifSrc,    .replace(/[òóôöõø]/g, 'o')
+
+    fallback: fallbackSrc    .replace(/[ùúûü]/g, 'u')
+
+  });    .replace(/[ýÿ]/g, 'y')
+
+}    .replace(/[ñ]/g, 'n')
+
+---    .replace(/[ç]/g, 'c')
+
+    .replace(/[^\w\-_.]/g, '');     // Rimuove caratteri non alfanumerici eccetto - _ .
+
+<picture class={className}>  
+
+  <!-- AVIF: formato più moderno e compatto -->  // EURISTICA UNIVERSALE basata sui pattern osservati:
+
+  <source   // Se il file ha già trattini (come IMG-3624.jpeg), mantienili
+
+    srcset={avifSrc}  // Se ha underscore e match pattern specifici, trasforma in base ai pattern esistenti:
+
+    type="image/avif"   if (sanitizedName.includes('_')) {
+
+    sizes={responsive ? sizes : undefined}    // Pattern osservati nel sistema di ottimizzazione:
+
+  />    // IMG_36xx → IMG-36xx (trasforma underscore in trattino)
+
+      // IMG_2xxx, IMG_1xxx, file lunghi → mantiene underscore
+
+  <!-- WebP: ampio supporto e buona compressione -->    
+
+  <source     if (sanitizedName.match(/^IMG_36\d+$/)) {
+
+    srcset={webpSrc}      // Caso specifico IMG_36xx: trasforma underscore in trattino
+
+    type="image/webp"       sanitizedName = sanitizedName.replace('_', '-');
+
+    sizes={responsive ? sizes : undefined}    }
+
+  />    // Per tutti gli altri pattern con underscore, mantieni l'underscore
+
+      // Questo include IMG_2xxx, IMG_1xxx, nomi lunghi numerici, etc.
+
+  <!-- Fallback: immagine originale -->  }
+
+  <img  
+
+    src={fallbackSrc}  if (import.meta.env.DEV) {
+
+    alt={alt}    console.log(`� Filename optimization: "${originalFilename}" → "${sanitizedName}"`);
+
+    width={width}  }
+
+    height={height}  
+
+    loading={loading}  return sanitizedName;
+
+    decoding="async"};
+
+    class="optimized-image"
+
+    sizes={responsive ? sizes : undefined}// Determina il percorso dell'immagine ottimizzata con logica universale
+
+  />const getOptimizedImagePath = (originalSrc: string, format: string) => {
+
+</picture>  if (!originalSrc) return '';
+
   
-  // Se l'immagine è già in uploads/, usa il percorso ottimizzato
-  if (originalSrc.includes('/uploads/')) {
-    // Estrai il percorso completo dall'URL
-    const urlParts = originalSrc.split('/');
-    const filename = urlParts[urlParts.length - 1];
-    
-    if (filename) {
-      // Ottieni il nome ottimizzato usando la logica universale
-      const optimizedName = getOptimizedFilename(filename);
-      
-      // Controlla se l'immagine è in una sottocartella
-      const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
-      if (uploadsIndex !== -1 && uploadsIndex < urlParts.length - 2) {
-        // L'immagine è in una sottocartella (es: /uploads/Foto_maglie/IMG_001.jpeg)
-        const subfolderPath = urlParts.slice(uploadsIndex + 1, -1).join('/'); // "Foto_maglie"
-        const optimizedSubfolder = `${subfolderPath}_ottimizzate`; // "Foto_maglie_ottimizzate"
-        return `/uploads/optimized/${optimizedSubfolder}/${optimizedName}.${format}`;
-      } else {
-        // L'immagine è direttamente in uploads/ (comportamento esistente)
-        return `/uploads/optimized/${optimizedName}.${format}`;
-      }
-    }
-  }
-  
-  return originalSrc;
-};
+
+<style>  // Se l'immagine è già in uploads/, usa il percorso ottimizzato
+
+  picture {  if (originalSrc.includes('/uploads/')) {
+
+    width: 100%;    // Estrai il percorso completo dall'URL
+
+    height: 100%;    const urlParts = originalSrc.split('/');
+
+    display: block;    const filename = urlParts[urlParts.length - 1];
+
+  }    
+
+      if (filename) {
+
+  .optimized-image {      // Ottieni il nome ottimizzato usando la logica universale
+
+    width: 100%;      const optimizedName = getOptimizedFilename(filename);
+
+    height: 100%;      
+
+    object-fit: cover;      // Controlla se l'immagine è in una sottocartella
+
+    display: block;      const uploadsIndex = urlParts.findIndex(part => part === 'uploads');
+
+    transition: opacity 0.3s ease;      if (uploadsIndex !== -1 && uploadsIndex < urlParts.length - 2) {
+
+  }        // L'immagine è in una sottocartella (es: /uploads/Foto_maglie/IMG_001.jpeg)
+
+          const subfolderPath = urlParts.slice(uploadsIndex + 1, -1).join('/'); // "Foto_maglie"
+
+  .optimized-image[loading="lazy"] {        const optimizedSubfolder = `${subfolderPath}_ottimizzate`; // "Foto_maglie_ottimizzate"
+
+    opacity: 0;        return `/uploads/optimized/${optimizedSubfolder}/${optimizedName}.${format}`;
+
+    animation: fadeIn 0.5s ease forwards;      } else {
+
+  }        // L'immagine è direttamente in uploads/ (comportamento esistente)
+
+          return `/uploads/optimized/${optimizedName}.${format}`;
+
+  @keyframes fadeIn {      }
+
+    to {    }
+
+      opacity: 1;  }
+
+    }  
+
+  }  return originalSrc;
+
+</style>};
 
 // Otteniamo i percorsi ottimizzati
 const webpSrc = getOptimizedImagePath(src, 'webp');
