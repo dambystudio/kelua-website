@@ -1,0 +1,45 @@
+---
+import OptimizedImage from '../components/OptimizedImage.astro';
+import OptimizedImageSimple from '../components/OptimizedImageSimple.astro';
+---
+
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Confronto OptimizedImage</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h1>Confronto OptimizedImage</h1>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <h2>OptimizedImage Originale (complesso):</h2>
+            <div style="max-width: 400px; border: 2px solid blue; padding: 10px;">
+                <OptimizedImage 
+                    src="/uploads/IMG-3685.jpeg"
+                    alt="Test immagine originale"
+                    width={400}
+                    height={300}
+                />
+            </div>
+        </div>
+        
+        <div>
+            <h2>OptimizedImageSimple (nuovo):</h2>
+            <div style="max-width: 400px; border: 2px solid green; padding: 10px;">
+                <OptimizedImageSimple 
+                    src="/uploads/IMG-3685.jpeg"
+                    alt="Test immagine semplice"
+                    width={400}
+                    height={300}
+                />
+            </div>
+        </div>
+    </div>
+    
+    <h2>Debug info:</h2>
+    <p>Controlla la console per vedere i log di entrambi i componenti</p>
+    <p>In development, entrambi dovrebbero mostrare l'immagine locale direttamente</p>
+</body>
+</html>

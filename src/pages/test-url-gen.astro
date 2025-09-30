@@ -1,0 +1,55 @@
+---
+// Test semplice per verificare la generazione URL
+const testUrl = 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937';
+const params = new URLSearchParams();
+params.set('url', testUrl);
+params.set('output', 'webp');
+params.set('w', '400');
+params.set('q', '80');
+params.set('fit', 'cover');
+const generatedUrl = `https://images.weserv.nl/?${params.toString()}`;
+
+console.log('🔧 URL Test:', {
+  original: testUrl,
+  generated: generatedUrl,
+  manualWorking: 'https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1516975080664-ed2fc6a32937&output=webp&w=400&q=80&fit=cover'
+});
+---
+
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Test URL Generation</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h1>Test Generazione URL</h1>
+    
+    <h2>URL Manuale (funziona):</h2>
+    <div style="max-width: 400px; border: 2px solid green; padding: 10px;">
+        <img 
+            src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1516975080664-ed2fc6a32937&output=webp&w=400&q=80&fit=cover"
+            alt="URL manuale"
+            width="400"
+            height="300"
+            style="width: 100%; height: auto;"
+        />
+    </div>
+    
+    <h2>URL Generato dinamicamente:</h2>
+    <div style="max-width: 400px; border: 2px solid red; padding: 10px;">
+        <img 
+            src={generatedUrl}
+            alt="URL generato"
+            width="400"
+            height="300"
+            style="width: 100%; height: auto;"
+        />
+    </div>
+    
+    <h2>Debug info:</h2>
+    <p><strong>Originale:</strong> {testUrl}</p>
+    <p><strong>Generato:</strong> {generatedUrl}</p>
+    <p>Controlla la console per i dettagli completi</p>
+</body>
+</html>

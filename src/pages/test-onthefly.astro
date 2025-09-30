@@ -1,0 +1,25 @@
+---
+import OnTheFlyImage from '../components/OnTheFlyImage.astro';
+---
+
+<html>
+<head>
+  <title>Test Ottimizzazione On-The-Fly</title>
+</head>
+<body>
+  <h1>Test Sistema On-The-Fly</h1>
+  
+  <h2>Immagine con ottimizzazione on-the-fly:</h2>
+  <OnTheFlyImage 
+    src="/uploads/IMG-3685.jpeg"
+    alt="Test immagine ottimizzata"
+    width={400}
+    height={300}
+  />
+  
+  <h2>Immagine normale per confronto:</h2>
+  <img src="/uploads/IMG-3685.jpeg" alt="Immagine normale" width="400" height="300" />
+  
+  <p>Apri gli strumenti sviluppatore per vedere i log del componente OnTheFlyImage!</p>
+</body>
+</html>

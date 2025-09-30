@@ -1,0 +1,59 @@
+---
+import OnTheFlyImage from '../components/OnTheFlyImage.astro';
+---
+
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Test External Image</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h1>Test Immagine Esterna</h1>
+    
+    <h2>Immagine da httpbin.org (dovrebbe funzionare):</h2>
+    <div style="max-width: 400px; border: 2px solid #ccc; padding: 10px;">
+        <OnTheFlyImage 
+            src="https://httpbin.org/image/jpeg"
+            alt="Test immagine da httpbin"
+            width={400}
+            height={300}
+        />
+    </div>
+    
+    <h2>Immagine locale (potrebbe non funzionare in dev):</h2>
+    <div style="max-width: 400px; border: 2px solid #ccc; padding: 10px;">
+        <OnTheFlyImage 
+            src="/uploads/IMG-3685.jpeg"
+            alt="Test immagine locale"
+            width={400}
+            height={300}
+        />
+    </div>
+    
+    <h2>Test da Netlify deployato:</h2>
+    <div style="max-width: 400px; border: 2px solid #ccc; padding: 10px;">
+        <OnTheFlyImage 
+            src="https://kelua.netlify.app/uploads/IMG-3685.jpeg"
+            alt="Test immagine da Netlify"
+            width={400}
+            height={300}
+        />
+    </div>
+    
+    <h2>Test diretto weserv.nl con httpbin:</h2>
+    <div style="max-width: 400px; border: 2px solid #ccc; padding: 10px;">
+        <img 
+            src="https://images.weserv.nl/?url=https%3A%2F%2Fhttpbin.org%2Fimage%2Fjpeg&output=webp&w=400&q=80&fit=cover"
+            alt="Test diretto weserv.nl con httpbin"
+            width="400"
+            height="300"
+            style="width: 100%; height: auto;"
+        />
+    </div>
+
+    <h2>Debug info:</h2>
+    <p>Controlla la console del browser per vedere gli URL generati</p>
+    <p>Controlla il Network tab per vedere le richieste HTTP</p>
+</body>
+</html>
