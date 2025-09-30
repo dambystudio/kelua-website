@@ -1,0 +1,10 @@
+{
+  "webhook": {
+    "name": "Auto Image Optimization",
+    "url": "https://kelua.netlify.app/.netlify/functions/auto-optimize-images",
+    "branches": "master",
+    "headers": "Content-Type: application/json"
+  },
+  "setup_date": "2025-09-30T21:50:42.709Z",
+  "instructions": "Configurare questo webhook su https://tina.io/dashboard/"
+}

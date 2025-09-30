@@ -16,10 +16,12 @@ console.log('2. 📂 Seleziona il tuo progetto "kelua-website"')
 console.log('3. ⚙️  Vai su Settings → Webhooks')
 console.log('4. ➕ Aggiungi nuovo webhook con questi parametri:')
 console.log('')
-console.log('   📍 URL: https://kelua.netlify.app/.netlify/functions/auto-optimize-images')
-console.log('   📋 Event: media.create (quando viene caricata una nuova immagine)')
-console.log('   🔐 Method: POST')
-console.log('   📦 Headers: Content-Type: application/json')
+console.log('   � Name: Auto Image Optimization')
+console.log('   �📍 Webhook URL: https://kelua.netlify.app/.netlify/functions/auto-optimize-images')
+console.log('   🌿 Branches: master (o il tuo branch principale)')
+console.log('   📦 Headers: 
+     Key: Content-Type
+     Value: application/json')
 console.log('')
 
 console.log('5. 💾 Salva il webhook')
@@ -55,12 +57,10 @@ import path from 'path'
 
 const config = {
   webhook: {
+    name: 'Auto Image Optimization',
     url: `${siteUrl}/.netlify/functions/auto-optimize-images`,
-    event: 'media.create',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    branches: 'master',
+    headers: 'Content-Type: application/json'
   },
   setup_date: new Date().toISOString(),
   instructions: 'Configurare questo webhook su https://tina.io/dashboard/'
