@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TinaCMS Debug</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .env-var { margin: 10px 0; padding: 10px; background: #f5f5f5; }
+        .missing { background: #ffebee; color: #c62828; }
+        .present { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>TinaCMS Environment Debug</h1>
+    
+    <h2>Expected Environment Variables:</h2>
+    <div id="env-vars"></div>
+    
+    <h2>TinaCMS Assets Test:</h2>
+    <div id="assets-test"></div>
+    
+    <script>
+        // Test delle variabili d'ambiente che TinaCMS dovrebbe avere
+        const expectedVars = [
+            'PUBLIC_TINA_CLIENT_ID',
+            'TINA_TOKEN', 
+            'TINA_SEARCH_TOKEN',
+            'NETLIFY_BRANCH',
+            'GITHUB_BRANCH'
+        ];
+        
+        const envContainer = document.getElementById('env-vars');
+        
+        expectedVars.forEach(varName => {
+            const div = document.createElement('div');
+            div.className = 'env-var missing';
+            div.innerHTML = `<strong>${varName}:</strong> NOT AVAILABLE IN BROWSER (server-side only)`;
+            envContainer.appendChild(div);
+        });
+        
+        // Test caricamento asset TinaCMS
+        const assetsContainer = document.getElementById('assets-test');
+        
+        // Test se i file JavaScript di TinaCMS si caricano
+        const testScript = document.createElement('script');
+        testScript.src = '/admin/assets/index-a9437073.js';
+        testScript.onload = () => {
+            assetsContainer.innerHTML += '<div class="present">✅ Main TinaCMS script loads successfully</div>';
+        };
+        testScript.onerror = () => {
+            assetsContainer.innerHTML += '<div class="missing">❌ Main TinaCMS script failed to load</div>';
+        };
+        document.head.appendChild(testScript);
+        
+        // Test se il CSS di TinaCMS si carica
+        const testCSS = document.createElement('link');
+        testCSS.rel = 'stylesheet';
+        testCSS.href = '/admin/assets/index-cf1c94fc.css';
+        testCSS.onload = () => {
+            assetsContainer.innerHTML += '<div class="present">✅ TinaCMS CSS loads successfully</div>';
+        };
+        testCSS.onerror = () => {
+            assetsContainer.innerHTML += '<div class="missing">❌ TinaCMS CSS failed to load</div>';
+        };
+        document.head.appendChild(testCSS);
+        
+        // Info generali
+        const infoDiv = document.createElement('div');
+        infoDiv.innerHTML = `
+            <h2>Browser Info:</h2>
+            <div class="env-var">
+                <strong>Current URL:</strong> ${window.location.href}<br>
+                <strong>Domain:</strong> ${window.location.hostname}<br>
+                <strong>Protocol:</strong> ${window.location.protocol}<br>
+                <strong>User Agent:</strong> ${navigator.userAgent}
+            </div>
+        `;
+        document.body.appendChild(infoDiv);
+    </script>
+</body>
+</html>
