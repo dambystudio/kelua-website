@@ -27,10 +27,28 @@ const getOptimizedVersions = (originalSrc: string) => {
     return { webp: null, avif: null, original: originalSrc };
   }
 
-  // Fix per inconsistenza nomi file IMG_xxxx → IMG-xxxx
+  // Normalizzazione universale del nome file per caratteri indesiderati
   let correctedSrc = originalSrc;
-  if (correctedSrc.includes('IMG_')) {
-    correctedSrc = correctedSrc.replace(/IMG_(\d+)/g, 'IMG-$1');
+  
+  // Normalizza il nome del file (non il percorso della cartella)
+  const pathParts = correctedSrc.split('/');
+  const filename = pathParts[pathParts.length - 1];
+  
+  // Normalizza solo il nome del file, mantenendo l'estensione
+  const extensionMatch = filename.match(/\.[^.]*$/);
+  const extension = extensionMatch ? extensionMatch[0] : '';
+  const nameWithoutExt = filename.replace(/\.[^.]*$/, '');
+  
+  // Normalizza: rimuovi caratteri speciali, sostituisci spazi e caratteri problematici
+  const normalizedName = nameWithoutExt
+    .replace(/[^\w\-\.]/g, '-')  // Sostituisce caratteri non alfanumerici con -
+    .replace(/[-]+/g, '-')       // Rimuove - multipli consecutivi
+    .replace(/^-+|-+$/g, '');    // Rimuove - all'inizio e alla fine
+  
+  // Ricostruisci il percorso con il nome normalizzato
+  if (normalizedName !== nameWithoutExt) {
+    pathParts[pathParts.length - 1] = normalizedName + extension;
+    correctedSrc = pathParts.join('/');
   }
 
   // Estrai path e nome file
@@ -57,10 +75,11 @@ const { webp, avif, original } = getOptimizedVersions(src);
 if (import.meta.env.DEV) {
   console.log('🖼️ AutoOptimizedImage:', { 
     original: src, 
+    normalized: original,
     webp, 
     avif,
     hasOptimized: !!(webp && avif),
-    corrected: original !== src ? `${src} → ${original}` : 'no correction needed'
+    fileNormalized: original !== src ? `${src} → ${original}` : 'no normalization needed'
   });
 }
 ---

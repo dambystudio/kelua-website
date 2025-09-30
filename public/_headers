@@ -3,9 +3,11 @@
 # Critical resources - immediate cache
 /*.webp
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/webp
   
 /*.avif
   Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/avif
 
 # CSS and JS with longer cache
 /*.css
