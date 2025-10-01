@@ -16,6 +16,7 @@
     "build:production": "astro build",
     "sync-images": "node scripts/sync-images.mjs",
     "optimize-single": "node scripts/optimize-single.mjs",
+    "auto-detect": "node scripts/auto-detect-sync.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "tina:build": "tinacms build",

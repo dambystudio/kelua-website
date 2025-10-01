@@ -148,7 +148,7 @@ if (import.meta.env.DEV) {
     });
   });
   
-  // Sistema per rilevare status 206 e altri errori HTTP
+  // Sistema per rilevare status 206 e altri errori HTTP + file vuoti
   async function validateImageSources() {
     const pictures = document.querySelectorAll('picture');
     
@@ -162,12 +162,24 @@ if (import.meta.env.DEV) {
           try {
             const response = await fetch(srcset, { method: 'HEAD' });
             
-            // Se status non è 200, rimuovi questa source
-            if (response.status !== 200) {
+            if (response.status === 200) {
+              // Controlla anche file vuoti o corrotti con status 200
+              const contentLength = response.headers.get('content-length');
+              const contentType = response.headers.get('content-type');
+              
+              if (contentLength && parseInt(contentLength) < 100) {
+                console.log(`🚫 Removing empty file (${contentLength} bytes):`, srcset);
+                source.remove();
+                img.setAttribute('data-fallback-reason', `Empty File (${contentLength}B)`);
+              } else if (contentType && !contentType.startsWith('image/')) {
+                console.log(`🚫 Removing invalid content-type (${contentType}):`, srcset);
+                source.remove();
+                img.setAttribute('data-fallback-reason', `Invalid Type (${contentType})`);
+              }
+            } else {
+              // Status non è 200, rimuovi questa source
               console.log(`🚫 Removing source with status ${response.status}:`, srcset);
               source.remove();
-              
-              // Aggiungi attributo data per debugging
               img.setAttribute('data-fallback-reason', `HTTP ${response.status}`);
             }
           } catch (error) {

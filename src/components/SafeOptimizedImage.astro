@@ -1,0 +1,232 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  enablePreValidation?: boolean; // Nuovo: verifica esistenza file prima del render
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  quality = 80,
+  class: className = '',
+  loading = 'lazy',
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
+  enablePreValidation = true
+} = Astro.props;
+
+import fs from 'fs';
+import path from 'path';
+
+// Funzione per ottenere le versioni ottimizzate con pre-validazione
+const getOptimizedVersions = (originalSrc: string) => {
+  if (!originalSrc || !originalSrc.startsWith('/uploads/')) {
+    return { webp: null, avif: null, original: originalSrc };
+  }
+
+  // Normalizzazione universale del nome file
+  let correctedSrc = originalSrc;
+  const pathParts = correctedSrc.split('/');
+  const filename = pathParts[pathParts.length - 1];
+  
+  const extensionMatch = filename.match(/\.[^.]*$/);
+  const extension = extensionMatch ? extensionMatch[0] : '';
+  const nameWithoutExt = filename.replace(/\.[^.]*$/, '');
+  
+  const normalizedName = nameWithoutExt
+    .replace(/[^\w\-\.]/g, '-')
+    .replace(/[-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  
+  if (normalizedName !== nameWithoutExt) {
+    pathParts[pathParts.length - 1] = normalizedName + extension;
+    correctedSrc = pathParts.join('/');
+  }
+
+  const directory = pathParts.slice(0, -1).join('/');
+  const finalFilename = pathParts[pathParts.length - 1];
+  const finalNameWithoutExt = finalFilename.replace(/\.[^/.]+$/, '');
+  
+  const webpSrc = `${directory}/optimized/${finalNameWithoutExt}.webp`;
+  const avifSrc = `${directory}/optimized/${finalNameWithoutExt}.avif`;
+  
+  // PRE-VALIDAZIONE: Controlla se i file esistono fisicamente (solo in build)
+  let validWebp = webpSrc;
+  let validAvif = avifSrc;
+  
+  if (enablePreValidation && !import.meta.env.DEV) {
+    try {
+      const publicDir = path.join(process.cwd(), 'public');
+      const webpPath = path.join(publicDir, webpSrc);
+      const avifPath = path.join(publicDir, avifSrc);
+      
+      // Controlla esistenza e dimensione file WebP
+      try {
+        const webpStats = fs.statSync(webpPath);
+        if (webpStats.size < 100) {
+          console.log(`⚠️ WebP file too small (${webpStats.size}B), skipping:`, webpSrc);
+          validWebp = null;
+        }
+      } catch {
+        validWebp = null; // File non esiste
+      }
+      
+      // Controlla esistenza e dimensione file AVIF
+      try {
+        const avifStats = fs.statSync(avifPath);
+        if (avifStats.size < 100) {
+          console.log(`⚠️ AVIF file too small (${avifStats.size}B), skipping:`, avifSrc);
+          validAvif = null;
+        }
+      } catch {
+        validAvif = null; // File non esiste
+      }
+      
+    } catch (error) {
+      console.log('⚠️ Pre-validation error:', error.message);
+      // In caso di errore, usa le versioni non validate (fallback JS gestirà)
+    }
+  }
+  
+  return {
+    webp: validWebp,
+    avif: validAvif,
+    original: correctedSrc
+  };
+};
+
+const { webp, avif, original } = getOptimizedVersions(src);
+
+// ID unico per questo componente
+const componentId = `img-${Math.random().toString(36).substr(2, 9)}`;
+
+// Debug info
+if (import.meta.env.DEV) {
+  console.log('🖼️ SafeOptimizedImage:', { 
+    original: src, 
+    normalized: original,
+    webp: webp ? 'valid' : 'skipped',
+    avif: avif ? 'valid' : 'skipped',
+    preValidation: enablePreValidation
+  });
+}
+---
+
+<picture class={className} data-component-id={componentId}>
+  {/* AVIF - solo se pre-validato o in development */}
+  {avif && (
+    <source 
+      srcset={avif} 
+      type="image/avif"
+      sizes={sizes}
+      data-optimized="avif"
+    />
+  )}
+  
+  {/* WebP - solo se pre-validato o in development */}
+  {webp && (
+    <source 
+      srcset={webp} 
+      type="image/webp"
+      sizes={sizes}
+      data-optimized="webp"
+    />
+  )}
+  
+  {/* Fallback JPEG/PNG originale - sempre presente */}
+  <img 
+    id={componentId}
+    src={original} 
+    alt={alt} 
+    width={width} 
+    height={height} 
+    loading={loading}
+    class="safe-optimized-image"
+    data-original-src={src}
+    data-has-webp={webp ? 'true' : 'false'}
+    data-has-avif={avif ? 'true' : 'false'}
+  />
+</picture>
+
+<!-- Solo in development: fallback JS come backup -->
+{import.meta.env.DEV && (
+  <script define:vars={{ componentId, webp, avif, original }}>
+    // Fallback system per development (in produzione pre-validazione previene problemi)
+    (function() {
+      const img = document.getElementById(componentId);
+      const picture = img.parentElement;
+      
+      // Handler errori standard
+      img.addEventListener('error', function() {
+        console.log('🔄 Dev fallback activated for:', img.src);
+        const sources = picture.querySelectorAll('source[data-optimized]');
+        sources.forEach(source => source.remove());
+        img.classList.add('fallback-active');
+      });
+      
+      // Validazione runtime in development
+      async function devValidation() {
+        const sources = picture.querySelectorAll('source[data-optimized]');
+        
+        for (const source of sources) {
+          const srcset = source.getAttribute('srcset');
+          if (!srcset) continue;
+          
+          try {
+            const response = await fetch(srcset, { method: 'HEAD' });
+            const contentLength = response.headers.get('content-length');
+            
+            if (response.status !== 200 || (contentLength && parseInt(contentLength) < 100)) {
+              console.log(`🚫 Dev: Removing problematic source:`, srcset);
+              source.remove();
+            }
+          } catch (error) {
+            console.log(`🚫 Dev: Removing failed source:`, srcset);
+            source.remove();
+          }
+        }
+      }
+      
+      // Esegui dopo caricamento
+      setTimeout(devValidation, 500);
+    })();
+  </script>
+)}
+
+<style>
+  picture { 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+  }
+  
+  .safe-optimized-image { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+  }
+  
+  /* Debug in development */
+  .safe-optimized-image[data-has-webp="false"]:not([data-has-avif="true"])::before {
+    content: "⚠️ No optimized versions";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: rgba(255, 193, 7, 0.9);
+    color: black;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-family: monospace;
+    z-index: 1000;
+    pointer-events: none;
+  }
+</style>

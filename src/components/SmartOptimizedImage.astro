@@ -171,6 +171,25 @@ if (import.meta.env.DEV) {
               console.log(`🚫 Status 206 detected for ${source.getAttribute('data-optimized')}:`, srcset);
               source.remove();
               img.setAttribute('data-fallback-reason', 'HTTP 206 - Partial Content');
+            } else if (response.status === 404) {
+              console.log(`🚫 Status 404 (Not Found) for ${source.getAttribute('data-optimized')}:`, srcset);
+              source.remove();
+              img.setAttribute('data-fallback-reason', 'HTTP 404 - Not Found');
+            } else if (response.status === 200) {
+              // Controlla anche la dimensione del file per status 200
+              const contentLength = response.headers.get('content-length');
+              const contentType = response.headers.get('content-type');
+              
+              // Se il file è troppo piccolo o non ha content-type corretto
+              if (contentLength && parseInt(contentLength) < 100) {
+                console.log(`🚫 Empty file detected for ${source.getAttribute('data-optimized')} (${contentLength} bytes):`, srcset);
+                source.remove();
+                img.setAttribute('data-fallback-reason', `Empty File (${contentLength}B)`);
+              } else if (contentType && !contentType.startsWith('image/')) {
+                console.log(`🚫 Invalid content-type for ${source.getAttribute('data-optimized')} (${contentType}):`, srcset);
+                source.remove();
+                img.setAttribute('data-fallback-reason', `Invalid Type (${contentType})`);
+              }
             } else if (response.status !== 200) {
               console.log(`🚫 HTTP ${response.status} for ${source.getAttribute('data-optimized')}:`, srcset);
               source.remove();
