@@ -1,0 +1,262 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  enableFallback?: boolean; // Nuovo prop per abilitare/disabilitare fallback
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  quality = 80,
+  class: className = '',
+  loading = 'lazy',
+  sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw',
+  enableFallback = true
+} = Astro.props;
+
+// Funzione per ottenere le versioni ottimizzate automaticamente generate
+const getOptimizedVersions = (originalSrc: string) => {
+  if (!originalSrc || !originalSrc.startsWith('/uploads/')) {
+    return { webp: null, avif: null, original: originalSrc };
+  }
+
+  // Normalizzazione universale del nome file per caratteri indesiderati
+  let correctedSrc = originalSrc;
+  
+  // Normalizza il nome del file (non il percorso della cartella)
+  const pathParts = correctedSrc.split('/');
+  const filename = pathParts[pathParts.length - 1];
+  
+  // Normalizza solo il nome del file, mantenendo l'estensione
+  const extensionMatch = filename.match(/\.[^.]*$/);
+  const extension = extensionMatch ? extensionMatch[0] : '';
+  const nameWithoutExt = filename.replace(/\.[^.]*$/, '');
+  
+  // Normalizza: rimuovi caratteri speciali, sostituisci spazi e caratteri problematici
+  const normalizedName = nameWithoutExt
+    .replace(/[^\w\-\.]/g, '-')  // Sostituisce caratteri non alfanumerici con -
+    .replace(/[-]+/g, '-')       // Rimuove - multipli consecutivi
+    .replace(/^-+|-+$/g, '');    // Rimuove - all'inizio e alla fine
+  
+  // Ricostruisci il percorso con il nome normalizzato
+  if (normalizedName !== nameWithoutExt) {
+    pathParts[pathParts.length - 1] = normalizedName + extension;
+    correctedSrc = pathParts.join('/');
+  }
+
+  // Estrai path e directory dal percorso corretto
+  const directory = pathParts.slice(0, -1).join('/');
+  const finalFilename = pathParts[pathParts.length - 1];
+  const finalNameWithoutExt = finalFilename.replace(/\.[^/.]+$/, '');
+  
+  const webpSrc = `${directory}/optimized/${finalNameWithoutExt}.webp`;
+  const avifSrc = `${directory}/optimized/${finalNameWithoutExt}.avif`;
+  
+  return {
+    webp: webpSrc,
+    avif: avifSrc,
+    original: correctedSrc
+  };
+};
+
+const { webp, avif, original } = getOptimizedVersions(src);
+
+// ID unico per questo componente
+const componentId = `img-${Math.random().toString(36).substr(2, 9)}`;
+
+// In development, mostra info di debug
+if (import.meta.env.DEV) {
+  console.log('🖼️ OptimizedImage:', { 
+    original: src, 
+    normalized: original,
+    webp, 
+    avif,
+    hasOptimized: !!(webp && avif),
+    fallbackEnabled: enableFallback,
+    fileNormalized: original !== src ? `${src} → ${original}` : 'no normalization needed'
+  });
+}
+---
+
+<picture class={className} data-component-id={componentId}>
+  {/* AVIF - formato più efficiente (se disponibile) */}
+  {avif && (
+    <source 
+      srcset={avif} 
+      type="image/avif"
+      sizes={sizes}
+      data-optimized="avif"
+    />
+  )}
+  
+  {/* WebP - ottimo supporto browser (se disponibile) */}
+  {webp && (
+    <source 
+      srcset={webp} 
+      type="image/webp"
+      sizes={sizes}
+      data-optimized="webp"
+    />
+  )}
+  
+  {/* Fallback JPEG/PNG originale */}
+  <img 
+    id={componentId}
+    src={original} 
+    alt={alt} 
+    width={width} 
+    height={height} 
+    loading={loading}
+    class="smart-optimized-image"
+    data-original-src={src}
+    data-fallback-enabled={enableFallback}
+  />
+</picture>
+
+{enableFallback && (
+  <script define:vars={{ componentId, webp, avif, original }}>
+    // Sistema di fallback intelligente con detection di errori HTTP
+    (function() {
+      const img = document.getElementById(componentId);
+      const picture = img.parentElement;
+      let fallbackActivated = false;
+      
+      // Funzione per attivare il fallback
+      function activateFallback(reason) {
+        if (fallbackActivated) return;
+        
+        fallbackActivated = true;
+        console.log(`🔄 Image fallback activated (${reason}):`, img.src);
+        
+        // Rimuovi tutte le sources ottimizzate
+        const sources = picture.querySelectorAll('source[data-optimized]');
+        sources.forEach(source => source.remove());
+        
+        // Aggiungi classi e attributi per debug
+        img.classList.add('fallback-active');
+        img.setAttribute('data-fallback-reason', reason);
+        
+        // Forza il reload dell'immagine originale se necessario
+        if (img.src !== original) {
+          img.src = original;
+        }
+      }
+      
+      // Handler per errori di caricamento standard
+      img.addEventListener('error', function() {
+        activateFallback('Load Error');
+      });
+      
+      // Validazione asincrona delle sources ottimizzate
+      async function validateOptimizedSources() {
+        const sources = picture.querySelectorAll('source[data-optimized]');
+        
+        for (const source of sources) {
+          const srcset = source.getAttribute('srcset');
+          if (!srcset) continue;
+          
+          try {
+            const response = await fetch(srcset, { method: 'HEAD' });
+            
+            if (response.status === 206) {
+              console.log(`🚫 Status 206 detected for ${source.getAttribute('data-optimized')}:`, srcset);
+              source.remove();
+              img.setAttribute('data-fallback-reason', 'HTTP 206 - Partial Content');
+            } else if (response.status !== 200) {
+              console.log(`🚫 HTTP ${response.status} for ${source.getAttribute('data-optimized')}:`, srcset);
+              source.remove();
+              img.setAttribute('data-fallback-reason', `HTTP ${response.status}`);
+            }
+          } catch (error) {
+            console.log(`🚫 Network error for ${source.getAttribute('data-optimized')}:`, srcset);
+            source.remove();
+            img.setAttribute('data-fallback-reason', 'Network Error');
+          }
+        }
+        
+        // Se non ci sono più sources ottimizzate, attiva fallback completo
+        const remainingSources = picture.querySelectorAll('source[data-optimized]');
+        if (remainingSources.length === 0 && (webp || avif)) {
+          activateFallback('All optimized sources failed');
+        }
+      }
+      
+      // Esegui validazione dopo il caricamento
+      img.addEventListener('load', function() {
+        // Validazione solo se l'immagine sembra problematica
+        if (img.naturalHeight === 0) {
+          activateFallback('Zero Height Detected');
+        } else {
+          // Validazione asincrona delle sources ottimizzate
+          setTimeout(validateOptimizedSources, 100);
+        }
+      });
+      
+      // Controllo immediato se l'immagine è già caricata
+      if (img.complete) {
+        if (img.naturalHeight === 0) {
+          activateFallback('Immediate Zero Height');
+        } else {
+          setTimeout(validateOptimizedSources, 100);
+        }
+      }
+    })();
+  </script>
+)}
+
+<style>
+  picture { 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+    position: relative;
+  }
+  
+  .smart-optimized-image { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+  }
+  
+  /* Stile per immagini in fallback */
+  .smart-optimized-image.fallback-active {
+    /* Opzionale: indicatore visivo sottile per debug */
+    /* box-shadow: inset 0 0 0 1px rgba(255, 193, 7, 0.3); */
+  }
+  
+  /* Debug info solo in development */
+  .smart-optimized-image[data-fallback-reason] {
+    position: relative;
+  }
+  
+  .smart-optimized-image[data-fallback-reason]::after {
+    content: "⚠️ " attr(data-fallback-reason);
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(255, 193, 7, 0.9);
+    color: #000;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+    display: none; /* Hidden by default */
+  }
+  
+  /* Show debug info only in development mode */
+  :global([data-debug="true"]) .smart-optimized-image[data-fallback-reason]::after {
+    display: block;
+  }
+</style>

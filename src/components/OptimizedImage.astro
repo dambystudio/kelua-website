@@ -108,8 +108,85 @@ if (import.meta.env.DEV) {
     height={height} 
     loading={loading}
     class="auto-optimized-image"
+    onError="handleImageError(this)"
   />
 </picture>
+
+<script>
+  // Sistema di fallback intelligente per immagini con errori
+  function handleImageError(img) {
+    const picture = img.parentElement;
+    const sources = picture.querySelectorAll('source');
+    
+    // Se l'immagine principale ha errore, rimuovi tutte le sources ottimizzate
+    // Il browser userà automaticamente solo l'src dell'img (originale)
+    if (img.src === img.getAttribute('src')) {
+      console.log('🔄 Image fallback activated for:', img.src);
+      sources.forEach(source => source.remove());
+      
+      // Aggiungi classe per debug/styling
+      img.classList.add('fallback-active');
+    }
+  }
+  
+  // Sistema avanzato: Intercetta errori di rete (status 206, 404, etc.)
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.auto-optimized-image');
+    
+    images.forEach(img => {
+      // Controlla se l'immagine si carica correttamente
+      img.addEventListener('error', function() {
+        console.log('❌ Image load error detected:', this.src);
+        handleImageError(this);
+      });
+      
+      // Controlla anche errori di rete (fetch per validare)
+      if (img.complete && img.naturalHeight === 0) {
+        console.log('⚠️ Image appears broken on load:', img.src);
+        handleImageError(img);
+      }
+    });
+  });
+  
+  // Sistema per rilevare status 206 e altri errori HTTP
+  async function validateImageSources() {
+    const pictures = document.querySelectorAll('picture');
+    
+    for (const picture of pictures) {
+      const sources = picture.querySelectorAll('source');
+      const img = picture.querySelector('img');
+      
+      for (const source of sources) {
+        const srcset = source.getAttribute('srcset');
+        if (srcset) {
+          try {
+            const response = await fetch(srcset, { method: 'HEAD' });
+            
+            // Se status non è 200, rimuovi questa source
+            if (response.status !== 200) {
+              console.log(`🚫 Removing source with status ${response.status}:`, srcset);
+              source.remove();
+              
+              // Aggiungi attributo data per debugging
+              img.setAttribute('data-fallback-reason', `HTTP ${response.status}`);
+            }
+          } catch (error) {
+            console.log('🚫 Removing source due to network error:', srcset);
+            source.remove();
+            img.setAttribute('data-fallback-reason', 'Network Error');
+          }
+        }
+      }
+    }
+  }
+  
+  // Esegui validazione dopo il caricamento del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', validateImageSources);
+  } else {
+    validateImageSources();
+  }
+</script>
 
 <style>
   picture { 
@@ -122,5 +199,33 @@ if (import.meta.env.DEV) {
     width: 100%; 
     height: 100%; 
     object-fit: cover; 
+  }
+  
+  /* Stile per immagini in fallback */
+  .auto-optimized-image.fallback-active {
+    /* Opzionale: bordo sottile per debug in sviluppo */
+    /* border: 1px solid rgba(255, 193, 7, 0.3); */
+  }
+  
+  /* Debug info in development */
+  .auto-optimized-image[data-fallback-reason]::after {
+    content: "Fallback: " attr(data-fallback-reason);
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    background: rgba(255, 193, 7, 0.8);
+    color: black;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-family: monospace;
+    display: none; /* Mostra solo in dev se necessario */
+  }
+  
+  /* Mostra debug info solo in development */
+  @media (max-width: 0px) { /* Nascosto di default, attiva via JS se necessario */
+    .auto-optimized-image[data-fallback-reason]::after {
+      display: block;
+    }
   }
 </style>
