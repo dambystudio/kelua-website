@@ -14,6 +14,8 @@
     "build:tina": "tinacms build && astro build",
     "build:local": "tinacms build --local --skip-cloud-checks && astro build",
     "build:production": "astro build",
+    "sync-images": "node scripts/sync-images.mjs",
+    "optimize-single": "node scripts/optimize-single.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "tina:build": "tinacms build",
