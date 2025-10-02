@@ -21,7 +21,10 @@ const {
   sizes = '(min-width: 1024px) 800px, (min-width: 768px) 600px, 100vw'
 } = Astro.props;
 
-// Funzione per ottenere le versioni ottimizzate automaticamente generate
+import fs from 'fs';
+import path from 'path';
+
+// Funzione per ottenere le versioni ottimizzate con validazione esistenza file
 const getOptimizedVersions = (originalSrc: string) => {
   if (!originalSrc || !originalSrc.startsWith('/uploads/')) {
     return { webp: null, avif: null, original: originalSrc };
@@ -59,9 +62,53 @@ const getOptimizedVersions = (originalSrc: string) => {
   const webpSrc = `${directory}/optimized/${finalNameWithoutExt}.webp`;
   const avifSrc = `${directory}/optimized/${finalNameWithoutExt}.avif`;
   
+  // VALIDAZIONE ESISTENZA FILE: Controlla se i file esistono fisicamente
+  let validWebp: string | null = null;
+  let validAvif: string | null = null;
+  
+  try {
+    const publicDir = path.join(process.cwd(), 'public');
+    
+    // Controlla WebP
+    const webpPath = path.join(publicDir, webpSrc);
+    try {
+      const webpStats = fs.statSync(webpPath);
+      if (webpStats.size >= 100) { // File valido (almeno 100 bytes)
+        validWebp = webpSrc;
+      } else {
+        console.log(`⚠️ WebP file too small (${webpStats.size}B), skipping:`, webpSrc);
+      }
+    } catch {
+      // File non esiste
+      if (import.meta.env.DEV) {
+        console.log(`ℹ️ WebP not found:`, webpSrc);
+      }
+    }
+    
+    // Controlla AVIF
+    const avifPath = path.join(publicDir, avifSrc);
+    try {
+      const avifStats = fs.statSync(avifPath);
+      if (avifStats.size >= 100) { // File valido (almeno 100 bytes)
+        validAvif = avifSrc;
+      } else {
+        console.log(`⚠️ AVIF file too small (${avifStats.size}B), skipping:`, avifSrc);
+      }
+    } catch {
+      // File non esiste
+      if (import.meta.env.DEV) {
+        console.log(`ℹ️ AVIF not found:`, avifSrc);
+      }
+    }
+    
+  } catch (error) {
+    // In caso di errore, non usare versioni ottimizzate
+    console.log('⚠️ Validation error, using original only:', error.message);
+  }
+  
   return {
-    webp: webpSrc,
-    avif: avifSrc,
+    webp: validWebp,
+    avif: validAvif,
     original: correctedSrc
   };
 };
@@ -70,12 +117,11 @@ const { webp, avif, original } = getOptimizedVersions(src);
 
 // In development, mostra info di debug
 if (import.meta.env.DEV) {
-  console.log('🖼️ AutoOptimizedImage:', { 
+  console.log('🖼️ ValidatedOptimizedImage:', { 
     original: src, 
     normalized: original,
-    webp, 
-    avif,
-    hasOptimized: !!(webp && avif),
+    webp: webp ? '✅ valid' : '❌ skipped',
+    avif: avif ? '✅ valid' : '❌ skipped',
     fileNormalized: original !== src ? `${src} → ${original}` : 'no normalization needed'
   });
 }

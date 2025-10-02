@@ -1,0 +1,428 @@
+---
+import OptimizedImage from '../components/OptimizedImage.astro';
+
+const pageTitle = "Test Validazione Proattiva Immagini";
+
+// Scenari di test
+const testCases = [
+  {
+    id: 'case1',
+    title: 'IMG_3709.jpeg - Con ottimizzazioni presenti',
+    description: 'File WebP e AVIF esistono. Dovrebbero essere inclusi nel HTML.',
+    src: '/uploads/IMG_3709.jpeg',
+    expected: '✅ 2 source tags (AVIF + WebP)',
+    status: 'valid'
+  },
+  {
+    id: 'case2',
+    title: 'Immagine hypothetica senza ottimizzazioni',
+    description: 'Se caricassi una nuova immagine, non dovrebbe avere source tags.',
+    src: '/uploads/example-not-optimized.jpg',
+    expected: '⚠️ 0 source tags, solo img originale',
+    status: 'fallback'
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{pageTitle}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .test-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .test-card h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .test-card .description {
+            color: #666;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .status-badge.valid {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.fallback {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-badge.invalid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .image-wrapper {
+            margin: 20px 0;
+            border: 3px solid #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+        
+        .expected {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #495057;
+        }
+        
+        .expected strong {
+            color: #667eea;
+        }
+        
+        .action-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .action-button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+        
+        .action-button.secondary {
+            background: #6c757d;
+        }
+        
+        .action-button.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .checklist {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .checklist h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist li::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        
+        .console-output .log {
+            margin: 5px 0;
+        }
+        
+        .console-output .emoji {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 {pageTitle}</h1>
+            <p class="subtitle">Verifica che il sistema NON includa tag &lt;source&gt; per file ottimizzati inesistenti</p>
+            
+            <div class="info-box">
+                <strong>📌 Novità:</strong> Il componente ora valida l'esistenza dei file PRIMA di generare l'HTML.
+                Solo i file WebP/AVIF che esistono fisicamente e sono &gt; 100 bytes vengono inclusi nei tag &lt;source&gt;.
+            </div>
+        </div>
+        
+        <div class="test-grid">
+            {testCases.map((testCase) => (
+                <div class="test-card" id={testCase.id}>
+                    <h2>{testCase.title}</h2>
+                    <span class={`status-badge ${testCase.status}`}>
+                        {testCase.status === 'valid' ? '✅ VALID' : testCase.status === 'fallback' ? '⚠️ FALLBACK' : '❌ INVALID'}
+                    </span>
+                    
+                    <p class="description">{testCase.description}</p>
+                    
+                    <div class="expected">
+                        <strong>Risultato atteso:</strong> {testCase.expected}
+                    </div>
+                    
+                    <div class="image-wrapper">
+                        <OptimizedImage 
+                            src={testCase.src}
+                            alt={`Test case: ${testCase.title}`}
+                            width={600}
+                            height={400}
+                            loading="eager"
+                        />
+                    </div>
+                    
+                    <button class="action-button" onclick={`inspectImage('${testCase.id}')`}>
+                        🔍 Ispeziona HTML
+                    </button>
+                    <button class="action-button secondary" onclick={`checkFiles('${testCase.src}')`}>
+                        📂 Verifica File
+                    </button>
+                </div>
+            ))}
+        </div>
+        
+        <div class="checklist">
+            <h2>✅ Checklist Validazione nei DevTools</h2>
+            <ul>
+                <li>Apri <strong>DevTools</strong> (F12) → Tab <strong>Elements</strong></li>
+                <li>Cerca i tag <code>&lt;picture&gt;</code> nelle immagini sopra</li>
+                <li>Per <strong>IMG_3709.jpeg</strong>: Dovresti vedere 2 tag <code>&lt;source&gt;</code> (AVIF + WebP)</li>
+                <li>Per immagini NON ottimizzate: <strong>NON</strong> dovresti vedere tag <code>&lt;source&gt;</code></li>
+                <li>Controlla la <strong>Console</strong> per i log: <code>🖼️ ValidatedOptimizedImage</code></li>
+                <li>Se vedi <code>❌ skipped</code> per WebP/AVIF → Il sistema sta funzionando correttamente!</li>
+            </ul>
+        </div>
+        
+        <div class="checklist">
+            <h2>📊 Console Logs Attesi</h2>
+            <div class="console-output">
+                <div class="log"><span class="emoji">🖼️</span> ValidatedOptimizedImage: {</div>
+                <div class="log">  original: '/uploads/IMG_3709.jpeg',</div>
+                <div class="log">  normalized: '/uploads/IMG_3709.jpeg',</div>
+                <div class="log">  webp: '<span style="color: #4ec9b0">✅ valid</span>',</div>
+                <div class="log">  avif: '<span style="color: #4ec9b0">✅ valid</span>',</div>
+                <div class="log">  fileNormalized: 'no normalization needed'</div>
+                <div class="log">}</div>
+            </div>
+            
+            <p style="margin-top: 15px; color: #666;">
+                Se i file ottimizzati NON esistono, vedrai <code style="background: #f8d7da; color: #721c24;">❌ skipped</code> 
+                e il componente NON includerà quei tag <code>&lt;source&gt;</code>.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function inspectImage(cardId) {
+            const card = document.getElementById(cardId);
+            if (!card) {
+                alert('❌ Card non trovata');
+                return;
+            }
+            
+            const picture = card.querySelector('picture');
+            if (!picture) {
+                alert('❌ Nessun tag <picture> trovato');
+                return;
+            }
+            
+            const sources = picture.querySelectorAll('source');
+            const img = picture.querySelector('img');
+            
+            let report = '📊 ANALISI HTML GENERATO\n';
+            report += '━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+            
+            report += `<picture>: ✅ Trovato\n\n`;
+            
+            if (sources.length === 0) {
+                report += `<source> tags: ⚠️ NESSUNO\n`;
+                report += `Questo significa che i file ottimizzati NON esistono.\n`;
+                report += `Il browser mostrerà solo l'immagine originale.\n\n`;
+            } else {
+                report += `<source> tags: ${sources.length} trovati\n\n`;
+                sources.forEach((source, i) => {
+                    const type = source.getAttribute('type');
+                    const srcset = source.getAttribute('srcset');
+                    report += `${i+1}. <source type="${type}">\n`;
+                    report += `   srcset="${srcset}"\n\n`;
+                });
+            }
+            
+            if (img) {
+                report += `<img> (fallback):\n`;
+                report += `   src="${img.src}"\n`;
+                report += `   alt="${img.alt}"\n`;
+            } else {
+                report += `<img>: ❌ MANCANTE (ERRORE!)\n`;
+            }
+            
+            report += '\n━━━━━━━━━━━━━━━━━━━━━━━\n';
+            report += '✅ Sistema proattivo: OK!\n';
+            report += 'Solo i file esistenti sono inclusi.\n';
+            
+            alert(report);
+        }
+        
+        async function checkFiles(originalSrc) {
+            const baseName = originalSrc.split('/').pop().replace(/\.[^/.]+$/, '');
+            const dir = originalSrc.substring(0, originalSrc.lastIndexOf('/'));
+            
+            const filesToCheck = [
+                { url: originalSrc, label: 'Originale' },
+                { url: `${dir}/optimized/${baseName}.webp`, label: 'WebP' },
+                { url: `${dir}/optimized/${baseName}.avif`, label: 'AVIF' }
+            ];
+            
+            let report = '📂 VERIFICA ESISTENZA FILE\n';
+            report += '━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+            
+            for (const file of filesToCheck) {
+                try {
+                    const response = await fetch(file.url, { method: 'HEAD' });
+                    const size = response.headers.get('content-length');
+                    const type = response.headers.get('content-type');
+                    
+                    if (response.ok) {
+                        const sizeNum = parseInt(size || '0');
+                        const sizeValid = sizeNum >= 100;
+                        
+                        report += `${sizeValid ? '✅' : '⚠️'} ${file.label}\n`;
+                        report += `   URL: ${file.url}\n`;
+                        report += `   Status: ${response.status}\n`;
+                        report += `   Size: ${size || 'unknown'} bytes ${sizeValid ? '' : '(troppo piccolo!)'}\n`;
+                        report += `   Type: ${type || 'unknown'}\n\n`;
+                    } else {
+                        report += `❌ ${file.label}\n`;
+                        report += `   URL: ${file.url}\n`;
+                        report += `   Status: ${response.status} (non trovato)\n\n`;
+                    }
+                } catch (error) {
+                    report += `❌ ${file.label}\n`;
+                    report += `   URL: ${file.url}\n`;
+                    report += `   Error: ${error.message}\n\n`;
+                }
+            }
+            
+            report += '━━━━━━━━━━━━━━━━━━━━━━━\n';
+            
+            alert(report);
+        }
+    </script>
+</body>
+</html>
